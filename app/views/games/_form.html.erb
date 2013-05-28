@@ -1,0 +1,19 @@
+  <%= simple_form_for(@game) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <% count = 0 %>
+    <%= f.simple_fields_for :participants do |builder| %>
+      <% if count == 0 %>
+        <% value = true %>
+        <% count += 1 %>
+      <% else %>
+        <% value = false%>
+      <% end %>
+      <%= builder.input :home_team, :as => :hidden, :input_html => {:value => value} %>
+      <%= builder.input :team_id, :collection => Team.all.collect{ |t| [t.team_name, t.id ]}%>
+    <% end %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+  <% end %>
