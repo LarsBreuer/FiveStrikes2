@@ -1,4 +1,8 @@
 FiveStrikes2::Application.routes.draw do
+  resources :join_ticker_players
+
+  resources :tickers
+
   resources :participants
 
   resources :games

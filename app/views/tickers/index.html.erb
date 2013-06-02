@@ -1,17 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Home:</b>
-  <%= @game.home_team.team_name %>
-</p>
-
-<p>
-  <b>Away:</b>
-  <%= @game.away_team.team_name %>
-</p>
+<h1>Listing tickers</h1>
 
 <table>
   <tr>
+    <th>Game</th>
     <th>Activity</th>
     <th>Player</th>
     <th>Time</th>
@@ -22,8 +13,9 @@
 
 <% @tickers.each do |ticker| %>
   <tr>
+    <td><%= ticker.game_id %></td>
     <td><%= ticker.activity_id %></td>
-    <td><%= ticker.player.player_id %></td>
+    <td><%= ticker.player_id %></td>
     <td><%= ticker.time %></td>
     <td><%= link_to 'Show', ticker %></td>
     <td><%= link_to 'Edit', edit_ticker_path(ticker) %></td>
@@ -32,5 +24,6 @@
 <% end %>
 </table>
 
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+<br />
+
+<%= link_to 'New Ticker', new_ticker_path %>

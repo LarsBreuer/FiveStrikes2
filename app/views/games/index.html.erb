@@ -9,9 +9,9 @@
 
 <% @games.each do |game| %>
   <tr>
-    <td><%= game.home_team %></td>
+    <td><%= game.home_team.team_name %></td>
     <td></td>
-    <td><%= game.away_team %></td>
+    <td><%= game.away_team.team_name %></td>
     <td><%= link_to 'Show', game %></td>
     <td><%= link_to 'Edit', edit_game_path(game) %></td>
     <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>

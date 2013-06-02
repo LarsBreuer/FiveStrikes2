@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ticker:</b>
+  <%= @join_ticker_player.ticker_id %>
+</p>
+
+<p>
+  <b>Player:</b>
+  <%= @join_ticker_player.player_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_join_ticker_player_path(@join_ticker_player) %> |
+<%= link_to 'Back', join_ticker_players_path %>

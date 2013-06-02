@@ -1,0 +1,25 @@
+<h1>Listing join_ticker_players</h1>
+
+<table>
+  <tr>
+    <th>Ticker</th>
+    <th>Player</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @join_ticker_players.each do |join_ticker_player| %>
+  <tr>
+    <td><%= join_ticker_player.ticker_id %></td>
+    <td><%= join_ticker_player.player_id %></td>
+    <td><%= link_to 'Show', join_ticker_player %></td>
+    <td><%= link_to 'Edit', edit_join_ticker_player_path(join_ticker_player) %></td>
+    <td><%= link_to 'Destroy', join_ticker_player, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Join ticker player', new_join_ticker_player_path %>
