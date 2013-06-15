@@ -15,6 +15,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @tickers = @game.tickers
+    @players = @ticker.players.first
 
     respond_to do |format|
       format.html # show.html.erb

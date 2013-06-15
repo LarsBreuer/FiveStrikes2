@@ -14,6 +14,7 @@ class TickersController < ApplicationController
   # GET /tickers/1.json
   def show
     @ticker = Ticker.find(params[:id])
+    @players = @ticker.players.first
 
     respond_to do |format|
       format.html # show.html.erb
