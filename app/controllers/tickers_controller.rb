@@ -14,7 +14,6 @@ class TickersController < ApplicationController
   # GET /tickers/1.json
   def show
     @ticker = Ticker.find(params[:id])
-    @players = @ticker.players.first
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,7 +44,6 @@ class TickersController < ApplicationController
 
     respond_to do |format|
       if @ticker.save
-        @ticker.join_ticker_players.create(:player_id => params[:ticker][:player_id])
         format.html { redirect_to @ticker, notice: 'Ticker was successfully created.' }
         format.json { render json: @ticker, status: :created, location: @ticker }
       else

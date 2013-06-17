@@ -23,9 +23,7 @@
 <% @tickers.each do |ticker| %>
   <tr>
     <td><%= ticker.activity_id %></td>
-
-      <td><%= ticker.players.player_name %></td>
-
+    <td><%= ticker.players %></td>
     <td><%= ticker.time %></td>
     <td><%= link_to 'Show', ticker %></td>
     <td><%= link_to 'Edit', edit_ticker_path(ticker) %></td>
@@ -36,3 +34,4 @@
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>
+<%= link_to 'New Ticker', new_ticker_path(:game_id=>@game.id) %>

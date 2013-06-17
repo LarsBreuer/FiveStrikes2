@@ -12,8 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :game_id %><br />
-    <%= f.number_field :game_id %>
+    <%= f.hidden_field :game_id, :value => params[:game_id] %>
   </div>
   <div class="field">
     <%= f.label :activity_id %><br />
