@@ -17,4 +17,8 @@ class Game < ActiveRecord::Base
     self.teams.joins(:participants).where("participants.home_team = ?", false).first
   end
 
+  def count_team_activity(activityID, teamID)
+    self.tickers.where(:activity_id => activityID, :team_id => teamID).count
+  end
+
 end

@@ -11,16 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530190243) do
+ActiveRecord::Schema.define(:version => 20130619170230) do
 
   create_table "games", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "join_ticker_players", :force => true do |t|
-    t.integer  "ticker_id"
-    t.integer  "player_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -54,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20130530190243) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "game_id"
+    t.integer  "team_id"
   end
 
 end

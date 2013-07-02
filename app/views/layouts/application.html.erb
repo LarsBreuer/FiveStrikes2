@@ -1,14 +1,64 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FiveStrikes2</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <title>Five Strikes</title>
+  <%= stylesheet_link_tag :application, :media=>"all" %>
+  <%= stylesheet_link_tag "scaffold" %>
+  <%= javascript_include_tag :application %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<div id="website" >
+	<%= yield %>
+</div>
 </body>
 </html>
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Five Strikes</title>
+	<style type="text/css">
+		* {
+		    margin: 0;
+		    padding: 0;
+		}
+		body {
+			background: #B7E2FA;
+			color: #333;
+			font: 100%/1.5 sans-serif;
+			padding: 50px 0;
+		}
+		#website {
+			border: 1px solid #333;
+			width: 800px;
+			margin: 0 auto;
+		}		
+		#banner {
+			width: 461px;
+			height: 61px;
+			margin: 0 auto;
+		}
+		p {
+			padding: 10px 15px;
+		}
+	</style>
+</head>
+<body>
+	<div id="website">
+		<div id="banner">
+			<img src="http://placehold.it/461x61/0eafff/ffffff.png" alt="" width="461" height="61">
+		</div>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, doloremque, blanditiis, sint, qui ullam dicta iusto minus quia sunt ea cupiditate molestias repellendus dignissimos facere.</p>
+		<p>Nemo, beatae magnam distinctio fugiat consectetur quo necessitatibus sapiente iusto ad eligendi illo error ab ullam. Est, quasi assumenda consequatur excepturi ipsum ut eos quo?</p>
+		<p>Quasi, ea, dolor, molestias, esse odio quia autem commodi quae inventore sequi doloribus consectetur. Id, assumenda, dicta iste dolorum aperiam sapiente accusamus libero iusto aut!</p>
+		<p>Corporis, velit, inventore repudiandae placeat quae asperiores veritatis doloribus dolor aspernatur nobis adipisci tempora culpa est nostrum mollitia eius incidunt optio vitae nulla ut molestiae!</p>
+	</div>
+</body>
+</html>
+-->

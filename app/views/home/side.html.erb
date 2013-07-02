@@ -1,0 +1,17 @@
+<% @games.each do |game| %>
+<div id="game_item" >
+<table>
+	<tr>
+		<td><%= game.home_team.team_name %></td>
+		<td></td>
+		<td><%= game.away_team.team_name %></td>
+		<td><%= link_to 'Show', home_statistic_path(:game_id=>game.id), :remote => true %></td>
+	</tr>
+	<tr>
+		<th><%= game.count_team_activity(1, game.home_team.id) %></th>
+		<th> : </th>
+		<th><%= game.count_team_activity(1, game.away_team.id) %></th>
+	</tr>
+</table>
+</div>
+<% end %>

@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<% if @game %>
 <table>
   <tr>
     <th><%= @game.home_team.team_name %></th>
@@ -19,9 +18,6 @@
     <th>Player</th>
     <th>Time</th>
     <th>Team</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @tickers.each do |ticker| %>
@@ -30,13 +26,9 @@
     <td><%= ticker.player.player_name %></td>
     <td><%= ticker.time %></td>
     <td><%= ticker.team_id %></td>
-    <td><%= link_to 'Show', ticker %></td>
-    <td><%= link_to 'Edit', edit_ticker_path(ticker) %></td>
-    <td><%= link_to 'Destroy', ticker, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
-
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
-<%= link_to 'New Ticker', new_ticker_path(:game_id=>@game.id) %>
+<% else %>
+	<p>Noch keine Daten ausgewählt.</p>
+<% end %>
