@@ -1,3 +1,4 @@
+<% if @game %>
 <% @games.each do |game| %>
 <div id="game_item" >
 <table>
@@ -14,4 +15,7 @@
 	</tr>
 </table>
 </div>
+<% end %>
+<% else %>
+	<p>Noch keine Daten vorhanden.</p>
 <% end %>
