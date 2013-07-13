@@ -10,8 +10,8 @@ class HomeController < ApplicationController
 
   def side
   	respond_to do |format|
-      format.html { redirect_to(home_url) }
-
+      format.html 
+      format.js
       format.json { render json: @games }
     end
   end
@@ -21,7 +21,8 @@ class HomeController < ApplicationController
     @tickers = @game.tickers
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
+      format.js
       format.json { render json: @game }
     end
   end
