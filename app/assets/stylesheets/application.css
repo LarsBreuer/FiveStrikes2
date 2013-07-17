@@ -18,18 +18,18 @@
 
 html, body
 {
-	width: 800px; 
+	width: 1000px; 
 	margin: 0 auto; 
 	background: #B7E2FA; 
 }
-/*
+
 #website { 
 	background: #B7E2FA; 
 }
-*/
+
 #banner {
 	margin:16px auto 16px auto; 
-	width: 800px; 
+	width: 1000px; 
 	height: 65px;
 	background: #9c9;
 	padding-top: 10px;
@@ -43,8 +43,7 @@ html, body
 
 #side {
 	float: left;
-	width: 400px;
-	background: #FAF0E6;
+	width: 382px;
 	margin-right: 10px;
 }
 
