@@ -21,4 +21,8 @@ class Game < ActiveRecord::Base
     self.tickers.where(:activity_id => activityID, :team_id => teamID).count
   end
 
+  def count_team_goals_time(teamID, time)
+    self.tickers.where("activity_id = ? AND team_id = ? AND time <= ?", 1, teamID, time).count
+  end
+
 end

@@ -1,5 +1,5 @@
 <% if @game %>
-<table>
+<table div id="game_item_table">
   <tr>
     <th><%= @game.home_team.team_name %></th>
     <th> - </th>
@@ -12,22 +12,16 @@
   </tr>
 </table>
 
-<table>
-  <tr>
-    <th>Activity</th>
-    <th>Player</th>
-    <th>Time</th>
-    <th>Team</th>
-  </tr>
+<table div id="game_item_table">
 
-<% @tickers.each do |ticker| %>
-  <tr>
-    <td><%= ticker.activity_id %></td>
-    <td><%= ticker.player.player_name %></td>
-    <td><%= ticker.time %></td>
-    <td><%= ticker.team_id %></td>
-  </tr>
-<% end %>
+  <% @tickers.each do |ticker| %>
+    <tr  class="<%= cycle('firstrow', 'secondrow') -%>">
+      <td><%= ticker.convert_seconds_to_time(ticker.time) %></td>    
+      <td><%= @game.count_team_goals_time(@game.home_team.id, ticker.time) %>:<%= @game.count_team_goals_time(@game.away_team.id, ticker.time) %></td>
+      <td><%= ticker.player.player_name %></td>
+
+    </tr>
+  <% end %>
 </table>
 <% else %>
 	<p>Noch keine Daten ausgewählt.</p>
