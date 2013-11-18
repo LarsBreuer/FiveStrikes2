@@ -41,7 +41,7 @@ html, body
 	-moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 5px;
-	border-width:1px; solid;
+	border-width:1px solid;
   	border-color:grey;
 }
 
