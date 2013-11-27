@@ -6,7 +6,8 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @teams }
+      hash = {:teams => @teams}
+      format.json { render :json => hash }
     end
   end
 
