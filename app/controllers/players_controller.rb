@@ -6,7 +6,8 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @players }
+      hash = {:players => @players}
+      format.json { render :json => hash }
     end
   end
 
