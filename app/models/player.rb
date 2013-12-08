@@ -9,7 +9,7 @@ class Player < ActiveRecord::Base
 			if player_name
 				find(:all, :conditions => ['team_id LIKE ? AND player_name LIKE ?', "%#{team_id}%", "%#{player_name}%"])
 			else
-				find(:all, :conditions => ['team_id LIKE ?', team_id])
+				find(:all, :conditions => ['team_id LIKE ?', team_id.to_i])
 			end
 		else
     		find(:all)
