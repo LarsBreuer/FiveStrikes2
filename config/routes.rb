@@ -1,8 +1,16 @@
 FiveStrikes2::Application.routes.draw do
   
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
+  devise_for :users
+  ActiveAdmin.routes(self)
+
   get "home/index"
 
   match '/home/statistic', :to => 'home#statistic' 
+
+  resources :users
 
   resources :tickers
 
@@ -14,6 +22,16 @@ FiveStrikes2::Application.routes.draw do
 
   resources :teams
 
+  namespace :api do
+    namespace :v1 do
+      devise_scope :user do
+        post 'registrations' => 'registrations#create', :as => 'register'
+        post 'sessions' => 'sessions#create', :as => 'login'
+        delete 'sessions' => 'sessions#destroy', :as => 'logout'
+      end
+    end
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
