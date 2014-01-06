@@ -9,11 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require_directory .
 */
 
 /* "auto" makes the left and right margins center the wrapper */
-
 
 
 html, body
@@ -34,7 +33,7 @@ html, body
 #banner {
 	margin:16px auto 16px auto; 
 	width: 1000px; 
-	height: 65px;
+	height: 80px;
 	background: #ffffff;
 	padding-top: 15px;
 	padding-bottom: 15px;
@@ -43,6 +42,12 @@ html, body
     border-radius: 5px;
 	border-width:1px solid;
   	border-color:grey;
+}
+
+#user_nav {
+	float: right;
+	font-family:"Arial";
+    font-size:9pt;
 }
 
 #banner img {
