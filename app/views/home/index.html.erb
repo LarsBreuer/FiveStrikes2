@@ -5,7 +5,7 @@
     		<%= link_to "Sign out", destroy_user_session_path %>  
   		<% else %>  
     		<%= link_to "Registrieren", new_user_registration_path %> oder  
-    		<%= link_to "Einloggen", new_user_session_path %>  
+        <%= link_to 'Einloggen', new_user_session_path, :id => 'login-link' %>  
   		<% end %>  
 	</div> 
  	<%= image_tag("LogoIconWebsite.png") %>
