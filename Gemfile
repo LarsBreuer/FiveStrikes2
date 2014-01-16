@@ -5,6 +5,11 @@ gem 'simple_form'
 gem "devise"
 gem 'activeadmin'
 gem 'meta_search', '>= 1.1.0.pre'
+gem 'facebox-rails'
+gem 'jquery-rails'
+gem 'sass-rails',   '~> 3.2.3'
+gem 'coffee-rails', '~> 3.2.1'
+gem 'thin'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -23,10 +28,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-rails'
-gem 'sass-rails',   '~> 3.2.3'
-gem 'coffee-rails', '~> 3.2.1'
 
 group :production do
   gem 'pg', '0.12.2'

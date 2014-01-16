@@ -1,0 +1,18 @@
+/* tweak facebox popup window UI */
+#facebox .popup {
+  border:1px solid rgba(0,0,0,0);
+  -webkit-border-radius:0px;
+  -moz-border-radius:0px;
+  border-radius:0px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+/* NOTE: changed default close image by putting custom image 
+         in assets/facebox/closelabel.png 
+   TODO: need to look into why setting closeImage didn't work? */
+
+/* conflict with another close class, probably bootsrap */
+#facebox .close img {
+  opacity: 1.0;
+}

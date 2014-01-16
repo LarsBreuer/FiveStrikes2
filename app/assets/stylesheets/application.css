@@ -8,6 +8,8 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require jquery.facebox
+ *= require facebox_custom
  *= require_self
  *= require_directory .
 */
@@ -24,6 +26,7 @@ html, body
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
+  	font-family:"Arial";
 }
 
 #website { 
@@ -46,7 +49,6 @@ html, body
 
 #user_nav {
 	float: right;
-	font-family:"Arial";
     font-size:9pt;
 }
 
@@ -106,3 +108,10 @@ table tr.firstrow {
 table tr.secondrow {
     background-color: #ffffff;
 }
+
+#facebox.modal-header{padding:9px 15px;border-bottom:1px solid #eee}
+#facebox.modal-header .close{margin-top:2px}
+#facebox.modal-header h3{margin:0;line-height:30px}
+#facebox.modal-body{position:relative;overflow-y:auto;max-height:400px;padding:15px}
+#facebox.control-group{margin-bottom:10px}
+#facebox.controls{*display:inline-block;*padding-left:20px;margin-left:180px;*margin-left:0}

@@ -11,15 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.facebox
 //= require jquery_ujs
 //= require_directory .
-
-document.observe('dom:loaded', function() {  
-    $('login-link').observe('click', function(event) {  
-        event.stop();  
-        Modalbox.show(this.href,  
-            {title: 'Login',   
-            width: 500}  
-        );  
-    });  
-}) 
