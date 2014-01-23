@@ -4,7 +4,7 @@
     		Angemeldet als <%= current_user.email %>.   
     		<%= link_to "Abmelden", destroy_user_session_path, :method => :delete %>  
   		<% else %>  
-    		<%= link_to "Registrieren", new_user_registration_path %> oder  
+    		<%= link_to "Registrieren", fb_create_user_path, :remote => true  %> oder  
         <%= link_to 'Anmelden', fb_login_path, :remote => true %>  
   		<% end %>  
 	</div> 

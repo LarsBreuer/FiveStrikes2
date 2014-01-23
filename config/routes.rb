@@ -1,11 +1,23 @@
 FiveStrikes2::Application.routes.draw do
   
-  devise_for :users, controllers: {sessions: "sessions"}
+  root :to => 'home#index', :as => 'home'
+
+  devise_for :users, :controllers => { :sessions => 'local_devise/sessions', 
+                                       :registrations => 'local_devise/registrations', 
+                                       :passwords => 'local_devise/passwords', 
+                                       :confirmations => 'local_devise/confirmations', 
+                                       :omniauth_callbacks => 'local_devise/omniauth_callbacks'}
+  
+  devise_scope :users do
+    get '/users', :to => 'home#index', :as => :user_root
+  end 
 
   get "home/index"
 
   match '/home/statistic', :to => 'home#statistic' 
   match '/facebox/fb_login' => 'facebox#fb_login', :as => :fb_login
+  match '/facebox/fb_create_user' => 'facebox#fb_create_user', :as => :fb_create_user
+  match '/facebox/failed_login' => 'facebox#failed_login', :as => :failed_login
 
   resources :users
 
@@ -71,8 +83,6 @@ FiveStrikes2::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-
-  root :to => 'home#index', :as => 'home'
 
   # See how all your routes lay out with "rake routes"
 

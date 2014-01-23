@@ -108,10 +108,3 @@ table tr.firstrow {
 table tr.secondrow {
     background-color: #ffffff;
 }
-
-#facebox.modal-header{padding:9px 15px;border-bottom:1px solid #eee}
-#facebox.modal-header .close{margin-top:2px}
-#facebox.modal-header h3{margin:0;line-height:30px}
-#facebox.modal-body{position:relative;overflow-y:auto;max-height:400px;padding:15px}
-#facebox.control-group{margin-bottom:10px}
-#facebox.controls{*display:inline-block;*padding-left:20px;margin-left:180px;*margin-left:0}
