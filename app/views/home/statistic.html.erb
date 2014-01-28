@@ -1,28 +1,19 @@
 <% if @game %>
-<table div id="game_item_table">
-  <tr>
-    <th><%= @game.home_team.team_name %></th>
-    <th> - </th>
-    <th><%= @game.away_team.team_name %></th>
-  </tr>
-  <tr>
-    <th><%= @game.count_team_activity(1, @game.home_team.id) %></th>
-    <th> : </th>
-    <th><%= @game.count_team_activity(1, @game.away_team.id) %></th>
-  </tr>
-</table>
 
-<table div id="game_item_table">
+  <table div id="game_item_table">
+    <% @tickers.each do |ticker| %>
+      <tr  class="<%= cycle('firstrow', 'secondrow') -%>">
+        <td><%= ticker.convert_seconds_to_time(ticker.time) %></td>    
+        <td><%= @game.count_team_goals_time(@game.home_team.id, ticker.time) %>:<%= @game.count_team_goals_time(@game.away_team.id, ticker.time) %></td>
+        <td><%= ticker.player.player_name %></td>
+      </tr>
+    <% end %>
+  </table>
 
-  <% @tickers.each do |ticker| %>
-    <tr  class="<%= cycle('firstrow', 'secondrow') -%>">
-      <td><%= ticker.convert_seconds_to_time(ticker.time) %></td>    
-      <td><%= @game.count_team_goals_time(@game.home_team.id, ticker.time) %>:<%= @game.count_team_goals_time(@game.away_team.id, ticker.time) %></td>
-      <td><%= ticker.player.player_name %></td>
+  <table div id="game_item_table">
+	<tr align="right">
+		<td><%= link_to 'Home', home_statistic_home_path(:game_id=>@game.id), :remote => true %></td>
+	</tr>
+  </table>
 
-    </tr>
-  <% end %>
-</table>
-<% else %>
-	<p>Noch keine Daten ausgewählt.</p>
 <% end %>

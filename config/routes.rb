@@ -14,7 +14,9 @@ FiveStrikes2::Application.routes.draw do
 
   get "home/index"
 
+  match '/home/main', :to => 'home#main' 
   match '/home/statistic', :to => 'home#statistic' 
+  match '/home/statistic_home', :to => 'home#statistic_home' 
   match '/facebox/fb_login' => 'facebox#fb_login', :as => :fb_login
   match '/facebox/fb_create_user' => 'facebox#fb_create_user', :as => :fb_create_user
   match '/facebox/failed_login' => 'facebox#failed_login', :as => :failed_login

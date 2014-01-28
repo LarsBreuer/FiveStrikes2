@@ -26,7 +26,7 @@ class LocalDevise::SessionsController < Devise::SessionsController
   end
 
   def failed_login
-    # set_msg t(:invalid, :scope => 'devise.failure')  
+    set_msg t(:invalid, :scope => 'devise.failure')  
   end
   
 end
