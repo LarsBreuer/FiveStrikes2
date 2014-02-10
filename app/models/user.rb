@@ -14,7 +14,18 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
+  has_many :friendship
+  has_many :friend, 
+           :through => :friendship,
+           :conditions => "status = 'accepted'", 
+           :order => :screen_name
+  has_many :games, foreign_key: "user_id"
+  
   def skip_confirmation!
   	self.confirmed_at = Time.now
+  end
+
+  def self.find_by_user_id(user_id)
+    find(:user_id => id).first
   end
 end

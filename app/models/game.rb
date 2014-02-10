@@ -4,6 +4,7 @@ class Game < ActiveRecord::Base
 	has_many :teams, :through => :participants
   has_many :tickers, :dependent => :destroy
   has_many :players, :through => :tickers
+  belongs_to :user
 
 	accepts_nested_attributes_for :participants,
     :reject_if => lambda {|a| a[:game_id].blank? },

@@ -10,6 +10,13 @@
   <%= @user.name %>
 </p>
 
+<h2>Your Friends</h2>
+<ol>
+<% @user.friendship.each do |friendship| %>
+  <li><%= friendship.friend.id %>, <%= friendship.status %></li>
+<% end %>
+</ol>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

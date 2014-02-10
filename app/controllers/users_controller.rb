@@ -21,6 +21,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def user_friends
+    # @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @user }
+    end
+  end
+
+  def find_friends
+    @users = User.all
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @user }
+    end
+  end
+
   # GET /users/new
   # GET /users/new.xml
   def new

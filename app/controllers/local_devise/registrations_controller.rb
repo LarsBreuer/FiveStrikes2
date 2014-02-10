@@ -1,10 +1,10 @@
-class RegistrationsController < Devise::RegistrationsController
+class LocalDevise::RegistrationsController < Devise::RegistrationsController
 
   # NOTE: some functionality has been removed for this project - check parent controller
 
   def create
-    build_resource(sign_up_params)
-    resource.role = User.user_role
+    build_resource
+    #resource.role = User.user_role
 
     if resource.save
       if resource.active_for_authentication?

@@ -1,0 +1,8 @@
+// want a full refresh since access changes to tabs, actions
+// redirect to dashboard if user is on a page and not a lightbox
+
+if(window.location.href.indexOf("<%= new_user_registration_path -%>") > -1) {
+  window.location.replace('<%= home_path -%>');
+} else {
+  window.location.reload();
+}

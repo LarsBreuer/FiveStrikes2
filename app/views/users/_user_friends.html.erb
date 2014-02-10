@@ -1,0 +1,32 @@
+<h1>Freund des Users <%= current_user.email %></h1>
+
+<table>
+  <tr>
+    <th>User ID</th>
+    <th>Email</th>
+    <th>Username</th>
+  </tr>
+
+  <% current_user.friendship.each do |friendship| %>
+    <tr>
+      <td><%= friendship.friend.id %></td>
+      <td><%= friendship.friend.email %></td>
+      <td><%= friendship.friend.name %></td>
+      <td>
+        <% if user_signed_in? %>
+          <%= friendship.status %>
+          <% if friendship.status == "requested" %>
+            (<%= link_to "accept",
+                          :controller => :friendships,
+                          :action => :accept,
+                          :id => friendship.friend.id %> |
+            <%= link_to "reject",
+                          :controller => :friendships,
+                          :action => :reject,
+                          :id => friendship.friend.id %>)
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

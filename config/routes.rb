@@ -8,9 +8,9 @@ FiveStrikes2::Application.routes.draw do
                                        :confirmations => 'local_devise/confirmations', 
                                        :omniauth_callbacks => 'local_devise/omniauth_callbacks'}
   
-  devise_scope :users do
-    get '/users', :to => 'home#index', :as => :user_root
-  end 
+  #devise_scope :users do
+  #  get '/users', :to => 'home#index', :as => :user_root
+  #end 
 
   get "home/index"
 
@@ -20,6 +20,15 @@ FiveStrikes2::Application.routes.draw do
   match '/facebox/fb_login' => 'facebox#fb_login', :as => :fb_login
   match '/facebox/fb_create_user' => 'facebox#fb_create_user', :as => :fb_create_user
   match '/facebox/failed_login' => 'facebox#failed_login', :as => :failed_login
+  match '/facebox/fb_ask_friend' => 'facebox#fb_ask_friend', :as => :fb_ask_friend
+  match '/facebox/fb_user_friends' => 'facebox#fb_user_friends', :as => :fb_user_friends
+  match '/facebox/fb_find_friends' => 'facebox#fb_find_friends', :as => :fb_find_friends
+  match '/friendships/req' => 'friendships#req', :as => :req
+  match '/friendships/accept' => 'friendships#accept', :as => :req
+  match '/friendships/reject' => 'friendships#reject', :as => :req
+  get "users/user_friends" => "users#user_friends", :as => :user_friends
+  get "users/find_friends" => "users#find_friends", :as => :find_friends
+  get "users/ask_friend" => "users#ask_friend", :as => :ask_friend
 
   resources :users
 

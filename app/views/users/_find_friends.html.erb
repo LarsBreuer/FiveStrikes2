@@ -1,0 +1,32 @@
+<h1>Listing users</h1>
+
+<table>
+
+  <% if user_signed_in? %>
+
+    <tr>
+      <th>User ID</th>
+      <th>Email</th>
+      <th>Username</th>
+    </tr>
+    
+    <% @users.each do |user| %>
+      <% if !Friendship.are_friends(current_user, user) &&
+        current_user != user %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.email %></td>
+          <td><%= user.name %></td>
+          <td>
+            (<%= link_to "request friendship",
+                          :controller => :friendships,
+                          :action => :req,
+                          :id => user.id %>)
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>
+
+<br />

@@ -16,4 +16,21 @@ class FaceboxController < ApplicationController
   def fb_reset_password
   end
 
+  def fb_ask_friend
+    @user = User.find(params[:id])
+    @user.id = params[:id]
+
+    respond_to do | format |
+      format.js {render :layout => false}
+    end
+  end
+
+  def fb_find_friends
+    @users = User.all
+
+    respond_to do | format |
+      format.js {render :layout => false}
+    end
+  end
+
 end
