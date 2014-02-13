@@ -17,12 +17,12 @@ FiveStrikes2::Application.routes.draw do
   match '/home/main', :to => 'home#main' 
   match '/home/statistic', :to => 'home#statistic' 
   match '/home/statistic_home', :to => 'home#statistic_home' 
-  match '/facebox/fb_login' => 'facebox#fb_login', :as => :fb_login
-  match '/facebox/fb_create_user' => 'facebox#fb_create_user', :as => :fb_create_user
-  match '/facebox/failed_login' => 'facebox#failed_login', :as => :failed_login
-  match '/facebox/fb_ask_friend' => 'facebox#fb_ask_friend', :as => :fb_ask_friend
-  match '/facebox/fb_user_friends' => 'facebox#fb_user_friends', :as => :fb_user_friends
-  match '/facebox/fb_find_friends' => 'facebox#fb_find_friends', :as => :fb_find_friends
+  match '/Facebox/fb_login' => 'facebox#fb_login', :as => :fb_login
+  match '/Facebox/fb_create_user' => 'facebox#fb_create_user', :as => :fb_create_user
+  match '/Facebox/failed_login' => 'facebox#failed_login', :as => :failed_login
+  match '/Facebox/fb_ask_friend' => 'facebox#fb_ask_friend', :as => :fb_ask_friend
+  match '/Facebox/fb_user_friends' => 'facebox#fb_user_friends', :as => :fb_user_friends
+  match '/Facebox/fb_find_friends' => 'facebox#fb_find_friends', :as => :fb_find_friends
   match '/friendships/req' => 'friendships#req', :as => :req
   match '/friendships/accept' => 'friendships#accept', :as => :req
   match '/friendships/reject' => 'friendships#reject', :as => :req
