@@ -1,5 +1,7 @@
 class LocalDevise::SessionsController < Devise::SessionsController
 
+  skip_before_filter :verify_authenticity_token,
+                     :if => Proc.new { |c| c.request.format == 'application/json' }
 
   def create
     self.resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failed_login")
