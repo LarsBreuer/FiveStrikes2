@@ -1,8 +1,6 @@
 class LocalDevise::RegistrationsController < Devise::RegistrationsController
 
-  skip_before_filter :verify_authenticity_token,
-                     :if => Proc.new { |c| c.request.format == 'application/json' }
-                     
+              
   # NOTE: some functionality has been removed for this project - check parent controller
 
   def create
