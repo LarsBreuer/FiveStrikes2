@@ -2,6 +2,7 @@ FiveStrikes2::Application.routes.draw do
   
   root :to => 'home#index', :as => 'home'
 
+
   devise_for :users, :controllers => { :sessions => 'local_devise/sessions', 
                                        :registrations => 'local_devise/registrations', 
                                        :passwords => 'local_devise/passwords', 
