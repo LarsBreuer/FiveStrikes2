@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.20'
 gem 'simple_form'
 gem "devise"
 gem 'activeadmin'

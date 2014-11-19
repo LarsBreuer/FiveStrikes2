@@ -20,7 +20,7 @@
 html, body
 {
 	width: 1000px; 
-	margin: 0 auto; 
+	margin: 0 auto; 	
 	background: url(background.png) no-repeat center center fixed;
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
@@ -30,12 +30,57 @@ html, body
 }
 
 #website { 
+	padding: 20px;	
+	background: url(background.png) no-repeat center center fixed;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  	font-family:"Arial";
+}
 
+#column_left {
+	float: left;
+	width: 382px;
+	margin-right: 10px;
+}
+
+#column_right {
+	margin-left: 400px;
+}
+
+#logo {
+	float: left;
+	width: 382px;
+	margin-right: 10px;
+	height: 80px;
+	background: #ffffff;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 5px;
+	border-width:1px solid;
+  	border-color:grey;
 }
 
 #banner {
-	margin:16px auto 16px auto; 
-	width: 1000px; 
+	height: 80px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 5px;
+  	border-width:1px solid;
+  	border-color:grey;
+  	background: #ffffff;
+}
+
+#search {
+	margin-top: 18px;
+	float: left;
+	width: 382px;
+	margin-right: 10px;
 	height: 80px;
 	background: #ffffff;
 	padding-top: 15px;
@@ -52,7 +97,7 @@ html, body
     font-size:9pt;
 }
 
-#banner img {
+#logo img {
 	float: left;
 	padding-left: 20px;
 }
@@ -61,6 +106,7 @@ html, body
 	float: left;
 	width: 382px;
 	margin-right: 10px;
+	margin-top: 18px;
 }
 
 #game_item {
@@ -87,7 +133,7 @@ html, body
 #main {
 	padding-top: 15px;
 	padding-left: 20px;
-	margin-left: 400px;
+	margin-top: 18px;
 	min-height: 700px;
 	font-family:"Arial";
     font-size:13pt;
@@ -107,4 +153,79 @@ table tr.firstrow {
 
 table tr.secondrow {
     background-color: #ffffff;
+}
+
+
+/* Facebox-Design, da die Einbindung von Facebox über 'rake assets:precompile' nicht funktioniert hat */
+
+
+#facebox{
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:100;
+	text-align:left
+}
+
+#facebox .popup{
+	position:relative;
+	border:3px solid rgba(0,0,0,0);
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	-webkit-box-shadow:0 0 18px rgba(0,0,0,0.4);
+	-moz-box-shadow:0 0 18px rgba(0,0,0,0.4);
+	box-shadow:0 0 18px rgba(0,0,0,0.4)
+}
+
+#facebox .content{
+	display:table;
+	width:370px;
+	padding:10px;
+	background:#fff;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px
+}
+
+#facebox .content>p:first-child{
+	margin-top:0
+}
+
+#facebox .content>p:last-child{
+	margin-bottom:0
+}
+
+#facebox .close{
+	position:absolute;top:5px;right:5px;padding:2px;background:#fff
+}
+
+#facebox .close img{
+	opacity:0.3
+}
+
+#facebox .close:hover img{
+	opacity:1.0
+}
+
+#facebox .loading{
+	text-align:center
+}
+
+#facebox .image{
+	text-align:center
+}
+
+#facebox img{border:0;margin:0}
+
+#facebox_overlay{
+	position:fixed;top:0px;left:0px;height:100%;width:100%
+}
+
+.facebox_hide{
+	z-index:-100
+}
+
+.facebox_overlayBG{
+	background-color:#000;z-index:99
 }

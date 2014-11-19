@@ -1,8 +1,11 @@
 class FaceboxController < ApplicationController
 
+
 # facebox stub functions
 # real work is done in JS.ERB files under views/facebox
 # or if not JS, then views under views/devise
+
+
 
   def fb_edit_user
   end

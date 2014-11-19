@@ -5,6 +5,14 @@ class LocalDevise::RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource
+
+
+    # Für den lokalen Modus Confirmation überspringen
+    resource.skip_confirmation!
+    
+
+
+
     #resource.role = User.user_role
 
     if resource.save
@@ -14,7 +22,7 @@ class LocalDevise::RegistrationsController < Devise::RegistrationsController
         set_msg t(:signed_up, :scope => 'devise.registrations')
       else
         set_msg t(:"signed_up_but_#{resource.inactive_message}", :scope => 'devise.registrations')
-        expire_data_after_sign_in!
+        #expire_data_after_sign_in!
       end
     else
       clean_up_passwords resource
@@ -44,4 +52,12 @@ class LocalDevise::RegistrationsController < Devise::RegistrationsController
       end
     end
   end 
+
+  def expire_data_after_sign_in!
+    # session.keys will return an empty array if the session is not yet loaded.
+    # This is a bug in both Rack and Rails.
+    # A call to #empty? forces the session to be loaded.
+    session.empty?
+    session.keys.grep(/^local_devise\./).each { |k| session.delete(k) }
+  end
 end

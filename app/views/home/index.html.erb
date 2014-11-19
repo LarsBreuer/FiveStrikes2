@@ -1,20 +1,38 @@
-<div id="banner" >
-	<div id="user_nav">  
+<div id="column_left" >
+
+  <div id="logo" >
+    <div id="user_nav">  
   		<% if user_signed_in? %>  
-    		Angemeldet als <%= current_user.email %>.   
-    		<%= link_to "Abmelden | ", destroy_user_session_path, :method => :delete %> 
-        <%= link_to "Freunde | ", fb_user_friends_path, :remote => true %>
-        <%= link_to "Freunde finden", fb_find_friends_path, :remote => true %>  
-  		<% else %>  
-    		<%= link_to "Registrieren", fb_create_user_path, :remote => true  %> oder  
-        <%= link_to 'Anmelden', fb_login_path, :remote => true %>  
-  		<% end %>  
-	</div> 
- 	<%= image_tag("LogoIconWebsite.png") %>
+    	  Angemeldet als <%= current_user.email %>.  <br> 
+    	  <%= link_to "Abmelden | ", destroy_user_session_path, :method => :delete %> 
+         <%= link_to "Freunde | ", fb_user_friends_path, :remote => true %>
+         <%= link_to "Freunde finden", fb_find_friends_path, :remote => true %>  
+  		 <% else %>  
+    	  <%= link_to "Registrieren", fb_create_user_path, :remote => true  %> oder  
+         <%= link_to 'Anmelden', fb_login_path, :remote => true %>  
+  		 <% end %>  
+    </div> 
+ 	  <%= image_tag("icon.png") %>
+  </div>
+
+  <div id="search" >
+
+  </div>
+
+  <div id="side" >
+    <%= render :file => "home/side" %>
+  </div>
+
 </div>
-<div id="side" >
-  	<%= render :file => "home/side" %>
-</div>
-<div id="main" >
+
+<div id="column_right" >
+
+  <div id="banner" >
+  
+  </div>
+
+  <div id="main" >
   	<%= render :file => "home/main" %>
+  </div>
+
 </div>

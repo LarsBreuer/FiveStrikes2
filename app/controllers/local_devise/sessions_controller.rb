@@ -3,7 +3,7 @@ class LocalDevise::SessionsController < Devise::SessionsController
   def create
     self.resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failed_login")
     sign_in(resource_name, resource)
-    #set_msg t(:signed_in, :scope => 'devise.sessions')
+    set_msg t(:signed_in, :scope => 'devise.sessions')
     respond_to do |format|
       format.js
       # and now keep placeholder integration test happy
