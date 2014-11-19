@@ -293,7 +293,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   coffee-rails (~> 3.2.1)
-  devise
+  devise (~> 2.2.8)
   facebox-rails
   jquery-rails
   meta_search (>= 1.1.0.pre)

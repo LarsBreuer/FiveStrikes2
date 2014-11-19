@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.20'
 gem 'simple_form'
-gem "devise"
+gem 'devise', '~> 2.2.8'
+# gem 'devise-token_authenticatable' siehe https://github.com/baschtl/devise-token_authenticatable
 gem 'activeadmin'
 gem 'meta_search', '>= 1.1.0.pre'
 gem 'facebox-rails'
