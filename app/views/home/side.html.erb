@@ -2,12 +2,12 @@
 <div id="game_item" >
 <table div id="game_item_table">
 	<tr>
-		<td><%= game.home_team.team_name %></td>
-		<td><%= game.count_team_activity(1, game.home_team.id) %></td>
+		<td><%= game.get_club_name_by_team_id(game.team_home_id) %></td>
+		<td><%= game.count_team_activity(1, game.team_home_id) %></td>
 	</tr>
 	<tr>
-		<td><%= game.away_team.team_name %></td>
-		<td><%= game.count_team_activity(1, game.away_team.id) %></td>
+		<td><%= game.get_club_name_by_team_id(game.team_away_id) %></td>
+		<td><%= game.count_team_activity(1, game.team_away_id) %></td>
 	</tr>
 	<tr align="right">
 		<td><%= link_to 'Show', home_main_path(:game_id=>game.id), :remote => true %></td>

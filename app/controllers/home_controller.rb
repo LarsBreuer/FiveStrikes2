@@ -12,9 +12,25 @@ class HomeController < ApplicationController
     end
   end
 
+  def search
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @games }
+    end
+  end
+
   def side
+    if params[:query].present?
+      logger.debug "Suchfunktion aufgerufen"
+      @games = Game.search(params[:query], page: params[:page])
+    else
+      logger.debug "Alle anzeigen"
+      @games = Game.all.page params[:page]
+    end
+
   	respond_to do |format|
       format.html 
+      format.js
       format.json { render json: @games }
     end
   end

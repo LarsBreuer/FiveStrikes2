@@ -2,7 +2,11 @@
 
 <table>
   <tr>
-    <th>Team name</th>
+    <th>Club ID</th>
+    <th>Team ID</th>
+    <th>Team Type ID</th>
+    <th>Club</th>
+    <th>Team</th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,7 +14,11 @@
 
 <% @teams.each do |team| %>
   <tr>
-    <td><%= team.team_name %></td>
+    <td><%= team.club_id %></td>
+    <td><%= team.id %></td>
+    <td><%= team.team_type_id %></td>
+    <td><%= team.club.club_name %></td>
+    <td><%= team.team_type(team.team_type_id) %></td>
     <td><%= link_to 'Show', team %></td>
     <td><%= link_to 'Edit', edit_team_path(team) %></td>
     <td><%= link_to 'Destroy', team, confirm: 'Are you sure?', method: :delete %></td>

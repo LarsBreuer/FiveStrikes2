@@ -1,22 +1,15 @@
 class Game < ActiveRecord::Base
 
-	has_many :participants, :dependent => :destroy
-	has_many :teams, :through => :participants
+  searchkick
+  
   has_many :tickers, :dependent => :destroy
   has_many :players, :through => :tickers
   belongs_to :user
 
-	accepts_nested_attributes_for :participants,
-    :reject_if => lambda {|a| a[:game_id].blank? },
-       :allow_destroy => :true
-
-  def home_team
-    self.teams.joins(:participants).where("participants.home_team = ?", true).first
-  end
-  	
-  def away_team
-    self.teams.joins(:participants).where("participants.home_team = ?", false).first
-  end
+  def get_club_name_by_team_id(team_id)
+	logger.debug "Team ID: #{team_id}"
+	Team.find(:first, :conditions => [ "id = ?", team_id ]).club.club_name
+  end 
 
   def count_team_activity(activityID, teamID)
     self.tickers.where(:activity_id => activityID, :team_id => teamID).count

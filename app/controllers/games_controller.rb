@@ -26,7 +26,6 @@ class GamesController < ApplicationController
   # GET /games/new.json
   def new
     @game = Game.new
-    2.times { @game.participants.build }
     
     respond_to do |format|
       format.html # new.html.erb
@@ -46,8 +45,6 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        @game.participants.create(:team_id => params[:home], :home_team => true)
-        @game.participants.create(:team_id => params[:away], :home_team => false)
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render json: @game, status: :created, location: @game }
       else

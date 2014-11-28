@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>ID</th>
     <th>Home</th>
     <th>-</th>
     <th>Away</th>
@@ -9,9 +10,10 @@
 
 <% @games.each do |game| %>
   <tr>
-    <td><%= game.home_team.team_name %></td>
+    <td><%= game.id %></td>
+    <td><%= game.club_home_name %></td>
     <td></td>
-    <td><%= game.away_team.team_name %></td>
+    <td><%= game.club_away_name %></td>
     <td><%= link_to 'Show', game %></td>
     <td><%= link_to 'Edit', edit_game_path(game) %></td>
     <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>

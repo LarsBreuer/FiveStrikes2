@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140204184718) do
+ActiveRecord::Schema.define(:version => 20141127135014) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -46,6 +46,10 @@ ActiveRecord::Schema.define(:version => 20140204184718) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "clubs", :force => true do |t|
+    t.string "club_name"
+  end
+
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -55,17 +59,13 @@ ActiveRecord::Schema.define(:version => 20140204184718) do
   end
 
   create_table "games", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "user_id"
-  end
-
-  create_table "participants", :force => true do |t|
-    t.integer  "game_id"
-    t.integer  "team_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.boolean  "home_team"
+    t.integer  "team_home_id"
+    t.integer  "team_away_id"
+    t.string   "club_home_name"
+    t.string   "club_away_name"
   end
 
   create_table "players", :force => true do |t|
@@ -77,9 +77,10 @@ ActiveRecord::Schema.define(:version => 20140204184718) do
   end
 
   create_table "teams", :force => true do |t|
-    t.string   "team_name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "club_id"
+    t.integer  "team_type_id"
   end
 
   create_table "tickers", :force => true do |t|

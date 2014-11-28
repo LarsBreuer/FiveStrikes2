@@ -1,5 +1,8 @@
 FiveStrikes2::Application.routes.draw do
   
+  resources :clubs
+
+
   root :to => 'home#index', :as => 'home'
 
   devise_for :users, :controllers => { :sessions => 'local_devise/sessions', 
@@ -17,6 +20,7 @@ FiveStrikes2::Application.routes.draw do
   get "home/index"
 
   match '/home/main', :to => 'home#main' 
+  match '/home/side', :to => 'home#side' 
   match '/home/statistic', :to => 'home#statistic' 
   match '/home/statistic_home', :to => 'home#statistic_home' 
   match '/facebox/fb_login' => 'facebox#fb_login', :as => :fb_login
