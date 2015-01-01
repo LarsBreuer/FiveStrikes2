@@ -3,6 +3,7 @@ class Player < ActiveRecord::Base
 	belongs_to :team
 	has_many :tickers, :dependent => :destroy
 	has_many :games, :through => :tickers
+	has_many :line_items
 	
 	def self.search(team_id, player_name)
 		if team_id

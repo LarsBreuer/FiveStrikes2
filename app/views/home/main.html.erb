@@ -2,18 +2,21 @@
   <% if @game %>
 		<table div id="game_item_table">
   		<tr>
-    		<th><%= @game.home_team.team_name %></th>
+    		<th><%= link_to @game.get_club_name_by_team_id(@game.team_home_id), line_items_create_team_line_items_path(:team_id=>@game.team_home_id), :remote => true %></th>
     		<th> - </th>
-    		<th><%= @game.away_team.team_name %></th>
+    		<th><%= @game.get_club_name_by_team_id(@game.team_away_id) %></th>
   		</tr>
   		<tr align="right">
 				<td><%= link_to 'Übersicht', home_statistic_home_path(:game_id=>@game.id), :remote => true %></td>&nbsp;&nbsp;&nbsp;
         <td><%= link_to 'Statistik', home_statistic_path(:game_id=>@game.id), :remote => true %>
 			</tr>
 		</table>
-	<% else %>
-		<p>Noch keine Daten ausgewählt.</p>
 	<% end %>
+
+  <% if @team %>
+    Du hast eine Mannschaft ausgewählt...
+  <% end %>
+
 </div>
 
 <div id="main_window" >

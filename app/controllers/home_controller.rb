@@ -20,24 +20,27 @@ class HomeController < ApplicationController
   end
 
   def side
-    if params[:query].present?
-      logger.debug "Suchfunktion aufgerufen"
-      @games = Game.search(params[:query], page: params[:page])
-    else
-      logger.debug "Alle anzeigen"
-      @games = Game.all.page params[:page]
-    end
+    logger.debug "+++++++++++++++++++++++ Home / Side wird aufgerufen +++++++++++++++++++++++"
+    @cart = current_cart
+    logger.debug "+++++++++++++++++++++++ Home / Side bevor line items created werden +++++++++++++++++++++++"
+    @line_items = @cart.line_items.all(:order => 'updated_at DESC', :limit => 10)
+    logger.debug "+++++++++++++++++++++++ Home / Side nachdem line items created werden +++++++++++++++++++++++"
 
   	respond_to do |format|
-      format.html 
       format.js
-      format.json { render json: @games }
     end
   end
 
   def main
-    @game = Game.find(params[:game_id])
-    @tickers = @game.tickers
+    
+    if params[:game_id].present?
+      @game = Game.find(params[:game_id])
+      @tickers = @game.tickers
+    end
+
+    if params[:team_id].present?
+      @team = Team.find(params[:team_id])
+    end
 
     respond_to do |format|
       format.html

@@ -1,14 +1,14 @@
 <% if @game %>
 	<table div id="game_item_table">
   		<tr>
-    		<th><%= @game.home_team.team_name %></th>
-    		<th> - </th>
-    		<th><%= @game.away_team.team_name %></th>
+    		<th><%= @game.get_club_name_by_team_id(@game.team_home_id) %></th>
+        <th> - </th>
+        <th><%= @game.get_club_name_by_team_id(@game.team_away_id) %></th>
   		</tr>
   		<tr>
-    		<th><%= @game.count_team_activity(1, @game.home_team.id) %></th>
+    		<th><%= @game.count_team_activity(1, @game.team_home_id) %></th>
     		<th> : </th>
-    		<th><%= @game.count_team_activity(1, @game.away_team.id) %></th>
+    		<th><%= @game.count_team_activity(1, @game.team_away_id) %></th>
   		</tr>
 	</table>
 <% end %>

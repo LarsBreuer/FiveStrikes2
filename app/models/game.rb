@@ -5,6 +5,9 @@ class Game < ActiveRecord::Base
   has_many :tickers, :dependent => :destroy
   has_many :players, :through => :tickers
   belongs_to :user
+  has_many :line_items
+
+  before_destroy :ensure_not_referenced_by_any_line_item
 
   def get_club_name_by_team_id(team_id)
 	logger.debug "Team ID: #{team_id}"

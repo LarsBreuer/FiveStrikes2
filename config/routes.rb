@@ -1,8 +1,5 @@
 FiveStrikes2::Application.routes.draw do
   
-  resources :clubs
-
-
   root :to => 'home#index', :as => 'home'
 
   devise_for :users, :controllers => { :sessions => 'local_devise/sessions', 
@@ -23,6 +20,8 @@ FiveStrikes2::Application.routes.draw do
   match '/home/side', :to => 'home#side' 
   match '/home/statistic', :to => 'home#statistic' 
   match '/home/statistic_home', :to => 'home#statistic_home' 
+  match '/line_items/create_line_items', :to => 'line_items#create_line_items'
+  match '/line_items/create_team_line_items', :to => 'line_items#create_team_line_items'
   match '/facebox/fb_login' => 'facebox#fb_login', :as => :fb_login
   match '/facebox/fb_create_user' => 'facebox#fb_create_user', :as => :fb_create_user
   match '/facebox/failed_login' => 'facebox#failed_login', :as => :failed_login
@@ -37,16 +36,14 @@ FiveStrikes2::Application.routes.draw do
   get "users/ask_friend" => "users#ask_friend", :as => :ask_friend
 
   resources :users
-
   resources :tickers
-
   resources :participants
-
   resources :games
-
   resources :players
-
   resources :teams
+  resources :line_items
+  resources :carts
+  resources :clubs
 
   namespace :api do
     namespace :v1 do

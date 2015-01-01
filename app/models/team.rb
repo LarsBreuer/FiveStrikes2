@@ -3,6 +3,7 @@ class Team < ActiveRecord::Base
 	has_many :players
 	has_many :tickers
 	belongs_to :club
+	has_many :line_items
 	
 	def self.search(search)
 		if search
@@ -21,11 +22,11 @@ class Team < ActiveRecord::Base
 		logger.debug "Team: #{team_type_id}"
 
 		case team_type_id
-			when 111 then "1. Herren"
-			when 112 then "2. Herren"
-			when 121 then "A1 männlich"
-			when 211 then "1. Damen"
-			when 222 then "A2 weiblich"
+			when 10111 then "1. Herren"
+			when 10112 then "2. Herren"
+			when 10121 then "A1 männlich"
+			when 10211 then "1. Damen"
+			when 10222 then "A2 weiblich"
 		end
 
 	end
