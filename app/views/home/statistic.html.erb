@@ -5,8 +5,8 @@
     <% @tickers.each do |ticker| %>
       <tr  class="<%= cycle('firstrow', 'secondrow') -%>">
         <td><%= ticker.convert_seconds_to_time(ticker.time) %></td>    
-        <td><%= @game.count_team_goals_time(@game.home_team.id, ticker.time) %>:<%= @game.count_team_goals_time(@game.away_team.id, ticker.time) %></td>
-        <td><%= ticker.player.player_name %></td>
+        <td><%= @game.count_team_goals_time(@game.team_home_id, ticker.time) %>:<%= @game.count_team_goals_time(@game.team_away_id, ticker.time) %></td>
+        <td><%= ticker.player.player_forename %> <%= ticker.player.player_surename %></td>
       </tr>
     <% end %>
   </table>

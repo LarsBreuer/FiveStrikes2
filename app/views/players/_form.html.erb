@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :player_name %><br />
-    <%= f.text_field :player_name %>
+    <%= f.label :player_forename %><br />
+    <%= f.text_field :player_forename %>
+  </div>
+  <div class="field">
+    <%= f.label :player_surename %><br />
+    <%= f.text_field :player_surename %>
   </div>
   <div class="field">
     <%= f.hidden_field :team_id, :value => params[:team_id] %>

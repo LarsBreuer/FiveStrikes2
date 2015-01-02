@@ -27,7 +27,7 @@
 <% @tickers.each do |ticker| %>
   <tr>
     <td><%= ticker.activity_id %></td>
-    <td><%= ticker.player.player_name %></td>
+    <td><%= ticker.player.player_forename %> <%= ticker.player.player_surename %></td>
     <td><%= ticker.time %></td>
     <td><%= ticker.team_id %></td>
     <td><%= link_to 'Show', ticker %></td>

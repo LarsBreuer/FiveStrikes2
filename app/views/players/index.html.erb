@@ -3,7 +3,8 @@
 <table>
   <tr>
     <th>ID</th>
-    <th>Player name</th>
+    <th>Player Forename</th>
+    <th>Player Surename</th>
     <th>Team</th>
     <th>Player number</th>
     <th></th>
@@ -14,7 +15,8 @@
 <% @players.each do |player| %>
   <tr>
     <td><%= player.id %></td>
-    <td><%= player.player_name %></td>
+    <td><%= player.player_forename %></td>
+    <td><%= player.player_surename %></td>
     <td><%= player.team_id %></td>
     <td><%= player.player_number %></td>
     <td><%= link_to 'Show', player %></td>
