@@ -13,11 +13,6 @@ class Team < ActiveRecord::Base
   		end
 	end
 
-	def team_club_name(club_id)
-		logger.debug "Club ID: #{club_id}"
-		Club.find(:first, :conditions => [ "id = ?", club_id ])
-	end
-
 	def team_type(team_type_id)
 		logger.debug "Team: #{team_type_id}"
 
