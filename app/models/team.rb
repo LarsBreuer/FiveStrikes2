@@ -7,7 +7,7 @@ class Team < ActiveRecord::Base
 	
 	def self.search(search)
 		if search
-			find(:all, :conditions => ['team_name LIKE ?', "%#{search}%"])
+			find(:all, :conditions => ['team_club_name LIKE ?', "%#{search}%"])
 		else
     		find(:all)
   		end
