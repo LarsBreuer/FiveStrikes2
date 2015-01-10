@@ -4,6 +4,7 @@ class ClubsController < ApplicationController
   # GET /clubs.json
   def index
     @clubs = Club.search(params[:search])
+    @clubs = Club.searchClubShort(params[:search])
 
     respond_to do |format|
       format.html # index.html.erb

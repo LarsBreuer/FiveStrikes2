@@ -10,4 +10,12 @@ class Club < ActiveRecord::Base
   		end
 	end
 
+	def self.searchClubShort(search)
+		if search
+			find(:all, :conditions => ['id = ?', "%#{search}%"])
+		else
+    		find(:all)
+  		end
+	end
+
 end
