@@ -20,11 +20,24 @@
     <%= f.text_field :player_surename %>
   </div>
   <div class="field">
-    <%= f.hidden_field :team_id, :value => params[:team_id] %>
+    <%= f.label :team_id %><br />
+    <%= f.number_field :team_id %>
   </div>
   <div class="field">
     <%= f.label :player_number %><br />
     <%= f.number_field :player_number %>
+  </div>
+  <div class="field">
+    <%= f.label :player_position_first %><br />
+    <%= f.number_field :player_position_first %>
+  </div>
+  <div class="field">
+    <%= f.label :player_position_second %><br />
+    <%= f.number_field :player_position_second %>
+  </div>
+  <div class="field">
+    <%= f.label :player_position_third %><br />
+    <%= f.number_field :player_position_third %>
   </div>
   <div class="actions">
     <%= f.submit %>

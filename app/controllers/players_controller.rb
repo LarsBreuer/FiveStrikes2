@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
-    @players = Player.search(params[:team_id], params[:player_name])
+    @players = Player.search(params[:team_id], params[:player_forename], params[:player_surename])
 
     respond_to do |format|
       format.html # index.html.erb

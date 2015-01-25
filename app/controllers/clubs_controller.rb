@@ -3,8 +3,7 @@ class ClubsController < ApplicationController
   # GET /clubs
   # GET /clubs.json
   def index
-    @clubs = Club.search(params[:search])
-    @clubs = Club.searchClubShort(params[:searchClubShort])
+    @clubs = Club.search(params[:club_name], params[:club_id])
 
     respond_to do |format|
       format.html # index.html.erb

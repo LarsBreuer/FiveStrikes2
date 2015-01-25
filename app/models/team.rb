@@ -4,12 +4,16 @@ class Team < ActiveRecord::Base
 	has_many :tickers
 	belongs_to :club
 	has_many :line_items
-	
-	def self.search(search)
-		if search
-			find(:all, :conditions => ['team_club_name LIKE ?', "%#{search}%"])
+
+	def self.search(team_name, club_id, team_type)
+		if team_name
+			find(:all, :conditions => ['team_club_name LIKE ?', "%#{team_name}%"])
 		else
-    		find(:all)
+			if club_id && team_type
+				find(:all, :conditions => ['club_id = ? AND team_type_id = ?', club_id, team_type])
+			else
+    			find(:all)
+    		end
   		end
 	end
 

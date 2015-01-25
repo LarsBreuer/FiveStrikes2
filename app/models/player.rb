@@ -5,10 +5,10 @@ class Player < ActiveRecord::Base
 	has_many :games, :through => :tickers
 	has_many :line_items
 	
-	def self.search(team_id, player_name)
+	def self.search(team_id, player_forename, player_surename)
 		if team_id
-			if player_name
-				find(:all, :conditions => ['team_id = ? AND player_name LIKE ?', team_id, "%#{player_name}%"])
+			if player_forename && player_surename
+				find(:all, :conditions => ['team_id = ? AND player_forename LIKE ? AND player_surename LIKE ?', team_id, "%#{player_forename}%", "%#{player_surename}%"])
 			else
 				find(:all, :conditions => ['team_id = ?', team_id])
 			end
@@ -16,4 +16,5 @@ class Player < ActiveRecord::Base
     		find(:all)
   		end
 	end
+	
 end
