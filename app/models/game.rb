@@ -2,8 +2,8 @@ class Game < ActiveRecord::Base
 
   searchkick
   
-  has_many :tickers, :dependent => :destroy
-  has_many :players, :through => :tickers
+  has_many :ticker_activities, :dependent => :destroy
+  has_many :players, :through => :ticker_activities
   belongs_to :user
   has_many :line_items
 
@@ -15,11 +15,11 @@ class Game < ActiveRecord::Base
   end 
 
   def count_team_activity(activityID, teamID)
-    self.tickers.where(:activity_id => activityID, :team_id => teamID).count
+    self.ticker_activities.where(:activity_id => activityID, :team_id => teamID).count
   end
 
   def count_team_goals_time(teamID, time)
-    self.tickers.where("activity_id = ? AND team_id = ? AND time <= ?", 1, teamID, time).count
+    self.ticker_activities.where("activity_id = ? AND team_id = ? AND time <= ?", 1, teamID, time).count
   end
 
 end

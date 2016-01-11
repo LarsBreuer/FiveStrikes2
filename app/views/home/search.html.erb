@@ -1,6 +1,13 @@
-<%= form_tag line_items_create_line_items_path, method: :get, :remote => true do %>
-  <p>
-    <%= text_field_tag :query, params[:query] %>
-    <%= submit_tag "Search", name: nil %>
-  </p>
+<%= form_tag line_items_create_line_items_path, method: :get, :remote => true, id: 'top-search-form' do %>
+    <%= text_field_tag :query, params[:query], options = {style:"float: left;
+    															 height:22px;
+    															 width: 261px;
+    															 margin-top: 11px;
+    															 padding: 6px;
+    															 border-width:0px;
+    															 border-radius: 0;
+    															 -webkit-appearance: none;
+    															 color: black;
+    															 font-size:12pt;", 
+    													placeholder: I18n.t('basic.search')} %>
 <% end %>

@@ -1,24 +1,36 @@
 <% @line_items.each do |item| %>
 
 <% if item.game %>
-
-	<div id="game_item" >
-	<table div id="game_item_table">
-		<tr>
-			<td><%= item.game.get_club_name_by_team_id(item.game.team_home_id) %></td>
-			<td><%= item.game.count_team_activity(1, item.game.team_home_id) %></td>
-		</tr>
-		<tr>
-			<td><%= item.game.get_club_name_by_team_id(item.game.team_away_id) %></td>
-			<td><%= item.game.count_team_activity(1, item.game.team_away_id) %></td>
-		</tr>
-		<tr>
-			<td><%= item.updated_at %></td>
-		</tr>
-		<tr align="right">
-			<td><%= link_to 'Show', home_main_path(:game_id=>item.game.id), :remote => true %></td>
-		</tr>
-	</table>
+	
+	<div id="table_game">
+		<div class="row_game">
+			<div class="cell_game_header_24"></div>
+			<div class="cell_game_empty_10"> </div>
+			<div class="cell_game_header_24"></div>
+			<div class="cell_game_header_261"><%= item.updated_at %></div>
+			<div class="cell_game_header_48"></div>
+		</div>
+		<div class="row_game">
+			<div class="cell_game_empty_24"></div>
+			<div class="cell_game_empty_10"> </div>
+			<div class="cell_game_blue_24"></div>
+			<div class="cell_game_team_261"><%= item.game.get_club_name_by_team_id(item.game.team_home_id) %></div>
+			<div class="cell_game_white_48"><%= item.game.count_team_activity(1, item.game.team_home_id) %></div>
+		</div>
+		<div class="row_game">
+			<div class="cell_game_empty_24"></div>
+			<div class="cell_game_empty_10"> </div>
+			<div class="cell_game_red_24"></div>
+			<div class="cell_game_team_261"><%= item.game.get_club_name_by_team_id(item.game.team_away_id) %></div>
+			<div class="cell_game_white_48"><%= item.game.count_team_activity(1, item.game.team_away_id) %></div>
+		</div>
+		<div class="row_game">
+			<div class="cell_game_empty_24"></div>
+			<div class="cell_game_empty_10"> </div>
+			<div class="cell_game_empty_24"></div>
+			<div class="cell_game_empty_261"></div>
+			<div class="cell_game_header_48"><%= link_to ">", home_main_path(:game_id=>item.game.id), :remote => true %></div>
+		</div>
 	</div>
 
 <% end %>

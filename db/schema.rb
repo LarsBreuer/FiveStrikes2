@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150125092437) do
+ActiveRecord::Schema.define(:version => 20160108102526) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(:version => 20150125092437) do
     t.string   "team_club_name"
   end
 
-  create_table "tickers", :force => true do |t|
+  create_table "ticker_activities", :force => true do |t|
     t.integer  "activity_id"
     t.integer  "player_id"
     t.integer  "time"

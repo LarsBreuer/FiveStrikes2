@@ -1,7 +1,7 @@
 class Team < ActiveRecord::Base
 	
 	has_many :players
-	has_many :tickers
+	has_many :ticker_activities
 	belongs_to :club
 	has_many :line_items
 

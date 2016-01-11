@@ -19,122 +19,157 @@
 
 html, body
 {
-	width: 1000px; 
+	width: 100%; 
 	margin: 0 auto; 	
-	background: url(background.png) no-repeat center center fixed;
+	background: #5D8AA8;
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
-  	font-family:"Arial";
+  	font-family: "Arial";
+  	font-size: 11pt;
+  	color: #355264;
 }
 
 #website { 
-	padding: 20px;	
-	background: url(background.png) no-repeat center center fixed;
+	background: #5D8AA8;
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
   	font-family:"Arial";
+  	font-size: 11pt;
+  	color: #355264;
 }
 
-#column_left {
+#navbar {
 	float: left;
-	width: 382px;
-	margin-right: 10px;
-}
-
-#column_right {
-	margin-left: 400px;
+	width: 100%;
+	height: 56px;
+	background: #355264;
+	color: white;
+	margin-bottom: 20px;
 }
 
 #logo {
 	float: left;
-	width: 382px;
-	margin-right: 10px;
-	height: 80px;
-	background: #ffffff;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	-moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 5px;
-	border-width:1px solid;
-  	border-color:grey;
-}
-
-#banner {
-	height: 80px;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	-moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 5px;
-  	border-width:1px solid;
-  	border-color:grey;
-  	background: #ffffff;
-}
-
-#search {
-	margin-top: 18px;
-	float: left;
-	width: 382px;
-	margin-right: 10px;
-	height: 80px;
-	background: #ffffff;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	-moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 5px;
-	border-width:1px solid;
-  	border-color:grey;
+	margin-left: 20px;
+	margin-right: 20px;
+	border-width:0px;
 }
 
 #user_nav {
 	float: right;
-    font-size:9pt;
+    font-size:11pt;
+    height: 56px;
+    line-height: 56px;
+    margin-right: 20px;
+  	vertical-align: middle;
 }
 
-#logo img {
+#column_left {
 	float: left;
-	padding-left: 20px;
+	width: 367px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 #side {
 	float: left;
-	width: 382px;
-	margin-right: 10px;
-	margin-top: 18px;
+	width: 367px;
+	margin-top: 20px;
 }
-
-#game_item {
-	height: 80px;
+#table_game {
+	display:table;
+	width: 367px;
 	margin-bottom: 20px;
-	background: #ffffff;
-	padding-left: 20px;
-	padding-top: 15px;
-	-moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 5px;
-  	border-width:1px solid;
-  	border-color:grey;
+}
+.row_game {
+	display:table-row;
+	height: 24px;
+}
+.cell_game_header_24{
+	display:table-cell;
+	background: #355264;
+	color: white;
+	width: 12px;
+	padding: 6px;
+	text-align: center;
+}
+.cell_game_header_48{
+	display:table-cell;
+	background: #355264;
+	color: white;
+	width: 36px;
+	padding: 6px;
+	text-align: center;
+}
+.cell_game_header_261{
+	display:table-cell;
+	background: #355264;
+	color: white;
+	width: 259px;
+	padding: 6px;
+}
+.cell_game_empty_24{
+	display:table-cell;
+	background: transparent;
+	width: 24px;
+}
+.cell_game_empty_10{
+	display:table-cell;
+	background: transparent;
+	width: 10px;
+}
+.cell_game_empty_261{
+	display:table-cell;
+	background: transparent;
+	width: 261px;
+}
+.cell_game_blue_24{
+	display:table-cell;
+	background: blue;
+	width: 24px;
+}
+.cell_game_red_24{
+	display:table-cell;
+	background: red;
+	width: 24px;
+}
+.cell_game_team_261{
+	display:table-cell;
+	background: white;
+	width: 249px;
+	padding: 6px;
+}
+.cell_game_white_48{
+	display:table-cell;
+	background: white;
+	width: 36px;
+	padding: 6px;
+	text-align: center;
 }
 
-#game_item_table {
-	width: 350px;
-	margin-left:auto; 
-    margin-right:auto;
-    font-family:"Arial";
-    font-size:13pt;
+#column_right {
+	float: left;
+}
+
+#banner {
+	width: 728px;
+	height: 90px;
+	border-width:0px;
+    border-radius: 0;
+    -webkit-appearance: none;
+  	border-width:0px;
+  	border-color:grey;
+  	background: #ffffff;
+  	margin-top: 20px;
 }
 
 #main {
-	padding-top: 15px;
-	padding-left: 20px;
-	margin-top: 18px;
-	min-height: 700px;
+	width: 728px;
+	margin-top: 20px;
+	min-height: 600px;
 	font-family:"Arial";
     font-size:13pt;
 	-moz-border-radius: 10px;
