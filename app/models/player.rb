@@ -1,8 +1,8 @@
 class Player < ActiveRecord::Base
 
 	belongs_to :team
-	has_many :tickers, :dependent => :destroy
-	has_many :games, :through => :tickers
+	has_many :ticker_activities, :dependent => :destroy
+	has_many :games, :through => :ticker_activities
 	has_many :line_items
 	
 	def self.search(team_id, player_forename, player_surename)

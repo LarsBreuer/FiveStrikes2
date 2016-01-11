@@ -14,7 +14,7 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
-    @tickers = @game.tickers
+    @ticker_activities = @game.ticker_activities
 
     respond_to do |format|
       format.html # show.html.erb

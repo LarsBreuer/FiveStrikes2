@@ -35,7 +35,7 @@ class HomeController < ApplicationController
     
     if params[:game_id].present?
       @game = Game.find(params[:game_id])
-      @tickers = @game.tickers
+      @ticker_activities = @game.ticker_activities
     end
 
     if params[:team_id].present?
@@ -51,7 +51,7 @@ class HomeController < ApplicationController
 
   def statistic
     @game = Game.find(params[:game_id])
-    @tickers = @game.tickers
+    @ticker_activities = @game.ticker_activities
     @user = User.find(@game.user_id)
 
     respond_to do |format|
@@ -63,7 +63,7 @@ class HomeController < ApplicationController
 
   def statistic_home
     @game = Game.find(params[:game_id])
-    @tickers = @game.tickers
+    @ticker_activities = @game.ticker_activities
 
     respond_to do |format|
       format.html

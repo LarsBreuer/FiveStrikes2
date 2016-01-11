@@ -36,7 +36,7 @@ FiveStrikes2::Application.routes.draw do
   get "users/ask_friend" => "users#ask_friend", :as => :ask_friend
 
   resources :users
-  resources :tickers
+  resources :ticker_activities
   resources :participants
   resources :games
   resources :players

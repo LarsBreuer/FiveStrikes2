@@ -2,11 +2,11 @@
 <% if @game %>
 
   <table div id="game_item_table">
-    <% @tickers.each do |ticker| %>
+    <% @ticker_activities.each do |ticker_activity| %>
       <tr  class="<%= cycle('firstrow', 'secondrow') -%>">
-        <td><%= ticker.convert_seconds_to_time(ticker.time) %></td>    
-        <td><%= @game.count_team_goals_time(@game.team_home_id, ticker.time) %>:<%= @game.count_team_goals_time(@game.team_away_id, ticker.time) %></td>
-        <td><%= ticker.player.player_forename %> <%= ticker.player.player_surename %></td>
+        <td><%= ticker_activity.convert_seconds_to_time(ticker_activity.time) %></td>    
+        <td><%= @game.count_team_goals_time(@game.team_home_id, ticker_activity.time) %>:<%= @game.count_team_goals_time(@game.team_away_id, ticker_activity.time) %></td>
+        <td><%= ticker_activity.player.player_forename %> <%= ticker_activity.player.player_surename %></td>
       </tr>
     <% end %>
   </table>
