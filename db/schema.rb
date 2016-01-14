@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160108102526) do
+ActiveRecord::Schema.define(:version => 20160114074746) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -65,13 +65,16 @@ ActiveRecord::Schema.define(:version => 20160108102526) do
   end
 
   create_table "games", :force => true do |t|
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.integer  "user_id"
     t.integer  "team_home_id"
     t.integer  "team_away_id"
     t.string   "club_home_name"
     t.string   "club_away_name"
+    t.integer  "duration_halftime"
+    t.date     "game_date"
+    t.text     "game_note"
   end
 
   create_table "line_items", :force => true do |t|
@@ -107,10 +110,18 @@ ActiveRecord::Schema.define(:version => 20160108102526) do
     t.integer  "activity_id"
     t.integer  "player_id"
     t.integer  "time"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.integer  "game_id"
     t.integer  "team_id"
+    t.string   "realtime"
+    t.integer  "home_or_away"
+    t.string   "goal_area"
+    t.integer  "field_position_x"
+    t.integer  "field_position_y"
+    t.integer  "throwing_technique_id"
+    t.text     "ticker_activity_note"
+    t.integer  "mark"
   end
 
   create_table "users", :force => true do |t|
