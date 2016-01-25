@@ -1,0 +1,56 @@
+<%= form_for(@ticker_activity) do |f| %>
+  <% if @ticker_activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ticker_activity.errors.count, "error") %> prohibited this ticker from being saved:</h2>
+
+      <ul>
+      <% @ticker_activity.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :game_id, :value => params[:game_id] %>
+  </div>
+  <div class="field">
+    <%= f.label :activity_id %><br />
+    <%= f.number_field :activity_id %>
+  </div>
+  <div class="field">
+    <%= f.label :player_id %><br />
+    <%= f.number_field :player_id %>
+  </div>
+  <div class="field">
+    <%= f.label :time %><br />
+    <%= f.number_field :time %>
+  </div>
+  <div class="field">
+    <%= f.label :team_id %><br />
+    <%= f.number_field :team_id %>
+  </div>
+  <div class="field">
+    <%= f.label :home_or_away %><br />
+    <%= f.number_field :home_or_away %>
+  </div>
+  <div class="field">
+    <%= f.label :goal_area %><br />
+    <%= f.text_field :goal_area %>
+  </div>
+  <div class="field">
+    <%= f.label :field_position_x %><br />
+    <%= f.number_field :field_position_x %>
+  </div>
+  <div class="field">
+    <%= f.label :field_position_y %><br />
+    <%= f.number_field :field_position_y %>
+  </div>
+  <div class="field">
+    <%= f.label :throwing_technique_id %><br />
+    <%= f.number_field :throwing_technique_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,48 @@
+<div id="game_main_result"> 
+	<div id="game_main_title_result"> 
+		<%= I18n.t('basic.result') %>
+	</div>
+	<div>
+		<div id="game_main_title_number"> 
+			<%= @game.count_team_goals(@game.team_home_id, @game.id) %>
+		</div>
+		<div id="game_main_title_number"> 
+			<%= @game.count_team_goals(@game.team_away_id, @game.id) %>
+		</div>
+	</div>
+	<div>
+		<div id="game_main_title_team"> 
+			<%= @game.get_club_name_by_team_id(@game.team_home_id) %>
+		</div>
+		<div id="game_main_title_team"> 
+			<%= @game.get_club_name_by_team_id(@game.team_away_id) %>
+		</div>
+	</div>
+	<div id="game_main_title_proceed"> 
+		<%= I18n.t('basic.proceed_ticker') %>
+	</div>
+	
+</div>
+
+<div id="game_main_field">
+
+	<div id="game_main_field_title"> 
+		<%= I18n.t('basic.top_scorer') %>
+	</div>
+	<div>
+		<div id="game_main_field_number"> 
+			<%= @game.get_top_scorer_goals(@game.id) %>
+		</div>
+	</div>
+	<div>
+		<div id="game_main_field_team"> 
+			<%= @game.get_top_scorer_name(@game.id) %>
+		</div>
+	</div>
+	<div id="game_main_field_proceed"> 
+		<%= I18n.t('basic.proceed_scorer') %>
+	</div>
+
+</div>
+
+

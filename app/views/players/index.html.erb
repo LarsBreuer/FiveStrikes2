@@ -31,3 +31,9 @@
 <br />
 
 <%= link_to 'New Player', new_player_path %>
+
+<h3>Import a CSV File</h3>
+<%= form_tag import_players_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import CSV" %>
+<% end %>

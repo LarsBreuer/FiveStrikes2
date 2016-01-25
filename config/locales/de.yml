@@ -6,6 +6,10 @@ de:
     logged_in_as: 'Angemeldet als'
     search: 'Suchen'
     show: 'Z'
+    result: 'Endstand'
+    proceed_ticker: 'Weiter mit dem Ticker zum Spiel ->'
+    proceed_scorer: 'Torschützen'
+    top_scorer: 'Bester Torschütze'
   activerecord:
     errors:
       messages:

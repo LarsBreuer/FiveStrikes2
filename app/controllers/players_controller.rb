@@ -81,4 +81,14 @@ class PlayersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def import
+    begin
+      Player.import(params[:file])
+      redirect_to home_path, notice: "Player imported."
+    rescue
+      redirect_to home_path, notice: "Invalid CSV file format."
+    end
+  end
+
 end

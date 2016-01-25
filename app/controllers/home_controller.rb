@@ -72,6 +72,16 @@ class HomeController < ApplicationController
     end
   end
 
+  def game_main
+    @game = Game.find(params[:game_id])
+
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render json: @game }
+    end
+  end
+
   protected
 
   def check_if_friend
