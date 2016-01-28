@@ -12,7 +12,7 @@ class Api::V1::SessionsController < Devise::SessionsController
     render :status => 200,
            :json => { :success => true,
                       :info => "Logged in",
-                      :data => { :auth_token => current_user.authentication_token, :user_id => current_user.id } }
+                      :data => { :auth_token => current_user.authentication_token, :user_id => current_user.id, :user_name => current_user.name }
   end
 
   def destroy
