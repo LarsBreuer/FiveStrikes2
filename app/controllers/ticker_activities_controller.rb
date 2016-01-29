@@ -40,6 +40,8 @@ class TickerActivitiesController < ApplicationController
   # POST /ticker_activities
   # POST /ticker_activities.json
   def create
+    puts params
+    Rails.logger.debug params.inspect
     @ticker_activity = TickerActivity.new(params[:ticker_activity])
 
     respond_to do |format|
