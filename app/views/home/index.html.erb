@@ -3,6 +3,7 @@
   <%= render :file => "home/search" %>
   
   <div id="user_nav"> 
+    <% if @user %>
     <% if user_signed_in? %>  
       <%=t 'basic.logged_in_as' %> 
       <%= current_user.email %>  <br> 
@@ -13,6 +14,7 @@
       <%= link_to I18n.t('basic.register'), fb_create_user_path, :remote => true  %> 
       <%=t 'basic.or' %>  
       <%= link_to I18n.t('basic.log_in'), fb_login_path, :remote => true %>  
+    <% end %> 
     <% end %> 
   </div>  
 

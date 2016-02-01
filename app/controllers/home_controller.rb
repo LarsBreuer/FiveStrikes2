@@ -4,12 +4,12 @@ class HomeController < ApplicationController
   before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home]
 
   def index
-  	@games = Game.all
+  	#@games = Game.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @games }
-    end
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.json { render json: @games }
+    #end
   end
 
   def search
