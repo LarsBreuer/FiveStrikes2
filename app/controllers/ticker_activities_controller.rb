@@ -41,21 +41,21 @@ class TickerActivitiesController < ApplicationController
   # POST /ticker_activities.json
   def create
     
-    params["_json"].each do |param_hash|
+    params["_json"].each do |params_hash|
       ticker = TickerActivity.create!(params_hash)
     end
-    
+
     #@ticker_activity = TickerActivity.new(params[:ticker_activity])
 
-    #respond_to do |format|
-    #  if @ticker_activity.save
-    #    format.html { redirect_to @ticker_activity, notice: 'Ticker was successfully created.' }
-    #    format.json { render json: @ticker_activity, status: :created, location: @ticker_activity }
-    #  else
-    #    format.html { render action: "new" }
-    #    format.json { render json: @ticker_activity.errors, status: :unprocessable_entity }
-    #  end
-    #end
+    respond_to do |format|
+      if @ticker_activity.save
+        format.html { redirect_to @ticker_activity, notice: 'Ticker was successfully created.' }
+        format.json { render json: @ticker_activity, status: :created, location: @ticker_activity }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @ticker_activity.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PUT /ticker_activities/1
