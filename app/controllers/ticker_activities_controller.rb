@@ -79,7 +79,7 @@ def create_multiple
 
       # Respond with the json versions of the saved ticker_activites
       format.json { render json: @ticker_activities, status: :created, location: multiple_ticker_locations_url }
-    }
+    
     else
       # We can't save *all* the ticker_activities so we
       # respond with the corresponding validation errors for the ticker_activities
