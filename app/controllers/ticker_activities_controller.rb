@@ -44,6 +44,7 @@ class TickerActivitiesController < ApplicationController
     params["_json"].each do |params_hash|
       puts params_hash.inspect
       ticker = TickerActivity.create!(params_hash)
+      @ticker_activity = TickerActivity.new(params_hash)
     end
 
     #@ticker_activity = TickerActivity.new(params[:ticker_activity])
