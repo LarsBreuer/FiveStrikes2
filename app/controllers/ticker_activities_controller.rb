@@ -60,6 +60,38 @@ class TickerActivitiesController < ApplicationController
     end
   end
 
+# POST /multiple_ticker_activities
+# POST /multiple_ticker_activities.json
+def create_multiple
+  puts params
+
+  @ticker_activities = params["_json"].map do |params_hash|
+    whitelisted_params = params_hash.permit(:activity_id, :player_id, :time, :game_id)
+    TickerActivity.new(whitelisted_params)      
+  end
+
+  respond_to do |format|
+    # Check that all the ticker_activities are valid and can be saved
+    if @ticker_activities.all? { |ticker_activity| ticker_activity.valid? }
+      # Now we know they are valid save each ticker_activity
+      @ticker_activities.each do |ticker_activity|
+        ticker_activity.save
+      end
+
+      # Respond with the json versions of the saved ticker_activites
+      format.json { render json: @ticker_activities, status: :created, location: multiple_ticker_locations_url }
+    }
+    else
+      # We can't save *all* the ticker_activities so we
+      # respond with the corresponding validation errors for the ticker_activities
+      @errors = @ticker_activities.map { |ticker_activity|
+        ticker_activity.errors
+      }
+      format.json { render json: @errors, status: :unprocessable_entity }
+    end
+  end
+end
+
   # PUT /ticker_activities/1
   # PUT /ticker_activities/1.json
   def update

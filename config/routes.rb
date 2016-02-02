@@ -34,6 +34,7 @@ FiveStrikes2::Application.routes.draw do
   get "users/user_friends" => "users#user_friends", :as => :user_friends
   get "users/find_friends" => "users#find_friends", :as => :find_friends
   get "users/ask_friend" => "users#ask_friend", :as => :ask_friend
+  post '/multiple_ticker_activities', to: 'ticker_activities#create', as: :multiple_ticker_locations
 
   resources :users
   resources :ticker_activities do
