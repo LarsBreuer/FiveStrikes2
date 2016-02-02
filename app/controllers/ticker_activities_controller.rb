@@ -66,8 +66,7 @@ def create_multiple
   puts params
 
   @ticker_activities = params["_json"].map do |params_hash|
-    whitelisted_params = params_hash.permit(:activity_id, :player_id, :time, :game_id)
-    TickerActivity.new(whitelisted_params)      
+    ticker = TickerActivity.create!(params_hash)     
   end
 
   respond_to do |format|
@@ -84,9 +83,7 @@ def create_multiple
     else
       # We can't save *all* the ticker_activities so we
       # respond with the corresponding validation errors for the ticker_activities
-      @errors = @ticker_activities.map { |ticker_activity|
-        ticker_activity.errors
-      }
+      @errors = @ticker_activities.map { |ticker_activity| ticker_activity.errors }
       format.json { render json: @errors, status: :unprocessable_entity }
     end
   end
