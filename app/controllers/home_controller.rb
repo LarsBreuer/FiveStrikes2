@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :side, :main, :statistic_home]
-  before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home]
+  before_filter :authenticate_user!, :except => [:index, :side, :main, :statistic_home, :game_main]
+  before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home, :game_main]
 
   def index
   	#@games = Game.all
@@ -42,6 +42,31 @@ class HomeController < ApplicationController
       @team = Team.find(params[:team_id])
     end
 
+    if params[:mode].present?
+      @mode = params[:mode]
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render json: @game }
+    end
+  end
+
+  def game_main
+
+    if params[:game_id].present?
+      @game = Game.find(params[:game_id])
+      @ticker_activities = @game.ticker_activities
+      @player_home = @game.get_player_home(params[:game_id])
+    end
+
+    if params[:mode].present?
+      @mode = params[:mode]
+    end
+
+    puts @mode
+
     respond_to do |format|
       format.html
       format.js
@@ -64,16 +89,6 @@ class HomeController < ApplicationController
   def statistic_home
     @game = Game.find(params[:game_id])
     @ticker_activities = @game.ticker_activities
-
-    respond_to do |format|
-      format.html
-      format.js
-      format.json { render json: @game }
-    end
-  end
-
-  def game_main
-    @game = Game.find(params[:game_id])
 
     respond_to do |format|
       format.html

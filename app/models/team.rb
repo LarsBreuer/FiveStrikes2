@@ -27,7 +27,6 @@ class Team < ActiveRecord::Base
 			when 10211 then "1. Damen"
 			when 10222 then "A2 weiblich"
 		end
-
 	end
 
 end

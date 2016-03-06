@@ -3,19 +3,17 @@
   <%= render :file => "home/search" %>
   
   <div id="user_nav"> 
-    <% if @user %>
-    <% if user_signed_in? %>  
-      <%=t 'basic.logged_in_as' %> 
-      <%= current_user.email %>  <br> 
-      <%= link_to "Abmelden | ", destroy_user_session_path, :method => :delete %> 
-      <%= link_to "Freunde | ", fb_user_friends_path, :remote => true %>
-      <%= link_to "Freunde finden", fb_find_friends_path, :remote => true %>  
-    <% else %>  
-      <%= link_to I18n.t('basic.register'), fb_create_user_path, :remote => true  %> 
-      <%=t 'basic.or' %>  
-      <%= link_to I18n.t('basic.log_in'), fb_login_path, :remote => true %>  
-    <% end %> 
-    <% end %> 
+  <% if user_signed_in? %>  
+    <%=t 'basic.logged_in_as' %> 
+    <%= current_user.email %>  <br> 
+    <%= link_to "Abmelden | ", destroy_user_session_path, :method => :delete %> 
+    <%= link_to "Freunde | ", fb_user_friends_path, :remote => true %>
+    <%= link_to "Freunde finden", fb_find_friends_path, :remote => true %>  
+  <% else %>  
+    <%= link_to I18n.t('basic.register'), fb_create_user_path, :remote => true, :class => "navbar"  %> 
+    <%=t 'basic.or' %>  
+    <%= link_to I18n.t('basic.log_in'), fb_login_path, :remote => true, :class => "navbar"  %>  
+  <% end %> 
   </div>  
 
 </div>
@@ -29,7 +27,7 @@
     </div>
 
     <div id="fives"> 
-      Fives
+      FIVES
     </div>
   
   </div>
@@ -47,7 +45,7 @@
   </div>
 
   <div id="main" >
-  	<%= render :file => "home/main" %>
+  	
   </div>
 
 </div>

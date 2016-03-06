@@ -89,6 +89,7 @@ html, body
     line-height: 90px;
   	vertical-align: middle;
   	font-weight: bold;
+  	letter-spacing: 5px;
   	color: white;
 }
 
@@ -98,18 +99,23 @@ html, body
 }
 
 #table_game {
-	display:table;
+	display: table;
 	width: 367px;
 	margin-bottom: 20px;
+	background: white;
+	color: #355264;
+}
+#table_game:hover{
+	color: #355264;
+	background-color: orange;
 }
 .row_game {
 	display:table-row;
 	height: 30px;
-	background: white;
 }
-.cell_game_header_295 {
+.cell_game_header_319 {
 	display:table-cell;
-	width: 283px;
+	width: 307px;
 	padding: 6px;
 	text-align: left;
 	border-bottom: 1px solid #355264;
@@ -120,15 +126,9 @@ html, body
 	padding: 6px;
 	border-bottom: 1px solid #355264;
 }
-.cell_game_header_24 {
+.cell_game_white_319 {
 	display:table-cell;
-	width: 12px;
-	padding: 6px;
-	border-bottom: 1px solid #355264;
-}
-.cell_game_white_295 {
-	display:table-cell;
-	width: 283px;
+	width: 307px;
 	padding: 6px;
 	text-align: left;
 }
@@ -136,11 +136,6 @@ html, body
 	display:table-cell;
 	width: 24px;
 	padding: 6px;
-	text-align: left;
-}
-.cell_game_white_24 {
-	display:table-cell;
-	width: 24px;
 	text-align: left;
 }
 .cell_game_white_6 {
@@ -169,12 +164,31 @@ html, body
 	min-height: 600px;
 	font-family:"Arial";
     font-size:13pt;
-	-moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 5px;
-  	border-width:1px solid;
-  	border-color:grey;
   	background: transparent;
+}
+
+#game_statistic_nav {
+	width: 716px;
+	height: 48px;
+	line-height: 48px;
+  	vertical-align: middle;
+  	padding-left: 12px;
+    font-size: 18pt;
+	color: #355264;
+  	background: white;
+  	border-bottom: 1px solid #355264;
+}
+
+#game_statistic_main {
+	width: 704px;
+	min-height: 600px;
+	padding: 12px;
+	color: #355264;
+  	background: white;
+}
+
+#game_row {
+	margin-bottom: 20px;
 }
 
 #game_main_result {
@@ -183,6 +197,11 @@ html, body
 	height: 160px;
 	background: white;
 	padding: 20px;
+	margin-bottom: 20px;
+}
+
+#game_main_result:hover{
+   background-color: orange;
 }
 
 #game_main_field {
@@ -192,6 +211,7 @@ html, body
 	background: white;
 	padding: 20px;
 	margin-left: 20px;
+	margin-bottom: 20px;
 }
 
 #game_main_title_result {
@@ -251,15 +271,15 @@ html, body
 	width: 314px;
 	height: 20px;
 	line-height: 40px;
-	font-size: 11pt;
-	text-align: right;
+	font-size: 10pt;
+	text-align: center;
 }
 #game_main_field_proceed {
 	width: 127px;
 	height: 20px;
 	line-height: 40px;
-	font-size: 11pt;
-	text-align: right;
+	font-size: 10pt;
+	text-align: center;
 }
 
 table tr.firstrow {
@@ -272,6 +292,175 @@ table tr.secondrow {
     background-color: #ffffff;
 }
 
+/* Links */
+
+a.navbar:link {
+	color: white;
+	text-decoration:none;
+}
+
+a.navbar:visited {
+	color: white;
+	text-decoration:none
+}
+
+a.navbar:hover {
+	color: #5eb1e7;
+	text-decoration:none
+}
+
+a.sidebar:link {
+	color: #355264;
+	text-decoration:none;
+}
+
+a.sidebar:visited {
+	color: #355264;
+	text-decoration:none
+}
+
+a.sidebar:hover {
+	color: #355264;
+	text-decoration:none
+}
+
+a.main:link {
+	color: #355264;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+a.main:visited {
+	color: #355264;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+a.main:hover {
+	color: #5eb1e7;
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
+a.main:link::after {
+	content: " »";
+	color: #5eb1e7;
+}
+
+/* Dropdown-Menü */
+
+#menu {
+  float: left;
+  width: 100%;
+  background: white;
+  font-size: 16px;
+}
+
+#menu ul {
+  margin: 0;
+  padding: 0;
+}
+
+#menu a {
+  display: block;
+  color: #355264;
+  text-decoration: none;
+  height: 48px;
+}
+
+#menu ul li {
+  position: relative;
+  float: left;
+  list-style: none;
+  color: #355264;
+}
+
+#menu ul li:hover {
+  color: white;
+  background: orange;
+}
+
+#menu ul li a {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#menu ul li a:hover {
+  color: white;
+}
+
+#menu > ul > li:hover > a {
+	background: #355264;
+	color: #fff;
+}
+
+#menu > ul > li.submenu:hover > a:after {
+	position: relative;
+  float: right;
+  content: '';
+  margin-left: 10px;
+  margin-top: 21px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #fff;
+  border-bottom: 5px solid transparent;
+}
+
+#menu ul > li.submenu > a:after {
+  position: relative;
+  float: right;
+  content: '';
+  margin-left: 10px;
+  margin-top: 21px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #355264;
+  border-bottom: 5px solid transparent;
+}
+
+#menu ul ul li.submenu > a:after {
+  margin-left: auto;
+  margin-right: -10px;
+  border-left: 5px solid #fff;
+  border-right: 5px solid transparent;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+#menu ul ul {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  background: #355264;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+#menu ul ul li {
+  float: none;
+  width: 200px;
+  border-bottom: 1px solid #555;
+}
+
+#menu ul ul li a {
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+}
+
+#menu ul ul li:last-child {
+  border-bottom: none;
+}
+
+#menu ul li:hover > ul {
+  top: 100%;
+  left: 0;
+}
+
+#menu ul ul li:hover > ul {
+  top: 0;
+  left: 200px;
+}
 
 /* Facebox-Design, da die Einbindung von Facebox über 'rake assets:precompile' nicht funktioniert hat */
 

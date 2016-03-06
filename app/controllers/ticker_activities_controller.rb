@@ -66,6 +66,7 @@ def create_multiple
   puts params
 
   @ticker_activities = params["_json"].map do |params_hash|
+    # ToDo => whitelisted_params einbauen. Siehe mein Beitrag bei stackoverflow unter http://stackoverflow.com/questions/35082478/handling-json-array-from-android-in-rails
     ticker = TickerActivity.create!(params_hash)     
   end
 

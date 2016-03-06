@@ -1,48 +1,61 @@
-<div id="game_main_result"> 
-	<div id="game_main_title_result"> 
-		<%= I18n.t('basic.result') %>
+<div id="game_statistic_nav" >
+
+	<div id="menu">
+    
+		<ul>
+      <li><%= link_to I18n.t('basic.overview'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+      <li class="submenu"><a href="#"><%= I18n.t('basic.game')%></a>
+        <ul>
+          <li><%= link_to I18n.t('basic.ticker'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+          <li class="submenu"><%= link_to I18n.t('basic.scorer'), home_main_path(:game_id=>@game.id), :remote => true %>
+            <ul>
+              <li><%= link_to I18n.t('basic.all'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+              <li><%= link_to @game.get_club_name_by_team_id(@game.team_home_id), home_main_path(:game_id=>@game.id), :remote => true %></li>
+              <li><%= link_to @game.get_club_name_by_team_id(@game.team_away_id), home_main_path(:game_id=>@game.id), :remote => true %></li>
+            </ul>
+          </li>
+          <li class="submenu"><%= link_to I18n.t('basic.team_roster'), home_main_path(:game_id=>@game.id), :remote => true %>
+            <ul>
+              <li><%= link_to @game.get_club_name_by_team_id(@game.team_home_id), home_main_path(:game_id=>@game.id), :remote => true %></li>
+              <li><%= link_to @game.get_club_name_by_team_id(@game.team_away_id), home_main_path(:game_id=>@game.id), :remote => true %></li>
+            </ul>
+          </li>
+          <li><%= link_to I18n.t('basic.goals'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.game_history'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.penalties'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.powerplay'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+        </ul>
+      </li>
+      <li class="submenu"><a href="#"><%= I18n.t('basic.player')%> <%= @game.get_club_name_short_by_team_id(@game.team_home_id)%></a>
+        <ul>
+
+          <% @player_home.each do |player_id| %>
+
+            <li><%= link_to @game.get_player_name_by_id(player_id), home_main_path(:game_id=>@game.id, :player_id=>player_id), :remote => true %></li>
+
+          <% end %>
+
+        </ul>
+      </li>
+      <li><%= link_to I18n.t('basic.comments'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+    </ul>
+    
 	</div>
-	<div>
-		<div id="game_main_title_number"> 
-			<%= @game.count_team_goals(@game.team_home_id, @game.id) %>
-		</div>
-		<div id="game_main_title_number"> 
-			<%= @game.count_team_goals(@game.team_away_id, @game.id) %>
-		</div>
-	</div>
-	<div>
-		<div id="game_main_title_team"> 
-			<%= @game.get_club_name_by_team_id(@game.team_home_id) %>
-		</div>
-		<div id="game_main_title_team"> 
-			<%= @game.get_club_name_by_team_id(@game.team_away_id) %>
-		</div>
-	</div>
-	<div id="game_main_title_proceed"> 
-		<%= I18n.t('basic.proceed_ticker') %>
-	</div>
-	
+
 </div>
 
-<div id="game_main_field">
+<div id="game_statistic_main" >
+<%
+=begin
+%>
+	<%= @game.get_club_name_by_team_id(@game.team_away_id) %>
 
-	<div id="game_main_field_title"> 
-		<%= I18n.t('basic.top_scorer') %>
-	</div>
-	<div>
-		<div id="game_main_field_number"> 
-			<%= @game.get_top_scorer_goals(@game.id) %>
-		</div>
-	</div>
-	<div>
-		<div id="game_main_field_team"> 
-			<%= @game.get_top_scorer_name(@game.id) %>
-		</div>
-	</div>
-	<div id="game_main_field_proceed"> 
-		<%= I18n.t('basic.proceed_scorer') %>
-	</div>
+	<% if @mode == 'GameGoals' %>
 
+		Spiel     Listen     Spieler       Ticker       Kommentare
+
+	<% end %>
+<%
+=end
+%>
 </div>
-
-
