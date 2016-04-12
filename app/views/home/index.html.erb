@@ -1,6 +1,12 @@
 <div id="navbar" >
 
-  <%= render :file => "home/search" %>
+  <div id="icon" >
+    <%= image_tag("icon.png") %>
+  </div>
+
+  <div id="fives"> 
+    FIVES
+  </div>
   
   <div id="user_nav"> 
   <% if user_signed_in? %>  
@@ -19,16 +25,14 @@
 </div>
 
 <div id="column_left" >
+  
+  <div id="search_field" >
 
-  <div id="logo" >
-
-    <div id="icon" >
-      <%= image_tag("icon.png") %>
+    <div id="label_line_item">
+      
     </div>
 
-    <div id="fives"> 
-      FIVES
-    </div>
+    <%= render :file => "home/search" %>
   
   </div>
 

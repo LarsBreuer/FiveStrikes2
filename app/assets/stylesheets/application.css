@@ -51,6 +51,26 @@ html, body
 	margin-bottom: 20px;
 }
 
+#icon {
+	float: left;
+	margin-left: 24px;
+	margin-right: 11px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-width:0px;
+}
+
+#fives {
+	float: left;
+    font-size: 22pt;
+    height: 56px;
+    line-height: 56px;
+  	vertical-align: middle;
+  	font-weight: bold;
+  	letter-spacing: 2px;
+  	color: white;
+}
+
 #user_nav {
 	float: right;
     font-size:11pt;
@@ -67,30 +87,12 @@ html, body
 	margin-right: 20px;
 }
 
-#logo {
+#search_field {
 	float: left;
 	width: 367px;
 	height: 90px;
 	margin-bottom: 20px;
-}
-
-#icon {
-	float: left;
-	margin-right: 7px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border-width:0px;
-}
-
-#fives {
-	float: left;
-    font-size:48pt;
-    height: 90px;
-    line-height: 90px;
-  	vertical-align: middle;
-  	font-weight: bold;
-  	letter-spacing: 5px;
-  	color: white;
+	background: white;
 }
 
 #side {
@@ -98,9 +100,19 @@ html, body
 	margin-top: 20px;
 }
 
+#label_line_item {
+	float: left;
+	width: 45px;
+	height: 90px;
+	margin-bottom: 20px;
+	background: #355264;
+	color: white;
+}
+
 #table_game {
+	float: left;
 	display: table;
-	width: 367px;
+	width: 322px;
 	margin-bottom: 20px;
 	background: white;
 	color: #355264;
@@ -115,7 +127,7 @@ html, body
 }
 .cell_game_header_319 {
 	display:table-cell;
-	width: 307px;
+	width: 262px;
 	padding: 6px;
 	text-align: left;
 	border-bottom: 1px solid #355264;
@@ -128,7 +140,7 @@ html, body
 }
 .cell_game_white_319 {
 	display:table-cell;
-	width: 307px;
+	width: 262px;
 	padding: 6px;
 	text-align: left;
 }
