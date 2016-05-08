@@ -6,6 +6,7 @@ de:
     log_in: 'Anmelden'
     logged_in_as: 'Angemeldet als'
     search: 'Suchen'
+    search_for: 'Suchen nach'
     show: 'Z'
     result: 'Endstand'
     proceed_ticker: 'Zum Ticker'
@@ -19,6 +20,8 @@ de:
     game: 'Spiel'
     lists: 'Listen'
     player: 'Spieler'
+    team: 'Mannschaft'
+    club: 'Verein'
     overview: 'Übersicht'
     comments: 'Kommentare'
     goals: 'Tore'
@@ -27,6 +30,16 @@ de:
     penalties: 'Strafen'
     powerplay: 'Überzahl'
     team_roster: 'Spielerliste'
+    edit: 'Bearbeiten'
+    new_player: 'Neuer Spieler'
+    new_team: 'Neue Mannschaft'
+    goalkeeper: 'Torwart'
+    left_wing: 'Linksaußen'
+    left_back: 'Rückraum links'
+    center_back: 'Rückraum mitte'
+    right_back: 'Rückraum rechts'
+    right_wing: 'Rechtsaußen'
+    pivot: 'Kreisläufer'
   activerecord:
     errors:
       messages:

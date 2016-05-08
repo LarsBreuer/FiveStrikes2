@@ -1,6 +1,5 @@
 class Game < ActiveRecord::Base
 
-  searchkick
   # ToDo => Eventuell doch Verweis auf Team Home und Team Away einrichten, statt nur auf die ID zu verweisen
   has_many :ticker_activities, :dependent => :destroy, :order => 'time ASC'
   has_many :players, :through => :ticker_activities
@@ -9,6 +8,20 @@ class Game < ActiveRecord::Base
 
   # ToDo => Überprüfung, ob Spiel tatsächlich zerstört werden darf, einrichten
   # before_destroy :ensure_not_referenced_by_any_line_item
+
+  #
+  #
+  # Suchfunktion
+  #
+  #
+
+  def self.search_items(search)
+    if search
+      find(:all, :conditions => ['club_home_name LIKE ? OR club_away_name LIKE ?', "%#{search}%", "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
 
   #
   #

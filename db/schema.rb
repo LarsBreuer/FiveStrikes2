@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160114074746) do
+ActiveRecord::Schema.define(:version => 20160504124256) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20160114074746) do
     t.integer  "player_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "club_id"
   end
 
   create_table "players", :force => true do |t|

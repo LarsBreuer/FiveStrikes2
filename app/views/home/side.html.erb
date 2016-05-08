@@ -4,25 +4,24 @@
 
 	<%= link_to home_main_path(:game_id=>item.game.id), :remote => true, :class => "sidebar" do %>
 
-		<div id="label_line_item">
-			<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
-		</div>
-
 		<div id="table_game">
+
+			<div id="label_line_item">
+				<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+			</div>
+
+		
 			<div class="row_game">
-				<div class="cell_game_white_6"> </div>
 				<div class="cell_game_header_319"><%= item.updated_at %></div>
 				<div class="cell_game_header_36"> </div>
 				<div class="cell_game_white_6"> </div>
 			</div>
 			<div class="row_game">
-				<div class="cell_game_white_6"> </div>
 				<div class="cell_game_white_319"><%= item.game.get_club_name_by_team_id(item.game.team_home_id) %></div>
 				<div class="cell_game_white_36"><%= item.game.count_team_goals(item.game.team_home_id, item.game.id) %></div>
 				<div class="cell_game_white_6"> </div>
 			</div>
 			<div class="row_game">
-				<div class="cell_game_white_6"> </div>
 				<div class="cell_game_white_319"><%= item.game.get_club_name_by_team_id(item.game.team_away_id) %> </div>
 				<div class="cell_game_white_36"><%= item.game.count_team_goals(item.game.team_away_id, item.game.id) %></div>
 				<div class="cell_game_white_6"> </div>
@@ -34,20 +33,41 @@
 <% end %>
 
 <% if item.team %>
+	
+	<%= link_to home_main_path(:team_id=>item.team.id), :remote => true, :class => "sidebar" do %>
+	<div id="table_game">
+			
+		<div id="label_line_item">
+			<%= image_tag("team.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+		</div>
 
-	<div id="game_item" >
-	<table div id="game_item_table">
-		<tr>
-			<td><%= item.team.club.club_name %></td>
-		</tr>
-		<tr>
-			<td><%= item.team.team_type(item.team.team_type_id) %></td>
-		</tr>
-		<tr align="right">
-			<td><%= link_to 'Show', home_main_path(:team_id=>item.team.id), :remote => true %></td>
-		</tr>
-	</table>
+		<div class="row_team">
+			<%= item.team.club.club_name %>
+			<%= item.team.team_type(item.team.team_type_id) %>
+		</div>
+		
 	</div>
+	<% end %>
+	
+
+<% end %>
+
+<% if item.club %>
+	
+	<%= link_to home_main_path(:club_id=>item.club.id), :remote => true, :class => "sidebar" do %>
+	<div id="table_game">
+			
+		<div id="label_line_item">
+			<%= image_tag("team.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+		</div>
+
+		<div class="row_team">
+			<%= item.club.club_name %> (<%= item.club.club_name_short %>)
+		</div>
+		
+	</div>
+	<% end %>
+	
 
 <% end %>
 

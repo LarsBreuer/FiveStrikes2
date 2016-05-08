@@ -29,6 +29,9 @@ FiveStrikes2::Application.routes.draw do
   match '/facebox/fb_ask_friend' => 'facebox#fb_ask_friend', :as => :fb_ask_friend
   match '/facebox/fb_user_friends' => 'facebox#fb_user_friends', :as => :fb_user_friends
   match '/facebox/fb_find_friends' => 'facebox#fb_find_friends', :as => :fb_find_friends
+  match '/facebox/fb_player_edit' => 'facebox#fb_player_edit', :as => :fb_player_edit
+  match '/facebox/fb_player_new' => 'facebox#fb_player_new', :as => :fb_player_new
+  match '/facebox/fb_team_new' => 'facebox#fb_team_new', :as => :fb_team_new
   match '/friendships/req' => 'friendships#req', :as => :req
   match '/friendships/accept' => 'friendships#accept', :as => :req
   match '/friendships/reject' => 'friendships#reject', :as => :req

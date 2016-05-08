@@ -92,7 +92,9 @@ html, body
 	width: 367px;
 	height: 90px;
 	margin-bottom: 20px;
-	background: white;
+	background: #355264;
+	color: white;
+	border: 0px;
 }
 
 #side {
@@ -100,30 +102,37 @@ html, body
 	margin-top: 20px;
 }
 
+#table_game {
+	float: left;
+	display: table;
+	width: 367px;
+	background: white;
+	color: #355264;
+	margin-bottom: 20px;
+}
 #label_line_item {
 	float: left;
 	width: 45px;
 	height: 90px;
-	margin-bottom: 20px;
+	margin-right: 6px;
 	background: #355264;
 	color: white;
-}
-
-#table_game {
-	float: left;
-	display: table;
-	width: 322px;
-	margin-bottom: 20px;
-	background: white;
-	color: #355264;
 }
 #table_game:hover{
 	color: #355264;
 	background-color: orange;
 }
 .row_game {
+	float: left;
 	display:table-row;
+	width: 316px;
 	height: 30px;
+}
+.row_team {
+	float: left;
+	display:table-row;
+	width: 316px;
+	height: 90px;
 }
 .cell_game_header_319 {
 	display:table-cell;
@@ -192,6 +201,27 @@ html, body
 }
 
 #game_statistic_main {
+	width: 704px;
+	min-height: 600px;
+	padding: 12px;
+	color: #355264;
+  	background: white;
+}
+
+#team_nav {
+	width: 704px;
+	height: 72px;
+  	padding: 12px;
+	color: #355264;
+  	background: white;
+  	font-size: 24px;
+  	font-weight: bold;
+  	text-align: center;
+	vertical-align: middle;
+  	border-bottom: 1px solid #355264;
+}
+
+#team_main {
 	width: 704px;
 	min-height: 600px;
 	padding: 12px;
@@ -294,14 +324,38 @@ html, body
 	text-align: center;
 }
 
+#first_row {
+	background-color: #355264;
+	color: white;
+}
+
+#first_row:hover {
+	background-color: orange;
+	color: #355264;
+}
+
+#second_row {
+	background-color: white;
+	color: #355264;
+}
+
+#second_row:hover {
+	background-color: orange;
+	color: #355264;
+}
+
 table tr.firstrow {
-    background-color: #5eb1e7;
+    background-color: #355264;
     font-size:13pt;
-    color: #ffffff;
+    color: white;
 }
 
 table tr.secondrow {
-    background-color: #ffffff;
+    background-color: white;
+}
+
+table tr:hover {
+    background-color: orange;
 }
 
 /* Links */
@@ -473,6 +527,56 @@ a.main:link::after {
   top: 0;
   left: 200px;
 }
+
+
+/* Select-Drop-Down-Box */
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: #355264;
+}
+
+.select-style {
+    padding: 0;
+    margin: 0;
+    border: none;
+    width: 80px;
+    height: 18px;
+    border-radius: 0px;
+    overflow: hidden;
+    background-color: orange;
+    color: #355264;
+    font-size: 13px;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background-color: orange;
+    background-image: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+
+/* turn it off completely */
+select:active, select:hover {
+  outline: none
+}
+
+/* make it red instead (with with same width and style) */
+select:active, select:hover {
+  outline-color: red
+}
+
 
 /* Facebox-Design, da die Einbindung von Facebox über 'rake assets:precompile' nicht funktioniert hat */
 

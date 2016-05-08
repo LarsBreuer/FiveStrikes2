@@ -1,6 +1,7 @@
 class Club < ActiveRecord::Base
 
 	has_many :teams
+	has_many :line_items
 
 	def self.search(club_name, club_id)
 		if club_name

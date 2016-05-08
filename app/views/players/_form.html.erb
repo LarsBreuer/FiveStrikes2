@@ -20,8 +20,7 @@
     <%= f.text_field :player_surename %>
   </div>
   <div class="field">
-    <%= f.label :team_id %><br />
-    <%= f.number_field :team_id %>
+    <%= f.hidden_field :team_id, :value => params[:team_id] %>
   </div>
   <div class="field">
     <%= f.label :player_number %><br />
@@ -29,17 +28,25 @@
   </div>
   <div class="field">
     <%= f.label :player_position_first %><br />
-    <%= f.number_field :player_position_first %>
+    <%= f.select :player_position_first, [[I18n.t('basic.goalkeeper'), 1001], [I18n.t('basic.left_wing'), 1002], [I18n.t('basic.left_back'), 1003], [I18n.t('basic.center_back'), 1004], [I18n.t('basic.right_back'), 1005], [I18n.t('basic.right_wing'), 1006], [I18n.t('basic.pivot'), 1007]] %>
   </div>
   <div class="field">
     <%= f.label :player_position_second %><br />
-    <%= f.number_field :player_position_second %>
+    <%= f.select :player_position_second, [[I18n.t('basic.goalkeeper'), 1001], [I18n.t('basic.left_wing'), 1002], [I18n.t('basic.left_back'), 1003], [I18n.t('basic.center_back'), 1004], [I18n.t('basic.right_back'), 1005], [I18n.t('basic.right_wing'), 1006], [I18n.t('basic.pivot'), 1007]] %>
   </div>
   <div class="field">
     <%= f.label :player_position_third %><br />
-    <%= f.number_field :player_position_third %>
+    <%= f.select :player_position_third, [[I18n.t('basic.goalkeeper'), 1001], [I18n.t('basic.left_wing'), 1002], [I18n.t('basic.left_back'), 1003], [I18n.t('basic.center_back'), 1004], [I18n.t('basic.right_back'), 1005], [I18n.t('basic.right_wing'), 1006], [I18n.t('basic.pivot'), 1007]] %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+<% end %>
+
+<% if params[:player_id].blank? %>
+  <h3>Import a CSV File</h3>
+  <%= form_tag import_players_path(:team_id => params[:team_id]), multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import CSV" %>
+  <% end %>
 <% end %>

@@ -128,7 +128,58 @@
 	<% end %>
 
 	<% if @team %>
-		Du hast eine Mannschaft ausgewählt...
+		
+		<div id="team_nav" >
+
+			<div style = "" > <%= @team.club.club_name %> </div>
+			<div style = "font-size: 18px;font-weight: normal;"> <%= @team.team_type(@team.team_type_id) %> </div>
+			<div style = "font-size: 18px;font-weight: normal; text-align: right;"> <%= link_to I18n.t('basic.new_player'), fb_player_new_path(:team_id => @team.id), :remote => true  %> </div>
+
+		</div>
+
+		<div id="team_main" >
+
+			<table div id="game_item_table">
+    			<% @players.each do |player| %>
+      				<tr  class="<%= cycle('firstrow', 'secondrow') -%>">
+        				<td><%= player.player_number %></td>
+        				<td><%= player.player_forename %> <%= player.player_surename %></td>    
+        				<td><%= player.get_player_position_by_id(player.player_position_first) %></td>
+        				<td><%= link_to I18n.t('basic.edit'), fb_player_edit_path(:player_id => player.id, :team_id => player.team_id), :remote => true  %>  </td>
+      				</tr>
+    			<% end %>
+  			</table>
+
+		</div>
+
+	<% end %>
+
+	<% if @club %>
+		
+		<div id="team_nav" >
+
+			<div style = "" > <%= @club.club_name %> </div>
+			<div style = "font-size: 18px;font-weight: normal; text-align: right;"> <%= link_to I18n.t('basic.new_team'), fb_team_new_path(:club_id => @club.id), :remote => true  %> </div>
+
+		</div>
+
+		<div id="team_main" >
+
+			<% @teams.each do |team| %>
+				
+				<%= link_to line_items_create_team_line_items_path(:team_id=>team.id), :remote => true, :class => "sidebar" do %>
+					<div id= "<%= cycle('first_row', 'second_row') -%>" >
+
+						<%= team.club.club_name %>
+						<%= team.team_type(team.team_type_id) %>
+
+					</div>
+				<% end %>
+
+			<% end %>
+
+		</div>
+
 	<% end %>
 
 </div>

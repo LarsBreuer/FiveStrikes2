@@ -36,4 +36,27 @@ class FaceboxController < ApplicationController
     end
   end
 
+  def fb_player_edit
+    @player = Player.find(params[:player_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def fb_player_new
+    @player = Player.new
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def fb_team_new
+    @team = Team.new
+    @club = Club.find(params[:club_id])
+    @team_club_name = @club.club_name
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end

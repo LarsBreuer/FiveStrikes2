@@ -45,7 +45,8 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
+# ToDo 0 => Wenn Spieler erstellt wurde, schließe das Fenster und aktualisiere die Spielerliste bzw. die Spielerübersicht
+        format.html { redirect_to home_path, notice: 'Player was successfully created.' }
         format.json { render json: @player, status: :created, location: @player }
       else
         format.html { render action: "new" }
@@ -61,7 +62,8 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.update_attributes(params[:player])
-        format.html { redirect_to @player, notice: 'Player was successfully updated.' }
+# ToDo 0 => Wenn Spieler aktualisiert wurde, schließe das Fenster und aktualisiere die Spielerliste bzw. die Spielerübersicht
+        format.html { redirect_to home_path, notice: 'Player was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -84,7 +86,7 @@ class PlayersController < ApplicationController
 
   def import
     begin
-      Player.import(params[:file])
+      Player.import(params[:file], params[:team_id])
       redirect_to home_path, notice: "Player imported."
     rescue
       redirect_to home_path, notice: "Invalid CSV file format."
