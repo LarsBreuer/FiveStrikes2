@@ -189,15 +189,24 @@ html, body
 }
 
 #game_statistic_nav {
-	width: 716px;
-	height: 48px;
+	width: 100%;
+	height: 72px;
 	line-height: 48px;
   	vertical-align: middle;
-  	padding-left: 12px;
     font-size: 18pt;
 	color: #355264;
   	background: white;
   	border-bottom: 1px solid #355264;
+}
+
+#game_headline {
+	width: 100%;
+	height: 24px;
+	line-height: 24px;
+	font-size: 11pt;
+	color: white;
+	text-align: center;
+	background: #355264;
 }
 
 #game_statistic_main {
@@ -206,6 +215,13 @@ html, body
 	padding: 12px;
 	color: #355264;
   	background: white;
+}
+
+#game_statistic_row {
+	width: 100%;
+	height: 22px;
+	padding: 6px;
+	color: #355264;
 }
 
 #team_nav {
@@ -344,18 +360,64 @@ html, body
 	color: #355264;
 }
 
-table tr.firstrow {
-    background-color: #355264;
-    font-size:13pt;
-    color: white;
+.game_stat_table {
+	width: 600px;
+	padding: 0px;
+	margin: 0 auto;
 }
 
-table tr.secondrow {
-    background-color: white;
+.game_stat_row {
+	width: 600px;
+	height: 26px;
+	line-height: 26px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	vertical-align: middle;
+	padding: 0px;
+	font-size: 14px
 }
 
-table tr:hover {
-    background-color: orange;
+.game_stat_left {
+	width: 30px;
+	text-align: left;
+	padding: 0px;
+}
+
+.game_stat_center_left {
+	width: 270px;
+	text-align: center;
+	padding: 0px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.game_stat_chart_left {
+	text-align: right;
+	padding: 0px;
+}
+
+.game_stat_center_middle {
+	text-align: center;
+	padding: 0px;
+}
+
+.game_stat_center_right {
+	width: 270px;
+	text-align: center;
+	padding: 0px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.game_stat_chart_right {
+	text-align: left;
+	padding: 0px;
+}
+
+.game_stat_right {
+	width: 30px;
+	text-align: right;
+	padding: 0px;
 }
 
 /* Links */
@@ -418,6 +480,7 @@ a.main:link::after {
 #menu {
   float: left;
   width: 100%;
+  height: 48px;
   background: white;
   font-size: 16px;
 }

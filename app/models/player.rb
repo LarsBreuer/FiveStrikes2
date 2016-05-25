@@ -20,40 +20,54 @@ class Player < ActiveRecord::Base
 
 	# Import CSV-File
 	def self.import(file, team_id)
-    	CSV.foreach(file.path, headers: true) do |row|
+    CSV.foreach(file.path, headers: true) do |row|
 
-      		player_hash = row.to_hash 
-      		player = Player.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"], team_id: team_id)
-      		if player.count == 0
+    	player_hash = row.to_hash 
+    	player = Player.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"], team_id: team_id)
+    	if player.count == 0
 # ToDo => Umlaute ä,ö,ü beachten
-        		Player.create!(player_hash.merge({ team_id: team_id }))
-      		end
+     		Player.create!(player_hash.merge({ team_id: team_id }))
     	end
-  	end
+    end
+  end
 
-  	def get_player_position_by_id(position_id)
-  		if position_id == '1001'
-  			position = I18n.t('basic.goalkeeper')
-  		end
-  		if position_id == '1002'
-  			position = I18n.t('basic.left_wing')
-  		end
-  		if position_id == '1003'
-  			position = I18n.t('basic.left_back')
-  		end
-  		if position_id == '1004'
-  			position = I18n.t('basic.center_back')
-  		end
-  		if position_id == '1005'
-  			position = I18n.t('basic.right_back')
-  		end
-  		if position_id == '1006'
-  			position = I18n.t('basic.right_wing')
-  		end
-  		if position_id == '1007'
-  			position = I18n.t('basic.pivot')
-  		end
-  		return position
+  def get_player_position_by_id(position_id)
+  	if position_id == '1001'
+  		position = I18n.t('basic.goalkeeper')
   	end
+  	if position_id == '1002'
+  		position = I18n.t('basic.left_wing')
+  	end
+  	if position_id == '1003'
+  		position = I18n.t('basic.left_back')
+  	end
+  	if position_id == '1004'
+  		position = I18n.t('basic.center_back')
+  	end
+  	if position_id == '1005'
+  		position = I18n.t('basic.right_back')
+  	end
+  	if position_id == '1006'
+  		position = I18n.t('basic.right_wing')
+  	end
+  	if position_id == '1007'
+  		position = I18n.t('basic.pivot')
+  	end
+  	return position
+  end
+
+  def get_player_games
+    
+    game_array = Array.new
+
+    self.games.each do |game|
+      unless game_array.include?(game)
+        game_array.push(game)
+      end
+    end
+
+    return game_array
+
+  end
 	
 end

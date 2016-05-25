@@ -58,11 +58,31 @@
 	<div id="table_game">
 			
 		<div id="label_line_item">
-			<%= image_tag("team.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+			<%= image_tag("club.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 		</div>
 
 		<div class="row_team">
 			<%= item.club.club_name %> (<%= item.club.club_name_short %>)
+		</div>
+		
+	</div>
+	<% end %>
+	
+
+<% end %>
+
+<% if item.player %>
+	
+	<%= link_to home_main_path(:player_id=>item.player.id), :remote => true, :class => "sidebar" do %>
+	<div id="table_game">
+			
+		<div id="label_line_item">
+			<%= image_tag("team.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+		</div>
+
+		<div class="row_team">
+			<%= item.player.player_surename %>
+			<%= item.player.team.club.club_name %>
 		</div>
 		
 	</div>

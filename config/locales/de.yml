@@ -18,6 +18,7 @@ de:
     lead: 'Führung'
     game_statistic: 'Spielstatistik'
     game: 'Spiel'
+    games: 'Spiele'
     lists: 'Listen'
     player: 'Spieler'
     team: 'Mannschaft'
@@ -40,6 +41,17 @@ de:
     right_back: 'Rückraum rechts'
     right_wing: 'Rechtsaußen'
     pivot: 'Kreisläufer'
+    male: 'Männlich'
+    female: 'Weiblich'
+    seniors: 'Senioren'
+    junior_a: 'A-Jugend'
+    goals_overall: 'Tore gesamt'
+    7m_goals_overall: '7m Tore gesamt'
+    fb_goals_overall: 'Tempogegenstoss Tore gesamt'
+    attempts: 'Versuche'
+    efficiency: 'Effektivität'
+    tech_faults: 'Technische Fehler'
+    possession: 'Ballbesitz'
   activerecord:
     errors:
       messages:

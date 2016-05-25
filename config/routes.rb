@@ -18,11 +18,14 @@ FiveStrikes2::Application.routes.draw do
 
   match '/home/main', :to => 'home#main' 
   match '/home/game_main', :to => 'home#game_main' 
+  match '/home/game_statistic_main', :to => 'home#game_statistic_main' 
   match '/home/side', :to => 'home#side' 
   match '/home/statistic', :to => 'home#statistic' 
   match '/home/statistic_home', :to => 'home#statistic_home' 
   match '/line_items/create_line_items', :to => 'line_items#create_line_items'
   match '/line_items/create_team_line_items', :to => 'line_items#create_team_line_items'
+  match '/line_items/create_player_line_items', :to => 'line_items#create_player_line_items'
+  match '/line_items/create_game_line_items', :to => 'line_items#create_game_line_items'
   match '/facebox/fb_login' => 'facebox#fb_login', :as => :fb_login
   match '/facebox/fb_create_user' => 'facebox#fb_create_user', :as => :fb_create_user
   match '/facebox/failed_login' => 'facebox#failed_login', :as => :failed_login

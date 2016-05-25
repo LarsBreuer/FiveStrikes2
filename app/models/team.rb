@@ -29,4 +29,20 @@ class Team < ActiveRecord::Base
 		end
 	end
 
+	def get_team_games
+    
+    	game_array = Array.new
+
+    	games = Game.find(:all, :conditions => ['team_home_id = ? OR team_away_id = ?', self.id, self.id])
+
+    	games.each do |game|
+      		unless game_array.include?(game)
+        		game_array.push(game)
+      		end
+      	end
+
+    	return game_array
+
+  	end
+
 end

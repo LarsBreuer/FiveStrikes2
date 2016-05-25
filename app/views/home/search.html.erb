@@ -10,15 +10,14 @@
     															                               color: #355264;
     															                               font-size:12pt;", 
     													placeholder: I18n.t('basic.search')} %>
-    <%= image_submit_tag('glass_small.png', options = {style:"width: 22px;
-                                                              height: 20px;
+    <%= image_submit_tag('arrow_right.png', options = {style:"width: 24px;
+                                                              height: 24px;
                                                               padding: 6px;
-                                                              background-color: #355264;
+                                                              background-color: white;
                                                               border-radius: 0;
-                                                              border-top: 2px solid white;
-                                                              border-right: 2px solid white;
-                                                              border-bottom: 2px solid white;
+                                                              border: 0px;
+                                                              -webkit-appearance: none;
                                                               margin-top: 19px;"}) %>
     <%= I18n.t('basic.search_for') %>
-    <%= select_tag(:choice_id, options_for_select([[I18n.t('basic.game'), 1], [I18n.t('basic.team'), 2], [I18n.t('basic.player'), 3], [I18n.t('basic.club'), 4]], 1), {:class => 'select-style'}) %>
+    <%= select_tag(:choice_id, options_for_select([[I18n.t('basic.game'), 1], [I18n.t('basic.team'), 2], [I18n.t('basic.club'), 4]], 1), {:class => 'select-style'}) %>
 <% end %>

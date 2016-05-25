@@ -43,23 +43,337 @@ class Game < ActiveRecord::Base
    return player_forename + " " + player_surename
   end
 
-  def get_player_home(gameID)
+  def get_player_home()
     
     player_array = Array.new
+    
     self.players.each do |player|
-
       if player.team_id == self.team_home_id
         unless player_array.include?(player.id)
           player_array.push(player.id)
         end
       end
-
     end
 
     return player_array
 
   end
 
+  #
+  #
+  # Spielstatistiken
+  #
+  #
+
+  def get_game_stat()
+
+    game_stat_array = Array.new
+    row_width = 300
+
+  # 0 => Titel Tore gesamt
+    game_stat_array.push(I18n.t('basic.goals_overall'))
+    # 1 => Tore gesamt Heim
+    game_stat_array.push(count_team_goals(self.team_home_id, self.id))
+    # 2 => Tore gesamt Auswärts
+    game_stat_array.push(count_team_goals(self.team_away_id, self.id))
+    # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Tore geworfen hat
+    max_width = game_stat_array[1]
+    if game_stat_array[2] > game_stat_array[1]
+      max_width = game_stat_array[2]
+    end
+    if game_stat_array[1] > game_stat_array[2]
+      max_width = game_stat_array[1]
+    end
+    array_length = game_stat_array.count
+    # 3 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 2] / max_width))
+    # 4 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 2] / max_width)
+    # 5 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 1] / max_width)
+    # 6 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
+  # 7 => Titel Versuche gesamt
+    game_stat_array.push(I18n.t('basic.attempts'))
+    # 8 => Versuche gesamt Heim
+    game_stat_array.push(count_team_goals(self.team_home_id, self.id) + count_team_miss(self.team_home_id, self.id))
+    # 9 => Versuche gesamt Auswärts
+    game_stat_array.push(count_team_goals(self.team_away_id, self.id) + count_team_miss(self.team_away_id, self.id))
+    # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Versuche hatte
+    max_width = game_stat_array[8]
+    if game_stat_array[9] > game_stat_array[8]
+      max_width = game_stat_array[9]
+    end
+    if game_stat_array[8] > game_stat_array[9]
+      max_width = game_stat_array[8]
+    end
+    array_length = game_stat_array.count
+    # 10 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 2] / max_width))
+    # 11 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 2] / max_width)
+    # 12 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 1] / max_width)
+    # 13 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
+  # 14 => Titel Effektivität gesamt
+    game_stat_array.push(I18n.t('basic.efficiency'))
+    # 15 => Effektivität gesamt Heim
+    percent_home = team_effective(self.team_home_id, self.id)
+    percentstring = percent_home.to_s
+    string = percentstring + "%"
+    game_stat_array.push(string)
+    # 16 => Effektivität gesamt Auswärts
+    percent_away = team_effective(self.team_away_id, self.id)
+    string = "#{percent_away}%"
+    game_stat_array.push(string)
+    array_length = game_stat_array.count
+    # 17 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * percent_home / 100))
+    # 18 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * percent_home / 100)
+    # 19 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * percent_away / 100)
+    # 20 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * percent_away / 100))
+  # 21 => Titel 7m-Tore gesamt
+    game_stat_array.push(I18n.t('basic.7m_goals_overall'))
+    # 22 => 7m-Tore gesamt Heim
+    game_stat_array.push(count_team_activity(10101, self.team_home_id))
+    # 23 => 7m-Tore gesamt Auswärts
+    game_stat_array.push(count_team_activity(10101, self.team_away_id))
+    # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr 7m-Tore geworfen hat
+    array_length = game_stat_array.count
+    max_width = game_stat_array[array_length - 1]
+    if game_stat_array[array_length - 1] > game_stat_array[array_length - 2]
+      max_width = game_stat_array[array_length - 1]
+    end
+    if game_stat_array[array_length - 2] > game_stat_array[array_length - 1]
+      max_width = game_stat_array[array_length - 2]
+    end
+    # 24 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 2] / max_width))
+    # 25 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 2] / max_width)
+    # 26 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 1] / max_width)
+    # 27 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
+  # 28 => Titel Versuche gesamt
+    game_stat_array.push(I18n.t('basic.attempts'))
+    # 29 => Versuche gesamt Heim
+    game_stat_array.push(count_team_activity(10101, self.team_home_id) + count_team_activity(10151, self.team_home_id))
+    # 30 => Versuche gesamt Auswärts
+    game_stat_array.push(count_team_activity(10101, self.team_away_id) + count_team_activity(10151, self.team_away_id))
+    # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Versuche hatte
+    array_length = game_stat_array.count
+    max_width = game_stat_array[array_length - 1]
+    if game_stat_array[array_length - 1] > game_stat_array[array_length - 2]
+      max_width = game_stat_array[array_length - 1]
+    end
+    if game_stat_array[array_length - 2] > game_stat_array[array_length - 1]
+      max_width = game_stat_array[array_length - 2]
+    end
+    array_length = game_stat_array.count
+    # 31 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 2] / max_width))
+    # 32 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 2] / max_width)
+    # 33 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 1] / max_width)
+    # 34 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
+  # 35 => Titel Effektivität gesamt
+    game_stat_array.push(I18n.t('basic.efficiency'))
+    # 36 => Effektivität gesamt Heim
+    percent_home = team_effective_7m(self.team_home_id)
+    string = "#{percent_home}%"
+    game_stat_array.push(string)
+    # 37 => Effektivität gesamt Auswärts
+    percent_away = team_effective_7m(self.team_away_id)
+    string = "#{percent_away}%"
+    game_stat_array.push(string)
+    array_length = game_stat_array.count
+    # 38 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * percent_home / 100))
+    # 39 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * percent_home / 100)
+    # 40 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * percent_away / 100)
+    # 41 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * percent_away / 100))
+  # 42 => Titel Tempogegenstoss-Tore gesamt
+    game_stat_array.push(I18n.t('basic.fb_goals_overall'))
+    # 43 => Tempogegenstoss-Tore gesamt Heim
+    game_stat_array.push(count_team_activity(10102, self.team_home_id))
+    # 44 => Tempogegenstoss-Tore gesamt Auswärts
+    game_stat_array.push(count_team_activity(10102, self.team_away_id))
+    # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Tempogegenstoss-Tore geworfen hat
+    array_length = game_stat_array.count
+    max_width = game_stat_array[array_length - 1]
+    if game_stat_array[array_length - 1] > game_stat_array[array_length - 2]
+      max_width = game_stat_array[array_length - 1]
+    end
+    if game_stat_array[array_length - 2] > game_stat_array[array_length - 1]
+      max_width = game_stat_array[array_length - 2]
+    end
+    # 45 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 2] / max_width))
+    # 46 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 2] / max_width)
+    # 47 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 1] / max_width)
+    # 48 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
+  # 49 => Titel Versuche gesamt
+    game_stat_array.push(I18n.t('basic.attempts'))
+    # 50 => Versuche gesamt Heim
+    game_stat_array.push(count_team_activity(10102, self.team_home_id) + count_team_activity(10152, self.team_home_id))
+    # 51 => Versuche gesamt Auswärts
+    game_stat_array.push(count_team_activity(10102, self.team_away_id) + count_team_activity(10152, self.team_away_id))
+    # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Versuche hatte
+    array_length = game_stat_array.count
+    max_width = game_stat_array[array_length - 1]
+    if game_stat_array[array_length - 1] > game_stat_array[array_length - 2]
+      max_width = game_stat_array[array_length - 1]
+    end
+    if game_stat_array[array_length - 2] > game_stat_array[array_length - 1]
+      max_width = game_stat_array[array_length - 2]
+    end
+    array_length = game_stat_array.count
+    # 52 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 2] / max_width))
+    # 53 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 2] / max_width)
+    # 54 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 1] / max_width)
+    # 55 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
+  # 56 => Titel Effektivität gesamt
+    game_stat_array.push(I18n.t('basic.efficiency'))
+    # 57 => Effektivität gesamt Heim
+    percent_home = team_effective_fb(self.team_home_id)
+    string = "#{percent_home}%"
+    game_stat_array.push(string)
+    # 58 => Effektivität gesamt Auswärts
+    percent_away = team_effective_fb(self.team_away_id)
+    string = "#{percent_away}%"
+    game_stat_array.push(string)
+    array_length = game_stat_array.count
+    # 59 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * percent_home / 100))
+    # 60 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * percent_home / 100)
+    # 61 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * percent_away / 100)
+    # 62 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * percent_away / 100))
+  # 63 => Titel Technische Fehler gesamt
+    game_stat_array.push(I18n.t('basic.tech_faults'))
+    # 64 => Technische Fehler Heim
+    game_stat_array.push(count_team_activity(10300, self.team_home_id) + count_team_activity(10301, self.team_home_id) + count_team_activity(10302, self.team_home_id) + count_team_activity(10303, self.team_home_id) + count_team_activity(10304, self.team_home_id) + count_team_activity(10305, self.team_home_id) + count_team_activity(10306, self.team_home_id) + count_team_activity(10307, self.team_home_id) + count_team_activity(10308, self.team_home_id))
+    # 65 => Technische Fehler Auswärts
+    game_stat_array.push(count_team_activity(10300, self.team_away_id) + count_team_activity(10301, self.team_away_id) + count_team_activity(10302, self.team_away_id) + count_team_activity(10303, self.team_away_id) + count_team_activity(10304, self.team_away_id) + count_team_activity(10305, self.team_away_id) + count_team_activity(10306, self.team_away_id) + count_team_activity(10307, self.team_away_id) + count_team_activity(10308, self.team_away_id))
+    # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Fehler hatte
+    array_length = game_stat_array.count
+    max_width = game_stat_array[array_length - 1]
+    if game_stat_array[array_length - 1] > game_stat_array[array_length - 2]
+      max_width = game_stat_array[array_length - 1]
+    end
+    if game_stat_array[array_length - 2] > game_stat_array[array_length - 1]
+      max_width = game_stat_array[array_length - 2]
+    end
+    array_length = game_stat_array.count
+    # 66 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 2] / max_width))
+    # 67 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 2] / max_width)
+    # 68 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 1] / max_width)
+    # 69 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
+    
+
+    return game_stat_array
+
+  end
+
+  def get_game_possession()
+
+    game_stat_array = Array.new
+    row_width = 300
+
+  # 0 => Titel Tore gesamt
+    game_stat_array.push(I18n.t('basic.goals_overall'))
+    # 1 => Tore gesamt Heim
+    game_stat_array.push(count_team_goals(self.team_home_id, self.id))
+    # 2 => Tore gesamt Auswärts
+    game_stat_array.push(count_team_goals(self.team_away_id, self.id))
+    # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Tore geworfen hat
+    max_width = game_stat_array[1]
+    if game_stat_array[2] > game_stat_array[1]
+      max_width = game_stat_array[2]
+    end
+    if game_stat_array[1] > game_stat_array[2]
+      max_width = game_stat_array[1]
+    end
+    array_length = game_stat_array.count
+    # 3 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 2] / max_width))
+    # 4 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 2] / max_width)
+    # 5 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 1] / max_width)
+    # 6 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
+  # 7 => Titel Versuche gesamt
+    game_stat_array.push(I18n.t('basic.attempts'))
+    # 8 => Versuche gesamt Heim
+    game_stat_array.push(count_team_goals(self.team_home_id, self.id) + count_team_miss(self.team_home_id, self.id))
+    # 9 => Versuche gesamt Auswärts
+    game_stat_array.push(count_team_goals(self.team_away_id, self.id) + count_team_miss(self.team_away_id, self.id))
+    # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Versuche hatte
+    max_width = game_stat_array[8]
+    if game_stat_array[9] > game_stat_array[8]
+      max_width = game_stat_array[9]
+    end
+    if game_stat_array[8] > game_stat_array[9]
+      max_width = game_stat_array[8]
+    end
+    array_length = game_stat_array.count
+    # 10 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 2] / max_width))
+    # 11 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 2] / max_width)
+    # 12 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * game_stat_array[array_length - 1] / max_width)
+    # 13 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
+  # 14 => Titel Effektivität gesamt
+    game_stat_array.push(I18n.t('basic.efficiency'))
+    # 15 => Effektivität gesamt Heim
+    percent_home = team_effective(self.team_home_id, self.id)
+    percentstring = percent_home.to_s
+    string = percentstring + "%"
+    game_stat_array.push(string)
+    # 16 => Effektivität gesamt Auswärts
+    percent_away = team_effective(self.team_away_id, self.id)
+    string = "#{percent_away}%"
+    game_stat_array.push(string)
+    array_length = game_stat_array.count
+    # 17 => Breite des grauen Balkens der Heimmannschaft berechnen
+    game_stat_array.push(row_width - (row_width * percent_home / 100))
+    # 18 => Breite des blauen Balkens der Heimmannschaft
+    game_stat_array.push(row_width * percent_home / 100)
+    # 19 => Breite des roten Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width * percent_away / 100)
+    # 20 => Breite des grauen Balkens der Auswärtsmannschaft
+    game_stat_array.push(row_width - (row_width * percent_away / 100))
+
+
+    return game_stat_array
+
+  end
   #
   #
   # Tore / Aktionen zählen
@@ -91,6 +405,26 @@ class Game < ActiveRecord::Base
     attempts = self.count_team_goals(teamID, gameID) + self.count_team_miss(teamID, gameID)
     if attempts > 0
       effective = self.count_team_goals(teamID, gameID) * 100 / attempts
+    else
+      effective = 0
+    end
+    return effective
+  end
+
+  def team_effective_7m(teamID)
+    attempts = self.count_team_activity(10101, teamID) + self.count_team_activity(10151, teamID)
+    if attempts > 0
+      effective = self.count_team_activity(10101, teamID) * 100 / attempts
+    else
+      effective = 0
+    end
+    return effective
+  end
+
+  def team_effective_fb(teamID)
+    attempts = self.count_team_activity(10102, teamID) + self.count_team_activity(10152, teamID)
+    if attempts > 0
+      effective = self.count_team_activity(10102, teamID) * 100 / attempts
     else
       effective = 0
     end

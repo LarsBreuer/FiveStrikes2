@@ -45,7 +45,10 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    @team = Team.new(params[:team])
+    team_type_id = "10" + params[:gender_id] + params[:age_id] + params[:class_id]
+    @team = Team.create!(params[:team].merge(team_type_id: team_type_id))
+# ToDo => Die ersten beiden Zahlen für die Sportart dynamisch generieren 
+# ToDo => Überprüfen, ob die Mannschaft schon vorhanden ist und nur dann abspeichern
 
     respond_to do |format|
       if @team.save

@@ -41,6 +41,13 @@ class HomeController < ApplicationController
     if params[:team_id].present?
       @team = Team.find(params[:team_id])
       @players = @team.players
+      @team_games = @team.get_team_games
+    end
+
+    if params[:player_id].present?
+      @player = Player.find(params[:player_id])
+      @player_team = @player.team
+      @player_games = @player.get_player_games
     end
 
     if params[:club_id].present?
@@ -59,12 +66,14 @@ class HomeController < ApplicationController
     end
   end
 
+# ToDo => Der allerste Versuch des Aufrufs des Statistik-Hauptfensters funktioniert nicht
+
   def game_main
 
     if params[:game_id].present?
       @game = Game.find(params[:game_id])
       @ticker_activities = @game.ticker_activities
-      @player_home = @game.get_player_home(params[:game_id])
+      @player_home = @game.get_player_home()
     end
 
     if params[:mode].present?
@@ -78,6 +87,22 @@ class HomeController < ApplicationController
       format.js
       format.json { render json: @game }
     end
+  end
+
+  def game_statistic_main
+
+    if params[:game_id].present?
+      @game = Game.find(params[:game_id])
+      @game_stat = @game.get_game_stat()
+      @game_possession = @game.get_game_possession()
+    end
+
+    if params[:mode].present?
+      @mode = params[:mode]
+    end
+
+    puts @mode
+
   end
 
   def statistic

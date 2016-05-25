@@ -19,9 +19,7 @@
     <%= f.label :player_surename %><br />
     <%= f.text_field :player_surename %>
   </div>
-  <div class="field">
-    <%= f.hidden_field :team_id, :value => params[:team_id] %>
-  </div>
+  <%= f.hidden_field :team_id, :value => params[:team_id] %>
   <div class="field">
     <%= f.label :player_number %><br />
     <%= f.number_field :player_number %>

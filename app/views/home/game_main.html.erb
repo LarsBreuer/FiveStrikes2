@@ -1,5 +1,11 @@
 <div id="game_statistic_nav" >
 
+  <div id="game_headline">
+
+    <%= @game.get_club_name_by_team_id(@game.team_home_id) %> - <%= @game.get_club_name_by_team_id(@game.team_away_id) %>
+
+  </div>
+
 	<div id="menu">
     
 		<ul>
@@ -20,7 +26,8 @@
               <li><%= link_to @game.get_club_name_by_team_id(@game.team_away_id), home_main_path(:game_id=>@game.id), :remote => true %></li>
             </ul>
           </li>
-          <li><%= link_to I18n.t('basic.goals'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.goals'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GameGoals'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.possession'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GamePossession'), :remote => true %></li>
           <li><%= link_to I18n.t('basic.game_history'), home_main_path(:game_id=>@game.id), :remote => true %></li>
           <li><%= link_to I18n.t('basic.penalties'), home_main_path(:game_id=>@game.id), :remote => true %></li>
           <li><%= link_to I18n.t('basic.powerplay'), home_main_path(:game_id=>@game.id), :remote => true %></li>
