@@ -420,6 +420,30 @@ html, body
 	padding: 0px;
 }
 
+td.player_stat_name {
+	width: 150px;
+	text-align: left;
+	padding: 0px;
+}
+
+td.player_stat_name_margin {
+	width: 130px;
+	padding: 0px;
+	padding-left: 20px;
+}
+
+td.player_stat_value {
+	width: 50px;
+	text-align: left;
+	padding: 0px;
+}
+
+td.player_stat_chart {
+	width: 400px;
+	text-align: left;
+	padding: 0px;
+}
+
 /* Links */
 
 a.navbar:link {

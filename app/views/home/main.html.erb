@@ -9,10 +9,10 @@
 				</div>
 				<div>
 					<div id="game_main_title_number"> 
-						<%= @game.count_team_goals(@game.team_home_id, @game.id) %>
+						<%= @game.count_team_goals(@game.team_home_id) %>
 					</div>
 					<div id="game_main_title_number"> 
-						<%= @game.count_team_goals(@game.team_away_id, @game.id) %>
+						<%= @game.count_team_goals(@game.team_away_id) %>
 					</div>
 				</div>
 				<div>

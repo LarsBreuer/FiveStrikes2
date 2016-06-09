@@ -74,13 +74,12 @@ class HomeController < ApplicationController
       @game = Game.find(params[:game_id])
       @ticker_activities = @game.ticker_activities
       @player_home = @game.get_player_home()
+      @player_away = @game.get_player_away()
     end
 
     if params[:mode].present?
       @mode = params[:mode]
     end
-
-    puts @mode
 
     respond_to do |format|
       format.html
@@ -92,16 +91,26 @@ class HomeController < ApplicationController
   def game_statistic_main
 
     if params[:game_id].present?
+# ToDo => Werden bei einem einzelnen Abruf immer alle Statistiken errechnet?
       @game = Game.find(params[:game_id])
       @game_stat = @game.get_game_stat()
       @game_possession = @game.get_game_possession()
+      @game_lead = @game.get_game_lead()
+      @game_history = @game.get_game_history()
+      @game_penalty = @game.get_game_penalty()
     end
 
     if params[:mode].present?
       @mode = params[:mode]
     end
 
-    puts @mode
+  end
+
+  def game_player_main
+
+    @game = Game.find(params[:game_id])
+    @player = Player.find(params[:player_id])
+    @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
 
   end
 

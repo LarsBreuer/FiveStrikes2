@@ -18,12 +18,12 @@
 			</div>
 			<div class="row_game">
 				<div class="cell_game_white_319"><%= item.game.get_club_name_by_team_id(item.game.team_home_id) %></div>
-				<div class="cell_game_white_36"><%= item.game.count_team_goals(item.game.team_home_id, item.game.id) %></div>
+				<div class="cell_game_white_36"><%= item.game.count_team_goals(item.game.team_home_id) %></div>
 				<div class="cell_game_white_6"> </div>
 			</div>
 			<div class="row_game">
 				<div class="cell_game_white_319"><%= item.game.get_club_name_by_team_id(item.game.team_away_id) %> </div>
-				<div class="cell_game_white_36"><%= item.game.count_team_goals(item.game.team_away_id, item.game.id) %></div>
+				<div class="cell_game_white_36"><%= item.game.count_team_goals(item.game.team_away_id) %></div>
 				<div class="cell_game_white_6"> </div>
 			</div>
 		</div>

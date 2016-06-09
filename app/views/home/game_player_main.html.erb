@@ -1,0 +1,39 @@
+<table class = "game_stat_table" cellspacing=0 cellpadding=0 border=0>
+
+  <tr class = "game_stat_row">
+
+    <td colspan="3" class = "player_stat_name" style="font-weight:bold"><%= @player.player_forename %> <%= @player.player_surename %> (<%= @player.team.team_club_name %>)</td>
+
+  </tr>
+
+  <% i = 0 %>
+  <% array_length = @player_stat.count %>
+
+  <% while( i < array_length )  %>
+
+    <tr class = "game_stat_row">
+<%# ToDo => Versuche und Quote einrücken %>
+      <% if @player_stat[i] == I18n.t('basic.percentage') || @player_stat[i] == I18n.t('basic.attempts') || @player_stat[i] == I18n.t('basic.seven_attempts') || @player_stat[i] == I18n.t('basic.fb_attempts')  || @player_stat[i] == I18n.t('basic.throws')  || @player_stat[i] == I18n.t('basic.seven_throws')  || @player_stat[i] == I18n.t('basic.fb_throws') %>
+        <td class = "player_stat_name_margin"><%= @player_stat[i] %></td>
+      <% else %>
+        <td class = "player_stat_name"><%= @player_stat[i] %></td>
+      <% end %>
+      <td class = "player_stat_value"><%= @player_stat[i+1] %></td>
+      <td class = "player_stat_chart">
+        <IMG src="/assets/blue.png" width="<%= @player_stat[i+2] -%>"  height=14 border=0><IMG src="/assets/grey.png" width="<%= @player_stat[i+3] -%>" height=14 border=0>
+      </td>
+
+    </tr>
+
+    <% i += 4 %>
+
+    <% if i == 21 or i == 42 or i == 63 %>
+
+      <tr class = "game_stat_row">
+      </tr>
+
+    <% end %>
+
+  <% end %>
+
+</table>
