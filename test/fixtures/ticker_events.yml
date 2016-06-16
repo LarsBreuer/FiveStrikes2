@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  game_id: 1
+  time: 1
+  ticker_event_note: MyText
+
+two:
+  game_id: 1
+  time: 1
+  ticker_event_note: MyText

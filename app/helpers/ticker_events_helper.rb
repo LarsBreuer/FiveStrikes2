@@ -1,0 +1,2 @@
+module TickerEventsHelper
+end

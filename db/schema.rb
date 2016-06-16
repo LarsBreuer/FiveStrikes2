@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160504124256) do
+ActiveRecord::Schema.define(:version => 20160616114315) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(:version => 20160504124256) do
     t.string   "club_home_name"
     t.string   "club_away_name"
     t.integer  "duration_halftime"
-    t.date     "game_date"
+    t.string   "game_date"
     t.text     "game_note"
   end
 
@@ -123,6 +123,16 @@ ActiveRecord::Schema.define(:version => 20160504124256) do
     t.integer  "throwing_technique_id"
     t.text     "ticker_activity_note"
     t.integer  "mark"
+    t.integer  "ticker_event_id"
+  end
+
+  create_table "ticker_events", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "time"
+    t.text     "ticker_event_note"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.integer  "ticker_event_id_local"
   end
 
   create_table "users", :force => true do |t|

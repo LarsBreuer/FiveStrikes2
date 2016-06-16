@@ -18,7 +18,6 @@
     <th>Activity</th>
     <th>Player</th>
     <th>Time</th>
-    <th>Team</th>
     <th></th>
     <th></th>
     <th></th>
@@ -29,7 +28,6 @@
     <td><%= ticker_activity.activity_id %></td>
     <td><%= ticker_activity.player.player_forename %> <%= ticker_activity.player.player_surename %></td>
     <td><%= ticker_activity.time %></td>
-    <td><%= ticker_activity.team_id %></td>
     <td><%= link_to 'Show', ticker_activity %></td>
     <td><%= link_to 'Edit', edit_ticker_path(ticker_activity) %></td>
     <td><%= link_to 'Destroy', ticker_activity, confirm: 'Are you sure?', method: :delete %></td>

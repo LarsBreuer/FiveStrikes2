@@ -1,5 +1,8 @@
 FiveStrikes2::Application.routes.draw do
   
+  resources :ticker_events
+
+
   root :to => 'home#index', :as => 'home'
 
   devise_for :users, :controllers => { :sessions => 'local_devise/sessions', 
@@ -43,6 +46,7 @@ FiveStrikes2::Application.routes.draw do
   get "users/find_friends" => "users#find_friends", :as => :find_friends
   get "users/ask_friend" => "users#ask_friend", :as => :ask_friend
   post '/multiple_ticker_activities', to: 'ticker_activities#create', as: :multiple_ticker_locations
+  post '/multiple_ticker_events', to: 'ticker_events#create', as: :multiple_ticker_events_locations
 
   resources :users
   resources :ticker_activities do

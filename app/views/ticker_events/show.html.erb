@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Game:</b>
+  <%= @ticker_event.game_id %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @ticker_event.time %>
+</p>
+
+<p>
+  <b>Ticker event note:</b>
+  <%= @ticker_event.ticker_event_note %>
+</p>
+
+
+<%= link_to 'Edit', edit_ticker_event_path(@ticker_event) %> |
+<%= link_to 'Back', ticker_events_path %>
