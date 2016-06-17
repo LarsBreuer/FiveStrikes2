@@ -2,7 +2,7 @@ class Game < ActiveRecord::Base
 
   # ToDo => Eventuell doch Verweis auf Team Home und Team Away einrichten, statt nur auf die ID zu verweisen
   has_many :ticker_activities, :dependent => :destroy, :order => 'time ASC'
-  has_many :ticker_events, :dependent => :destroy, :order => 'time ASC'
+  has_many :ticker_events, :dependent => :delete_all, :order => 'time ASC'
   has_many :players, :through => :ticker_activities
   belongs_to :user
   has_many :line_items

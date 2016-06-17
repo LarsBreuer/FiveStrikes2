@@ -7,6 +7,7 @@
     <th>Player</th>
     <th>Time</th>
     <th>Home Or Away</th>
+    <th>Team</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,6 +20,7 @@
     <td><%= ticker_activity.player_id %></td>
     <td><%= ticker_activity.time %></td>
     <td><%= ticker_activity.home_or_away %></td>
+    <td><%= ticker_activity.team_id %></td>
     <td><%= link_to 'Show', ticker_activity %></td>
     <td><%= link_to 'Edit', edit_ticker_activity_path(ticker_activity) %></td>
     <td><%= link_to 'Destroy', ticker_activity, confirm: 'Are you sure?', method: :delete %></td>
