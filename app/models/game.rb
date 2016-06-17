@@ -1,5 +1,7 @@
 class Game < ActiveRecord::Base
 
+  accepts_nested_attributes_for :ticker_activities, allow_destroy: true
+  
   # ToDo => Eventuell doch Verweis auf Team Home und Team Away einrichten, statt nur auf die ID zu verweisen
   has_many :ticker_activities, :dependent => :destroy, :order => 'time ASC'
   has_many :ticker_events, :dependent => :delete_all, :order => 'time ASC'
