@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160616114315) do
+ActiveRecord::Schema.define(:version => 20160623083551) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(:version => 20160616114315) do
     t.integer  "throwing_technique_id"
     t.text     "ticker_activity_note"
     t.integer  "mark"
-    t.integer  "ticker_event_id"
+    t.integer  "ticker_event_id_local"
   end
 
   create_table "ticker_events", :force => true do |t|
@@ -133,6 +133,8 @@ ActiveRecord::Schema.define(:version => 20160616114315) do
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
     t.integer  "ticker_event_id_local"
+    t.integer  "activity_id"
+    t.string   "ticker_result"
   end
 
   create_table "users", :force => true do |t|
