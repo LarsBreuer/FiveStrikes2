@@ -1,3 +1,18 @@
+<% if @mode == 'GameTicker' %>
+
+  <% @ticker_events.each do |ticker_event| %>
+
+    <tr class = "game_stat_row">
+
+      <td class = "game_ticker_left"><%= ticker_event.time %></td>
+      <td class = "game_ticker_right"><%= ticker_event.ticker_event_note %></td>
+
+    </tr>
+
+  <% end %>
+
+<% end %>
+
 <% if @mode == 'GameGoals' %>
 
 <table class = "game_stat_table" cellspacing=0 cellpadding=0 border=0>

@@ -377,6 +377,24 @@ html, body
 	font-size: 14px
 }
 
+.game_ticker_left {
+	width: 30px;
+	text-align: left;
+	padding: 0px;
+}
+
+.game_ticker_right {
+	width: 270px;
+	text-align: left;
+	padding: 0px;
+}
+
+.game_stat_left {
+	width: 30px;
+	text-align: left;
+	padding: 0px;
+}
+
 .game_stat_left {
 	width: 30px;
 	text-align: left;

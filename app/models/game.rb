@@ -82,6 +82,16 @@ class Game < ActiveRecord::Base
   #
   #
 
+  def get_game_ticker()
+
+    game_ticker_array = Array.new
+
+    
+
+    return game_ticker_array
+
+  end
+
   def get_game_stat()
 
     game_stat_array = Array.new
@@ -438,6 +448,7 @@ class Game < ActiveRecord::Base
   # 7 => Titel Zeit im Ballbesitz
     game_stat_array.push(I18n.t('basic.time'))
     # 8 => Zeit Heim
+# ToDo => Zweimal Zeit definiert. update_timer und convert_seconds_to_time zusammenführen.
     game_stat_array.push(update_timer(intPossessionTimeHome))
     # 9 => Zeit Auswärts
     game_stat_array.push(update_timer(intPossessionTimeAway))
