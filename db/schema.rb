@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160623083551) do
+ActiveRecord::Schema.define(:version => 20160628080855) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20160623083551) do
     t.integer  "ticker_event_id_local"
     t.integer  "activity_id"
     t.string   "ticker_result"
+    t.integer  "home_or_away"
   end
 
   create_table "users", :force => true do |t|
