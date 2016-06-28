@@ -9,10 +9,10 @@
 	<div id="menu">
     
 		<ul>
-      <li><%= link_to I18n.t('basic.overview'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GameTicker'), :remote => true %></li>
+      <li><%= link_to I18n.t('basic.overview'), home_main_path(:game_id=>@game.id), :remote => true %></li>
       <li class="submenu"><a href="#"><%= I18n.t('basic.game')%></a>
         <ul>
-          <li><%= link_to I18n.t('basic.ticker'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.ticker'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GameTicker'), :remote => true %></li>
           <li class="submenu"><%= link_to I18n.t('basic.scorer'), home_main_path(:game_id=>@game.id), :remote => true %>
             <ul>
               <li><%= link_to I18n.t('basic.all'), home_main_path(:game_id=>@game.id), :remote => true %></li>

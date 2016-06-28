@@ -378,13 +378,13 @@ html, body
 }
 
 .game_ticker_left {
-	width: 30px;
-	text-align: left;
+	width: 60px;
+	text-align: middle;
 	padding: 0px;
 }
 
 .game_ticker_right {
-	width: 270px;
+	width: 540px;
 	text-align: left;
 	padding: 0px;
 }
