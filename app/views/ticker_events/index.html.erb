@@ -6,6 +6,7 @@
     <th>Time</th>
     <th>Ticker event note</th>
     <th>Activity ID</th>
+    <th>Home or away</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
     <td><%= ticker_event.time %></td>
     <td><%= ticker_event.ticker_event_note %></td>
     <td><%= ticker_event.activity_id %></td>
+    <td><%= ticker_event.home_or_away %></td>
     <td><%= link_to 'Show', ticker_event %></td>
     <td><%= link_to 'Edit', edit_ticker_event_path(ticker_event) %></td>
     <td><%= link_to 'Destroy', ticker_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
