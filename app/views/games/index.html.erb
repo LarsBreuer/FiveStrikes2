@@ -7,6 +7,7 @@
     <th>-</th>
     <th>Away</th>
     <th>Halbzeitlänge</th>
+    <th>User</th>
   </tr>
 
 <% @games.each do |game| %>
@@ -16,6 +17,7 @@
     <td></td>
     <td><%= game.club_away_name %></td>
     <td><%= game.duration_halftime %></td>
+    <td><%= game.user.name %></td>
     <td><%= link_to 'Show', game %></td>
     <td><%= link_to 'Edit', edit_game_path(game) %></td>
     <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>

@@ -1,5 +1,7 @@
 class TickerEvent < ActiveRecord::Base
 
+	attr_accessible :game_id, :ticker_event_note, :time, :ticker_event_id_local, :activity_id, :ticker_result, :home_or_away
+
   	belongs_to :game
 
   	def convert_seconds_to_time(seconds)

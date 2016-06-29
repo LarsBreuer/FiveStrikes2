@@ -74,6 +74,7 @@ class GamesController < ApplicationController
   # DELETE /games/1.json
   def destroy
     @game = Game.find(params[:id])
+# ToDo => Bei Löschen eines Spiels erhalte ich die Fehlermeldung "undefined method `name' for nil:NilClass"
     @game.destroy
 
     respond_to do |format|
