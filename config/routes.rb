@@ -1,5 +1,7 @@
 FiveStrikes2::Application.routes.draw do
   
+  get "frame/game"
+
   resources :ticker_events
 
 

@@ -1,5 +1,7 @@
 <% if @mode == 'GameTicker' %>
 
+<table class = "game_stat_table" cellspacing=0 cellpadding=0 border=0>
+
   <% @ticker_events.each do |ticker_event| %>
 
     <tr class = "game_stat_row">
@@ -10,7 +12,7 @@
 
         <% if ticker_event.activity_id == 10170 %>
 
-          <%= image_tag("ticker_symbol_defense.png") %>
+          <p><%= image_tag("ticker_symbol_defense.png") %></p>
 
         <% end %>
 
@@ -22,49 +24,49 @@
 
         <% if ticker_event.activity_id == 10400 %>
 
-          <%= image_tag("ticker_symbol_yellow_card.png") %>
+          <p><%= image_tag("ticker_symbol_yellow_card.png") %></p>
 
         <% end %>
 
         <% if ticker_event.activity_id == 10401 %>
 
-          <%= image_tag("ticker_symbol_two_out.png") %>
+          <p><%= image_tag("ticker_symbol_two_out.png") %></p>
 
         <% end %>
 
         <% if ticker_event.activity_id == 10403 %>
 
-          <%= image_tag("ticker_symbol_red_card.png") %>
+          <p><%= image_tag("ticker_symbol_red_card.png") %></p>
 
         <% end %>
 
         <% if ticker_event.activity_id == 10600 %>
 
-          <%= image_tag("ticker_symbol_timeout.png") %>
+          <p><%= image_tag("ticker_symbol_timeout.png") %></p>
 
         <% end %>
 
         <% if ticker_event.activity_id == 10501 %>
 
-          <%= image_tag("ticker_symbol_sub_in.png") %>
+          <p><%= image_tag("ticker_symbol_sub_in.png") %></p>
 
         <% end %>
 
         <% if ticker_event.activity_id == 10700 %>
 
-          <%= image_tag("ticker_symbol_tactic.png") %>
+          <p><%= image_tag("ticker_symbol_tactic.png") %></p>
 
         <% end %>
 
         <% if ticker_event.activity_id == 10150 %>
 
-          <%= image_tag("ticker_symbol_miss.png") %>
+          <p><%= image_tag("ticker_symbol_miss.png") %></p>
 
         <% end %>
 
         <% if ticker_event.activity_id == 10100 %>
 
-          <%= ticker_event.ticker_result %>
+          <p><%= ticker_event.ticker_result %></p>
 
         <% end %>
 
@@ -74,6 +76,8 @@
     </tr>
 
   <% end %>
+
+</table>
 
 <% end %>
 

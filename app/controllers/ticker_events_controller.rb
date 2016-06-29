@@ -2,8 +2,8 @@ class TickerEventsController < InheritedResources::Base
 
 
 
-	# POST /ticker_activities
-  	# POST /ticker_activities.json
+	# POST /ticker_events
+  	# POST /ticker_events.json
   	def create
     
     	params["_json"].each do |params_hash|
