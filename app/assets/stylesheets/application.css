@@ -379,13 +379,15 @@ html, body
 
 .game_ticker_left {
 	width: 60px;
-	text-align: middle;
+	text-align: center;
+	vertical-align: top;
 	padding: 0px;
 }
 
 .game_ticker_right {
 	width: 540px;
 	text-align: left;
+	vertical-align: top;
 	padding: 0px;
 }
 

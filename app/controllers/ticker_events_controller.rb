@@ -1,8 +1,36 @@
 class TickerEventsController < InheritedResources::Base
 
+# GET /ticker_activities/new
+  # GET /ticker_activities/new.json
+  def new
+    @ticker_event = TickerEvent.new
+    
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @ticker_event }
+    end
+  end
+
+  # POST /ticker_activities
+  # POST /ticker_activities.json
+  def create
+    @ticker_event = TickerEvent.new(params[:ticker_event])
+
+    respond_to do |format|
+      if @ticker_event.save
+        format.html { redirect_to @ticker_event, notice: 'ticker_event was successfully created.' }
+        format.json { render json: @ticker_event, status: :created, location: @ticker_event }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @ticker_event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
 	# POST /ticker_activities
   	# POST /ticker_activities.json
-  	def create
+  	def create_json
     
     	params["_json"].each do |params_hash|
       		puts params_hash.inspect
@@ -30,7 +58,7 @@ class TickerEventsController < InheritedResources::Base
 
   		@ticker_events = params["_json"].map do |params_hash|
     		# ToDo => whitelisted_params einbauen. Siehe mein Beitrag bei stackoverflow unter http://stackoverflow.com/questions/35082478/handling-json-array-from-android-in-rails
-    		ticker = TickerEvent.create!(params_hash)     
+    		ticker = TickerEvent.create_json!(params_hash)     
   		end
 
   		respond_to do |format|
