@@ -75,6 +75,8 @@ class GamesController < ApplicationController
   def destroy
     @game = Game.find(params[:id])
 # ToDo => Bei Löschen eines Spiels erhalte ich die Fehlermeldung "undefined method `name' for nil:NilClass"
+# Lösung eventuell Ruby-Version ändern, siehe hier: http://stackoverflow.com/questions/23568084/create-with-has-many-through-association-gets-nomethoderror-undefined-method-n
+# Aber dies könnte eventuell andere Probleme bereiten, z.B. mit Heroku (siehe eMail vom 04.02.2016).
     @game.destroy
 
     respond_to do |format|

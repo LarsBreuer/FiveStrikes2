@@ -526,12 +526,14 @@ a.main:link::after {
   width: 100%;
   height: 48px;
   background: white;
-  font-size: 16px;
 }
 
 #menu ul {
   margin: 0;
   padding: 0;
+  line-height: 48px;
+  font-family: "Arial";
+  font-size: 16px;
 }
 
 #menu a {
@@ -611,7 +613,7 @@ a.main:link::after {
 
 #menu ul ul li {
   float: none;
-  width: 200px;
+  width: 300px;
   border-bottom: 1px solid #555;
 }
 
@@ -632,7 +634,7 @@ a.main:link::after {
 
 #menu ul ul li:hover > ul {
   top: 0;
-  left: 200px;
+  left: 300px;
 }
 
 
