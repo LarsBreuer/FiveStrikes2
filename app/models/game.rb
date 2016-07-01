@@ -448,10 +448,9 @@ class Game < ActiveRecord::Base
   # 7 => Titel Zeit im Ballbesitz
     game_stat_array.push(I18n.t('basic.time'))
     # 8 => Zeit Heim
-# ToDo => Zweimal Zeit definiert. update_timer und convert_seconds_to_time zusammenführen.
-    game_stat_array.push(update_timer(intPossessionTimeHome))
+    game_stat_array.push(TickerActivity.convert_seconds_to_time(intPossessionTimeHome))
     # 9 => Zeit Auswärts
-    game_stat_array.push(update_timer(intPossessionTimeAway))
+    game_stat_array.push(TickerActivity.convert_seconds_to_time(intPossessionTimeAway))
     # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Zeit hatte
     max_width = intPossessionTimeHome
     if intPossessionTimeAway > intPossessionTimeHome
@@ -476,9 +475,9 @@ class Game < ActiveRecord::Base
   # 14 => Durchschnittliche Zeit im Ballbesitz
     game_stat_array.push(I18n.t('basic.time_attack'))
     # 15 => Zeit Heim
-    game_stat_array.push(update_timer(intTimePossessionAttemptHome))
+    game_stat_array.push(TickerActivity.convert_seconds_to_time(intTimePossessionAttemptHome))
     # 16 => Zeit Auswärts
-    game_stat_array.push(update_timer(intTimePossessionAttemptAway))
+    game_stat_array.push(TickerActivity.convert_seconds_to_time(intTimePossessionAttemptAway))
     # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Zeit hatte
     max_width = intTimePossessionAttemptHome
     if intTimePossessionAttemptAway > intTimePossessionAttemptHome
@@ -598,9 +597,9 @@ class Game < ActiveRecord::Base
   # 0 => Titel Führung
     game_stat_array.push(I18n.t('basic.lead'))
     # 1 => Führung Heim
-    game_stat_array.push(update_timer(intTimeLeadHome))
+    game_stat_array.push(TickerActivity.convert_seconds_to_time(intTimeLeadHome))
     # 2 => Führung Auswärts
-    game_stat_array.push(update_timer(intTimeLeadAway))
+    game_stat_array.push(TickerActivity.convert_seconds_to_time(intTimeLeadAway))
     # Ermitteln, ob die Heim- oder Auswärtsmannschaft länger in Führung war
     array_length = game_stat_array.count
     max_width = intTimeLeadHome
@@ -623,9 +622,9 @@ class Game < ActiveRecord::Base
   # 7 => Titel Unentschieden
     game_stat_array.push(I18n.t('basic.draw'))
     # 8 => Unentschieden Heim
-    game_stat_array.push(update_timer(intTimeDraw))
+    game_stat_array.push(TickerActivity.convert_seconds_to_time(intTimeDraw))
     # 9 => Unentschieden Auswärts
-    game_stat_array.push(update_timer(intTimeDraw))
+    game_stat_array.push(TickerActivity.convert_seconds_to_time(intTimeDraw))
     # Zeit Unentschieden ermitteln
     max_width = intTimeDraw
     array_length = game_stat_array.count
@@ -731,7 +730,7 @@ class Game < ActiveRecord::Base
 
   # 0 => Titel Spielstand zur x. Minute
     while i < 13 do
-      game_stat_array.push(update_timer(time_step * i))
+      game_stat_array.push(TickerActivity.convert_seconds_to_time(time_step * i))
       # 1 => Tore Heim
       goals_home = count_team_goals_time(self.team_home_id, time_step * i)
       game_stat_array.push(goals_home)
@@ -981,9 +980,9 @@ class Game < ActiveRecord::Base
   # 28 => Titel Zeit in Überzahl
     game_stat_array.push(I18n.t('basic.powerplay'))
     # 29 => Zeit Heim
-    game_stat_array.push(update_timer(intTimePowerplayHome))
+    game_stat_array.push(TickerActivity.convert_seconds_to_time(intTimePowerplayHome))
     # 30 => Zeit Auswärts
-    game_stat_array.push(update_timer(intTimePowerplayAway))
+    game_stat_array.push(TickerActivity.convert_seconds_to_time(intTimePowerplayAway))
     # Ermitteln, ob die Heim- oder Auswärtsmannschaft mehr Zeit hatte
     max_width = intTimePowerplayHome
     if intTimePowerplayAway > intTimePowerplayHome

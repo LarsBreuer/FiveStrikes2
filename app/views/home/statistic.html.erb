@@ -4,7 +4,7 @@
   <table div id="game_item_table">
     <% @ticker_activities.each do |ticker_activity| %>
       <tr  class="<%= cycle('firstrow', 'secondrow') -%>">
-        <td><%= ticker_activity.convert_seconds_to_time(ticker_activity.time) %></td>    
+        <td><%= ticker_activity.convert_seconds_to_time(ticker_activity.time / 1000) %></td>    
         <td><%= @game.count_team_goals_time(@game.team_home_id, ticker_activity.time) %>:<%= @game.count_team_goals_time(@game.team_away_id, ticker_activity.time) %></td>
         <td><%= ticker_activity.player.player_forename %> <%= ticker_activity.player.player_surename %></td>
       </tr>
