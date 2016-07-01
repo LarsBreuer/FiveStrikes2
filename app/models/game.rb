@@ -402,6 +402,9 @@ class Game < ActiveRecord::Base
 
     end
 
+    intPossessionTimeHome = intPossessionTimeHome / 1000
+    intPossessionTimeAway = intPossessionTimeAway / 1000
+
     # Wenn zum Spielende eine Mannschaft in Ballbesitz, dann Restzeit eintragen
     if intCurrentPossession == 1
       intPossessionTimeHome = intPossessionTimeHome + duration * 2 - intChangePossessionTime
@@ -580,6 +583,10 @@ class Game < ActiveRecord::Base
       end
     end
 
+    intTimeLeadHome = intTimeLeadHome / 1000
+    intTimeLeadAway = intTimeLeadAway / 1000
+    intTimeDraw = intTimeDraw / 1000
+
     # Führung oder Unentschieden zum Spielende eintragen
     if intGoalDifference > 0
       intTimeLeadHome = intTimeLeadHome + (duration * 2) - intTimeLeadChange
@@ -720,6 +727,8 @@ class Game < ActiveRecord::Base
 
     # Betrag der maximalen Führung der Auswärtsmannschaft, da sonst negativ 
     intMaxLeadAway= intMaxLeadAway.abs
+    intMaxLeadHome = intMaxLeadHome / 1000
+    intMaxLeadAway = intMaxLeadAway / 1000
 
     max_width = intMaxLeadHome
     if intMaxLeadAway > max_width
@@ -892,7 +901,7 @@ class Game < ActiveRecord::Base
       # Wurde ein Tor geschossen?
       if ticker_activity.activity_id == 10100 || ticker_activity.activity_id == 10101 || ticker_activity.activity_id == 10102
               
-        # Hat das Heimteam das Tor geschossen?
+        # Hat das Heimteam das Tor geworfen?
         if ticker_activity.home_or_away == 1
             
           #Überzahl- und Unterzahltore ermitteln
@@ -905,7 +914,7 @@ class Game < ActiveRecord::Base
         
         end
             
-        # Hat das Auswärtsteam das Tor geschossen?
+        # Hat das Auswärtsteam das Tor geworfen?
         if ticker_activity.home_or_away == 0
             
           # Überzahl- und Unterzahltore ermitteln
@@ -968,6 +977,9 @@ class Game < ActiveRecord::Base
         end
       end
     end
+
+    intTimePowerplayHome = intTimePowerplayHome / 1000
+    intTimePowerplayAway = intTimePowerplayHome / 1000
 
     # Falls eine Mannschaft zum Ende des Spiels in Überzahl ist
     if intPowerplay > 0
@@ -1132,6 +1144,9 @@ class Game < ActiveRecord::Base
       end
     end
 
+    time = time /1000
+    time_in = time_in / 1000
+    
     # Falls der Spieler auch am Ende des Spiels noch eingewechselt war, 
     # addiere die restliche Spielzeit zur Gesamtspielzeit.
     if status == 1
@@ -1672,10 +1687,10 @@ class Game < ActiveRecord::Base
     # Falls nach der längsten Führung gefragt wird
     if home_or_away
       if home_or_away == 1
-        result = TickerActivity.convert_seconds_to_time(time_lead_home)
+        result = TickerActivity.convert_seconds_to_time(time_lead_home / 1000)
       end
       if home_or_away == 0
-        result = TickerActivity.convert_seconds_to_time(time_lead_away)
+        result = TickerActivity.convert_seconds_to_time(time_lead_away / 1000)
       end
     else
       if time_lead_home > time_lead_away
@@ -1683,14 +1698,14 @@ class Game < ActiveRecord::Base
           result = self.club_home_name
         end
         if modus == "time"
-          result = TickerActivity.convert_seconds_to_time(time_lead_home)
+          result = TickerActivity.convert_seconds_to_time(time_lead_home / 1000)
         end
       else
         if modus == "name"
           result = self.club_away_name
         end
         if modus == "time"
-          result = TickerActivity.convert_seconds_to_time(time_lead_away)
+          result = TickerActivity.convert_seconds_to_time(time_lead_away / 1000)
         end
       end
     end
