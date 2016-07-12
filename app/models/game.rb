@@ -1669,8 +1669,10 @@ class Game < ActiveRecord::Base
     if goals_home == goals_away
       time_draw = time_draw + (duration_halftime * 2 * 60) - time_lead_change
     end
-
-puts time_lead_home
+string = "Halbzeitlänge: " + duration_halftime
+puts string
+string = "time_lead_change: " + time_lead_change
+puts string
 
 # ToDo => Diese Funktion wird mehrmals aufgerufen. Kann man diese auch nur einmal aufrufen und das Ergebnis mehrmals verwenden?
     
