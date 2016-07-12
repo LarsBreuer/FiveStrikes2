@@ -1159,7 +1159,7 @@ class Game < ActiveRecord::Base
     # Falls der Spieler auch am Ende des Spiels noch eingewechselt war, 
     # addiere die restliche Spielzeit zur Gesamtspielzeit.
     if status == 1
-      time = time + (duration * 2) - time_in
+      time = time + (duration * 2 * 60) - time_in
     end
 
     puts "Spielzeit nachher"
