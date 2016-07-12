@@ -1109,8 +1109,6 @@ class Game < ActiveRecord::Base
             time_in = ticker_activity.time
           end
           status = 1
-          puts 'time_in'
-          puts time_in
         end
         
         # Wurde Spieler ausgewechselt?
@@ -1144,15 +1142,6 @@ class Game < ActiveRecord::Base
       end
     end
 
-    puts "Spielzeit vorher"
-    puts time
-
-    puts "time_in vorher"
-    puts time
-
-    puts "duration"
-    puts duration
-
     time = time /1000
     time_in = time_in / 1000
 
@@ -1161,9 +1150,6 @@ class Game < ActiveRecord::Base
     if status == 1
       time = time + (duration * 2 * 60) - time_in
     end
-
-    puts "Spielzeit nachher"
-    puts time
 
     # Spielzeit und +/- eintragen
     if time > 0
@@ -1625,7 +1611,7 @@ class Game < ActiveRecord::Base
     if self.duration_halftime
       duration_halftime = self.duration_halftime
     else
-      duration_halftime = 1800
+      duration_halftime = 30
     end
 
     self.ticker_activities.each do |ticker_activity|
@@ -1670,15 +1656,15 @@ class Game < ActiveRecord::Base
     # Restzeit bis zum Ende des Spiels ermitteln
     # Die Heimmannschaft lag bis zum Ende des Spiels in Führung
     if goals_home - goals_away > 0
-      time_lead_home = time_lead_home + (duration_halftime * 2) - time_lead_change
+      time_lead_home = time_lead_home + (duration_halftime * 2 * 60) - time_lead_change
     end
     # Die Auswärtsmannschaft lag bis zum Ende des Spiels in Führung
     if goals_home - goals_away < 0
-      time_lead_away = time_lead_away + (duration_halftime * 2) - time_lead_change
+      time_lead_away = time_lead_away + (duration_halftime * 2 * 60) - time_lead_change
     end
     # Zum Ende des Spiels Stand es Unentschieden
     if goals_home == goals_away
-      time_draw = time_draw + (duration_halftime * 2) - time_lead_change
+      time_draw = time_draw + (duration_halftime * 2 * 60) - time_lead_change
     end
 
 # ToDo => Diese Funktion wird mehrmals aufgerufen. Kann man diese auch nur einmal aufrufen und das Ergebnis mehrmals verwenden?
@@ -1692,7 +1678,9 @@ class Game < ActiveRecord::Base
         result = TickerActivity.convert_seconds_to_time(time_lead_away / 1000)
       end
     else
+      puts "Vergleich aufgerufen"
       if time_lead_home > time_lead_away
+        puts "Heim ist größer"
         if modus == "name"
           result = self.club_home_name
         end
@@ -1700,6 +1688,7 @@ class Game < ActiveRecord::Base
           result = TickerActivity.convert_seconds_to_time(time_lead_home / 1000)
         end
       else
+        puts "Auswärts ist größer"
         if modus == "name"
           result = self.club_away_name
         end
