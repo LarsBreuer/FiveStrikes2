@@ -1653,6 +1653,11 @@ class Game < ActiveRecord::Base
       end
     end
 
+    time_lead_home = time_lead_home / 1000
+    time_lead_away = time_lead_away / 1000
+
+puts time_lead_home
+
     # Restzeit bis zum Ende des Spiels ermitteln
     # Die Heimmannschaft lag bis zum Ende des Spiels in Führung
     if goals_home - goals_away > 0
@@ -1669,34 +1674,28 @@ class Game < ActiveRecord::Base
 
 # ToDo => Diese Funktion wird mehrmals aufgerufen. Kann man diese auch nur einmal aufrufen und das Ergebnis mehrmals verwenden?
     
-    puts "Führungszeiten"
-    puts time_lead_home
-    puts time_lead_away
     # Falls nach der längsten Führung gefragt wird
     if home_or_away
       if home_or_away == 1
-        result = TickerActivity.convert_seconds_to_time(time_lead_home / 1000)
+        result = TickerActivity.convert_seconds_to_time(time_lead_home)
       end
       if home_or_away == 0
-        result = TickerActivity.convert_seconds_to_time(time_lead_away / 1000)
+        result = TickerActivity.convert_seconds_to_time(time_lead_away)
       end
     else
-      puts "Vergleich aufgerufen"
       if time_lead_home > time_lead_away
-        puts "Heim ist größer"
         if modus == "name"
           result = self.club_home_name
         end
         if modus == "time"
-          result = TickerActivity.convert_seconds_to_time(time_lead_home / 1000)
+          result = TickerActivity.convert_seconds_to_time(time_lead_home)
         end
       else
-        puts "Auswärts ist größer"
         if modus == "name"
           result = self.club_away_name
         end
         if modus == "time"
-          result = TickerActivity.convert_seconds_to_time(time_lead_away / 1000)
+          result = TickerActivity.convert_seconds_to_time(time_lead_away)
         end
       end
     end
