@@ -1144,6 +1144,15 @@ class Game < ActiveRecord::Base
       end
     end
 
+    puts "Spielzeit vorher"
+    puts time
+
+    puts "time_in vorher"
+    puts time
+
+    puts "duration"
+    puts duration
+
     time = time /1000
     time_in = time_in / 1000
 
@@ -1153,7 +1162,7 @@ class Game < ActiveRecord::Base
       time = time + (duration * 2) - time_in
     end
 
-    puts "Spielzeit"
+    puts "Spielzeit nachher"
     puts time
 
     # Spielzeit und +/- eintragen
