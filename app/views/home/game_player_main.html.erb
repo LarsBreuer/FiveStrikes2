@@ -12,7 +12,6 @@
   <% while( i < array_length )  %>
 
     <tr class = "game_stat_row">
-<%# ToDo => Versuche und Quote einrücken %>
       <% if @player_stat[i] == I18n.t('basic.percentage') || @player_stat[i] == I18n.t('basic.attempts') || @player_stat[i] == I18n.t('basic.seven_attempts') || @player_stat[i] == I18n.t('basic.fb_attempts')  || @player_stat[i] == I18n.t('basic.throws')  || @player_stat[i] == I18n.t('basic.seven_throws')  || @player_stat[i] == I18n.t('basic.fb_throws') %>
         <td class = "player_stat_name_margin"><%= @player_stat[i] %></td>
       <% else %>

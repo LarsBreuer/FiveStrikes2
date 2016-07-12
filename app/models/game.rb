@@ -1146,12 +1146,15 @@ class Game < ActiveRecord::Base
 
     time = time /1000
     time_in = time_in / 1000
-    
+
     # Falls der Spieler auch am Ende des Spiels noch eingewechselt war, 
     # addiere die restliche Spielzeit zur Gesamtspielzeit.
     if status == 1
       time = time + (duration * 2) - time_in
     end
+
+    puts "Spielzeit"
+    puts time
 
     # Spielzeit und +/- eintragen
     if time > 0
@@ -1168,21 +1171,11 @@ class Game < ActiveRecord::Base
       # Wert
       player_stat_array.push(plus_minus.to_s)
       # Breite der Balken berechnen
-
-
-
       # player_stat_array.push(row_width * plus_minus / team_plus_minus)
       # player_stat_array.push(row_width - (row_width * plus_minus / team_plus_minus))
       player_stat_array.push(0)
       player_stat_array.push(0)
     end
-
-
-
-
-
-
-
 
     #
     # Sonstige Statistiken zu dem Spieler einfügen
@@ -1223,9 +1216,6 @@ class Game < ActiveRecord::Base
     stat_overall_hash[10401] = count_team_activity(10401, team_id)
     stat_overall_hash[10402] = count_team_activity(10402, team_id)
     stat_overall_hash[10403] = count_team_activity(10403, team_id)
-
-
-
 
     stat_hash[10100] = I18n.t('basic.goals_overall')
     stat_hash[10101] = I18n.t('basic.seven_goals')
