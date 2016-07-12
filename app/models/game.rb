@@ -407,10 +407,10 @@ class Game < ActiveRecord::Base
 
     # Wenn zum Spielende eine Mannschaft in Ballbesitz, dann Restzeit eintragen
     if intCurrentPossession == 1
-      intPossessionTimeHome = intPossessionTimeHome + duration * 2 - intChangePossessionTime
+      intPossessionTimeHome = intPossessionTimeHome + duration * 2 * 60 - intChangePossessionTime
     end
     if intCurrentPossession == 0
-      intPossessionTimeAway = intPossessionTimeAway + duration * 2 - intChangePossessionTime
+      intPossessionTimeAway = intPossessionTimeAway + duration * 2 * 60 - intChangePossessionTime
     end
 
     # Durchschnittliche Zeit pro Angriff errechnen
@@ -589,13 +589,13 @@ class Game < ActiveRecord::Base
 
     # Führung oder Unentschieden zum Spielende eintragen
     if intGoalDifference > 0
-      intTimeLeadHome = intTimeLeadHome + (duration * 2) - intTimeLeadChange
+      intTimeLeadHome = intTimeLeadHome + (duration * 2 * 60) - intTimeLeadChange
     end
     if intGoalDifference < 0
-      intTimeLeadAway = intTimeLeadAway + (duration * 2) - intTimeLeadChange
+      intTimeLeadAway = intTimeLeadAway + (duration * 2 * 60) - intTimeLeadChange
     end
     if intGoalDifference == 0
-      intTimeDraw = intTimeDraw + (duration * 2) - intTimeLeadChange
+      intTimeDraw = intTimeDraw + (duration * 2 * 60) - intTimeLeadChange
     end
 
     # Betrag der maximalen Führung der Auswärtsmannschaft, da sonst negativ 
@@ -983,10 +983,10 @@ class Game < ActiveRecord::Base
 
     # Falls eine Mannschaft zum Ende des Spiels in Überzahl ist
     if intPowerplay > 0
-      intTimePowerplayHome = intTimePowerplayHome + (duration * 2) - intTimePowerplayChange
+      intTimePowerplayHome = intTimePowerplayHome + (duration * 2 * 60) - intTimePowerplayChange
     end
     if intPowerplay < 0
-      intTimePowerplayAway = intTimePowerplayAway + (duration * 2) - intTimePowerplayChange
+      intTimePowerplayAway = intTimePowerplayAway + (duration * 2 * 60) - intTimePowerplayChange
     end
 
   # 28 => Titel Zeit in Überzahl
@@ -1172,8 +1172,8 @@ class Game < ActiveRecord::Base
       # Wert
       player_stat_array.push(TickerActivity.convert_seconds_to_time(time))
       # Breite der Balken berechnen
-      player_stat_array.push(row_width * time / (duration * 2))
-      player_stat_array.push(row_width - (row_width * time / (duration * 2)))
+      player_stat_array.push(row_width * time / (duration * 2 * 60))
+      player_stat_array.push(row_width - (row_width * time / (duration * 2 * 60)))
 
       # Titel Plus Minus
       player_stat_array.push(I18n.t('basic.plus_minus'))
