@@ -1668,7 +1668,10 @@ class Game < ActiveRecord::Base
     end
 
 # ToDo => Diese Funktion wird mehrmals aufgerufen. Kann man diese auch nur einmal aufrufen und das Ergebnis mehrmals verwenden?
-
+    
+    puts "Führungszeiten"
+    puts time_lead_home
+    puts time_lead_away
     # Falls nach der längsten Führung gefragt wird
     if home_or_away
       if home_or_away == 1
