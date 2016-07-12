@@ -1655,6 +1655,7 @@ class Game < ActiveRecord::Base
 
     time_lead_home = time_lead_home / 1000
     time_lead_away = time_lead_away / 1000
+    time_lead_change = time_lead_change / 1000
 
     # Restzeit bis zum Ende des Spiels ermitteln
     # Die Heimmannschaft lag bis zum Ende des Spiels in Führung
