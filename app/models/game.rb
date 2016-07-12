@@ -1656,8 +1656,6 @@ class Game < ActiveRecord::Base
     time_lead_home = time_lead_home / 1000
     time_lead_away = time_lead_away / 1000
 
-puts time_lead_home
-
     # Restzeit bis zum Ende des Spiels ermitteln
     # Die Heimmannschaft lag bis zum Ende des Spiels in Führung
     if goals_home - goals_away > 0
@@ -1671,6 +1669,8 @@ puts time_lead_home
     if goals_home == goals_away
       time_draw = time_draw + (duration_halftime * 2 * 60) - time_lead_change
     end
+
+puts time_lead_home
 
 # ToDo => Diese Funktion wird mehrmals aufgerufen. Kann man diese auch nur einmal aufrufen und das Ergebnis mehrmals verwenden?
     
