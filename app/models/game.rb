@@ -7,6 +7,8 @@ class Game < ActiveRecord::Base
   belongs_to :user
   has_many :line_items
 
+  require 'date'
+
   # ToDo => Überprüfung, ob Spiel tatsächlich zerstört werden darf, einrichten
   # before_destroy :ensure_not_referenced_by_any_line_item
 
@@ -1670,10 +1672,6 @@ class Game < ActiveRecord::Base
     if goals_home == goals_away
       time_draw = time_draw + (duration_halftime * 2 * 60) - time_lead_change
     end
-string = "Halbzeitlänge: " + duration_halftime.to_s
-puts string
-string = "time_lead_change: " + time_lead_change.to_s
-puts string
 
 # ToDo => Diese Funktion wird mehrmals aufgerufen. Kann man diese auch nur einmal aufrufen und das Ergebnis mehrmals verwenden?
     
@@ -1713,33 +1711,10 @@ puts string
   #
   #
 
-  def update_timer(time)
-    
-    secs = time
-    mins = time / 60
+  def convert_game_date(date)
 
-    secs = secs % 60
-    seconds = secs.to_s
-
-    if secs == 0
-      seconds = "00"
-    end
-    if secs <10 && secs > 0
-      seconds = "0" + seconds
-    end
-        
-    # Convert the minutes to String and format the String
-        
-    minutes = mins.to_s
-
-    if mins == 0
-      minutes = "00"
-    end
-    if mins <10 && mins > 0
-      minutes = "0" + minutes
-    end
-    
-    result = minutes + ":" + seconds
+    date = DateTime.parse(date)
+    result = date.strftime('%a %b %d %H:%M:%S %Z %Y')
 
     return result
 

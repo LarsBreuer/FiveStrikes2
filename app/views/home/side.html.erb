@@ -10,9 +10,8 @@
 				<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 			</div>
 
-		
 			<div class="row_game">
-				<div class="cell_game_header_319"><%= item.updated_at %> <%= item.game.id %></div>
+				<div class="cell_game_header_319"><%= item.game.convert_game_date(item.game.game_date) %> <%= item.game.id %></div>
 				<div class="cell_game_header_36"> </div>
 				<div class="cell_game_white_6"> </div>
 			</div>
