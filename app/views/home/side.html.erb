@@ -10,8 +10,6 @@
 
 				<% game_activities = item.game.count_game_activity() %>
 
-				<% puts game_activities %>
-
 				<% if game_activities < 100 %>
 					<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 					<% else %>

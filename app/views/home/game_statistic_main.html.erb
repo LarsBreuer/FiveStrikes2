@@ -83,59 +83,7 @@
 
 <% if @mode == 'GameGoals' %>
 
-<table class = "game_stat_table" cellspacing=0 cellpadding=0 border=0>
-
-  <tr class = "game_stat_row">
-
-    <td class = "game_stat_left"></td>
-    <td class = "game_stat_center_left">
-      <%= @game.get_club_name_by_team_id(@game.team_home_id) %>
-    </td>
-    <td class = "game_stat_center_right">
-      <%= @game.get_club_name_by_team_id(@game.team_away_id) %>
-    </td>
-    <td class = "game_stat_right"></td>
-
-  </tr>
-
-  <% i = 0 %>
-  <% array_length = @game_stat.count %>
-
-  <% while( i < array_length )  %>
-
-    <tr class = "game_stat_row">
-
-      <td class = "game_stat_left"><%= @game_stat[i+1] %></td>
-      <td colspan="2" class = "game_stat_center_middle">
-        <%= @game_stat[i] %>
-      </td>
-      <td class = "game_stat_right"><%= @game_stat[i+2] %></td>
-
-    </tr>
-
-    <tr class = "game_stat_row">
-
-      <td colspan="2" class = "game_stat_chart_left">
-        <IMG src="/assets/grey.png" width="<%= @game_stat[i+3] -%>"  height=10 border=0><IMG src="/assets/blue.png" width="<%= @game_stat[i+4] -%>" height=10 border=0>
-      </td>
-      <td colspan="2" class = "game_stat_chart_right">
-        <IMG src="/assets/red.png" width="<%= @game_stat[i+5] -%>" height=10 border=0><IMG src="/assets/grey.png" width="<%= @game_stat[i+6] -%>"  height=10 border=0>
-      </td>
-
-    </tr>
-
-    <% i += 7 %>
-
-    <% if i == 21 or i == 42 or i == 63 %>
-
-      <tr class = "game_stat_row">
-      </tr>
-
-    <% end %>
-
-  <% end %>
-
-</table>
+  <%= render :file => "home/game_statistic_goals" %>
 
 <% end %>
 
