@@ -7,7 +7,31 @@
 		<div id="table_game">
 
 			<div id="label_line_item">
-				<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+
+				<% game_activities = item.game.count_game_activity() %>
+
+				<% puts game_activities %>
+
+				<% if game_activities < 100 %>
+					<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+				<% end %>
+
+				<% if game_activities < 200 %>
+					<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+				<% end %>
+
+				<% if game_activities < 300 %>
+					<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+				<% end %>
+
+				<% if game_activities < 400 %>
+					<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+				<% end %>
+
+				<% if game_activities > 399 %>
+					<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+				<% end %>
+
 			</div>
 
 			<div class="row_game">

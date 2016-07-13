@@ -1405,6 +1405,10 @@ class Game < ActiveRecord::Base
   #
 
   # Aktivitäten
+  def count_game_activity()
+    self.ticker_activities.count
+  end
+
   def count_team_activity(activityID, teamID)
     self.ticker_activities.where(:activity_id => activityID, :team_id => teamID).count
   end
