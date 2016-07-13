@@ -1714,7 +1714,7 @@ class Game < ActiveRecord::Base
   def convert_game_date(date)
 
     date = DateTime.parse(date)
-    result = date.strftime('%a %b %d %H:%M:%S %Z %Y')
+    result = date.strftime('%d.%m.%Y, %H:%M:%S')
 
     return result
 
