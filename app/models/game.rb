@@ -1126,11 +1126,11 @@ class Game < ActiveRecord::Base
         end
       else
 puts "Abfrage Aufstellung aufgerufen"
-string = "activity_id: " + ticker_activity.activity_id
+string = "activity_id: " + ticker_activity.activity_id.to_s
 puts string
-string = "ticker_event_id: " + ticker_event_id
+string = "ticker_event_id: " + ticker_event_id.to_s
 puts string
-string = "last_ticker_event_id: " + last_ticker_event_id
+string = "last_ticker_event_id: " + last_ticker_event_id.to_s
 puts string
 
         # Falls es zwar keine Aktion des Spielers, aber eine Einwechselung
@@ -1142,7 +1142,7 @@ puts string
         if ticker_activity.activity_id == 10501 && status == 1 && !ticker_event_id == last_ticker_event_id
 puts "Aufstellung aufgerufen"
           ticker_activities_sub_in = self.ticker_activities.where("ticker_event_id_local = ? AND activity_id = ?", ticker_event_id, 10501)
-string = "ticker_activities_sub_in.count: " + ticker_activities_sub_in.count
+string = "ticker_activities_sub_in.count: " + ticker_activities_sub_in.count.to_s
 puts string
           if ticker_activities_sub_in.count == 7
             
