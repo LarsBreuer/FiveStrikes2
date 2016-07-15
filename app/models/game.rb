@@ -1126,7 +1126,7 @@ class Game < ActiveRecord::Base
         end
       else
 puts "Abfrage Aufstellung aufgerufen"
-string = "ticker_activity.activity_id: " + activity_id
+string = "activity_id: " + ticker_activity.activity_id
 puts string
 string = "ticker_event_id: " + ticker_event_id
 puts string
