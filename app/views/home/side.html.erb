@@ -10,18 +10,20 @@
 
 				<% game_activities = item.game.count_game_activity() %>
 
+				<% puts game_activities %>
+
 				<% if game_activities < 100 %>
-					<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+					<%= image_tag("stroke_one_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+				<% else %>
+					<% if game_activities < 200 %>
+						<%= image_tag("stroke_two_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 					<% else %>
-						<% if game_activities < 200 %>
-							<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+						<% if game_activities < 300 %>
+							<%= image_tag("stroke_three_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 						<% else %>
-							<% if game_activities < 300 %>
-								<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+							<% if game_activities < 400 %>
+								<%= image_tag("stroke_four_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 							<% else %>
-								<% if game_activities < 400 %>
-									<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
-								<% else %>
 								<% if game_activities > 399 %>
 									<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 								<% end %>

@@ -1125,6 +1125,13 @@ class Game < ActiveRecord::Base
           end
         end
       else
+puts "Abfrage Aufstellung aufgerufen"
+string = "ticker_activity.activity_id: " + activity_id
+puts string
+string = "ticker_event_id: " + ticker_event_id
+puts string
+string = "last_ticker_event_id: " + last_ticker_event_id
+puts string
 
         # Falls es zwar keine Aktion des Spielers, aber eine Einwechselung
         # ist und der zu prüfende Spieler gerade eingewechselt ist, prüfe, ob 
@@ -1133,9 +1140,10 @@ class Game < ActiveRecord::Base
         # Falls ja: Wechsel den Spieler aus.
 
         if ticker_activity.activity_id == 10501 && status == 1 && !ticker_event_id == last_ticker_event_id
-
+puts "Aufstellung aufgerufen"
           ticker_activities_sub_in = self.ticker_activities.where("ticker_event_id_local = ? AND activity_id = ?", ticker_event_id, 10501)
-
+string = "ticker_activities_sub_in.count: " + ticker_activities_sub_in.count
+puts string
           if ticker_activities_sub_in.count == 7
             
             # Überprüfe, ob der Spieler Teil der Mannschaftsaufstellung ist
