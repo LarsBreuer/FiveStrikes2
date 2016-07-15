@@ -1066,7 +1066,6 @@ class Game < ActiveRecord::Base
       game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
     end
 
-
     return game_stat_array
 
   end
@@ -1097,11 +1096,15 @@ class Game < ActiveRecord::Base
     else
       team_plus_minus = count_team_goals(self.team_away_id) - count_team_goals(self.team_home_id)
     end
+    last_ticker_event_id = -1
+    ticker_lineup_id = 0
 
     #
     # Spielzeit einfügen
     #
     self.ticker_activities.each do |ticker_activity|
+
+      ticker_event_id = ticker_activity.ticker_event_id_local
 
       # Überprüfen, ob es eine Aktion des Spielers ist
       if playerID == ticker_activity.player_id.to_s
@@ -1122,13 +1125,45 @@ class Game < ActiveRecord::Base
           end
         end
       else
-        # ToDo
-        # Falls es zwar keine Aktion des Spielers ist, aber es eine Einwechselung
+
+        # Falls es zwar keine Aktion des Spielers, aber eine Einwechselung
         # ist und der zu prüfende Spieler gerade eingewechselt ist, prüfe, ob 
         # es sich um eine Mannschaftsaufstellung mit sieben Spielern handelt 
         # und ob das Ticker Ereignis noch nicht abgefragt wurde
         # Falls ja: Wechsel den Spieler aus.
-        # Siehe Android-Projekt HelperSQL ab Zeile 1956
+
+        if ticker_activity.activity_id == 10501 && status == 1 && !ticker_event_id == last_ticker_event_id
+
+          ticker_activities_sub_in = self.ticker_activities.where("ticker_event_id_local = ? AND activity_id = ?", ticker_event_id, 10501)
+
+          if ticker_activities_sub_in.count == 7
+            
+            # Überprüfe, ob der Spieler Teil der Mannschaftsaufstellung ist
+            player_in = false
+            # Alle Tickermeldungen des Events abfragen und mit der Spieler ID vergleichen
+            ticker_activities_sub_in.each do |ticker_activity_sub_in|
+              ticker_lineup_id = ticker_activity_sub_in.id
+              if ticker_lineup_id != nil
+                if ticker_lineup_id == playerID
+                  player_in = true
+                end
+              end
+            end
+            
+            # Ticker Event ID speichern, damit diese nicht noch einmal abgefragt wird
+            last_ticker_event_id = ticker_event_id
+            
+            # Falls nicht, also falls sieben Spieler eingewechselt wurden und der 
+            # zu prüfende Spieler nicht dabei war, wurde der zu prüfende 
+            # Spieler ausgewechselt.
+            if player_in == false
+              
+              time = time + ticker_activity.time - time_in
+              status = 0
+              
+            end          
+          end
+        end
       end
 
       # Falls ein Tor geworfen wurde und Spieler aktiv war, ändere Plus / Minus Statistik
@@ -1717,8 +1752,10 @@ class Game < ActiveRecord::Base
 
   def convert_game_date(date)
 
-    date = DateTime.parse(date)
-    result = date.strftime('%d.%m.%Y, %H:%M:%S')
+    if date
+      date = DateTime.parse(date)
+      result = date.strftime('%d.%m.%Y, %H:%M:%S')
+    end
 
     return result
 

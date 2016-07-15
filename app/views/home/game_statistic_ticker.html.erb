@@ -1,0 +1,78 @@
+<table class = "game_stat_table" cellspacing=0 cellpadding=0 border=0>
+
+  <% @ticker_events.each do |ticker_event| %>
+
+    <tr class = "game_stat_row">
+
+      <td class = "game_ticker_left">
+
+        <%= ticker_event.convert_seconds_to_time(ticker_event.time / 1000) %>
+
+        <% if ticker_event.activity_id == 10170 %>
+
+          <p><%= image_tag("ticker_symbol_defense.png") %></p>
+
+        <% end %>
+
+        <% if ticker_event.activity_id == 10300 %>
+          
+          <p><%= image_tag("ticker_symbol_tech_fault.png") %></p>
+
+        <% end %>
+
+        <% if ticker_event.activity_id == 10400 %>
+
+          <p><%= image_tag("ticker_symbol_yellow_card.png") %></p>
+
+        <% end %>
+
+        <% if ticker_event.activity_id == 10401 %>
+
+          <p><%= image_tag("ticker_symbol_two_out.png") %></p>
+
+        <% end %>
+
+        <% if ticker_event.activity_id == 10403 %>
+
+          <p><%= image_tag("ticker_symbol_red_card.png") %></p>
+
+        <% end %>
+
+        <% if ticker_event.activity_id == 10600 %>
+
+          <p><%= image_tag("ticker_symbol_timeout.png") %></p>
+
+        <% end %>
+
+        <% if ticker_event.activity_id == 10501 %>
+
+          <p><%= image_tag("ticker_symbol_sub_in.png") %></p>
+
+        <% end %>
+
+        <% if ticker_event.activity_id == 10700 %>
+
+          <p><%= image_tag("ticker_symbol_tactic.png") %></p>
+
+        <% end %>
+
+        <% if ticker_event.activity_id == 10150 %>
+
+          <p><%= image_tag("ticker_symbol_miss.png") %></p>
+
+        <% end %>
+
+        <% if ticker_event.activity_id == 10100 %>
+
+          <p><%= ticker_event.ticker_result %></p>
+
+        <% end %>
+
+      </td>
+      <td class = "game_ticker_right"><%= ticker_event.ticker_event_note %></td>
+
+    </tr>
+
+  <% end %>
+
+</table>

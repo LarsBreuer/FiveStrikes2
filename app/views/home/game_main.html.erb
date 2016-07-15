@@ -62,17 +62,37 @@
 </div>
 
 <div id="game_statistic_main" >
-<%
-=begin
-%>
-	<%= @game.get_club_name_by_team_id(@game.team_away_id) %>
 
-	<% if @mode == 'GameGoals' %>
+  <% if @mode == 'GameTicker' %>
 
-		Spiel     Listen     Spieler       Ticker       Kommentare
+    <%= render :file => "home/game_statistic_ticker" %>
 
-	<% end %>
-<%
-=end
-%>
+  <% end %>
+
+  <% if @mode == 'GameGoals' %>
+
+    <%= render :file => "home/game_statistic_goals" %>
+
+  <% end %>
+
+
+  <% if @mode == 'GamePossession' %>
+
+    <%= render :file => "home/game_statistic_possession" %>
+
+  <% end %>
+
+
+  <% if @mode == 'GameHistory' %>
+
+    <%= render :file => "home/game_statistic_history" %>
+
+  <% end %>
+
+  <% if @mode == 'GamePenalty' %>
+
+    <%= render :file => "home/game_statistic_history" %>
+
+  <% end %>
+  
 </div>

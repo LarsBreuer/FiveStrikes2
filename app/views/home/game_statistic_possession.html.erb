@@ -1,0 +1,46 @@
+<table class = "game_stat_table" cellspacing=0 cellpadding=0 border=0>
+
+  <tr class = "game_stat_row">
+
+    <td class = "game_stat_left"></td>
+    <td class = "game_stat_center_left">
+      <%= @game.get_club_name_by_team_id(@game.team_home_id) %>
+    </td>
+    <td class = "game_stat_center_right">
+      <%= @game.get_club_name_by_team_id(@game.team_away_id) %>
+    </td>
+    <td class = "game_stat_right"></td>
+
+  </tr>
+
+  <% i = 0 %>
+  <% array_length = @game_possession.count %>
+
+  <% while( i < array_length )  %>
+
+    <tr class = "game_stat_row">
+
+      <td class = "game_stat_left"><%= @game_possession[i+1] %></td>
+      <td colspan="2" class = "game_stat_center_middle">
+        <%= @game_possession[i] %>
+      </td>
+      <td class = "game_stat_right"><%= @game_possession[i+2] %></td>
+
+    </tr>
+
+    <tr class = "game_stat_row">
+
+      <td colspan="2" class = "game_stat_chart_left">
+        <IMG src="/assets/grey.png" width="<%= @game_possession[i+3] -%>" height=10 border=0><IMG src="/assets/blue.png" width="<%= @game_possession[i+4] -%>" height=10 border=0>
+      </td>
+      <td colspan="2" class = "game_stat_chart_right">
+        <IMG src="/assets/red.png" width="<%= @game_possession[i+5] -%>" height=10 border=0><IMG src="/assets/grey.png" width="<%= @game_possession[i+6] -%>"  height=10 border=0>
+      </td>
+
+    </tr>
+
+    <% i += 7 %>
+
+  <% end %>
+
+</table>

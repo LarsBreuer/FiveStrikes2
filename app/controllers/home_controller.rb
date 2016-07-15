@@ -75,6 +75,12 @@ class HomeController < ApplicationController
       @ticker_activities = @game.ticker_activities
       @player_home = @game.get_player_home()
       @player_away = @game.get_player_away()
+      @game_stat = @game.get_game_stat()
+      @game_possession = @game.get_game_possession()
+      @game_lead = @game.get_game_lead()
+      @game_history = @game.get_game_history()
+      @game_penalty = @game.get_game_penalty()
+      @ticker_events = @game.ticker_events
     end
 
     if params[:mode].present?
