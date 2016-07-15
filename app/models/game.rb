@@ -1135,7 +1135,7 @@ puts string
         # und ob das Ticker Ereignis noch nicht abgefragt wurde
         # Falls ja: Wechsel den Spieler aus.
 
-        if ticker_activity.activity_id == 10501 && player_status == 1 && !ticker_event_id == last_ticker_event_id
+        if ticker_activity.activity_id == 10501 && player_status == 1 && ticker_event_id != last_ticker_event_id
 
           ticker_activities_sub_in = self.ticker_activities.where("ticker_event_id_local = ? AND activity_id = ?", ticker_event_id, 10501)
 string = "Auswertung Aufstellung aufgerufen " + " ticker_activities_sub_in.count: " + ticker_activities_sub_in.count.to_s
