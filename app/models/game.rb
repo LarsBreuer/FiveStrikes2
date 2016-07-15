@@ -1087,7 +1087,7 @@ class Game < ActiveRecord::Base
     if home_or_away == '0'
       team_id = self.team_away_id
     end
-    status = 0
+    player_status = 0
     time_in = 0
     time = 0
     plus_minus = 0
@@ -1110,27 +1110,23 @@ class Game < ActiveRecord::Base
       if playerID == ticker_activity.player_id.to_s
         # Wurde Spieler eingewechselt?
         if ticker_activity.activity_id == 10501 || ticker_activity.activity_id == 10503
-          if status == 0
+          if player_status == 0
             time_in = ticker_activity.time
           end
-          status = 1
+          player_status = 1
         end
         
         # Wurde Spieler ausgewechselt?
         if ticker_activity.activity_id == 10502 || ticker_activity.activity_id == 10401 || 
            ticker_activity.activity_id == 10402 || ticker_activity.activity_id == 10403
-          if status == 1
+          if player_status == 1
             time = time + ticker_activity.time - time_in
-            status = 0
+            player_status = 0
           end
         end
       else
-puts "Abfrage Aufstellung aufgerufen"
-string = "activity_id: " + ticker_activity.activity_id.to_s
-puts string
-string = "ticker_event_id: " + ticker_event_id.to_s
-puts string
-string = "last_ticker_event_id: " + last_ticker_event_id.to_s
+
+string = "Abfrage Aufstellung aufgerufen => " + " activity_id: " + ticker_activity.activity_id.to_s + " ticker_event_id: " + ticker_event_id.to_s + " last_ticker_event_id: " + last_ticker_event_id.to_s + " player_status: " + player_status.to_s
 puts string
 
         # Falls es zwar keine Aktion des Spielers, aber eine Einwechselung
@@ -1139,11 +1135,12 @@ puts string
         # und ob das Ticker Ereignis noch nicht abgefragt wurde
         # Falls ja: Wechsel den Spieler aus.
 
-        if ticker_activity.activity_id == 10501 && status == 1 && !ticker_event_id == last_ticker_event_id
-puts "Aufstellung aufgerufen"
+        if ticker_activity.activity_id == 10501 && player_status == 1 && !ticker_event_id == last_ticker_event_id
+
           ticker_activities_sub_in = self.ticker_activities.where("ticker_event_id_local = ? AND activity_id = ?", ticker_event_id, 10501)
-string = "ticker_activities_sub_in.count: " + ticker_activities_sub_in.count.to_s
+string = "Auswertung Aufstellung aufgerufen " + " ticker_activities_sub_in.count: " + ticker_activities_sub_in.count.to_s
 puts string
+
           if ticker_activities_sub_in.count == 7
             
             # Überprüfe, ob der Spieler Teil der Mannschaftsaufstellung ist
@@ -1167,7 +1164,7 @@ puts string
             if player_in == false
               
               time = time + ticker_activity.time - time_in
-              status = 0
+              player_status = 0
               
             end          
           end
@@ -1176,7 +1173,7 @@ puts string
 
       # Falls ein Tor geworfen wurde und Spieler aktiv war, ändere Plus / Minus Statistik
       if ticker_activity.activity_id == 10100 || ticker_activity.activity_id == 10101 || ticker_activity.activity_id == 10102
-        if status == 1
+        if player_status == 1
           ticker_home_or_away = ticker_activity.home_or_away
           if ticker_home_or_away == home_or_away.to_i
             plus_minus = plus_minus + 1
@@ -1192,7 +1189,7 @@ puts string
 
     # Falls der Spieler auch am Ende des Spiels noch eingewechselt war, 
     # addiere die restliche Spielzeit zur Gesamtspielzeit.
-    if status == 1
+    if player_status == 1
       time = time + (duration * 2 * 60) - time_in
     end
 
