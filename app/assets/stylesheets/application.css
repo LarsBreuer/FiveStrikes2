@@ -49,6 +49,7 @@ html, body
 	background: #355264;
 	color: white;
 	margin-bottom: 20px;
+	position: fixed;
 }
 
 #icon {
@@ -85,6 +86,7 @@ html, body
 	width: 367px;
 	margin-left: 20px;
 	margin-right: 20px;
+	margin-top: 76px;
 }
 
 #search_field {
@@ -166,6 +168,7 @@ html, body
 
 #column_right {
 	float: left;
+	margin-top: 76px;
 }
 
 #banner {

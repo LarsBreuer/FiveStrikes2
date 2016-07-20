@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
+  validates_uniqueness_of :name, case_sensitive: false
+
   has_many :friendship
   has_many :friend, 
            :through => :friendship,
