@@ -95,6 +95,15 @@ de:
     Stuermerfoul: 'Stürmerfoul'
     playing_time: 'Spielzeit'
     plus_minus: '+/-'
+    missing_date: 'Kein Datum vorhanden'
+    sign_out: 'Abmelden'
+    friends: 'Freunde'
+    find_friends: 'Freunde finden'
+    user: 'Nutzer'
+    logged_in_as: 'Angemeldet als'
+    email: 'E-Mail'
+    password: 'Passwort'
+    remember_me: 'Merken'
 
   activerecord:
     errors:

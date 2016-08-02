@@ -1,17 +1,20 @@
-<div class="modal-header">  
-  <h3>Anmelden</h3> 
+<div class="facebox-header">  
+	<%= I18n.t('basic.log_in') %> 
 </div>  
 
 <div class="modal-body">
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f| %>
-	<div id="login_errors">
-  </div>
- 	<%= f.input :email, :required => false, :autofocus => true %>
- 	<%= f.input :password, :required => false %>
- 	<%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+	
+	<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f| %>
+		
+		<div id="login_errors"></div>
+
+ 		<%= f.input :email, :input_html => { :style=> 'width: 248px' }, :required => false, :label => I18n.t('basic.email'), :label_html => { :class => 'label_type' }, :autofocus => true %>
+ 		<%= f.input :password, :label => I18n.t('basic.password'), :required => false %>
+ 		<%= f.input :remember_me, :label => I18n.t('basic.remember_me'), :as => :boolean if devise_mapping.rememberable? %>
   
-   <%= f.button :submit, "Anmelden" %>
-<% end %>
+   		<%= f.button :submit, "Anmelden" %>
+	<% end %>
+
 </div>
 
 <div class="modal-footer">

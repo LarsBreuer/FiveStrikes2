@@ -6,26 +6,24 @@
 
 		<div id="table_game">
 
-			<div id="label_line_item">
+			<div id="label_line_item" style="background: #FFF;">
 
 				<% game_activities = item.game.count_game_activity() %>
 
-				<% puts game_activities %>
-
 				<% if game_activities < 100 %>
-					<%= image_tag("stroke_one_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+					<%= image_tag("stroke_one_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 				<% else %>
 					<% if game_activities < 200 %>
-						<%= image_tag("stroke_two_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+						<%= image_tag("stroke_two_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 					<% else %>
 						<% if game_activities < 300 %>
-							<%= image_tag("stroke_three_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+							<%= image_tag("stroke_three_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 						<% else %>
 							<% if game_activities < 400 %>
-								<%= image_tag("stroke_four_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+								<%= image_tag("stroke_four_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 							<% else %>
 								<% if game_activities > 399 %>
-									<%= image_tag("stroke_five_white.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+									<%= image_tag("stroke_five_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 								<% end %>
 							<% end %>
 						<% end %>
@@ -35,7 +33,13 @@
 			</div>
 
 			<div class="row_game">
-				<div class="cell_game_header_319"><%= item.game.convert_game_date(item.game.game_date) %> <%= item.game.id %></div>
+				<div class="cell_game_header_319">
+					<% if item.game.convert_game_date(item.game.game_date) %>
+						<%= item.game.convert_game_date(item.game.game_date) %> 
+					<% else %>
+						<%= I18n.t('basic.missing_date')%>
+					<% end %>
+				</div>
 				<div class="cell_game_header_36"> </div>
 				<div class="cell_game_white_6"> </div>
 			</div>

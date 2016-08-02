@@ -26,7 +26,7 @@ html, body
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
-  	font-family: "Arial";
+  	font-family: Arial;
   	font-size: 11pt;
   	color: #355264;
 }
@@ -37,19 +37,27 @@ html, body
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
-  	font-family:"Arial";
+  	font-family:Arial;
   	font-size: 11pt;
   	color: #355264;
 }
 
-#navbar {
+#column_left {
 	float: left;
-	width: 100%;
+	width: 367px;
+	margin-right: 20px;
+}
+
+#menu_field {
+	position: fixed;
+}
+
+#icon_field {
+	width: 367px;
 	height: 56px;
 	background: #355264;
 	color: white;
-	margin-bottom: 20px;
-	position: fixed;
+	border: 0px;
 }
 
 #icon {
@@ -72,28 +80,55 @@ html, body
   	color: white;
 }
 
-#user_nav {
-	float: right;
-    font-size:11pt;
-    height: 56px;
-    line-height: 56px;
-    margin-right: 20px;
-  	vertical-align: middle;
+ /* Dropdown Button */
+.dropbtn {
+	padding-left: 130px;
+    background-color: none;
+    border: none;
+    cursor: pointer;
 }
 
-#column_left {
-	float: left;
-	width: 367px;
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: 76px;
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+	left: 0;
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: #355264 !important;
+    padding: 12px 16px;
+    text-decoration: none !important;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: orange}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: none;
 }
 
 #search_field {
-	float: left;
 	width: 367px;
 	height: 90px;
-	margin-bottom: 20px;
+	padding-top: 20px;
 	background: #355264;
 	color: white;
 	border: 0px;
@@ -101,8 +136,48 @@ html, body
 
 #side {
 	width: 367px;
-	margin-top: 20px;
+	padding-top: 166px;
 }
+
+#column_left_footer {
+	bottom: 0;
+	width: 367px;
+	height: 56px;
+	line-height: 56px;
+	text-align: center;
+  	vertical-align: middle;
+	background: #355264;
+	color: white;
+	font-weight: bold;
+	border: 0px;
+	position: fixed;
+}
+
+#column_right {
+	margin-left: 407px;
+}
+
+#banner {
+	width: 728px;
+	height: 90px;
+	border-width: 0px;
+    border-radius: 0;
+    -webkit-appearance: none;
+  	border-width: 0px;
+  	border-color: grey;
+  	background: #ffffff;
+  	position: fixed;
+}
+
+#main {
+	width: 728px;
+	padding-top: 110px;
+	min-height: 600px;
+	font-family: Arial;
+    font-size: 13pt;
+  	background: transparent;
+}
+
 
 #table_game {
 	float: left;
@@ -110,8 +185,9 @@ html, body
 	width: 367px;
 	background: white;
 	color: #355264;
-	margin-bottom: 20px;
+	border-bottom: 2px solid #355264;
 }
+
 #label_line_item {
 	float: left;
 	width: 45px;
@@ -166,36 +242,9 @@ html, body
 	width: 6px;
 }
 
-#column_right {
-	float: left;
-	margin-top: 76px;
-}
-
-#banner {
-	width: 728px;
-	height: 90px;
-	border-width:0px;
-    border-radius: 0;
-    -webkit-appearance: none;
-  	border-width:0px;
-  	border-color:grey;
-  	background: #ffffff;
-}
-
-#main {
-	width: 728px;
-	margin-top: 20px;
-	min-height: 600px;
-	font-family:"Arial";
-    font-size:13pt;
-  	background: transparent;
-}
-
 #game_statistic_nav {
 	width: 100%;
-	height: 72px;
-	line-height: 48px;
-  	vertical-align: middle;
+	height: 122px;
     font-size: 18pt;
 	color: #355264;
   	background: white;
@@ -204,18 +253,17 @@ html, body
 
 #game_headline {
 	width: 100%;
-	height: 24px;
-	line-height: 24px;
+	height: 74px;
 	font-size: 11pt;
 	color: white;
 	text-align: center;
-	background: #355264;
+	background: white;
 }
 
 #game_statistic_main {
 	width: 704px;
 	min-height: 600px;
-	padding: 12px;
+	padding: 30px 12px 12px 12px;
 	color: #355264;
   	background: white;
 }
@@ -249,7 +297,7 @@ html, body
 }
 
 #game_row {
-	margin-bottom: 20px;
+	
 }
 
 #game_main_result {
@@ -367,17 +415,17 @@ html, body
 	width: 600px;
 	padding: 0px;
 	margin: 0 auto;
+	font-family: Arial;
 }
 
 .game_stat_row {
 	width: 600px;
 	height: 26px;
 	line-height: 26px;
-	padding-top: 2px;
-	padding-bottom: 2px;
 	vertical-align: middle;
 	padding: 0px;
-	font-size: 14px
+	font-size: 14px;
+	font-family: Arial;
 }
 
 .game_ticker_left {
@@ -385,6 +433,7 @@ html, body
 	text-align: center;
 	vertical-align: top;
 	padding: 0px;
+	font-family: Arial;
 }
 
 .game_ticker_right {
@@ -392,18 +441,14 @@ html, body
 	text-align: left;
 	vertical-align: top;
 	padding: 0px;
+	font-family: Arial;
 }
 
 .game_stat_left {
 	width: 30px;
 	text-align: left;
 	padding: 0px;
-}
-
-.game_stat_left {
-	width: 30px;
-	text-align: left;
-	padding: 0px;
+	font-family: Arial;
 }
 
 .game_stat_center_left {
@@ -412,16 +457,20 @@ html, body
 	padding: 0px;
 	font-size: 18px;
 	font-weight: bold;
+	font-family: Arial;
 }
 
 .game_stat_chart_left {
 	text-align: right;
 	padding: 0px;
+	font-family: Arial;
 }
 
 .game_stat_center_middle {
+	width: 540px;
 	text-align: center;
 	padding: 0px;
+	font-family: Arial;
 }
 
 .game_stat_center_right {
@@ -430,41 +479,151 @@ html, body
 	padding: 0px;
 	font-size: 18px;
 	font-weight: bold;
+	font-family: Arial;
 }
 
 .game_stat_chart_right {
 	text-align: left;
 	padding: 0px;
+	font-family: Arial;
 }
 
 .game_stat_right {
 	width: 30px;
 	text-align: right;
 	padding: 0px;
+	font-family: Arial;
+}
+
+#game_headline_table {
+	width: 600px;
+	height: 74px;
+	margin: 0 auto;
+	font-family: Arial;
+	color: #355264;
+}
+
+.game_headline_row_date {
+	width: 600px;
+	height: 26px;
+	line-height: 26px;
+	padding: 0px;
+	text-align: center;
+  	vertical-align: middle;
+	font-size: 11px;
+	font-family: Arial;
+	background-color: #355264;
+	color: white;
+}
+
+.game_headline_row {
+	width: 600px;
+	height: 48px;
+	font-family: Arial;
+	background-color: #355264;
+	color: white;
+}
+
+.game_headline_date {
+	width: 100%;
+	height: 26px;
+	line-height: 26px;
+	vertical-align: middle;
+	padding: 0px;
+	font-size: 11px; 
+	font-weight: normal; 
+	text-align: center;
+}
+
+.game_headline_left {
+	width: 40%;
+	height: 38px;
+	line-height: 38px;
+	vertical-align: middle;
+	padding: 0px 0px 10px 0px;
+	text-align: right;
+	font-family: Arial;
+	font-size: 24px;
+	color: white;
+}
+
+.game_headline_middle_left {
+	width: 8%;
+	height: 38px;
+	line-height: 38px;
+	vertical-align: middle;
+	text-align: right;
+	padding: 0px 0px 10px 0px;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 36px;
+	color: white;
+}
+
+.game_headline_middle {
+	width: 4%;
+	height: 38px;
+	line-height: 38px;
+	vertical-align: middle;
+	text-align: center;
+	padding: 0px 0px 10px 0px;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 36px;
+	color: white;
+}
+
+.game_headline_middle_right {
+	width: 8%;
+	hheight: 38px;
+	line-height: 38px;
+	vertical-align: middle;
+	text-align: left;
+	padding: 0px 0px 10px 0px;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 36px;
+	color: white;
+}
+
+.game_headline_right {
+	width: 40%;
+	height: 38px;
+	line-height: 38px;
+	vertical-align: middle;
+	text-align: left;
+	padding: 0px 0px 10px 0px;
+	font-family: Arial;
+	font-size: 24px;
+	color: white;
 }
 
 td.player_stat_name {
 	width: 150px;
 	text-align: left;
 	padding: 0px;
+	font-family: Arial;
 }
 
 td.player_stat_name_margin {
 	width: 130px;
 	padding: 0px;
 	padding-left: 20px;
+	font-family: Arial;
 }
 
 td.player_stat_value {
 	width: 50px;
 	text-align: left;
 	padding: 0px;
+	font-family: Arial;
 }
 
 td.player_stat_chart {
 	width: 400px;
 	text-align: left;
 	padding: 0px;
+	font-family: Arial;
 }
 
 /* Links */
@@ -525,17 +684,17 @@ a.main:link::after {
 /* Dropdown-Menü */
 
 #menu {
-  float: left;
   width: 100%;
   height: 48px;
   background: white;
+  border-bottom: 1px solid #355264;
 }
 
 #menu ul {
   margin: 0;
   padding: 0;
   line-height: 48px;
-  font-family: "Arial";
+  font-family: Arial;
   font-size: 16px;
 }
 
@@ -701,6 +860,15 @@ select:active, select:hover {
 	text-align:left
 }
 
+.facebox-header {
+	width: 100%;
+	font-size: 18pt;
+	font-weight: bold;
+	text-align:center;
+	color: #355264;
+	margin-bottom: 20px;
+}
+
 #facebox .popup{
 	position:relative;
 	border:3px solid rgba(0,0,0,0);
@@ -715,7 +883,7 @@ select:active, select:hover {
 #facebox .content{
 	display:table;
 	width:370px;
-	padding:10px;
+	padding:20px;
 	background:#fff;
 	-webkit-border-radius:4px;
 	-moz-border-radius:4px;
@@ -762,4 +930,19 @@ select:active, select:hover {
 
 .facebox_overlayBG{
 	background-color:#000;z-index:99
+}
+
+.label_type {
+	width: 100px;
+ 	text-align: left;
+ 	padding-bottom: 4px;
+ 	font-family: Arial;
+ 	font-size: 11pt;
+ 	color: #355264;
+ 	display:block;
+ 	float: left;
+}
+
+.input_type {
+	width: 200px;
 }

@@ -2,7 +2,39 @@
 
   <div id="game_headline">
 
-    <%= @game.get_club_name_by_team_id(@game.team_home_id) %> - <%= @game.get_club_name_by_team_id(@game.team_away_id) %>
+    <table class = "game_headline_table" cellspacing=0 cellpadding=0 border=0>
+
+      <tr class = "game_headline_row_date">
+
+        <td colspan="5" class = "game_headline_date" >
+
+          <%= @game.convert_game_date(@game.game_date) %>
+
+        </td>
+
+      </tr>
+
+      <tr class = "game_headline_row">
+
+        <td class = "game_headline_left">
+          <%= @game.get_club_name_by_team_id(@game.team_home_id) %>
+        </td>
+        <td class = "game_headline_middle_left">
+          <%= @game.count_team_goals(@game.team_home_id) %>
+        </td>
+        <td class = "game_headline_middle">
+          -
+        </td>
+        <td class = "game_headline_middle_right">
+          <%= @game.count_team_goals(@game.team_away_id) %>
+        </td>
+        <td class = "game_headline_right">
+          <%= @game.get_club_name_by_team_id(@game.team_away_id) %>
+        </td>
+
+      </tr>
+
+    </table>
 
   </div>
 
