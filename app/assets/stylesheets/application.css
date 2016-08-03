@@ -934,8 +934,10 @@ select:active, select:hover {
 
 .label_type {
 	width: 100px;
+	height: 30px;
+	line-height: 30px;
  	text-align: left;
- 	padding-bottom: 4px;
+ 	margin-bottom: 4px;
  	font-family: Arial;
  	font-size: 11pt;
  	color: #355264;
@@ -944,5 +946,9 @@ select:active, select:hover {
 }
 
 .input_type {
+	width: 200px;
+}
+
+.btn_submit {
 	width: 200px;
 }
