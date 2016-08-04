@@ -2,8 +2,8 @@ de:
   basic:
     or: 'oder'
     all: 'Alle'
-    register: 'Registrieren'
-    log_in: 'Anmelden'
+    sign_up: 'Registrieren'
+    sign_in: 'Anmelden'
     logged_in_as: 'Angemeldet als'
     search: 'Suchen'
     search_for: 'Suchen nach'
@@ -100,9 +100,11 @@ de:
     friends: 'Freunde'
     find_friends: 'Freunde finden'
     user: 'Nutzer'
+    name: 'Name'
     logged_in_as: 'Angemeldet als'
     email: 'E-Mail'
     password: 'Passwort'
+    password_confirmation: 'Passwort bestätigen'
     remember_me: 'Merken'
 
   activerecord:

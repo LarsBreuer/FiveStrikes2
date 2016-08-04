@@ -1,5 +1,5 @@
 <div class="facebox-header">  
-	<%= I18n.t('basic.log_in') %> 
+	<%= I18n.t('basic.sign_in') %> 
 </div>  
 
 <div class="modal-body">
@@ -8,16 +8,17 @@
 		
 		<div id="login_errors"></div>
 
- 		<%= f.input :email, :input_html => { :style=> 'width: 248px; margin-bottom: 4px;' }, :required => false, :label => I18n.t('basic.email'), :label_html => { :class => 'label_type' }, :autofocus => true %>
- 		<%= f.input :password, :input_html => { :style=> 'width: 248px; margin-bottom: 4px;' }, :label => I18n.t('basic.password'), :label_html => { :class => 'label_type' }, :required => false %>
- 		<%= f.input :remember_me, :input_html => { :style=> 'height: 30px; margin-bottom: 4px;' }, :label => I18n.t('basic.remember_me'), :label_html => { :class => 'label_type' }, :as => :boolean if devise_mapping.rememberable? %>
+ 		<%= f.input :email, :input_html => { :style=> 'width: 188px; margin-bottom: 4px;' }, :required => false, :label => I18n.t('basic.email'), :label_html => { :class => 'label_type' }, :autofocus => true %>
+ 		<%= f.input :password, :input_html => { :style=> 'width: 188px; margin-bottom: 4px;' }, :label => I18n.t('basic.password'), :label_html => { :class => 'label_type' }, :required => false %>
+ 		<%= f.input :remember_me, :as => :boolean, :label => I18n.t('basic.remember_me'), :label_html => { :class => 'label_type_boolean' }, :inline_label => true if devise_mapping.rememberable? %>
   
 
-   		<%= f.button :submit, I18n.t('basic.log_in'), class: 'btn_submit' %>
+   		<%= f.button :submit, I18n.t('basic.sign_in'), class: 'btn_submit' %>
 	<% end %>
 
 </div>
-
+<!--
 <div class="modal-footer">
 <%= render "devise/shared/links" %>
 </div>
+-->

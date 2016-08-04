@@ -933,7 +933,7 @@ select:active, select:hover {
 }
 
 .label_type {
-	width: 100px;
+	width: 160px;
 	height: 30px;
 	line-height: 30px;
  	text-align: left;
@@ -945,10 +945,25 @@ select:active, select:hover {
  	float: left;
 }
 
+.label_type_boolean {
+ 	margin-left: 4px;
+ 	margin-bottom: 4px;
+ 	font-family: Arial;
+ 	font-size: 11pt;
+ 	color: #355264;
+}
+
 .input_type {
 	width: 200px;
 }
 
 .btn_submit {
 	width: 200px;
+	background: none  !important;
+	background-color: #355264 !important;
+	font-family: Arial !important;
+ 	font-size: 11pt !important;
+	color: white !important;
+	border-radius: 0 !important;
+	margin-top: 8px;
 }

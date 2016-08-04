@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   # , :token_authenticatable entfernen? Siehe http://blog.plataformatec.com.br/2013/08/devise-3-1-now-with-more-secure-defaults/
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :terms
+  validates_acceptance_of :terms, :allow_nil => false, :message => :terms_not_accepted, :on => :create
 
   before_save :ensure_authentication_token
 
