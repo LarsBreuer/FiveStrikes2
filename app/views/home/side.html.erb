@@ -118,4 +118,23 @@
 
 <% end %>
 
+<% if item.user %>
+	
+	<%= link_to home_main_path(:user_id=>item.user.id), :remote => true, :class => "sidebar" do %>
+	<div id="table_game">
+			
+		<div id="label_line_item">
+			<%= image_tag("team.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+		</div>
+
+		<div class="row_team">
+			<%= item.user.name %>
+		</div>
+		
+	</div>
+	<% end %>
+	
+
+<% end %>
+
 <% end %>

@@ -26,6 +26,8 @@ class LocalDevise::RegistrationsController < Devise::RegistrationsController
       end
     else
       clean_up_passwords resource
+      set_msg t(:signed_up_failure, :scope => 'devise.registrations')
+# ToDo => Eigener Fehlertext, falls die Nutzungsbedingungen nicht bestätigt wurden.
       respond_to do |format|
         format.js { render :action => "failed_new" }
       end

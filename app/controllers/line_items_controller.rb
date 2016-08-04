@@ -56,6 +56,19 @@ class LineItemsController < InheritedResources::Base
       end
     end
 
+    if choice == '5'
+      if params[:query].present?
+        @users = User.search(params[:query])
+      end
+
+      @users.each do |user|
+        @line_item = @cart.line_items.build(:user => user)
+        if @line_item.save
+        else
+        end
+      end
+    end
+
 		redirect_to home_side_path 
 		
 	end

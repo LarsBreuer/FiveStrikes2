@@ -1,16 +1,18 @@
+<div id="login_errors"></div>
 <div class="facebox-header">  
   <%= I18n.t('basic.sign_up') %> 
 </div> 
 
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :remote => true) do |f| %>
-  <%= f.error_notification %>
 
   <div class="modal-body">
     <%= f.input :name, :input_html => { :style=> 'width: 188px; margin-bottom: 4px;' }, :required => true, :label => I18n.t('basic.name'), :label_html => { :class => 'label_type' }, :autofocus => true %>
     <%= f.input :email, :input_html => { :style=> 'width: 188px; margin-bottom: 4px;' }, :required => true, :label => I18n.t('basic.email'), :label_html => { :class => 'label_type' }, :autofocus => true %>
     <%= f.input :password, :input_html => { :style=> 'width: 188px; margin-bottom: 4px;' }, :label => I18n.t('basic.password'), :label_html => { :class => 'label_type' }, :required => true %>
     <%= f.input :password_confirmation, :input_html => { :style=> 'width: 188px; margin-bottom: 4px;' }, :label => I18n.t('basic.password_confirmation'), :label_html => { :class => 'label_type' }, :required => true %>
-    <%= f.input :terms, :as => :boolean, :label => 'Die Nutzungsbedingungen habe ich zur Kenntnis genommen und erkläre mich mit ihnen einverstanden.', :label_html => { :class => 'label_type_boolean' }, :inline_label => true %>
+<!-- ToDo => Deutschen Text in locales einbringen -->
+    <%= f.input :terms, :as => :boolean, :label => ("Die #{link_to I18n.t('basic.terms'), asset_path("terms.pdf"), :target => "_blank"} habe ich gelesen und stimme ihnen zu."), :label_html => { :class => 'label_type_boolean' }, :inline_label => true %>
+    <%= f.input :privacy, :as => :boolean, :label => ("Hiermit stimme ich den #{link_to I18n.t('basic.privacy'), asset_path("privacy.pdf"), :target => "_blank"} zu."), :label_html => { :class => 'label_type_boolean' }, :inline_label => true %>
 
     <%= f.button :submit, I18n.t('basic.sign_up'), class: 'btn_submit' %>
 

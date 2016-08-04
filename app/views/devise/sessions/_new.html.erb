@@ -1,3 +1,4 @@
+<div id="login_errors"></div>
 <div class="facebox-header">  
 	<%= I18n.t('basic.sign_in') %> 
 </div>  
@@ -5,8 +6,6 @@
 <div class="modal-body">
 	
 	<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f| %>
-		
-		<div id="login_errors"></div>
 
  		<%= f.input :email, :input_html => { :style=> 'width: 188px; margin-bottom: 4px;' }, :required => false, :label => I18n.t('basic.email'), :label_html => { :class => 'label_type' }, :autofocus => true %>
  		<%= f.input :password, :input_html => { :style=> 'width: 188px; margin-bottom: 4px;' }, :label => I18n.t('basic.password'), :label_html => { :class => 'label_type' }, :required => false %>

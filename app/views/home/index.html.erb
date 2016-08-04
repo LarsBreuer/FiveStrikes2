@@ -47,7 +47,6 @@
             <%= link_to title %>  
             <%= link_to I18n.t('basic.sign_out'), destroy_user_session_path, :method => :delete %> 
             <%= link_to I18n.t('basic.friends'), fb_user_friends_path, :remote => true %>
-            <%= link_to I18n.t('basic.find_friends'), fb_find_friends_path, :remote => true %>  
           <% else %>  
             <%= link_to I18n.t('basic.sign_in'), fb_login_path, :remote => true %>  
             <%= link_to I18n.t('basic.sign_up'), fb_create_user_path, :remote => true %> 

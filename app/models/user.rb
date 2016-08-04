@@ -9,8 +9,9 @@ class User < ActiveRecord::Base
   # , :token_authenticatable entfernen? Siehe http://blog.plataformatec.com.br/2013/08/devise-3-1-now-with-more-secure-defaults/
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :terms
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :terms, :privacy
   validates_acceptance_of :terms, :allow_nil => false, :message => :terms_not_accepted, :on => :create
+  validates_acceptance_of :privacy, :allow_nil => false, :message => :terms_not_accepted, :on => :create
 
   before_save :ensure_authentication_token
 
@@ -22,6 +23,7 @@ class User < ActiveRecord::Base
            :conditions => "status = 'accepted'", 
            :order => :screen_name
   has_many :games, foreign_key: "user_id"
+  has_many :line_items
   
   def skip_confirmation!
   	self.confirmed_at = Time.now
@@ -31,6 +33,10 @@ class User < ActiveRecord::Base
     find(:user_id => id).first
   end
 
-
+  def self.search(user_name)
+    if user_name
+      find(:all, :conditions => ['name = ?', user_name])
+    end
+  end
 
 end

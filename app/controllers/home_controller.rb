@@ -55,6 +55,11 @@ class HomeController < ApplicationController
       @teams = @club.teams
     end
 
+    if params[:user_id].present?
+      @user = User.find(params[:user_id])
+      @games = @user.games
+    end
+
     if params[:mode].present?
       @mode = params[:mode]
     end

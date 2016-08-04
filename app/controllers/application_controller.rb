@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     if user
       filename = Rails.root.join('log', 'login_history.log')
       sign_in_time = user.current_sign_in_at ? user.current_sign_in_at : Time.now
-      File.open(filename, 'a') { |f| f.write("#{sign_in_time.strftime("%Y-%m-%dT%H:%M:%S%Z")} #{user.current_sign_in_ip} #{user.username} #{user.email if user.email} #{user.provider if user.provider}\n") }
+      File.open(filename, 'a') { |f| f.write("#{sign_in_time.strftime("%Y-%m-%dT%H:%M:%S%Z")} #{user.current_sign_in_ip} #{user.name} #{user.email if user.email}\n") }
     end  
   end
 

@@ -229,4 +229,34 @@
 
 	<% end %>
 
+	<% if @user %>
+		
+		<div id="team_nav" >
+
+			<div style = "" > <%= @user.name %> 
+				<%= link_to I18n.t('basic.request_friendship'),
+                          :controller => :friendships,
+                          :action => :req,
+                          :id => @user.id %></div>
+
+		</div>
+
+		<div id="team_main" >
+
+			<% @games.each do |game| %>
+				
+				<%= link_to line_items_create_game_line_items_path(:game_id=>game.id), :remote => true, :class => "sidebar" do %>
+					<div id= "<%= cycle('first_row', 'second_row') -%>" >
+
+						<%= game.club_home_name %> - <%= game.club_away_name %>
+
+					</div>
+				<% end %>
+
+			<% end %>
+
+		</div>
+
+	<% end %>
+
 </div>

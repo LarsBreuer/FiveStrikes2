@@ -967,3 +967,9 @@ select:active, select:hover {
 	border-radius: 0 !important;
 	margin-top: 8px;
 }
+
+#login_errors {
+	background-color: red;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
