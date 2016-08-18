@@ -7,8 +7,8 @@
 	
 	<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f| %>
 
- 		<%= f.input :email, :input_html => { :style=> 'width: 188px; margin-bottom: 4px;' }, :required => false, :label => I18n.t('basic.email'), :label_html => { :class => 'label_type' }, :autofocus => true %>
- 		<%= f.input :password, :input_html => { :style=> 'width: 188px; margin-bottom: 4px;' }, :label => I18n.t('basic.password'), :label_html => { :class => 'label_type' }, :required => false %>
+ 		<%= f.input :email, :input_html => { :style=> 'width: 348px; margin-bottom: 8px;' }, :required => false, :label => I18n.t('basic.email'), :label_html => { :class => 'label_type' }, :autofocus => true %>
+ 		<%= f.input :password, :input_html => { :style=> 'width: 348px; margin-bottom: 8px;' }, :label => I18n.t('basic.password'), :label_html => { :class => 'label_type' }, :required => false %>
  		<%= f.input :remember_me, :as => :boolean, :label => I18n.t('basic.remember_me'), :label_html => { :class => 'label_type_boolean' }, :inline_label => true if devise_mapping.rememberable? %>
   
 

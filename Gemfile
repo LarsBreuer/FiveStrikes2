@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 3.2.1'
 gem 'thin'
 gem 'uglifier', '>= 1.0.3'
 gem 'searchkick'
+gem "iconv", "~> 1.0.3"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

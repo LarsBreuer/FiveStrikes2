@@ -1,6 +1,8 @@
 ---
 LogoIconWebsite.png: LogoIconWebsite-21fcaa4b3f6c40b54c6d6a559247b885.png
 LogoIconWebsite/index.png: LogoIconWebsite-21fcaa4b3f6c40b54c6d6a559247b885.png
+arrow_down.png: arrow_down-0a157afa758afb004aea8675cf7aaa80.png
+arrow_down/index.png: arrow_down-0a157afa758afb004aea8675cf7aaa80.png
 arrow_right.png: arrow_right-f406ccc4e1589b2a6ee3d7b216cabca4.png
 arrow_right/index.png: arrow_right-f406ccc4e1589b2a6ee3d7b216cabca4.png
 blue.png: blue-37289eba122595f91fbb77712c0f1b1f.png
@@ -11,8 +13,8 @@ club.png: club-2cd9549486cdf6401d5a5962d038917b.png
 club/index.png: club-2cd9549486cdf6401d5a5962d038917b.png
 facebox/closelabel.png: facebox/closelabel-14303ebeb2def0d6fb54778e6a60b4ae.png
 facebox/closelabel/index.png: facebox/closelabel-14303ebeb2def0d6fb54778e6a60b4ae.png
-glass.png: glass-c608a6cc5aa1ff5dac53eecedc78afea.png
-glass/index.png: glass-c608a6cc5aa1ff5dac53eecedc78afea.png
+glass.png: glass-ea4c5507975912ce96a67a29edfda96a.png
+glass/index.png: glass-ea4c5507975912ce96a67a29edfda96a.png
 glass_small.png: glass_small-92f32d4779dad9f5bce9ddcc7ac4af2b.png
 glass_small/index.png: glass_small-92f32d4779dad9f5bce9ddcc7ac4af2b.png
 grey.png: grey-32e941bd9e1a4b8b5621e5797e555d0e.png
@@ -23,6 +25,14 @@ icon_old.png: icon_old-dd013db5de55cfc9b96441f17b776c1b.png
 icon_old/index.png: icon_old-dd013db5de55cfc9b96441f17b776c1b.png
 login.png: login-e7359bcea8eccff7990bb618509228ee.png
 login/index.png: login-e7359bcea8eccff7990bb618509228ee.png
+login_green.png: login_green-03856efb7b5ea24da9220e0cfedb3612.png
+login_green/index.png: login_green-03856efb7b5ea24da9220e0cfedb3612.png
+login_red.png: login_red-583acb45811b0509f894a36d723c6c62.png
+login_red/index.png: login_red-583acb45811b0509f894a36d723c6c62.png
+player.csv: player-e334c5e709c1a29d07f3bd02878598c4.csv
+player/index.csv: player-e334c5e709c1a29d07f3bd02878598c4.csv
+player.png: player-37687052d868404dd04eb8f3bb6b9eb0.png
+player/index.png: player-37687052d868404dd04eb8f3bb6b9eb0.png
 privacy.pdf: privacy-4f1a6305f1946f5ff810ea6c50f8e877.pdf
 privacy/index.pdf: privacy-4f1a6305f1946f5ff810ea6c50f8e877.pdf
 rails.png: rails-71e944d9b39043eba50b77788c0d767f.png
@@ -101,14 +111,16 @@ ticker_symbol_two_out.png: ticker_symbol_two_out-71c1cc528373db68cac3d117d4b2d28
 ticker_symbol_two_out/index.png: ticker_symbol_two_out-71c1cc528373db68cac3d117d4b2d283.png
 ticker_symbol_yellow_card.png: ticker_symbol_yellow_card-8cebc176afdcb8af2c69580d91fd08ba.png
 ticker_symbol_yellow_card/index.png: ticker_symbol_yellow_card-8cebc176afdcb8af2c69580d91fd08ba.png
+user.png: user-0a080784c7f67275d26681000e55d6ff.png
+user/index.png: user-0a080784c7f67275d26681000e55d6ff.png
 active_admin.js: active_admin-1f40b26983acc545b8e824a2778480cb.js
 active_admin/index.js: active_admin-1f40b26983acc545b8e824a2778480cb.js
 application.js: application-4beb80221889e5dddf323cbb1c2d1d80.js
 application/index.js: application-4beb80221889e5dddf323cbb1c2d1d80.js
 active_admin.css: active_admin-00570fe10e276d52b69af19432d3212f.css
 active_admin/index.css: active_admin-00570fe10e276d52b69af19432d3212f.css
-application.css: application-f552250c48293984cd218eae671a50cd.css
-application/index.css: application-f552250c48293984cd218eae671a50cd.css
+application.css: application-21dd7da7dbdf3f5d076f27d16fd1d2c8.css
+application/index.css: application-21dd7da7dbdf3f5d076f27d16fd1d2c8.css
 facebox/loading.gif: facebox/loading-a297497bfa40d2c5dfa8b8408d497bef.gif
 facebox/loading/index.gif: facebox/loading-a297497bfa40d2c5dfa8b8408d497bef.gif
 active_admin/admin_notes_icon.png: active_admin/admin_notes_icon-8e217933591c9da65796cac884693255.png

@@ -1,5 +1,6 @@
 class Player < ActiveRecord::Base
 	require 'csv'
+  #require 'iconv'
 
 	belongs_to :team
 	has_many :ticker_activities, :dependent => :destroy
@@ -20,12 +21,16 @@ class Player < ActiveRecord::Base
 
 	# Import CSV-File
 	def self.import(file, team_id)
+
+    # Datei umwandeln wegen Umlaute (ä,ü,ö)
+    #file = Iconv.conv("UTF8", "LATIN1", file_in)
+
+    # Daten aus der CSV herauslesen
     CSV.foreach(file.path, headers: true) do |row|
 
     	player_hash = row.to_hash 
     	player = Player.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"], team_id: team_id)
     	if player.count == 0
-# ToDo => Umlaute ä,ö,ü beachten
      		Player.create!(player_hash.merge({ team_id: team_id }))
     	end
     end

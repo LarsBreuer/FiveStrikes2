@@ -40,28 +40,27 @@
       </div>
 
       <div class="dropdown">
-        <div class="dropbtn"><%= image_tag("login.png") %></div>
-        <div class="dropdown-content">
-          <% if user_signed_in? %> 
+        <% if user_signed_in? %>
+          <div class="dropbtn"><%= image_tag("login_green.png") %></div>
+          <div class="dropdown-content">
             <% title = I18n.t('basic.logged_in_as') + ': ' + current_user.name %>
             <%= link_to title %>  
             <%= link_to I18n.t('basic.sign_out'), destroy_user_session_path, :method => :delete %> 
             <%= link_to I18n.t('basic.friends'), fb_user_friends_path, :remote => true %>
-          <% else %>  
+          </div>
+        <% else %>
+          <div class="dropbtn"><%= image_tag("login_red.png") %></div>
+          <div class="dropdown-content">
             <%= link_to I18n.t('basic.sign_in'), fb_login_path, :remote => true %>  
             <%= link_to I18n.t('basic.sign_up'), fb_create_user_path, :remote => true %> 
-          <% end %> 
-        </div>
+          </div>
+        <% end %> 
       </div>
 
 
     </div>
   
     <div id="search_field" >
-
-      <div id="label_line_item">
-        <%= image_tag("glass.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
-      </div>
 
       <%= render :file => "home/search" %>
   

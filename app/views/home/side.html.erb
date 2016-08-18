@@ -6,7 +6,7 @@
 
 		<div id="table_game">
 
-			<div id="label_line_item" style="background: #FFF;">
+			<div id="line_item_label">
 
 				<% game_activities = item.game.count_game_activity() %>
 
@@ -64,11 +64,11 @@
 	<%= link_to home_main_path(:team_id=>item.team.id), :remote => true, :class => "sidebar" do %>
 	<div id="table_game">
 			
-		<div id="label_line_item">
+		<div id="line_item_label">
 			<%= image_tag("team.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 		</div>
 
-		<div class="row_team">
+		<div id="line_item_main">
 			<%= item.team.club.club_name %>
 			<%= item.team.team_type(item.team.team_type_id) %>
 		</div>
@@ -84,11 +84,11 @@
 	<%= link_to home_main_path(:club_id=>item.club.id), :remote => true, :class => "sidebar" do %>
 	<div id="table_game">
 			
-		<div id="label_line_item">
+		<div id="line_item_label">
 			<%= image_tag("club.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 		</div>
 
-		<div class="row_team">
+		<div id="line_item_main">
 			<%= item.club.club_name %> (<%= item.club.club_name_short %>)
 		</div>
 		
@@ -103,13 +103,14 @@
 	<%= link_to home_main_path(:player_id=>item.player.id), :remote => true, :class => "sidebar" do %>
 	<div id="table_game">
 			
-		<div id="label_line_item">
-			<%= image_tag("team.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+		<div id="line_item_label">
+			<%= image_tag("player.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
 		</div>
 
-		<div class="row_team">
-			<%= item.player.player_surename %>
-			<%= item.player.team.club.club_name %>
+		<div id="line_item_main">
+			<%= item.player.player_forename %>
+			<%= item.player.player_surename %> (
+			<%= item.player.team.club.club_name %>)
 		</div>
 		
 	</div>
@@ -121,17 +122,19 @@
 <% if item.user %>
 	
 	<%= link_to home_main_path(:user_id=>item.user.id), :remote => true, :class => "sidebar" do %>
-	<div id="table_game">
+	
+		<div id="table_game">
 			
-		<div id="label_line_item">
-			<%= image_tag("team.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+			<div id="line_item_label">
+				<%= image_tag("user.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+			</div>
+
+			<div id="line_item_main">
+				<%= item.user.name %>
+			</div>
+		
 		</div>
 
-		<div class="row_team">
-			<%= item.user.name %>
-		</div>
-		
-	</div>
 	<% end %>
 	
 

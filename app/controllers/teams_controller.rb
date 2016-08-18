@@ -49,10 +49,12 @@ class TeamsController < ApplicationController
     @team = Team.create!(params[:team].merge(team_type_id: team_type_id))
 # ToDo => Die ersten beiden Zahlen für die Sportart dynamisch generieren 
 # ToDo => Überprüfen, ob die Mannschaft schon vorhanden ist und nur dann abspeichern
+# ToDo => Überprüfen, ob alle Angaben (gender_id, age_id und class_id) gemacht wurden
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+# ToDo => Nur Facebox schließen und nicht zum Home-Path weiterleiten
+        format.html { redirect_to home_path, notice: 'Team was successfully created.' }
         format.json { render json: @team, status: :created, location: @team }
       else
         format.html { render action: "new" }

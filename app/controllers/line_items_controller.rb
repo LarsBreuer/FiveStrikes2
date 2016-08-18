@@ -60,7 +60,8 @@ class LineItemsController < InheritedResources::Base
       if params[:query].present?
         @users = User.search(params[:query])
       end
-
+      logger.debug "+++++++++++++++++++++++ Ermittelte User: +++++++++++++++++++++++"
+      logger.debug @users
       @users.each do |user|
         @line_item = @cart.line_items.build(:user => user)
         if @line_item.save

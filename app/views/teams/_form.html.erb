@@ -10,13 +10,25 @@
       </ul>
     </div>
   <% end %>
+
+  <div class="facebox-header"> 
+    <%= I18n.t('basic.new_team') %>
+  </div>  
   
   <%= f.hidden_field :club_id, :value => params[:club_id] %>
-  <%= select_tag(:gender_id, options_for_select([[I18n.t('basic.male'), 1], [I18n.t('basic.female'), 2]], 1), {:class => 'select-style'}) %>
-  <%= select_tag(:age_id, options_for_select([[I18n.t('basic.seniors'), 1], [I18n.t('basic.junior_a'), 2]], 1), {:class => 'select-style'}) %>
-  <%= select_tag(:class_id, options_for_select([['1', 1], ['2', 2]], 1), {:class => 'select-style'}) %>
+
+  <%= f.label :player_position_first, I18n.t('basic.gender'), class: 'label_type' %>
+  <%= select_tag(:gender_id, options_for_select([[I18n.t('basic.choose'), 0], [I18n.t('basic.male'), 1], [I18n.t('basic.female'), 2]], 0), {:class => 'select-style'}) %>
+
+  <%= f.label :player_position_first, I18n.t('basic.stage_of_life'), class: 'label_type' %>
+  <%= select_tag(:age_id, options_for_select([[I18n.t('basic.choose'), 0], [I18n.t('basic.seniors'), 1], [I18n.t('basic.junior_a'), 2], [I18n.t('basic.junior_b'), 3], [I18n.t('basic.junior_c'), 4], [I18n.t('basic.junior_d'), 5], [I18n.t('basic.junior_e'), 6]], 0), {:class => 'select-style'}) %>
+
+  <%= f.label :player_position_first, I18n.t('basic.level'), class: 'label_type' %>
+  <%= select_tag(:class_id, options_for_select([[I18n.t('basic.choose'), 0], ['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]], 0), {:class => 'select-style'}) %>
+
   <%= f.hidden_field :team_club_name, :value => @team_club_name %>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit I18n.t('basic.save_team'), class: 'btn_submit' %>
   </div>
 <% end %>
