@@ -1,10 +1,52 @@
-<table class = "game_stat_table" cellspacing=0 cellpadding=0 border=0>
+<table class = "game_headline_table"  style = "width: 100%;border: 3px solid white;" cellspacing=0 cellpadding=0 border=0>
 
-<% @ticker_events.each do |ticker_event| %>
+  <tr class = "game_headline_row_date">
 
-    <tr class = "game_stat_row">
+    <td colspan="5" class = "game_headline_date" >
 
-      <td class = "game_ticker_left">
+      <%= @game.convert_game_date(@game.game_date) %>
+
+    </td>
+
+  </tr>
+
+  <tr class = "game_headline_row">
+
+    <td class = "game_headline_left">
+      <%= @game.get_club_name_by_team_id(@game.team_home_id) %>
+    </td>
+    <td class = "game_headline_middle_left">
+      <%= @game.count_team_goals(@game.team_home_id) %>
+    </td>
+    <td class = "game_headline_middle">
+      -
+    </td>
+    <td class = "game_headline_middle_right">
+      <%= @game.count_team_goals(@game.team_away_id) %>
+    </td>
+    <td class = "game_headline_right">
+      <%= @game.get_club_name_by_team_id(@game.team_away_id) %>
+    </td>
+
+  </tr>
+
+</table>
+
+<table class = "game_ticker_table" style = "width: 100%;" cellspacing=0 cellpadding=0 border=0>
+
+  <% @ticker_events.each do |ticker_event| %>
+
+    <tr class = "game_ticker_row">
+
+      <% if ticker_event.home_or_away == 0 %>
+
+        <td class = "game_ticker_left" style = "background: #ffcdcc;" >
+
+      <% else %>
+
+        <td class = "game_ticker_left" style = "background: #e1f2ff;" >
+
+      <% end %>
 
         <%= ticker_event.convert_seconds_to_time(ticker_event.time / 1000) %>
 
@@ -69,10 +111,23 @@
         <% end %>
 
       </td>
-      <td class = "game_ticker_right"><%= ticker_event.ticker_event_note %></td>
+
+      <% if ticker_event.home_or_away == 0 %>
+
+        <td class = "game_ticker_right" style = "background: #ffcdcc;" >
+
+      <% else %>
+
+        <td class = "game_ticker_right" style = "background: #e1f2ff;" >
+
+      <% end %>
+      
+        <%= ticker_event.ticker_event_note %>
+
+      </td>
 
     </tr>
 
-<% end %>
+  <% end %>
 
 </table>

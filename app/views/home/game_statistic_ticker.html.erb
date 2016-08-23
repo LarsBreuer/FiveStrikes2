@@ -1,10 +1,18 @@
-<table class = "game_stat_table" cellspacing=0 cellpadding=0 border=0>
+<table class = "game_ticker_table" cellspacing=0 cellpadding=0 border=0>
 
   <% @ticker_events.each do |ticker_event| %>
 
-    <tr class = "game_stat_row">
+    <tr class = "game_ticker_row">
 
-      <td class = "game_ticker_left">
+      <% if ticker_event.home_or_away == 0 %>
+
+        <td class = "game_ticker_left" style = "background: #ffcdcc;" >
+
+      <% else %>
+
+        <td class = "game_ticker_left" style = "background: #e1f2ff;" >
+
+      <% end %>
 
         <%= ticker_event.convert_seconds_to_time(ticker_event.time / 1000) %>
 
@@ -69,7 +77,20 @@
         <% end %>
 
       </td>
-      <td class = "game_ticker_right"><%= ticker_event.ticker_event_note %></td>
+
+      <% if ticker_event.home_or_away == 0 %>
+
+        <td class = "game_ticker_right" style = "background: #ffcdcc;" >
+
+      <% else %>
+
+        <td class = "game_ticker_right" style = "background: #e1f2ff;" >
+
+      <% end %>
+      
+        <%= ticker_event.ticker_event_note %>
+
+      </td>
 
     </tr>
 
