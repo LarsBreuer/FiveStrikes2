@@ -1,4 +1,4 @@
-<table class = "game_headline_table"  style = "width: 100%;border: 3px solid white;" cellspacing=0 cellpadding=0 border=0>
+<table class = "game_headline_table"  style = "width: 100%;border: 3px solid white;margin = 0">
 
   <tr class = "game_headline_row_date">
 
@@ -12,19 +12,19 @@
 
   <tr class = "game_headline_row">
 
-    <td class = "game_headline_left">
+    <td class = "game_headline_left" style = "font-size: 16px;">
       <%= @game.get_club_name_by_team_id(@game.team_home_id) %>
     </td>
-    <td class = "game_headline_middle_left">
+    <td class = "game_headline_middle_left" style = "font-size: 24px;">
       <%= @game.count_team_goals(@game.team_home_id) %>
     </td>
-    <td class = "game_headline_middle">
+    <td class = "game_headline_middle" style = "font-size: 24px;">
       -
     </td>
-    <td class = "game_headline_middle_right">
+    <td class = "game_headline_middle_right" style = "font-size: 24px;">
       <%= @game.count_team_goals(@game.team_away_id) %>
     </td>
-    <td class = "game_headline_right">
+    <td class = "game_headline_right" style = "font-size: 16px;">
       <%= @game.get_club_name_by_team_id(@game.team_away_id) %>
     </td>
 
