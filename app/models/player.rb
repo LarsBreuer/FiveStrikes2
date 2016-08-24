@@ -6,6 +6,16 @@ class Player < ActiveRecord::Base
 	has_many :games, :through => :ticker_activities
 	has_many :line_items
 
+	CSV_POSITION_MAPPING = {
+		TW: '1001',
+		LA: '1002',
+		RL: '1003',
+		RM: '1004',
+		RR: '1005',
+		RA: '1006',
+		KM: '1007'
+	}
+
 	def self.search(team_id, player_forename, player_surename)
 		if team_id
 			if player_forename && player_surename
@@ -25,6 +35,9 @@ class Player < ActiveRecord::Base
 			CSV.foreach(file_in.path, headers: true, encoding:'iso-8859-1:utf-8') do |row|
 				player_hash = row.to_hash
 				player_hash.keys.each {|k| player_hash[k] = player_hash[k].encode("iso-8859-1").force_encoding("utf-8")}
+			  if player_hash['player_position_first'] and not player_hash['player_position_first'].empty?
+					player_hash['player_position_first'] = CSV_POSITION_MAPPING[player_hash['player_position_first'].to_sym]
+				end
 				puts "CSV row: #{player_hash.inspect}"
 				players = team.players.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"])
 				team.players.create(player_hash) if players.count == 0
