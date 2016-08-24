@@ -1,6 +1,6 @@
 class Player < ActiveRecord::Base
 	require 'csv'
-  require 'iconv'
+  #require 'iconv'
 
 	belongs_to :team
 	has_many :ticker_activities, :dependent => :destroy
@@ -23,8 +23,8 @@ class Player < ActiveRecord::Base
 	def self.import(file_in, team_id)
 
     # Datei umwandeln wegen Umlaute (ä,ü,ö)
-    logger.debug "Datei umwandeln"
-    file = Iconv.conv("UTF8", "LATIN3", file_in)
+    #logger.debug "Datei umwandeln"
+    #file = Iconv.conv("UTF8", "LATIN3", file_in)
 
     # Daten aus der CSV herauslesen
     CSV.foreach(file.path, headers: true) do |row|
