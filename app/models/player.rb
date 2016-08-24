@@ -34,8 +34,10 @@ class Player < ActiveRecord::Base
 			# Daten aus der CSV herauslesen
 			CSV.foreach(file_in.path, headers: true, encoding:'iso-8859-1:utf-8') do |row|
 				player_hash = row.to_hash
-				player_hash.keys.each {|k| player_hash[k] = player_hash[k].encode("iso-8859-1").force_encoding("utf-8")}
-			  if player_hash['player_position_first'] and not player_hash['player_position_first'].empty?
+				player_hash.keys.each do |k|
+					player_hash[k] = player_hash[k].encode("iso-8859-1").force_encoding("utf-8") if player_hash[k]
+				end
+				if player_hash['player_position_first'] and not player_hash['player_position_first'].empty?
 					player_hash['player_position_first'] = CSV_POSITION_MAPPING[player_hash['player_position_first'].to_sym]
 				end
 				puts "CSV row: #{player_hash.inspect}"
