@@ -26,7 +26,7 @@ class Player < ActiveRecord::Base
 				player_hash = row.to_hash
 				player_hash.keys.each {|k| player_hash[k] = player_hash[k].encode("iso-8859-1").force_encoding("utf-8")}
 				puts "CSV row: #{player_hash.inspect}"
-				players = Player.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"], team_id: team_id)
+				players = team.players.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"])
 				team.players.create(player_hash) if players.count == 0
 			end
 		end
