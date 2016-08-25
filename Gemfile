@@ -1,20 +1,19 @@
 ruby '2.2.4'
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.20'
+gem 'rails', '3.2.22.2'
 gem 'simple_form'
 gem 'devise', '~> 2.2.8'
 # gem 'devise-token_authenticatable' siehe https://github.com/baschtl/devise-token_authenticatable
-gem 'activeadmin'
+gem 'activeadmin', '0.6.6'
 gem 'meta_search', '>= 1.1.0.pre'
-gem 'facebox-rails'
-gem 'jquery-rails'
+gem 'facebox-rails', '0.2.0'
+gem 'jquery-rails', '2.2.1'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'thin'
 gem 'uglifier', '>= 1.0.3'
 gem 'searchkick'
-gem "iconv", "~> 1.0.3"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
