@@ -70,8 +70,8 @@ class LineItemsController < InheritedResources::Base
       end
     end
 
-		redirect_to home_side_path 
-		
+		redirect_to home_side_path
+
 	end
 
   def create_team_line_items
@@ -97,9 +97,9 @@ class LineItemsController < InheritedResources::Base
     @player = Player.find(params[:player_id])
     @line_item = @cart.line_items.build(:player => @player)
     if @line_item.save
-      
+
     else
-      
+
     end
 # ToDo => Beim Aufruf eines Spielers den Spieler auch im Hauptfenster anzeigen
     redirect_to home_side_path
@@ -112,9 +112,9 @@ class LineItemsController < InheritedResources::Base
     @game = Game.find(params[:game_id])
     @line_item = @cart.line_items.build(:game => @game)
     if @line_item.save
-      
+
     else
-      
+
     end
 # ToDo => Beim Aufruf eines Teams das Team auch im Hauptfenster anzeigen
     redirect_to home_side_path

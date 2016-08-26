@@ -5,19 +5,19 @@ class ApplicationController < ActionController::Base
 
 
   private
-  
+
   def after_sign_out_path_for(resource_or_scope)
     home_path
   end
- 
+
   def check_access_level(role)
     redirect_to home_path unless current_user.role_access?(role)
   end
-  
+
   def after_omniauth_failure_path_for(resource)
     home_path
   end
-  
+
   def after_inactive_sign_up_path_for(resource)
     home_path
   end
@@ -42,17 +42,16 @@ class ApplicationController < ActionController::Base
       filename = Rails.root.join('log', 'login_history.log')
       sign_in_time = user.current_sign_in_at ? user.current_sign_in_at : Time.now
       File.open(filename, 'a') { |f| f.write("#{sign_in_time.strftime("%Y-%m-%dT%H:%M:%S%Z")} #{user.current_sign_in_ip} #{user.name} #{user.email if user.email}\n") }
-    end  
+    end
   end
 
-
-  def current_cart 
-    Cart.find(session[:cart_id])
-    
-  rescue ActiveRecord::RecordNotFound 
-    cart = Cart.create 
-    session[:cart_id] = cart.id
+  def current_cart
+    unless (cart = Cart.where(id: session[:cart_id]).first)
+      cart = Cart.create
+      session[:cart_id] = cart.id
+puts "!!!!!!!!!!!!!!IN"
+      logger.debug("New cart created: #{session[:cart_id]}")
+    end
     cart
   end
-
 end

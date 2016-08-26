@@ -1,5 +1,5 @@
 <%= form_tag line_items_create_line_items_path, method: :get, :remote => true, id: 'top-search-form' do %>
-    
+
     <%= select_tag(:choice_id, options_for_select([[I18n.t('basic.game'), 1], [I18n.t('basic.team'), 2], [I18n.t('basic.club'), 4], [I18n.t('basic.user'), 5]], 1), {:class => 'select_search'}) %>
     <%= text_field_tag :query, params[:query], options = {style:"float: left;
     															                               height: 34px;
@@ -13,7 +13,7 @@
     															                               -webkit-appearance: none;
     															                               color: #355264;
     															                               font-size:12pt;
-                                                                 vertical-align: middle;", 
+                                                                 vertical-align: middle;",
     													placeholder: I18n.t('basic.search')} %>
     <%= image_submit_tag('glass.png', options = {style:"width: 24px;
                                                               height: 24px;
