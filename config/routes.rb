@@ -1,5 +1,5 @@
 FiveStrikes2::Application.routes.draw do
-  
+
   get "frame/game"
 
   resources :ticker_events
@@ -7,27 +7,27 @@ FiveStrikes2::Application.routes.draw do
 
   root :to => 'home#index', :as => 'home'
 
-  devise_for :users, :controllers => { :sessions => 'local_devise/sessions', 
-                                       :registrations => 'local_devise/registrations', 
-                                       :passwords => 'local_devise/passwords', 
-                                       :confirmations => 'local_devise/confirmations', 
+  devise_for :users, :controllers => { :sessions => 'local_devise/sessions',
+                                       :registrations => 'local_devise/registrations',
+                                       :passwords => 'local_devise/passwords',
+                                       :confirmations => 'local_devise/confirmations',
                                        :omniauth_callbacks => 'local_devise/omniauth_callbacks'}
-  
+
   #devise_scope :users do
   #  get '/users', :to => 'home#index', :as => :user_root
-  #end 
+  #end
 
 # test
 
   get "home/index"
 
-  match '/home/main', :to => 'home#main' 
-  match '/home/game_main', :to => 'home#game_main' 
-  match '/home/game_statistic_main', :to => 'home#game_statistic_main' 
-  match '/home/game_player_main', :to => 'home#game_player_main' 
-  match '/home/side', :to => 'home#side' 
-  match '/home/statistic', :to => 'home#statistic' 
-  match '/home/statistic_home', :to => 'home#statistic_home' 
+  match '/home/main', :to => 'home#main'
+  match '/home/game_main', :to => 'home#game_main'
+  match '/home/game_statistic_main', :to => 'home#game_statistic_main'
+  match '/home/game_player_main', :to => 'home#game_player_main'
+  match '/home/side', :to => 'home#side'
+  match '/home/statistic', :to => 'home#statistic'
+  match '/home/statistic_home', :to => 'home#statistic_home'
   match '/line_items/create_line_items', :to => 'line_items#create_line_items'
   match '/line_items/create_team_line_items', :to => 'line_items#create_team_line_items'
   match '/line_items/create_player_line_items', :to => 'line_items#create_player_line_items'
@@ -50,6 +50,7 @@ FiveStrikes2::Application.routes.draw do
   get "users/ask_friend" => "users#ask_friend", :as => :ask_friend
   post '/multiple_ticker_activities', to: 'ticker_activities#create', as: :multiple_ticker_locations
   post '/multiple_ticker_events', to: 'ticker_events#create', as: :multiple_ticker_events_locations
+  match '/impressum', to: 'home#imprint', as: :imprint
 
   resources :users
   resources :ticker_activities do
@@ -74,8 +75,8 @@ FiveStrikes2::Application.routes.draw do
       end
     end
   end
-  
-  
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

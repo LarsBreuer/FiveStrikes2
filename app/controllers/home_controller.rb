@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :side, :main, :statistic_home, :game_main]
-  before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home, :game_main]
+  before_filter :authenticate_user!, :except => [:index, :side, :main, :statistic_home, :game_main, :imprint]
+  before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home, :game_main, :imprint]
 
   def index
   	#@games = Game.all
@@ -32,7 +32,7 @@ class HomeController < ApplicationController
   end
 
   def main
-    
+
     if params[:game_id].present?
       @game = Game.find(params[:game_id])
       @ticker_activities = @game.ticker_activities
@@ -147,6 +147,10 @@ class HomeController < ApplicationController
       format.js
       format.json { render json: @game }
     end
+  end
+
+  def imprint
+    render layout: 'content'
   end
 
   protected

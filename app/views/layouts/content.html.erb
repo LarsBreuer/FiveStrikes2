@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fives</title>
+  <%= stylesheet_link_tag :application, :media=>"all" %>
+  <%= javascript_include_tag :application %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<% if flash[:notice] -%>
+    <div id='notice'><%= flash[:notice] -%></div>
+  <% end -%>
+	<div id="website" >
+    <div id="column_left" >
+      <div id="menu_field" >
+        <div id="icon_field" >
+
+          <div id="icon" >
+            <%= image_tag("icon.png") %>
+          </div>
+
+          <div id="fives">
+            FIVES
+          </div>
+
+          <div class="dropdown">
+            <% if user_signed_in? %>
+              <div class="dropbtn"><%= image_tag("login_green.png") %></div>
+              <div class="dropdown-content">
+                <% title = I18n.t('basic.logged_in_as') + ': ' + current_user.name %>
+                <%= link_to title %>
+                <%= link_to I18n.t('basic.sign_out'), destroy_user_session_path, :method => :delete %>
+                <%= link_to I18n.t('basic.friends'), fb_user_friends_path, :remote => true %>
+              </div>
+            <% else %>
+              <div class="dropbtn"><%= image_tag("login_red.png") %></div>
+              <div class="dropdown-content">
+                <%= link_to I18n.t('basic.sign_in'), fb_login_path, :remote => true %>
+                <%= link_to I18n.t('basic.sign_up'), fb_create_user_path, :remote => true %>
+              </div>
+            <% end %>
+          </div>
+
+
+        </div>
+
+        <div id="search_field" >
+
+          <%= render :file => "home/search" %>
+
+        </div>
+
+        <div id="column_left_footer" >
+
+          Über Fives | <a href="/impressum">Impressum</a> | Kontakt
+
+        </div>
+      </div>
+
+      <div id="side" >
+
+      </div>
+
+    </div>
+
+    <div id="column_right" >
+
+      <div id="banner" >
+
+      </div>
+
+      <div id="main" >
+        <%= yield %>
+      </div>
+
+    </div>
+	</div>
+</body>
+</html>
