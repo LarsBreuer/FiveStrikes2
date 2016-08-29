@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show]
+
   # GET /games
   # GET /games.json
   def index
@@ -15,9 +17,12 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @ticker_activities = @game.ticker_activities
-
     respond_to do |format|
-      format.html # show.html.erb
+      format.html do
+        unless params[:edit]
+          render layout: 'content'
+        end
+      end
       format.json { render json: @game }
     end
   end
@@ -26,7 +31,6 @@ class GamesController < ApplicationController
   # GET /games/new.json
   def new
     @game = Game.new
-    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @game }
@@ -42,7 +46,6 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(params[:game])
-
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
@@ -58,7 +61,6 @@ class GamesController < ApplicationController
   # PUT /games/1.json
   def update
     @game = Game.find(params[:id])
-
     respond_to do |format|
       if @game.update_attributes(params[:game])
         format.html { redirect_to @game, notice: 'Game was successfully updated.' }
@@ -78,7 +80,6 @@ class GamesController < ApplicationController
 # Lösung eventuell Ruby-Version ändern, siehe hier: http://stackoverflow.com/questions/23568084/create-with-has-many-through-association-gets-nomethoderror-undefined-method-n
 # Aber dies könnte eventuell andere Probleme bereiten, z.B. mit Heroku (siehe eMail vom 04.02.2016).
     @game.destroy
-
     respond_to do |format|
       format.html { redirect_to games_url }
       format.json { head :no_content }
