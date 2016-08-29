@@ -45,7 +45,6 @@ class HomeController < ApplicationController
       @team = Team.find(params[:team_id])
       @players = @team.players
       @team_games = @team.get_team_games
-      puts "!!!!!!!!!!!!!!!!!IN"
     end
 
     if params[:player_id].present?

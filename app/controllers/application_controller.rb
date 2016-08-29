@@ -49,7 +49,6 @@ class ApplicationController < ActionController::Base
     unless (cart = Cart.where(id: session[:cart_id]).first)
       cart = Cart.create
       session[:cart_id] = cart.id
-puts "!!!!!!!!!!!!!!IN"
       logger.debug("New cart created: #{session[:cart_id]}")
     end
     cart
