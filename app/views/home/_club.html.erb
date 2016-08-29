@@ -1,0 +1,25 @@
+<div id="info_headline" >
+
+  <%= @club.club_name %>
+
+</div>
+
+<div id="info_main" >
+
+  <p id="info_text"> <%= I18n.t('basic.text_club_teams') %> </p>
+
+  <% @teams.each do |team| %>
+
+    <%= link_to line_items_create_team_line_items_path(:team_id=>team.id), :remote => true, :class => "sidebar" do %>
+      <div id= "<%= cycle('first_row', 'second_row') -%>" >
+
+        <%= team.club.club_name %> (<%= team.team_type(team.team_type_id) %>)
+
+      </div>
+    <% end %>
+
+  <% end %>
+
+  <p id="info_link"> <%= link_to I18n.t('basic.new_team'), fb_team_new_path(:club_id => @club.id), :remote => true %> </p>
+
+</div>

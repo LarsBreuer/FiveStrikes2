@@ -88,8 +88,8 @@
   </div>
 
   <div id="main" >
-    <% if @last_games.present? and @last_games.any? and @line_items.present? and @line_items.any? %>
-      <!-- TODO -->
+    <% if @last_games.present? and @last_games.any? and @game %>
+      <%= render partial: 'home/game' %>
     <% end %>
   </div>
 
