@@ -10,9 +10,11 @@ class HomeController < ApplicationController
       unless current_cart.line_items.any?
         @last_games.each {|game| cart.line_items.create(game: game)}
       end
-      @game = @last_games.first
-      @ticker_activities = @game.ticker_activities
       @line_items = cart.line_items.limit(100).all
+      if @line_items.first.game and @last_games.first 
+        @game = @last_games.first
+        @ticker_activities = @game.ticker_activities
+      end
     end
   end
 
