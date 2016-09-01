@@ -4,18 +4,7 @@ class HomeController < ApplicationController
   before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home, :game_main, :imprint]
 
   def index
-    @last_games = Game.limit(5).order('created_at DESC').all
-    if @last_games.any?
-      cart = current_cart
-      unless current_cart.line_items.any?
-        @last_games.each {|game| cart.line_items.create(game: game)}
-      end
-      @line_items = cart.line_items.limit(100).all
-      if @line_items.first.game and @last_games.first 
-        @game = @last_games.first
-        @ticker_activities = @game.ticker_activities
-      end
-    end
+    setup_last_games_in_cart
   end
 
   def search
@@ -155,6 +144,7 @@ class HomeController < ApplicationController
   end
 
   def imprint
+    setup_last_games_in_cart
     render layout: 'content'
   end
 
