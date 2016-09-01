@@ -1,0 +1,41 @@
+<div id="info_headline" >
+
+  <%= @team.club.club_name %> <%= @team.team_type(@team.team_type_id) %>
+
+</div>
+
+<div id="info_main" >
+
+  <p id="info_text"> <%= I18n.t('basic.text_team_players') %> </p>
+
+  <% @players.each do |player| %>
+
+    <%= link_to line_items_create_player_line_items_path(:player_id=>player.id), :remote => true, :class => "sidebar" do %>
+      <div id= "<%= cycle('first_row', 'second_row') -%>" >
+
+        <div style="float: left; width: 34px;"><%= player.player_number %></div>
+        <div style="float: left;"><%= player.player_forename %> <%= player.player_surename %> (<%= player.get_player_position_by_id(player.player_position_first) %>)</div>
+        <div style="float: right;"><%= link_to I18n.t('basic.edit'), fb_player_edit_path(:player_id => player.id, :team_id => player.team_id), :remote => true %></div>
+
+      </div>
+    <% end %>
+
+  <% end %>
+
+  <p id="info_link"> <%= link_to I18n.t('basic.new_player'), fb_player_new_path(:team_id => @team.id), :remote => true  %> |  <%= link_to I18n.t('basic.csv_import'), fb_player_csv_path(:team_id => @team.id), :remote => true  %></p>
+
+  <p id="info_text"> <%= I18n.t('basic.text_team_games') %> </p>
+
+  <% @team_games.each do |game| %>
+
+    <%= link_to line_items_create_game_line_items_path(:game_id=>game.id), :remote => true, :class => "sidebar" do %>
+      <div id= "<%= cycle('first_row', 'second_row') -%>" >
+
+        <%= game.club_home_name %> - <%= game.club_away_name %>
+
+      </div>
+    <% end %>
+
+  <% end %>
+
+</div>

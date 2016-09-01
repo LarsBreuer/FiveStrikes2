@@ -62,7 +62,7 @@
 
     <div id="search_field" >
 
-      <%= render :file => "home/search" %>
+      <%= render partial: "search" %>
 
     </div>
 
@@ -74,7 +74,9 @@
   </div>
 
   <div id="side" >
-
+    <% if @last_games.present? and @last_games.any? and @line_items.present? and @line_items.any? %>
+      <%= render partial: 'side', locals: { line_items: @line_items } %>
+    <% end %>
   </div>
 
 </div>
@@ -86,7 +88,9 @@
   </div>
 
   <div id="main" >
-
+    <% if @last_games.present? and @last_games.any? and @game %>
+      <%= render partial: 'home/game' %>
+    <% end %>
   </div>
 
 </div>

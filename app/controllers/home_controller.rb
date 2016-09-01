@@ -4,12 +4,16 @@ class HomeController < ApplicationController
   before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home, :game_main, :imprint]
 
   def index
-  	#@games = Game.all
-
-    #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.json { render json: @games }
-    #end
+    @last_games = Game.limit(5).order('created_at DESC').all
+    if @last_games.any?
+      cart = current_cart
+      unless current_cart.line_items.any?
+        @last_games.each {|game| cart.line_items.create(game: game)}
+      end
+      @game = @last_games.first
+      @ticker_activities = @game.ticker_activities
+      @line_items = cart.line_items.limit(100).all
+    end
   end
 
   def search
@@ -23,7 +27,7 @@ class HomeController < ApplicationController
     logger.debug "+++++++++++++++++++++++ Home / Side wird aufgerufen +++++++++++++++++++++++"
     @cart = current_cart
     logger.debug "+++++++++++++++++++++++ Home / Side bevor line items created werden +++++++++++++++++++++++"
-    @line_items = @cart.line_items.all(:order => 'updated_at DESC', :limit => 10)
+    @line_items = @cart.line_items.limit(10).all
     logger.debug "+++++++++++++++++++++++ Home / Side nachdem line items created werden +++++++++++++++++++++++"
 
   	respond_to do |format|
@@ -32,9 +36,8 @@ class HomeController < ApplicationController
   end
 
   def main
-
     if params[:game_id].present?
-      @game = Game.find(params[:game_id])
+      @game = Game.includes(:ticker_activities).find(params[:game_id])
       @ticker_activities = @game.ticker_activities
     end
 
@@ -65,7 +68,7 @@ class HomeController < ApplicationController
     end
 
     respond_to do |format|
-      format.html
+      # format.html
       format.js
       format.json { render json: @game }
     end

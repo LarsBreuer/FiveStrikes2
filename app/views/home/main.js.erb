@@ -1,1 +1,11 @@
-$("#main").html("<%= escape_javascript render(:file => 'home/main.html.erb', :handlers => [:erb]) %>");
+<% if @game %>
+$("#main").html("<%= escape_javascript render(:partial => 'home/game', :handlers => [:erb]) %>");
+<% elsif @team %>
+$("#main").html("<%= escape_javascript render(:partial => 'home/team', :handlers => [:erb]) %>");
+<% elsif @club %>
+$("#main").html("<%= escape_javascript render(:partial => 'home/club', :handlers => [:erb]) %>");
+<% elsif @player %>
+$("#main").html("<%= escape_javascript render(:partial => 'home/player', :handlers => [:erb]) %>");
+<% elsif @user %>
+$("#main").html("<%= escape_javascript render(:partial => 'home/user', :handlers => [:erb]) %>");
+<% end %>

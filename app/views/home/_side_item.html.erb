@@ -1,0 +1,139 @@
+<% if item.game %>
+
+	<%= link_to home_main_path(:game_id=>item.game.id), :class => "sidebar" do %>
+
+		<div id="table_game">
+
+			<div id="line_item_label">
+
+				<% game_activities = item.game.count_game_activity() %>
+
+				<% if game_activities < 100 %>
+					<%= image_tag("stroke_one_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+				<% else %>
+					<% if game_activities < 200 %>
+						<%= image_tag("stroke_two_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+					<% else %>
+						<% if game_activities < 300 %>
+							<%= image_tag("stroke_three_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+						<% else %>
+							<% if game_activities < 400 %>
+								<%= image_tag("stroke_four_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+							<% else %>
+								<% if game_activities > 399 %>
+									<%= image_tag("stroke_five_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+								<% end %>
+							<% end %>
+						<% end %>
+					<% end %>
+				<% end %>
+
+			</div>
+
+			<div class="row_game">
+				<div class="cell_game_header_319">
+					<% if item.game.convert_game_date(item.game.game_date) %>
+						<%= item.game.convert_game_date(item.game.game_date) %>
+					<% else %>
+						<%= I18n.t('basic.missing_date')%>
+					<% end %>
+				</div>
+				<div class="cell_game_header_36"> </div>
+				<div class="cell_game_white_6"> </div>
+			</div>
+			<div class="row_game">
+				<div class="cell_game_white_319"><%= item.game.get_club_name_by_team_id(item.game.team_home_id) %></div>
+				<div class="cell_game_white_36"><%= item.game.count_team_goals(item.game.team_home_id) %></div>
+				<div class="cell_game_white_6"> </div>
+			</div>
+			<div class="row_game">
+				<div class="cell_game_white_319"><%= item.game.get_club_name_by_team_id(item.game.team_away_id) %> </div>
+				<div class="cell_game_white_36"><%= item.game.count_team_goals(item.game.team_away_id) %></div>
+				<div class="cell_game_white_6"> </div>
+			</div>
+		</div>
+
+	<% end %>
+
+<% end %>
+
+<% if item.team %>
+
+	<%= link_to home_main_path(:team_id=>item.team.id), :remote => true, :class => "sidebar" do %>
+	<div id="table_game">
+
+		<div id="line_item_label">
+			<%= image_tag("team.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+		</div>
+
+		<div id="line_item_main">
+			<%= item.team.club.club_name %>
+			<%= item.team.team_type(item.team.team_type_id) %>
+		</div>
+
+	</div>
+	<% end %>
+
+
+<% end %>
+
+<% if item.club %>
+
+	<%= link_to home_main_path(:club_id=>item.club.id), :remote => true, :class => "sidebar" do %>
+	<div id="table_game">
+
+		<div id="line_item_label">
+			<%= image_tag("club.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+		</div>
+
+		<div id="line_item_main">
+			<%= item.club.club_name %> (<%= item.club.club_name_short %>)
+		</div>
+
+	</div>
+	<% end %>
+
+
+<% end %>
+
+<% if item.player %>
+
+	<%= link_to home_main_path(:player_id=>item.player.id), :remote => true, :class => "sidebar" do %>
+	<div id="table_game">
+
+		<div id="line_item_label">
+			<%= image_tag("player.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+		</div>
+
+		<div id="line_item_main">
+			<%= item.player.player_forename %>
+			<%= item.player.player_surename %> (
+			<%= item.player.team.club.club_name %>)
+		</div>
+
+	</div>
+	<% end %>
+
+
+<% end %>
+
+<% if item.user %>
+
+	<%= link_to home_main_path(:user_id=>item.user.id), :remote => true, :class => "sidebar" do %>
+
+		<div id="table_game">
+
+			<div id="line_item_label">
+				<%= image_tag("user.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+			</div>
+
+			<div id="line_item_main">
+				<%= item.user.name %>
+			</div>
+
+		</div>
+
+	<% end %>
+
+
+<% end %>
