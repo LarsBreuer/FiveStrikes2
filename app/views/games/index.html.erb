@@ -20,7 +20,7 @@
     <td><%= game.duration_halftime %></td>
     <td><%= game.user.name %></td>
     <td><%= game.game_date %></td>
-    <td><%= link_to 'Show', game %></td>
+    <td><%= link_to 'Show', game_path(game, edit: true) %></td>
     <td><%= link_to 'Edit', edit_game_path(game) %></td>
     <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>
   </tr>

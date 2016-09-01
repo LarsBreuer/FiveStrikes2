@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show]
+
   # GET /games
   # GET /games.json
   def index
@@ -15,9 +17,15 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @ticker_activities = @game.ticker_activities
-
     respond_to do |format|
-      format.html # show.html.erb
+      format.html do
+        unless params[:edit]
+          cart = current_cart
+          cart.line_items.create(game: @game)
+          @line_items = cart.line_items.limit(100).all
+          render layout: 'content'
+        end
+      end
       format.json { render json: @game }
     end
   end
@@ -26,7 +34,7 @@ class GamesController < ApplicationController
   # GET /games/new.json
   def new
     @game = Game.new
-    
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @game }

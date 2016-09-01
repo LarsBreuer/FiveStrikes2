@@ -58,8 +58,8 @@
       </div>
 
       <div id="side" >
-        <% if @last_games.present? and @last_games.any? and @line_items.present? and @line_items.any? %>
-          <%= render partial: 'side', locals: { line_items: @line_items } %>
+        <% if @line_items.present? and @line_items.any? %>
+          <%= render partial: 'home/side', locals: { line_items: @line_items } %>
         <% end %>
       </div>
 
