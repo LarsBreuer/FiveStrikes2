@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:index]
-  
+
   # GET /teams
   # GET /teams.json
   def index
@@ -19,7 +19,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @players = @team.players
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }
@@ -45,17 +45,23 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    team_type_id = "10" + params[:gender_id] + params[:age_id] + params[:class_id]
-    @team = Team.create!(params[:team].merge(team_type_id: team_type_id))
-# ToDo => Die ersten beiden Zahlen für die Sportart dynamisch generieren 
-# ToDo => Überprüfen, ob die Mannschaft schon vorhanden ist und nur dann abspeichern
-# ToDo => Überprüfen, ob alle Angaben (gender_id, age_id und class_id) gemacht wurden
-
+    valid = false
+    if params[:gender_id] and params[:age_id] and params[:class_id]
+      # ToDo => Die ersten beiden Zahlen für die Sportart dynamisch generieren
+      team_type_id = "10#{params[:gender_id]}#{params[:age_id]}#{params[:class_id]}"
+      if club = (Club.find(params[:club_id]))
+        unless (@team = club.teams.where(team_club_name: params[:team_club_name], team_type_id: team_type_id).first)
+          @team = Team.create!(params[:team].merge(team_type_id: team_type_id))
+          valid = true
+        end
+      end
+    end
     respond_to do |format|
-      if @team.save
-# ToDo => Nur Facebox schließen und nicht zum Home-Path weiterleiten
+      if valid and @team and @team.save
+        # ToDo => Nur Facebox schließen und nicht zum Home-Path weiterleiten
         format.html { redirect_to home_path, notice: 'Team was successfully created.' }
         format.json { render json: @team, status: :created, location: @team }
+        # format.js   { render :action => "create" }
       else
         format.html { render action: "new" }
         format.json { render json: @team.errors, status: :unprocessable_entity }
