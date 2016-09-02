@@ -1,20 +1,13 @@
-<%= form_for(@team) do |f| %>
-  <% if @team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+<%= form_for(@team, remote: true) do |f| %>
 
-      <ul>
-      <% @team.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="facebox-header"> 
+  <div class="facebox-header">
     <%= I18n.t('basic.new_team') %>
-  </div>  
-  
+  </div>
+
+  <div id="error_explanation" style="display: none;">
+    <h2 id="error_message"></h2>
+  </div>
+
   <%= f.hidden_field :club_id, :value => params[:club_id] %>
 
   <%= f.label :player_position_first, I18n.t('basic.gender'), class: 'label_type' %>

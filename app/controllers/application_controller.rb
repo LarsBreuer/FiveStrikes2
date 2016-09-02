@@ -68,4 +68,8 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def js_error_message(message)
+    "$('#error_message').html('#{message}'); $('#error_explanation').show();"
+  end
 end

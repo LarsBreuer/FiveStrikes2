@@ -46,25 +46,34 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     valid = false
-    if params[:gender_id] and params[:age_id] and params[:class_id]
+    team_exists = false
+    if params[:gender_id] != "0" and params[:age_id] != "0" and params[:class_id] != "0"
       # ToDo => Die ersten beiden Zahlen für die Sportart dynamisch generieren
       team_type_id = "10#{params[:gender_id]}#{params[:age_id]}#{params[:class_id]}"
-      if club = (Club.find(params[:club_id]))
-        unless (@team = club.teams.where(team_club_name: params[:team_club_name], team_type_id: team_type_id).first)
-          @team = Team.create!(params[:team].merge(team_type_id: team_type_id))
+      if club = (Club.find(params[:team][:club_id]))
+        unless (@team = club.teams.where(team_club_name: params[:team][:team_club_name], team_type_id: team_type_id).first)
+          @team = Team.create(params[:team].merge(team_type_id: team_type_id))
           valid = true
+        else
+          team_exists = true
         end
       end
     end
     respond_to do |format|
       if valid and @team and @team.save
-        # ToDo => Nur Facebox schließen und nicht zum Home-Path weiterleiten
         format.html { redirect_to home_path, notice: 'Team was successfully created.' }
         format.json { render json: @team, status: :created, location: @team }
-        # format.js   { render :action => "create" }
+        format.js   { render :action => "create" }
       else
         format.html { render action: "new" }
         format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.js do
+          if team_exists
+            render js: js_error_message('Diese Mannschaft existiert bereits!')
+          else
+            render js: js_error_message('Bitte ergänzen Sie alle Felder!')
+          end
+        end
       end
     end
   end

@@ -1,9 +1,11 @@
 class Team < ActiveRecord::Base
-	
+
 	has_many :players
 	has_many :ticker_activities
 	belongs_to :club
 	has_many :line_items
+
+	validates_presence_of :club_id
 
 	def self.search(team_name, club_id, team_type)
 		if team_name
@@ -74,7 +76,7 @@ class Team < ActiveRecord::Base
 	end
 
 	def get_team_games
-    
+
     	game_array = Array.new
 
     	games = Game.find(:all, :conditions => ['team_home_id = ? OR team_away_id = ?', self.id, self.id])
