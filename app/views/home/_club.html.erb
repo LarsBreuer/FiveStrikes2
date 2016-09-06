@@ -10,7 +10,7 @@
 
   <% @teams.each do |team| %>
 
-    <%= link_to line_items_create_team_line_items_path(:team_id=>team.id), :remote => true, :class => "sidebar" do %>
+    <%= link_to line_items_create_team_line_items_path(:team_id=>team.id), :class => "sidebar" do %>
       <div id= "<%= cycle('first_row', 'second_row') -%>" >
 
         <%= team.club.club_name %> (<%= team.team_type(team.team_type_id) %>)

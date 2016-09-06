@@ -1,5 +1,5 @@
 <div id="game_row">
-  <%= link_to home_game_main_path(:game_id => @game.id, :mode => 'GameTicker'), :remote => true, :class => "sidebar" do %>
+  <%= link_to home_game_main_path(:game_id => @game.id, :mode => 'GameTicker'), :class => "sidebar" do %>
   <div id="game_main_result">
     <div id="game_main_title_result">
       <%= I18n.t('basic.result') %>

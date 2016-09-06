@@ -10,7 +10,7 @@
 
   <% @players.each do |player| %>
 
-    <%= link_to line_items_create_player_line_items_path(:player_id=>player.id), :remote => true, :class => "sidebar" do %>
+    <%= link_to line_items_create_player_line_items_path(:player_id=>player.id), :class => "sidebar" do %>
       <div id= "<%= cycle('first_row', 'second_row') -%>" >
 
         <div style="float: left; width: 34px;"><%= player.player_number %></div>

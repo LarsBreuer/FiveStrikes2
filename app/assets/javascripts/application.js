@@ -11,6 +11,15 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.facebox
 //= require jquery_ujs
 //= require_directory .
+//= require jquery.facebox
+
+function setSideBarClickListener() {
+  $('.sidebar').click(function() {
+      $.ajax($(this).attr("href"), {
+        type: 'GET'
+      });
+      return false;
+  });
+}
