@@ -23,3 +23,9 @@ function setSideBarClickListener() {
       return false;
   });
 }
+
+$(document).ajaxStart(function() {
+  $('#ajax-loading').show();
+}).ajaxStop(function() {
+  $('#ajax-loading').hide();
+});
