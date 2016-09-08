@@ -9,3 +9,4 @@ $("#main").html("<%= escape_javascript render(:partial => 'home/player', :handle
 <% elsif @user %>
 $("#main").html("<%= escape_javascript render(:partial => 'home/user', :handlers => [:erb]) %>");
 <% end %>
+setSideBarClickListener();

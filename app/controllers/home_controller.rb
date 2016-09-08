@@ -87,7 +87,7 @@ class HomeController < ApplicationController
     end
 
     respond_to do |format|
-      format.html
+      #format.html
       format.js
       format.json { render json: @game }
     end
