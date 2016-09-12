@@ -96,7 +96,7 @@ class HomeController < ApplicationController
   def game_statistic_main
 
     if params[:game_id].present?
-# ToDo => Werden bei einem einzelnen Abruf immer alle Statistiken errechnet?
+      # ToDo => Werden bei einem einzelnen Abruf immer alle Statistiken errechnet?
       @game = Game.find(params[:game_id])
       @game_stat = @game.get_game_stat()
       @game_possession = @game.get_game_possession()
@@ -110,6 +110,10 @@ class HomeController < ApplicationController
       @mode = params[:mode]
     end
 
+    respond_to do |format|
+      #format.html
+      format.js
+    end
   end
 
   def game_player_main

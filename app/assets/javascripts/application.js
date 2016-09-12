@@ -16,6 +16,7 @@
 //= require jquery.facebox
 
 function setSideBarClickListener() {
+  $('.sidebar').unbind("click");
   $('.sidebar').click(function() {
       $.ajax($(this).attr("href"), {
         type: 'GET'

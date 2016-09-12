@@ -5,6 +5,4 @@ $(document).ready ->
         data: { query: $("#query").val(), choice_id: $("#choice_id").val() }
     false
 
-  $('.sidebar').click ->
-    $.ajax $(this).attr("href"), type: 'GET'
-    false
+  setSideBarClickListener()
