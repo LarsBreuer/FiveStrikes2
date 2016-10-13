@@ -163,7 +163,7 @@ html, body
 #banner {
 	width: 728px;
 	height: 90px;
-	margin-top: 25px;
+	margin-top: 0px;
 	border-width: 0px;
     border-radius: 0;
     -webkit-appearance: none;
@@ -171,11 +171,28 @@ html, body
   	border-color: grey;
   	background: #ffffff;
   	position: fixed;
+  	z-index:99;
+}
+
+#dummy {
+	width: 728px;
+	height: 24px;
+	margin-top: 90px;
+	border-width: 0px;
+    border-radius: 0;
+    -webkit-appearance: none;
+  	border-width: 0px;
+  	background-image:
+    linear-gradient(
+      #5D8AA8, transparent
+    );
+  	position: fixed;
+  	z-index:99;
 }
 
 #main {
 	width: 728px;
-	padding-top: 141px;
+	padding-top: 114px;
 	min-height: 600px;
 	font-family: Arial;
     font-size: 13pt;
@@ -357,11 +374,11 @@ html, body
 
 #game_main_result {
 	float: left;
-	width: 314px;
+	width: 322px;
 	height: 160px;
 	background: white;
 	padding: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 6px;
 }
 
 #game_main_result:hover{
@@ -370,23 +387,27 @@ html, body
 
 #game_main_field {
 	float: left;
-	width: 127px;
+	width: 137px;
 	height: 160px;
 	background: white;
 	padding: 20px;
-	margin-left: 20px;
-	margin-bottom: 20px;
+	margin-left: 6px;
+	margin-bottom: 6px;
+}
+
+#game_main_field:hover{
+   background-color: #ffb465;
 }
 
 #game_main_title_result {
-	width: 314px;
+	width: 322px;
 	height: 20px;
 	font-size: 11pt;
 	border-bottom: 1px solid #355264;
 	text-align: center;
 }
 #game_main_field_title {
-	width: 127px;
+	width: 137px;
 	height: 20px;
 	font-size: 11pt;
 	border-bottom: 1px solid #355264;
@@ -395,17 +416,7 @@ html, body
 
 #game_main_title_number {
 	float: left;
-	width: 157px;
-	height: 70px;
-	line-height: 70px;
-	font-size: 36pt;
-	font-weight: bold;
-	text-align: center;
-}
-
-#game_main_field_number {
-	float: left;
-	width: 127px;
+	width: 161px;
 	height: 70px;
 	line-height: 70px;
 	font-size: 36pt;
@@ -415,31 +426,75 @@ html, body
 
 #game_main_title_team {
 	float: left;
-	width: 157px;
+	width: 161px;
 	height: 40px;
 	line-height: 40px;
 	font-size: 14pt;
 	text-align: center;
+}
+
+#game_main_history_team {
+	float: left;
+	width: 122px;
+	height: 55px;
+	line-height: 55px;
+	font-size: 18pt;
+	font-weight: bold;
+	text-align: left;
+	vertical-align: center;
+}
+
+#game_main_history_chart_home {
+	float: left;
+	width: 10px;
+	height: 55px;
+	border-bottom: 1px solid #355264;
+}
+
+#game_main_history_chart_home img {
+	vertical-align: bottom;
+	margin-bottom: 1px;
+}
+
+#game_main_history_chart_away {
+	float: left;
+	width: 10px;
+	height: 55px;
+}
+
+#game_main_history_chart_away img {
+	vertical-align: top;
+	margin-top: 1px;
 }
 
 #game_main_field_team {
 	float: left;
-	width: 127px;
+	width: 137px;
 	height: 40px;
 	line-height: 40px;
 	font-size: 14pt;
 	text-align: center;
 }
 
+#game_main_field_number {
+	float: left;
+	width: 137px;
+	height: 70px;
+	line-height: 70px;
+	font-size: 36pt;
+	font-weight: bold;
+	text-align: center;
+}
+
 #game_main_title_proceed {
-	width: 314px;
+	width: 322px;
 	height: 20px;
 	line-height: 40px;
 	font-size: 10pt;
 	text-align: center;
 }
 #game_main_field_proceed {
-	width: 127px;
+	width: 137px;
 	height: 20px;
 	line-height: 40px;
 	font-size: 10pt;

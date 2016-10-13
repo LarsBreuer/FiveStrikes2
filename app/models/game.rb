@@ -84,6 +84,63 @@ class Game < ActiveRecord::Base
   #
   #
 
+  def get_game_main_stat()
+
+    game_stat_main_array = Array.new
+    params_array = Array.new
+
+    # Tore
+    game_stat_main_array.push(count_team_goals(self.team_home_id))
+    game_stat_main_array.push(count_team_goals(self.team_away_id))
+
+    # Bester Torschütze
+    params_array = self.get_top_scorer(self.id)
+    game_stat_main_array.push(params_array[0])
+    game_stat_main_array.push(params_array[1])
+
+    # Bester Torwart
+    params_array = self.get_top_goalie(self.id)
+    game_stat_main_array.push(params_array[0])
+    game_stat_main_array.push(params_array[1])
+
+    # Spielverlauf eingeben
+    params_array = self.get_game_history(54, "Overview")
+    i=0
+    while i < 40 do
+      game_stat_main_array.push(params_array[i])
+      i += 1
+    end
+    
+    # Längste Führung
+    params_array = self.get_team_lead(self.id)
+    game_stat_main_array.push(params_array[0])
+    game_stat_main_array.push(params_array[1])
+
+    # Höchste Führung
+    params_array = self.get_max_team_lead()
+    game_stat_main_array.push(params_array[0])
+    game_stat_main_array.push(params_array[1])
+
+    # Mannschaft Effektivität
+    game_stat_main_array.push(team_effective(self.team_home_id, self.id))
+    game_stat_main_array.push(team_effective(self.team_away_id, self.id))
+
+    # Fairste Mannschaft
+    params_array = self.get_team_penalty(self.id)
+    game_stat_main_array.push(params_array[0])
+    game_stat_main_array.push(params_array[1])
+    game_stat_main_array.push(params_array[2])
+    game_stat_main_array.push(params_array[3])
+
+    # Spieler Effektivität
+    params_array = self.get_top_effective(self.id)
+    game_stat_main_array.push(params_array[0])
+    game_stat_main_array.push(params_array[1])
+
+    return game_stat_main_array
+
+  end
+
   def get_game_ticker()
 
     game_ticker_array = Array.new
@@ -366,7 +423,7 @@ class Game < ActiveRecord::Base
     intPossessionTimeHome = 0
     intPossessionTimeAway = 0
     intGoalDifference = 0
-    duration = 1800
+    duration = 30
     if self.duration_halftime != nil
       duration = self.duration_halftime
     end
@@ -406,6 +463,7 @@ class Game < ActiveRecord::Base
 
     intPossessionTimeHome = intPossessionTimeHome / 1000
     intPossessionTimeAway = intPossessionTimeAway / 1000
+    intChangePossessionTime = intChangePossessionTime / 1000
 
     # Wenn zum Spielende eine Mannschaft in Ballbesitz, dann Restzeit eintragen
     if intCurrentPossession == 1
@@ -521,7 +579,7 @@ class Game < ActiveRecord::Base
     intTimeLeadAway = 0
     intTimeDraw = 0
     intTimeLeadChange = 0
-    duration = 1800
+    duration = 30
     if self.duration_halftime != nil
       duration = self.duration_halftime
     end
@@ -588,6 +646,7 @@ class Game < ActiveRecord::Base
     intTimeLeadHome = intTimeLeadHome / 1000
     intTimeLeadAway = intTimeLeadAway / 1000
     intTimeDraw = intTimeDraw / 1000
+    intTimeLeadChange = intTimeLeadChange / 1000
 
     # Führung oder Unentschieden zum Spielende eintragen
     if intGoalDifference > 0
@@ -679,20 +738,116 @@ class Game < ActiveRecord::Base
 
   end
 
-  def get_game_history()
+  def get_game_history(row_width, source)
 
     game_stat_array = Array.new
-    row_width = 300
-    duration = 1800
+    max_lead_array = Array.new
+    game_stat_away = Array.new
+
+    duration = 30
     if self.duration_halftime != nil
       duration = self.duration_halftime
     end
-    time_step = duration / 6
+
+    max_lead_array = self.get_max_team_lead
+    max_width = max_lead_array[0]
+
+    i = 1
+
+    if source == "Statistic"
+
+      time_step = 5
+      intervall = duration * 2 / time_step
+
+      while i <= intervall do
+        # 0 => Titel Spielstand zur x. Minute
+        game_stat_array.push(TickerActivity.convert_seconds_to_time(time_step * i))
+        # 1 => Tore Heim
+        goals_home = count_team_goals_time(self.team_home_id, time_step * i)
+        game_stat_array.push(goals_home)
+        # 2 => Tore Auswärts
+        goals_away = count_team_goals_time(self.team_away_id, time_step * i)
+        game_stat_array.push(goals_away)
+        diff_home = 0
+        diff_away = 0
+        if goals_home > goals_away
+          diff_home = goals_home - goals_away
+        end
+        if goals_away > goals_home
+          diff_away = goals_away - goals_home
+        end
+        # 3 - 6 => Breite der Balken berechnen
+          if max_width == 0
+          game_stat_array.push(row_width)
+          game_stat_array.push(0)
+          game_stat_array.push(0)
+          game_stat_array.push(row_width)
+        else
+          game_stat_array.push(row_width - (row_width * diff_home / max_width))
+          game_stat_array.push(row_width * diff_home / max_width)
+          game_stat_array.push(row_width * diff_away / max_width)
+          game_stat_array.push(row_width - (row_width * diff_away / max_width))
+        end
+        i += 1
+      end
+    end
+    if source == "Overview"
+
+      intervall = 20
+      time_step = duration * 2 / intervall
+
+      while i <= intervall do
+        
+        # Tore Heim und Auswärts ermitteln
+        goals_home = count_team_goals_time(self.team_home_id, time_step * i)
+        goals_away = count_team_goals_time(self.team_away_id, time_step * i)
+
+        # Führung Heim oder Auswärts ermitteln
+        diff_home = 0
+        diff_away = 0
+        if goals_home > goals_away
+          diff_home = goals_home - goals_away
+        end
+        if goals_away > goals_home
+          diff_away = goals_away - goals_home
+        end
+
+        # Breite des Balken entsprechend der Führung ermitteln
+        if max_width == 0
+          game_stat_array.push(0)
+          game_stat_away.push(0)
+        else
+          game_stat_array.push(row_width * diff_home / max_width)
+          game_stat_away.push(row_width * diff_away / max_width)
+        end
+        i += 1
+
+      end
+
+      i = 1
+
+      while i <= intervall do
+
+        # Daten für die Auswärtsmannschaft eingeben
+        game_stat_array.push(game_stat_away[i-1])
+        i += 1
+
+      end
+    end
+
+    return game_stat_array
+
+  end
+
+  def get_max_team_lead()
+
+    team_lead_array = Array.new
+
     intGoalDifference = 0
     intMaxLeadHome = 0
     intMaxLeadAway = 0
 
-  # Maximale Führung ermitteln
+    # Maximale Führung ermitteln
     # Alle Ticker eines Spiels aufrufen
     self.ticker_activities.each do |ticker_activity|
 
@@ -729,49 +884,19 @@ class Game < ActiveRecord::Base
 
     # Betrag der maximalen Führung der Auswärtsmannschaft, da sonst negativ 
     intMaxLeadAway= intMaxLeadAway.abs
-    intMaxLeadHome = intMaxLeadHome / 1000
-    intMaxLeadAway = intMaxLeadAway / 1000
+    intMaxLeadHome = intMaxLeadHome
+    intMaxLeadAway = intMaxLeadAway
 
-    max_width = intMaxLeadHome
-    if intMaxLeadAway > max_width
-      max_width = intMaxLeadAway
+    if intMaxLeadHome > intMaxLeadAway
+      team_lead_array.push(intMaxLeadHome)
+      team_lead_array.push(self.get_club_name_short_by_team_id(self.team_home_id))
+    end
+    if intMaxLeadAway > intMaxLeadHome
+      team_lead_array.push(intMaxLeadAway)
+      team_lead_array.push(self.get_club_name_short_by_team_id(self.team_away_id))
     end
 
-    i = 1
-
-  # 0 => Titel Spielstand zur x. Minute
-    while i < 13 do
-      game_stat_array.push(TickerActivity.convert_seconds_to_time(time_step * i))
-      # 1 => Tore Heim
-      goals_home = count_team_goals_time(self.team_home_id, time_step * i)
-      game_stat_array.push(goals_home)
-      # 2 => Tore Auswärts
-      goals_away = count_team_goals_time(self.team_away_id, time_step * i)
-      game_stat_array.push(goals_away)
-      diff_home = 0
-      diff_away = 0
-      if goals_home > goals_away
-        diff_home = goals_home - goals_away
-      end
-      if goals_away > goals_home
-        diff_away = goals_away - goals_home
-      end
-      # 3 - 6 => Breite der Balken berechnen
-      if max_width == 0
-        game_stat_array.push(row_width)
-        game_stat_array.push(0)
-        game_stat_array.push(0)
-        game_stat_array.push(row_width)
-      else
-        game_stat_array.push(row_width - (row_width * diff_home / max_width))
-        game_stat_array.push(row_width * diff_home / max_width)
-        game_stat_array.push(row_width * diff_away / max_width)
-        game_stat_array.push(row_width - (row_width * diff_away / max_width))
-      end
-      i += 1
-    end
-
-    return game_stat_array
+    return team_lead_array
 
   end
 
@@ -779,7 +904,7 @@ class Game < ActiveRecord::Base
 
     game_stat_array = Array.new
     row_width = 300
-    duration = 1800
+    duration = 30
     if self.duration_halftime != nil
       duration = self.duration_halftime
     end
@@ -982,6 +1107,7 @@ class Game < ActiveRecord::Base
 
     intTimePowerplayHome = intTimePowerplayHome / 1000
     intTimePowerplayAway = intTimePowerplayHome / 1000
+    intTimePowerplayChange = intTimePowerplayChange / 1000
 
     # Falls eine Mannschaft zum Ende des Spiels in Überzahl ist
     if intPowerplay > 0
@@ -1077,7 +1203,7 @@ class Game < ActiveRecord::Base
     stat_overall_hash = Hash.new
     
     row_width = 400
-    duration = 1800
+    duration = 30
     if self.duration_halftime != nil
       duration = self.duration_halftime
     end
@@ -1450,6 +1576,7 @@ class Game < ActiveRecord::Base
 
   # Tore zu einer Spielzeit
   def count_team_goals_time(teamID, time)
+    time = time * 1000 * 60
     self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ?) AND team_id = ? AND time <= ?", 10100, 10101, 10102, teamID, time).count
   end
 
@@ -1562,7 +1689,7 @@ class Game < ActiveRecord::Base
 
   #
   #
-  # Betsen Torschützen ermitteln
+  # Betsen Torschützen / Torwart ermitteln
   #
   #
 
@@ -1579,18 +1706,42 @@ class Game < ActiveRecord::Base
 
   end
 
-  def get_top_scorer_goals(gameID)
+  def get_top_scorer(gameID)
 
-    return self.get_top_scorer_hash(gameID).max_by{|k,v| v}[1]
+    top_scorer_array = Array.new
+
+    top_scorer_array.push(self.get_top_scorer_hash(gameID).max_by{|k,v| v}[1])
+    playerID = self.get_top_scorer_hash(gameID).max_by{|k,v| v}[0]
+    player = self.players.where("player_id = ?", playerID).first
+    top_scorer_array.push(player.player_surename)
+
+    return top_scorer_array
 
   end
 
-  def get_top_scorer_name(gameID)
+  def get_top_goalie_hash(gameID)
+    player_hash = Hash.new
 
-    playerID = self.get_top_scorer_hash(gameID).max_by{|k,v| v}[0]
+    self.players.each do |player|
+
+      player_hash[player.id] = self.gk_effective_saves(player.id)
+
+    end
+
+    return player_hash
+
+  end
+
+  def get_top_goalie(gameID)
+
+    top_goalie_array = Array.new
+
+    top_goalie_array.push(self.get_top_goalie_hash(gameID).max_by{|k,v| v}[1])
+    playerID = self.get_top_goalie_hash(gameID).max_by{|k,v| v}[0]
     player = self.players.where("player_id = ?", playerID).first
+    top_goalie_array.push(player.player_surename)
 
-    return player.player_forename + " " + player.player_surename
+    return top_goalie_array
 
   end
 
@@ -1618,18 +1769,17 @@ class Game < ActiveRecord::Base
 
   end
 
-  def get_top_effective_percent(gameID)
+  def get_top_effective(gameID)
 
-    return self.get_top_effective_hash(gameID).max_by{|k,v| v}[1]
+    top_effective_array = Array.new
 
-  end
-
-  def get_top_effective_name(gameID)
-
+    effective = self.get_top_effective_hash(gameID).max_by{|k,v| v}[1]
+    top_effective_array.push(effective)
     playerID = self.get_top_effective_hash(gameID).max_by{|k,v| v}[0]
     player = self.players.where("player_id = ?", playerID).first
+    top_effective_array.push(player.player_surename)
 
-    return player.player_forename + " " + player.player_surename
+    return top_effective_array
 
   end
 
@@ -1640,7 +1790,9 @@ class Game < ActiveRecord::Base
   #
 
   # Ergebnis Mannschaft in Führung
-  def get_team_lead(gameID, home_or_away, modus)
+  def get_team_lead(gameID)
+
+    team_lead_array = Array.new
 
     goals_home = 0
     goals_away = 0
@@ -1654,9 +1806,9 @@ class Game < ActiveRecord::Base
     else
       duration_halftime = 30
     end
-
+    
     self.ticker_activities.each do |ticker_activity|
-      
+         
       if ticker_activity.activity_id == 10100 || ticker_activity.activity_id == 10101 || ticker_activity.activity_id == 10102
 
         if ticker_activity.home_or_away == 1
@@ -1712,35 +1864,88 @@ class Game < ActiveRecord::Base
       time_draw = time_draw + (duration_halftime * 2 * 60) - time_lead_change
     end
 
-# ToDo => Diese Funktion wird mehrmals aufgerufen. Kann man diese auch nur einmal aufrufen und das Ergebnis mehrmals verwenden?
-    
-    # Falls nach der längsten Führung gefragt wird
-    if home_or_away
-      if home_or_away == 1
-        result = TickerActivity.convert_seconds_to_time(time_lead_home)
-      end
-      if home_or_away == 0
-        result = TickerActivity.convert_seconds_to_time(time_lead_away)
-      end
+    if time_lead_home > time_lead_away
+      team_lead_array.push(TickerActivity.convert_seconds_to_time(time_lead_home))
+      team_lead_array.push(self.get_club_name_short_by_team_id(self.team_home_id))
     else
-      if time_lead_home > time_lead_away
-        if modus == "name"
-          result = self.club_home_name
-        end
-        if modus == "time"
-          result = TickerActivity.convert_seconds_to_time(time_lead_home)
-        end
-      else
-        if modus == "name"
-          result = self.club_away_name
-        end
-        if modus == "time"
-          result = TickerActivity.convert_seconds_to_time(time_lead_away)
-        end
-      end
+      team_lead_array.push(TickerActivity.convert_seconds_to_time(time_lead_away))
+      team_lead_array.push(self.get_club_name_short_by_team_id(self.team_away_id))
     end
 
-    return result
+    return team_lead_array
+
+  end
+
+  # Ergebnis fairste Mannschaft
+  def get_team_penalty(gameID)
+
+    team_penalty_array = Array.new
+
+    yellow_home = 0
+    yellow_away = 0
+    two_home = 0
+    two_away = 0
+    red_home = 0
+    red_away = 0
+    fair_home = 0
+    fair_away = 0
+    
+    self.ticker_activities.each do |ticker_activity|
+         
+      if ticker_activity.activity_id == 10400 
+        if ticker_activity.home_or_away == 1
+          yellow_home = yellow_home + 1
+        end
+        if ticker_activity.home_or_away == 0
+          yellow_away = yellow_away + 1
+        end
+      end
+
+      if ticker_activity.activity_id == 10401 
+        if ticker_activity.home_or_away == 1
+          two_home = two_home + 1
+        end
+        if ticker_activity.home_or_away == 0
+          two_away = two_away + 1
+        end
+      end
+
+      if ticker_activity.activity_id == 10402
+        if ticker_activity.home_or_away == 1
+          two_home = two_home + 2
+        end
+        if ticker_activity.home_or_away == 0
+          two_away = two_away + 2
+        end
+      end
+
+      if ticker_activity.activity_id == 10403 
+        if ticker_activity.home_or_away == 1
+          red_home = red_home + 1
+        end
+        if ticker_activity.home_or_away == 0
+          red_away = red_away + 1
+        end
+      end
+
+    end
+
+    fair_home = yellow_home + (two_home * 2) + (red_home * 5)
+    fair_away = yellow_away + (two_away * 2) + (red_away * 5)
+
+    if fair_home < fair_away
+      team_penalty_array.push(yellow_home)
+      team_penalty_array.push(two_home)
+      team_penalty_array.push(red_home)
+      team_penalty_array.push(self.get_club_name_short_by_team_id(self.team_home_id))
+    else
+      team_penalty_array.push(yellow_away)
+      team_penalty_array.push(two_away)
+      team_penalty_array.push(red_away)
+      team_penalty_array.push(self.get_club_name_short_by_team_id(self.team_away_id))
+    end
+
+    return team_penalty_array
 
   end
 

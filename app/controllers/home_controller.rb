@@ -27,9 +27,12 @@ class HomeController < ApplicationController
   end
 
   def main
+logger.debug "home_controller > main aufgerufen"
     if params[:game_id].present?
       @game = Game.includes(:ticker_activities).find(params[:game_id])
       @ticker_activities = @game.ticker_activities
+      @game_overview = @game.get_game_main_stat()
+logger.debug "home_controller > main > params game aufgerufen"
     end
 
     if params[:team_id].present?
@@ -77,7 +80,7 @@ class HomeController < ApplicationController
       @game_stat = @game.get_game_stat()
       @game_possession = @game.get_game_possession()
       @game_lead = @game.get_game_lead()
-      @game_history = @game.get_game_history()
+      @game_history = @game.get_game_history(300, "Statistic")
       @game_penalty = @game.get_game_penalty()
       @ticker_events = @game.ticker_events
     end
@@ -101,7 +104,7 @@ class HomeController < ApplicationController
       @game_stat = @game.get_game_stat()
       @game_possession = @game.get_game_possession()
       @game_lead = @game.get_game_lead()
-      @game_history = @game.get_game_history()
+      @game_history = @game.get_game_history(300, "Statistic")
       @game_penalty = @game.get_game_penalty()
       @ticker_events = @game.ticker_events
     end

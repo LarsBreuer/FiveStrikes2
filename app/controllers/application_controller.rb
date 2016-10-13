@@ -64,6 +64,7 @@ class ApplicationController < ActionController::Base
       @line_items = cart.line_items.limit(100).all
       if @line_items.first.game and @last_games.first
         @game = @last_games.first
+        @game_overview = @game.get_game_main_stat()
         @ticker_activities = @game.ticker_activities
       end
     end

@@ -1,3 +1,6 @@
+<% i = 0 %>
+<% array_length = @game_overview.count %>
+
 <div id="game_row">
   <%= link_to home_game_main_path(:game_id => @game.id, :mode => 'GameTicker'), :class => "sidebar" do %>
   <div id="game_main_result">
@@ -6,10 +9,10 @@
     </div>
     <div>
       <div id="game_main_title_number">
-        <%= @game.count_team_goals(@game.team_home_id) %>
+        <%= @game_overview[0] %>
       </div>
       <div id="game_main_title_number">
-        <%= @game.count_team_goals(@game.team_away_id) %>
+        <%= @game_overview[1] %>
       </div>
     </div>
     <div>
@@ -21,53 +24,134 @@
       </div>
     </div>
     <div id="game_main_title_proceed">
-      <%= link_to I18n.t('basic.game_statistic'), home_game_main_path(:game_id => @game.id, :mode => 'GameTicker'), :class => "main sidebar" %>
+      <%= link_to I18n.t('basic.ticker'), home_game_main_path(:game_id => @game.id, :mode => 'GameTicker'), :class => "main sidebar" %>
     </div>
-
   </div>
   <% end %>
 
+  <%= link_to home_game_main_path(:game_id => @game.id, :mode => 'GameGoals'), :class => "sidebar" do %>
   <div id="game_main_field">
-
     <div id="game_main_field_title">
       <%= I18n.t('basic.top_scorer') %>
     </div>
     <div>
       <div id="game_main_field_number">
-        <%= @game.get_top_scorer_goals(@game.id) %>
+        <%= @game_overview[2] %>
       </div>
     </div>
     <div>
       <div id="game_main_field_team">
-        <%= @game.get_top_scorer_name(@game.id) %>
+        <%= @game_overview[3] %>
       </div>
     </div>
     <div id="game_main_field_proceed">
-      <%= I18n.t('basic.scorer') %>
+      <%= link_to I18n.t('basic.scorer'), home_game_main_path(:game_id => @game.id, :mode => 'GameGoals'), :class => "main sidebar" %>
     </div>
-
   </div>
+  <% end %>
 
+  <%= link_to home_game_main_path(:game_id => @game.id, :mode => 'GameGoals'), :class => "sidebar" do %>
   <div id="game_main_field">
-
     <div id="game_main_field_title">
-      <%= I18n.t('basic.top_effective') %>
+      <%= I18n.t('basic.top_goalie') %>
     </div>
     <div>
       <div id="game_main_field_number">
-        <%= @game.get_top_effective_percent(@game.id) %>%
+        <%= @game_overview[4] %>%
       </div>
     </div>
     <div>
       <div id="game_main_field_team">
-        <%= @game.get_top_effective_name(@game.id) %>
+        <%= @game_overview[5] %>
       </div>
     </div>
     <div id="game_main_field_proceed">
-      <%= I18n.t('basic.scorer') %>
+      <%= link_to I18n.t('basic.scorer'), home_game_main_path(:game_id => @game.id, :mode => 'GameGoals'), :class => "main sidebar" %>
+    </div>
+  </div>
+  <% end %>
+
+</div>
+
+<div id="game_row">
+
+  <%= link_to home_game_main_path(:game_id => @game.id, :mode => 'GameHistory'), :class => "sidebar" do %>
+  <div id="game_main_result">
+    <div id="game_main_title_result">
+      <%= I18n.t('basic.game_history') %>
+    </div>
+    <div>
+      <div id="game_main_history_team">
+        <%= @game.get_club_name_short_by_team_id(@game.team_home_id) %>
+      </div>
+      <% i = 0 %>
+      <% while i < 20 do %>
+        <div id="game_main_history_chart_home">
+          <IMG src="/assets/blue.png" width=8 height="<%= @game_overview[i + 6] -%>" border=0>
+          <% i += 1 %>
+        </div>
+      <% end %>
     </div>
 
+    <div>
+      <div id="game_main_history_team">
+        <%= @game.get_club_name_short_by_team_id(@game.team_away_id) %>
+      </div>
+      <% while i < 40 do %>
+        <div id="game_main_history_chart_away">
+          <IMG src="/assets/red.png" width=8 height="<%= @game_overview[i + 6] -%>" border=0>
+          <% i += 1 %>
+        </div>
+      <% end %>
+    </div>
+    <div id="game_main_title_proceed">
+      <%= link_to I18n.t('basic.game_history'), home_game_main_path(:game_id => @game.id, :mode => 'GameHistory'), :class => "main sidebar" %>
+    </div>
   </div>
+  <% end %>
+
+  <%= link_to home_game_main_path(:game_id => @game.id, :mode => 'GameHistory'), :class => "sidebar" do %>
+  <div id="game_main_field">
+    <div id="game_main_field_title">
+      <%= I18n.t('basic.longest_lead') %>
+    </div>
+    <div>
+      <div id="game_main_field_number">
+        <%= @game_overview[46] %>
+      </div>
+    </div>
+    <div>
+      <div id="game_main_field_team">
+        <%= @game_overview[47] %>
+      </div>
+    </div>
+    <div id="game_main_field_proceed">
+      <%= link_to I18n.t('basic.game_history'), home_game_main_path(:game_id => @game.id, :mode => 'GameHistory'), :class => "main sidebar" %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= link_to home_game_main_path(:game_id => @game.id, :mode => 'GameHistory'), :class => "sidebar" do %>
+  <div id="game_main_field">
+    <div id="game_main_field_title">
+      <%= I18n.t('basic.max_lead') %>
+    </div>
+    <div>
+      <div id="game_main_field_number">
+        <%= @game_overview[48] %>
+      </div>
+    </div>
+    <div>
+      <div id="game_main_field_team">
+        <%= @game_overview[49] %>
+      </div>
+    </div>
+    <div id="game_main_field_proceed">
+      <%= link_to I18n.t('basic.game_history'), home_game_main_path(:game_id => @game.id, :mode => 'GameHistory'), :class => "main sidebar" %>
+    </div>
+  </div>
+  <% end %>
+
 </div>
 
 <div id="game_row">
@@ -79,10 +163,10 @@
     </div>
     <div>
       <div id="game_main_title_number">
-        <%= @game.team_effective(@game.team_home_id, @game.id) %>%
+        <%= @game_overview[50] %>%
       </div>
       <div id="game_main_title_number">
-        <%= @game.team_effective(@game.team_away_id, @game.id) %>%
+        <%= @game_overview[51] %>%
       </div>
     </div>
     <div>
@@ -96,30 +180,49 @@
     <div id="game_main_title_proceed">
       <%= link_to I18n.t('basic.game_statistic'), home_game_main_path(:game_id => @game.id, :mode => 'GameGoals'), :class => "main sidebar" %>
     </div>
-
   </div>
-
   <% end %>
 
+  <%= link_to home_game_main_path(:game_id => @game.id, :mode => 'GamePenalty'), :class => "sidebar" do %>
   <div id="game_main_field">
-
     <div id="game_main_field_title">
-      <%= I18n.t('basic.lead') %>
+      <%= I18n.t('basic.fair_team') %>
     </div>
     <div>
       <div id="game_main_field_number">
-        <%= @game.get_team_lead(@game.id, nil, "time") %>
+        <%= @game_overview[52] %>/<%= @game_overview[53] %>/<%= @game_overview[54] %>
       </div>
     </div>
     <div>
       <div id="game_main_field_team">
-        <%= @game.get_team_lead(@game.id, nil, "name") %>
+        <%= @game_overview[55] %>
       </div>
     </div>
     <div id="game_main_field_proceed">
-      <%= link_to I18n.t('basic.game_statistic'), fb_create_user_path, :class => "main" %>
+      <%= link_to I18n.t('basic.penalties'), home_game_main_path(:game_id => @game.id, :mode => 'GamePenalty'), :class => "main sidebar" %>
     </div>
-
   </div>
+  <% end %>
+
+  <%= link_to home_game_main_path(:game_id => @game.id, :mode => 'GameGoals'), :class => "sidebar" do %>
+  <div id="game_main_field">
+    <div id="game_main_field_title">
+      <%= I18n.t('basic.top_effective') %>
+    </div>
+    <div>
+      <div id="game_main_field_number">
+        <%= @game_overview[56] %>%
+      </div>
+    </div>
+    <div>
+      <div id="game_main_field_team">
+        <%= @game_overview[57] %>
+      </div>
+    </div>
+    <div id="game_main_field_proceed">
+      <%= link_to I18n.t('basic.scorer'), home_game_main_path(:game_id => @game.id, :mode => 'GameGoals'), :class => "main sidebar" %>
+    </div>
+  </div>
+  <% end %>
 
 </div>
