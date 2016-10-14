@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160808095435) do
+ActiveRecord::Schema.define(:version => 20161013081248) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -52,8 +52,15 @@ ActiveRecord::Schema.define(:version => 20160808095435) do
   end
 
   create_table "clubs", :force => true do |t|
-    t.string "club_name"
-    t.string "club_name_short"
+    t.string  "club_name"
+    t.string  "club_name_short"
+    t.integer "district_id"
+  end
+
+  create_table "districts", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "friendships", :force => true do |t|

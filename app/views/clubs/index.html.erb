@@ -4,6 +4,7 @@
   <tr>
     <th>ID</th>
     <th>Club name</th>
+    <th>district_id</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,6 +14,7 @@
   <tr>
     <td><%= club.id %></td>
     <td><%= club.club_name %></td>
+    <td><%= club.district_id %></td>
     <td><%= link_to 'Show', club %></td>
     <td><%= link_to 'Edit', edit_club_path(club) %></td>
     <td><%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -23,3 +25,9 @@
 <br />
 
 <%= link_to 'New Club', new_club_path %>
+
+<h3>Import a CSV File</h3>
+<%= form_tag import_clubs_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import CSV" %>
+<% end %>

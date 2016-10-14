@@ -1,5 +1,8 @@
 FiveStrikes2::Application.routes.draw do
 
+  resources :districts
+
+
   get "frame/game"
 
   resources :ticker_events
@@ -64,7 +67,12 @@ FiveStrikes2::Application.routes.draw do
   resources :teams
   resources :line_items
   resources :carts
-  resources :clubs
+  resources :clubs do
+    collection { post :import }
+  end
+  resources :districts do
+    collection { post :import }
+  end
 
   namespace :api do
     namespace :v1 do

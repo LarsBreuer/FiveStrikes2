@@ -67,8 +67,8 @@
 		</div>
 
 		<div id="line_item_main">
-			<%= item.team.club.club_name %>
-			<%= item.team.team_type(item.team.team_type_id) %>
+			<p id="item_text_main"><%= item.team.club.club_name %></p>
+			<p id="item_text_sub"><%= item.team.team_type(item.team.team_type_id) %></p>
 		</div>
 
 	</div>
@@ -87,7 +87,8 @@
 		</div>
 
 		<div id="line_item_main">
-			<%= item.club.club_name %> (<%= item.club.club_name_short %>)
+			<p id="item_text_main"><%= item.club.club_name %> (<%= item.club.club_name_short %>)</p>
+			<p id="item_text_sub"><%= I18n.t('basic.district') %> <%= item.club.district.name %></p>
 		</div>
 
 	</div>
@@ -106,9 +107,8 @@
 		</div>
 
 		<div id="line_item_main">
-			<%= item.player.player_forename %>
-			<%= item.player.player_surename %> (
-			<%= item.player.team.club.club_name %>)
+			<p id="item_text_main"><%= item.player.player_forename %> <%= item.player.player_surename %></p>
+			<p id="item_text_sub"><%= item.player.team.club.club_name %></p>
 		</div>
 
 	</div>

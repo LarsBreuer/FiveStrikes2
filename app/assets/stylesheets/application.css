@@ -232,6 +232,24 @@ html, body
 	color: #355264;
 }
 
+#item_text_main {
+	font-size: 16px;
+	font-family: Arial;
+	color: #355264;
+	height: 20px;
+	vertical-align: bottom;
+	margin: 0px;
+	padding-top: 28px;
+}
+
+#item_text_sub {
+	font-family: Arial;
+	color: #355264;
+	font-size: 12px;
+	vertical-align: middle;
+	margin: 0px;
+}
+
 #table_game:hover{
 	color: #355264;
 	background-color: #ffb465;
@@ -448,6 +466,7 @@ html, body
 	float: left;
 	width: 10px;
 	height: 55px;
+	line-height: 55px;
 	border-bottom: 1px solid #355264;
 }
 
@@ -460,6 +479,7 @@ html, body
 	float: left;
 	width: 10px;
 	height: 55px;
+	line-height: 55px;
 }
 
 #game_main_history_chart_away img {

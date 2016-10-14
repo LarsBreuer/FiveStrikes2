@@ -140,6 +140,7 @@ de:
     gender: 'Geschlecht'
     stage_of_life: 'Altersstufe'
     level: 'Spielstärke'
+    district: 'Kreis'
   devise:
     confirmations:
       confirmed: "Your account was successfully confirmed. You are now signed in."

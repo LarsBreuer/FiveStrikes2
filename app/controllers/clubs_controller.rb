@@ -83,4 +83,13 @@ class ClubsController < ApplicationController
     end
   end
 
+  def import
+    begin
+      Club.import(params[:file])
+      redirect_to home_path, notice: "Clubs imported."
+    rescue
+      redirect_to home_path, notice: "Invalid CSV file format."
+    end
+  end
+
 end

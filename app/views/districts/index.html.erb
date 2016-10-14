@@ -1,0 +1,31 @@
+<h1>Listing districts</h1>
+
+<table>
+  <tr>
+    <th>id</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @districts.each do |district| %>
+  <tr>
+    <td><%= district.id %></td>
+    <td><%= district.name %></td>
+    <td><%= link_to 'Show', district %></td>
+    <td><%= link_to 'Edit', edit_district_path(district) %></td>
+    <td><%= link_to 'Destroy', district, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New District', new_district_path %>
+
+<h3>Import a CSV File</h3>
+<%= form_tag import_districts_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import CSV" %>
+<% end %>
