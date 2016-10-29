@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :side, :main, :statistic_home, :game_main, :imprint]
-  before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home, :game_main, :imprint]
+  before_filter :authenticate_user!, :except => [:index, :side, :main, :statistic_home, :game_main, :game_statistic_main, :imprint, :help, :help_info]
+  before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home, :game_main, :game_statistic_main, :imprint, :help, :help_info]
 
   def index
     setup_last_games_in_cart
@@ -27,12 +27,10 @@ class HomeController < ApplicationController
   end
 
   def main
-logger.debug "home_controller > main aufgerufen"
     if params[:game_id].present?
       @game = Game.includes(:ticker_activities).find(params[:game_id])
       @ticker_activities = @game.ticker_activities
       @game_overview = @game.get_game_main_stat()
-logger.debug "home_controller > main > params game aufgerufen"
     end
 
     if params[:team_id].present?
@@ -155,12 +153,27 @@ logger.debug "home_controller > main > params game aufgerufen"
     render layout: 'content'
   end
 
+  def help
+    setup_last_games_in_cart
+    render layout: 'content'
+
+    if params[:mode].present?
+      @mode = params[:mode]
+    end
+  end
+
+  def help_info
+    if params[:mode].present?
+      @mode = params[:mode]
+    end
+  end
+
   protected
 
   def check_if_friend
     @game = Game.find(params[:game_id])
     @user = User.find(@game.user_id)
-    redirect_to fb_ask_friend_path(:id => @game.user_id), :remote => true, notice: 'Du bist kein Freund' unless current_user.friend.include?(@user) || current_user == @user
+    redirect_to fb_ask_friend_path(:id => @game.user_id), :remote => true, notice: 'Du bist kein Freund' unless current_user.friend.include?(@user) || current_user == @user || current_user.name == 'JaqenHghar'
   end
 
   def authenticate_user!

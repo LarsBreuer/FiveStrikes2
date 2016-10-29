@@ -20,6 +20,8 @@
 html, body
 {
 	width: 100%; 
+	height: 100%;
+	min-height: 100%;
 	margin: 0 auto; 	
 	background: #5D8AA8;
 	-webkit-background-size: cover;
@@ -31,7 +33,9 @@ html, body
   	color: #355264;
 }
 
-#website { 
+#website {
+	height: 100%;
+	min-height: 100%;
 	background: #5D8AA8;
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
@@ -45,7 +49,10 @@ html, body
 #column_left {
 	float: left;
 	width: 367px;
+	height: 100%;	
+	min-height: 100%;
 	margin-right: 20px;
+	background: white;
 }
 
 #menu_field {
@@ -114,7 +121,9 @@ html, body
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ffb465}
+.dropdown-content a:hover {
+	background-color: #ffb465 !important;
+}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
@@ -320,9 +329,9 @@ html, body
 	line-height: 74px;
 	vertical-align: middle;
 	font-size: 36px;
-	color: white;
+	color: #355264;
 	text-align: center;
-	background: #355264;
+	background: white;
 	font-family: Arial;
 	font-weight: bold;
 }
@@ -330,7 +339,7 @@ html, body
 #game_statistic_main {
 	width: 704px;
 	min-height: 600px;
-	padding: 30px 12px 12px 12px;
+	padding: 50px 12px 12px 12px;
 	color: #355264;
   	background: white;
 }
@@ -371,10 +380,24 @@ html, body
   	background: white;
 }
 
+#help_info {
+	width: 648px;
+	min-height: 600px;
+	padding: 40px;
+	color: #355264;
+  	background: white;
+}
+
 #info_text {
 	font-family: Arial;
  	font-size: 16px;
  	color: #355264;
+}
+
+img.pic {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #info_link {
@@ -612,6 +635,7 @@ html, body
 	text-align: left;
 	padding: 0px;
 	font-family: Arial;
+	font-size: 16px;
 }
 
 .game_stat_center_left {
@@ -627,6 +651,7 @@ html, body
 	text-align: right;
 	padding: 0px;
 	font-family: Arial;
+	font-size: 16px;
 }
 
 .game_stat_center_middle {
@@ -634,6 +659,7 @@ html, body
 	text-align: center;
 	padding: 0px;
 	font-family: Arial;
+	font-size: 16px;
 }
 
 .game_stat_center_right {
@@ -643,12 +669,14 @@ html, body
 	font-size: 18px;
 	font-weight: bold;
 	font-family: Arial;
+	font-size: 16px;
 }
 
 .game_stat_chart_right {
 	text-align: left;
 	padding: 0px;
 	font-family: Arial;
+	font-size: 16px;
 }
 
 .game_stat_right {
@@ -656,6 +684,7 @@ html, body
 	text-align: right;
 	padding: 0px;
 	font-family: Arial;
+	font-size: 16px;
 }
 
 #game_headline_table {
@@ -664,6 +693,7 @@ html, body
 	margin: 0 auto;
 	font-family: Arial;
 	color: #355264;
+	border-bottom: 1px solid #355264;
 }
 
 .game_headline_row_date {
@@ -675,16 +705,16 @@ html, body
   	vertical-align: middle;
 	font-size: 11px;
 	font-family: Arial;
-	background-color: #355264;
-	color: white;
+	background-color: white;
+	color: #355264;
 }
 
 .game_headline_row {
 	width: 600px;
 	height: 48px;
 	font-family: Arial;
-	background-color: #355264;
-	color: white;
+	background-color: white;
+	color: #355264;
 }
 
 .game_headline_date {
@@ -707,7 +737,7 @@ html, body
 	text-align: right;
 	font-family: Arial;
 	font-size: 24px;
-	color: white;
+	color: #355264;
 }
 
 .game_headline_middle_left {
@@ -720,7 +750,7 @@ html, body
 	font-family: Arial;
 	font-weight: bold;
 	font-size: 36px;
-	color: white;
+	color: #355264;
 }
 
 .game_headline_middle {
@@ -733,7 +763,7 @@ html, body
 	font-family: Arial;
 	font-weight: bold;
 	font-size: 36px;
-	color: white;
+	color: #355264;
 }
 
 .game_headline_middle_right {
@@ -746,7 +776,7 @@ html, body
 	font-family: Arial;
 	font-weight: bold;
 	font-size: 36px;
-	color: white;
+	color: #355264;
 }
 
 .game_headline_right {
@@ -758,7 +788,8 @@ html, body
 	padding: 0px 0px 10px 0px;
 	font-family: Arial;
 	font-size: 24px;
-	color: white;
+	color: #355264;
+	border-bottom: 1px solid #355264;
 }
 
 td.player_stat_name {
@@ -825,31 +856,57 @@ a.main:link {
 	color: #355264;
 	text-decoration: none;
 	text-transform: uppercase;
+	background: transparent;
 }
 
 a.main:visited {
 	color: #355264;
 	text-decoration: none;
 	text-transform: uppercase;
+	background: transparent;
 }
 
 a.main:hover {
 	color: #5eb1e7;
 	text-transform: uppercase;
 	text-decoration: underline;
+	background: transparent;
 }
 
 a.main:link::after {
 	content: " »";
 	color: #5eb1e7;
+	background: transparent;
+}
+
+a.column_left_footer:link {
+	color: white;
+	text-decoration: none;
+	text-transform: capitalize;
+	background: transparent;
+}
+
+a.column_left_footer:visited {
+	color: white;
+	text-decoration: none;
+	text-transform: capitalize;
+	background: transparent;
+}
+
+a.column_left_footer:hover {
+	color: white;
+	text-transform: capitalize;
+	text-decoration: underline;
+	background: transparent;
 }
 
 /* Dropdown-Menü */
 
 #menu {
   width: 100%;
-  height: 48px;
+  height: 47px;
   background: white;
+  border-top: 1px solid #355264;
   border-bottom: 1px solid #355264;
 }
 
@@ -877,7 +934,7 @@ a.main:link::after {
 
 #menu ul li:hover {
   color: white;
-  background: #ffb465;
+  background-color: #ffb465 !important;
 }
 
 #menu ul li a {
@@ -887,6 +944,7 @@ a.main:link::after {
 
 #menu ul li a:hover {
   color: white;
+  background-color: #ffb465 !important;
 }
 
 #menu > ul > li:hover > a {

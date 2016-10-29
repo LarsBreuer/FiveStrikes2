@@ -28,6 +28,7 @@ FiveStrikes2::Application.routes.draw do
   match '/home/game_main', :to => 'home#game_main'
   match '/home/game_statistic_main', :to => 'home#game_statistic_main'
   match '/home/game_player_main', :to => 'home#game_player_main'
+  match '/home/help_info', :to => 'home#help_info'
   match '/home/side', :to => 'home#side'
   match '/home/statistic', :to => 'home#statistic'
   match '/home/statistic_home', :to => 'home#statistic_home'
@@ -54,6 +55,7 @@ FiveStrikes2::Application.routes.draw do
   post '/multiple_ticker_activities', to: 'ticker_activities#create', as: :multiple_ticker_locations
   post '/multiple_ticker_events', to: 'ticker_events#create', as: :multiple_ticker_events_locations
   match '/impressum', to: 'home#imprint', as: :imprint
+  match '/hilfe', to: 'home#help', as: :help
 
   resources :users
   resources :ticker_activities do

@@ -1,0 +1,68 @@
+<div id="main_window">
+	
+	<div id="info_headline" >
+  		<%= I18n.t('basic.help')%>
+	</div>
+
+	<div id="menu">
+
+	<ul>
+      <li class="submenu"><%= link_to I18n.t('basic.first_steps'), home_help_info_path(:mode => 'HelpFirstSteps'), :remote => true %>
+        <ul>
+          <li><%= link_to I18n.t('basic.first_steps'), home_help_info_path(:mode => 'HelpFirstSteps'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.register_login'), home_help_info_path(:mode => 'HelpRegisterLogin'), :remote => true %></li>
+        </ul>
+      </li>
+      <li class="submenu"><a href="#"><%= I18n.t('basic.create_team')%></a>
+        <ul>
+          <li><%= link_to I18n.t('basic.new_team'), home_help_info_path(:mode => 'HelpNewTeam'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.sync_team'), home_help_info_path(:mode => 'HelpSyncTeam'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.new_player'), home_help_info_path(:mode => 'HelpNewPlayer'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.sync_player'), home_help_info_path(:mode => 'HelpSyncPlayer'), :remote => true %></li>
+        </ul>
+      </li>
+      <li class="submenu"><a href="#"><%= I18n.t('basic.create_game')%></a>
+        <ul>
+          <li><%= link_to I18n.t('basic.fast_game'), home_help_info_path(:mode => 'HelpFastGame'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.new_game'), home_help_info_path(:mode => 'HelpNewGame'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.game_overview'), home_help_info_path(:mode => 'HelpGameOverview'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.new_game_activitiy'), home_help_info_path(:mode => 'HelpNewGameActivity'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.edit_game_activitiy'), home_help_info_path(:mode => 'HelpEditGameActivity'), :remote => true %></li>
+        </ul>
+      </li>
+      <li class="submenu"><a href="#"><%= I18n.t('basic.statistic')%></a>
+        <ul>
+          <li><%= link_to I18n.t('basic.game_statistic'), home_help_info_path(:mode => 'HelpGameStatistic'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.player_statistic'), home_help_info_path(:mode => 'HelpPlayerStatistic'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.live_ticker'), home_help_info_path(:mode => 'HelpTickerStatistic'), :remote => true %></li>
+          <li><%= link_to I18n.t('basic.friends'), home_help_info_path(:mode => 'HelpFriends'), :remote => true %></li>
+        </ul>
+      </li>
+    </ul>
+
+	</div>
+
+</div>
+
+	<div id="help_info" >
+
+    <% if @mode %>
+
+
+
+
+
+
+
+
+
+
+    <% else %>
+
+      <%= render :file => "home/help_first_steps" %>
+
+    <% end %>
+
+	</div>
+
+</div>

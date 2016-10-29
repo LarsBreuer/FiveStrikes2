@@ -1,26 +1,28 @@
-<h1>Freund des Users <%= current_user.email %></h1>
+<div id="login_errors"></div>
+<div class="facebox-header">  
+  <%= I18n.t('basic.your_friends') %> 
+</div>  
+
+<div class="modal-body">
 
 <table>
   <tr>
-    <th>User ID</th>
-    <th>Email</th>
-    <th>Username</th>
+    <th><%= I18n.t('basic.name') %></th>
+    <th><%= I18n.t('basic.status') %></th>
   </tr>
 
   <% current_user.friendship.each do |friendship| %>
     <tr>
-      <td><%= friendship.friend.id %></td>
-      <td><%= friendship.friend.email %></td>
       <td><%= friendship.friend.name %></td>
       <td>
         <% if user_signed_in? %>
           <%= friendship.status %>
           <% if friendship.status == "requested" %>
-            (<%= link_to "accept",
+            (<%= link_to I18n.t('basic.accept'),
                           :controller => :friendships,
                           :action => :accept,
                           :id => friendship.friend.id %> |
-            <%= link_to "reject",
+            <%= link_to I18n.t('basic.reject'),
                           :controller => :friendships,
                           :action => :reject,
                           :id => friendship.friend.id %>)
@@ -30,3 +32,5 @@
     </tr>
   <% end %>
 </table>
+
+</div>
