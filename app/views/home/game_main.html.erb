@@ -86,7 +86,12 @@
 
         </ul>
       </li>
-      <li><%= link_to I18n.t('basic.comments'), home_main_path(:game_id=>@game.id), :remote => true %></li>
+      <li class="submenu"><a href="#"><%= I18n.t('basic.extras')%></a>
+        <ul>
+          <li><%= link_to I18n.t('basic.live_ticker'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GameLiveTicker'), :class => "sidebar" %></li>
+          <li><%= link_to I18n.t('basic.link_to_game'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GameLinkToGame'), :remote => true %></li>
+        </ul>
+      </li>
     </ul>
 
 	</div>

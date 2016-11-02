@@ -1,6 +1,15 @@
 class TeamsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:index]
+  before_filter :check_if_admin, :only => [:index, :edit]
+
+  def check_if_admin
+    begin
+      redirect_to home_path, :remote => true, notice: 'Du bist kein Admin' unless current_user.name == 'JaqenHghar'
+    rescue
+      redirect_to home_path, :remote => true, notice: 'Du bist kein Admin'
+    end
+  end
 
   # GET /teams
   # GET /teams.json

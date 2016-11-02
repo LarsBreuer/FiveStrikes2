@@ -141,7 +141,7 @@ de:
     stage_of_life: 'Altersstufe'
     level: 'Spielstärke'
     district: 'Kreis'
-    about: 'Impressum'
+    imprint: 'Impressum'
     help: 'Hilfe'
     first_steps: 'Erste Schritte'
     register_login: 'Registrieren / Login'
@@ -165,6 +165,14 @@ de:
     status: 'Status'
     accept: 'annehmen'
     reject: 'ablehnen'
+    account: 'Konto'
+    copyright: 'Copyright'
+    copyright_text: '2016 handmade in Germany'
+    about: 'Über'
+    service_provider: 'Dienstanbieter'
+    extras: 'Extras'
+    link_to_game: 'Link zum Spiel'
+    text_link_game: 'Unter der nachfolgenden Linkadresse kannst Du dieses Spiel verlinken:'
   devise:
     confirmations:
       confirmed: "Your account was successfully confirmed. You are now signed in."

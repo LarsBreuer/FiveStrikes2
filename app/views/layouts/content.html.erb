@@ -12,50 +12,83 @@
     <div id='notice'><%= flash[:notice] -%></div>
   <% end -%>
 	<div id="website" >
-    <div id="column_left" >
-      <div id="menu_field" >
-        <div id="icon_field" >
+    <div id="tools_left" >
 
-          <div id="icon" >
-            <%= image_tag("icon.png") %>
-          </div>
-
-          <div id="fives">
-            FIVES
-          </div>
-
-          <div class="dropdown">
-            <% if user_signed_in? %>
-              <div class="dropbtn"><%= image_tag("login_green.png") %></div>
-              <div class="dropdown-content">
-                <% title = I18n.t('basic.logged_in_as') + ': ' + current_user.name %>
-                <%= link_to title %>
-                <%= link_to I18n.t('basic.sign_out'), destroy_user_session_path, :method => :delete %>
-                <%= link_to I18n.t('basic.friends'), fb_user_friends_path, :remote => true %>
-              </div>
-            <% else %>
-              <div class="dropbtn"><%= image_tag("login_red.png") %></div>
-              <div class="dropdown-content">
-                <%= link_to I18n.t('basic.sign_in'), fb_login_path, :remote => true %>
-                <%= link_to I18n.t('basic.sign_up'), fb_create_user_path, :remote => true %>
-              </div>
-            <% end %>
-          </div>
-
-
+      <div id="tools_field" style="margin-bottom: 60px;">
+        <div id="tools_icon" >
+          <%= image_tag("icon.png") %>
         </div>
 
+        <div id="tools_text" style = "font-weight: bold;">
+          FIVES
+        </div>
+      </div>
+
+      <div id="tools_field" >
+        <div class="dropdown">
+          <% if user_signed_in? %>
+            <div class="dropbtn"><%= image_tag("login_green.png") %></div>
+            <div class="dropdown-content">
+              <% title = I18n.t('basic.logged_in_as') + ': ' + current_user.name %>
+              <%= link_to title %>
+              <%= link_to I18n.t('basic.sign_out'), destroy_user_session_path, :method => :delete %>
+              <%= link_to I18n.t('basic.friends'), fb_user_friends_path, :remote => true %>
+            </div>
+          <% else %>
+            <div class="dropbtn"><%= image_tag("login_red.png") %></div>
+            <div class="dropdown-content">
+              <%= link_to I18n.t('basic.sign_in'), fb_login_path, :remote => true %>
+              <%= link_to I18n.t('basic.sign_up'), fb_create_user_path, :remote => true %>
+            </div>
+          <% end %>
+        </div>
+
+        <div id="tools_text">
+          <%= I18n.t('basic.account') %>
+        </div>
+      </div>
+
+      <div id="tools_field" >
+        <%= link_to help_path, :class => "toolbar" do %>
+        <div id="tools_icon" >
+          <%= image_tag("help.png") %>
+        </div>
+
+        <div id="tools_text">
+          <%= I18n.t('basic.help') %>
+        </div>
+        <% end %>
+      </div>
+
+      <div id="tools_field" >
+        <div class="dropdown">
+          <div class="dropbtn"><%= image_tag("imprint.png") %></div>
+          <div class="dropdown-content" style="right: -214px;">
+            <%= link_to I18n.t('basic.imprint'), imprint_path %>
+            <%= link_to I18n.t('basic.terms'), '/terms.pdf', :target => "_blank" %>
+            <%= link_to I18n.t('basic.privacy'), '/privacy.pdf', :target => "_blank" %>
+          </div>
+        </div>
+
+        <div id="tools_text">
+          <%= I18n.t('basic.about') %>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div id="column_left" >
+      <div id="menu_field" >
         <div id="search_field" >
 
           <%= render partial: "home/search" %>
 
         </div>
+      </div>
 
-        <div id="column_left_footer" >
+      <div id="dummy_white" >
 
-          <a href="/hilfe" class="column_left_footer"><%= I18n.t('basic.help')%></a> | <a href="/impressum" class="column_left_footer"><%= I18n.t('basic.about')%></a>
-
-        </div>
       </div>
 
       <div id="side" >

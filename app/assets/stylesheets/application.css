@@ -23,7 +23,7 @@ html, body
 	height: 100%;
 	min-height: 100%;
 	margin: 0 auto; 	
-	background: #5D8AA8;
+	background: #c9d0d6;
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
@@ -36,7 +36,7 @@ html, body
 #website {
 	height: 100%;
 	min-height: 100%;
-	background: #5D8AA8;
+	background: #c9d0d6;
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
@@ -46,70 +46,63 @@ html, body
   	color: #355264;
 }
 
-#column_left {
+#tools_left {
 	float: left;
-	width: 367px;
+	position: relative;
+	width: 60px;
 	height: 100%;	
 	min-height: 100%;
-	margin-right: 20px;
-	background: white;
-}
-
-#menu_field {
+	background: #355264;
+	color: white;
 	position: fixed;
 }
 
-#icon_field {
-	width: 367px;
-	height: 56px;
-	background: #355264;
-	color: white;
-	border: 0px;
+#tools_field {
+	width: 60px;
+	height: 54px;
+	margin-bottom: 20px;
 }
 
-#icon {
-	float: left;
-	margin-left: 13px;
-	margin-right: 11px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+#tools_field:hover{
+   background-color: #ffb465;
+}
+
+#tools_icon {	
+	padding: 10px 14px 0px 10px;
 	border-width:0px;
 }
 
-#fives {
-	float: left;
-    font-size: 22pt;
-    height: 56px;
-    line-height: 56px;
-  	vertical-align: middle;
-  	font-weight: bold;
-  	letter-spacing: 2px;
-  	color: white;
+#tools_text {
+	width: 60px;
+    font-size: 8pt;
+    text-align: center;
 }
 
- /* Dropdown Button */
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+	padding: 10px 14px 0px 10px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Button */
 .dropbtn {
-	padding-left: 150px;
-	margin-top: 13px;
     background-color: none;
     border: none;
     cursor: pointer;
 }
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-	left: 0;
     display: none;
     position: absolute;
     background-color: white;
     min-width: 160px;
+    white-space: nowrap;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    font-size: 12pt;
+    right: -148px;
+    top: 0px;
 }
 
 /* Links inside the dropdown */
@@ -135,18 +128,34 @@ html, body
     background-color: none;
 }
 
+#column_left {
+	float: left;
+	width: 307px;
+	height: 100%;	
+	min-height: 100%;
+	margin-left: 60px;
+	margin-right: 20px;
+	background: white;
+}
+
+#menu_field {
+	position: fixed;
+	height: 90px;
+	z-index:99;
+	background: white;
+}
+
 #search_field {
-	width: 367px;
-	height: 44px;
+	width: 307px;
+	height: 42px;
 	padding: 5px 0px 0px 0px;
-	background: #355264;
-	color: white;
-	border: 0px;
+	background: white;
+	color: #355264;
 }
 
 #column_left_footer {
 	bottom: 0;
-	width: 367px;
+	width: 307px;
 	height: 36px;
 	line-height: 36px;
 	text-align: center;
@@ -159,9 +168,9 @@ html, body
 }
 
 #side {
-	width: 367px;
+	width: 307px;
 	min-height: 100%;
-	padding-top: 141px;
+	padding-top: 114px;
 	background: white;
 }
 
@@ -193,7 +202,23 @@ html, body
   	border-width: 0px;
   	background-image:
     linear-gradient(
-      #5D8AA8, transparent
+      #c9d0d6, transparent
+    );
+  	position: fixed;
+  	z-index:99;
+}
+
+#dummy_white {
+	width: 307px;
+	height: 24px;
+	margin-top: 90px;
+	border-width: 0px;
+    border-radius: 0;
+    -webkit-appearance: none;
+  	border-width: 0px;
+  	background-image:
+    linear-gradient(
+      white, transparent
     );
   	position: fixed;
   	z-index:99;
@@ -212,29 +237,30 @@ html, body
 #table_game {
 	float: left;
 	display: table;
-	width: 367px;
+	width: 307px;
 	background: white;
 	color: #355264;
-	border-bottom: 2px solid #355264;
+	border: 0px;
+	margin-bottom: 20px;
 }
 
 #table_game:hover {
-	background: #ffb465;
+	background-color: #ffb465;
 }
 
 #line_item_label {
 	float: left;
 	width: 45px;
-	height: 90px;
+	height: 58px;
 	margin-right: 6px;
 	color: #355264;
 }
 
 #line_item_main {
 	float: left;
-	width: 316px;
-	height: 90px;
-	line-height: 90px;
+	width: 256px;
+	height: 58px;
+	line-height: 58px;
 	vertical-align: middle;
 	font-size: 16px;
 	font-family: Arial;
@@ -248,7 +274,7 @@ html, body
 	height: 20px;
 	vertical-align: bottom;
 	margin: 0px;
-	padding-top: 28px;
+	padding-top: 11px;
 }
 
 #item_text_sub {
@@ -259,45 +285,42 @@ html, body
 	margin: 0px;
 }
 
-#table_game:hover{
-	color: #355264;
-	background-color: #ffb465;
-}
 .row_game {
 	float: left;
 	display:table-row;
-	width: 316px;
-	height: 30px;
+	width: 256px;
+	height: 18px;
 }
 .row_team {
 	float: left;
 	display:table-row;
-	width: 316px;
-	height: 90px;
+	width: 256px;
+	height: 60px;
 }
 .cell_game_header_319 {
 	display:table-cell;
-	width: 262px;
-	padding: 6px;
+	width: 202px;
+	padding:  0px 6px 3px 6px;
 	text-align: left;
-	border-bottom: 1px solid #355264;
+	border: 0px;
+	font-size: 11px;
 }
 .cell_game_header_36 {
 	display:table-cell;
 	width: 24px;
-	padding: 6px;
-	border-bottom: 1px solid #355264;
+	padding:  0px 6px 3px 6px;
+	border: 0px;
 }
 .cell_game_white_319 {
 	display:table-cell;
-	width: 262px;
-	padding: 6px;
+	width: 202px;
+	padding:  3px 6px 3px 6px;
 	text-align: left;
 }
 .cell_game_white_36 {
 	display:table-cell;
 	width: 24px;
-	padding: 6px;
+	padding:  3px 6px 3px 6px;
 	text-align: left;
 }
 .cell_game_white_6 {
@@ -391,6 +414,7 @@ html, body
 #info_text {
 	font-family: Arial;
  	font-size: 16px;
+ 	line-height: 1.54;
  	color: #355264;
 }
 
@@ -879,24 +903,24 @@ a.main:link::after {
 	background: transparent;
 }
 
-a.column_left_footer:link {
+a.toolbar:link {
 	color: white;
 	text-decoration: none;
 	text-transform: capitalize;
 	background: transparent;
 }
 
-a.column_left_footer:visited {
+a.toolbar:visited {
 	color: white;
 	text-decoration: none;
 	text-transform: capitalize;
 	background: transparent;
 }
 
-a.column_left_footer:hover {
+a.toolbar:hover {
 	color: white;
 	text-transform: capitalize;
-	text-decoration: underline;
+	text-decoration: none;
 	background: transparent;
 }
 
@@ -1078,7 +1102,6 @@ select {
 }
 
 .select_search {
-	float: left;
     padding: 0;
     margin: 0;
     width: 81px;
@@ -1090,7 +1113,7 @@ select {
     background: url('arrow_down.png')  no-repeat;
     background-position: 60px 14px;
     overflow: hidden;
-    margin: 4px 0px 4px 13px;
+    margin: 0px 0px 4px 13px;
     background-color: #c9d0d6;
     color: #355264;
     font-size: 15px;

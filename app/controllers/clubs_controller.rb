@@ -1,5 +1,15 @@
 class ClubsController < ApplicationController
 
+  before_filter :check_if_admin
+
+  def check_if_admin
+    begin
+      redirect_to home_path, :remote => true, notice: 'Du bist kein Admin' unless current_user.name == 'JaqenHghar'
+    rescue
+      redirect_to home_path, :remote => true, notice: 'Du bist kein Admin'
+    end
+  end
+
   # GET /clubs
   # GET /clubs.json
   def index

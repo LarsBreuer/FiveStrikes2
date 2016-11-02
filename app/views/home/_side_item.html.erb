@@ -9,19 +9,19 @@
 				<% game_activities = item.game.count_game_activity() %>
 
 				<% if game_activities < 100 %>
-					<%= image_tag("stroke_one_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+					<%= image_tag("stroke_one_small.png", :style => "padding-top: 10px; padding_bottom: 10px; margin-left: 4px;") %>
 				<% else %>
 					<% if game_activities < 200 %>
-						<%= image_tag("stroke_two_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+						<%= image_tag("stroke_two_small.png", :style => "padding-top: 10px; padding_bottom: 10px; margin-left: 4px;") %>
 					<% else %>
 						<% if game_activities < 300 %>
-							<%= image_tag("stroke_three_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+							<%= image_tag("stroke_three_small.png", :style => "padding-top: 10px; padding_bottom: 10px; margin-left: 4px;") %>
 						<% else %>
 							<% if game_activities < 400 %>
-								<%= image_tag("stroke_four_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+								<%= image_tag("stroke_four_small.png", :style => "padding-top: 10px; padding_bottom: 10px; margin-left: 4px;") %>
 							<% else %>
 								<% if game_activities > 399 %>
-									<%= image_tag("stroke_five_small.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+									<%= image_tag("stroke_five_small.png", :style => "padding-top: 10px; padding_bottom: 10px; margin-left: 4px;") %>
 								<% end %>
 							<% end %>
 						<% end %>
@@ -63,7 +63,7 @@
 	<div id="table_game">
 
 		<div id="line_item_label">
-			<%= image_tag("team.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+			<%= image_tag("team.png", :style => "padding-top: 10px; padding_bottom: 10px; margin-left: 4px;") %>
 		</div>
 
 		<div id="line_item_main">
@@ -83,12 +83,14 @@
 	<div id="table_game">
 
 		<div id="line_item_label">
-			<%= image_tag("club.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+			<%= image_tag("club.png", :style => "padding-top: 10px; padding_bottom: 10px; margin-left: 4px;") %>
 		</div>
 
 		<div id="line_item_main">
 			<p id="item_text_main"><%= item.club.club_name %> (<%= item.club.club_name_short %>)</p>
-			<p id="item_text_sub"><%= I18n.t('basic.district') %> <%= item.club.district.name %></p>
+			<% if item.club.district %>
+				<p id="item_text_sub"><%= I18n.t('basic.district') %> <%= item.club.district.name %></p>
+			<% end %>
 		</div>
 
 	</div>
@@ -103,7 +105,7 @@
 	<div id="table_game">
 
 		<div id="line_item_label">
-			<%= image_tag("player.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+			<%= image_tag("player.png", :style => "padding-top: 10px; padding_bottom: 10px; margin-left: 4px;") %>
 		</div>
 
 		<div id="line_item_main">
@@ -124,7 +126,7 @@
 		<div id="table_game">
 
 			<div id="line_item_label">
-				<%= image_tag("user.png", :style => "padding-top: 26px; padding_bottom: 26px; margin-left: 4px;") %>
+				<%= image_tag("user.png", :style => "padding-top: 10px; padding_bottom: 10px; margin-left: 4px;") %>
 			</div>
 
 			<div id="line_item_main">

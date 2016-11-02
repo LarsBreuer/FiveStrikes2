@@ -1,28 +1,30 @@
 <%= form_tag("#", method: "get", id: 'top-search-form') do %>
 
-    <%= select_tag(:choice_id, options_for_select([[I18n.t('basic.game'), 1], [I18n.t('basic.team'), 2], [I18n.t('basic.club'), 4], [I18n.t('basic.user'), 5]], 1), {:class => 'select_search'}) %>
     <%= text_field_tag :query, params[:query], options = {style:"float: left;
-    															                               height: 34px;
-                                                                 line-height: 36px;
-    															                               width: 212px;
+    															                               height: 32px;
+                                                                 line-height: 34px;
+    															                               width: 230px;
     															                               margin-top: 4px;
-                                                                 margin-bottom: 4px;
+                                                                 margin-left: 14px;
     															                               padding: 2px 6px 0px 6px;
-    															                               border: 0px;
+    															                               border-top: 1px solid #c9d0d6;
+                                                                 border-right: 0px;
+                                                                 border-bottom: 1px solid #c9d0d6;
+                                                                 border-left: 1px solid #c9d0d6;
                                                                  border-radius: 0px;
     															                               -webkit-appearance: none;
     															                               color: #355264;
-    															                               font-size:12pt;
+    															                               font-size: 12pt;
                                                                  vertical-align: middle;",
     													placeholder: I18n.t('basic.search')} %>
-    <%= image_submit_tag('glass.png', options = {style:"width: 24px;
+    <%= image_submit_tag('glass.png', options = {style:"      width: 24px;
                                                               height: 24px;
                                                               padding: 6px;
                                                               background-color: #ffb465;
                                                               border-radius: 0;
                                                               border: 0px;
                                                               -webkit-appearance: none;
-                                                              margin-top: 4px;
-                                                              margin-bottom: 4px;"}) %>
+                                                              margin-top: 4px;"}) %>
+    <%= select_tag(:choice_id, options_for_select([[I18n.t('basic.game'), 1], [I18n.t('basic.team'), 2], [I18n.t('basic.club'), 4], [I18n.t('basic.user'), 5]], 1), {:class => 'select_search'}) %>
 
 <% end %>
