@@ -1,3 +1,4 @@
+<% if @player_mode == 'Overview' %>
 <table class = "game_stat_table" cellspacing=0 cellpadding=0 border=0>
 
   <tr class = "game_stat_row">
@@ -36,3 +37,16 @@
   <% end %>
 
 </table>
+<% end %>
+
+<% if @player_mode == 'GoalArea' %>
+
+  <p id="info_text" style="text-align: center;"> <%= I18n.t('basic.coming_soon') %> </p>
+
+<% end %>
+
+<% if @player_mode == 'AttemptOrder' %>
+
+  <p id="info_text" style="text-align: center;"> <%= I18n.t('basic.coming_soon') %> </p>
+
+<% end %>

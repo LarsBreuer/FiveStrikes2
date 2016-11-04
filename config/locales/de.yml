@@ -106,6 +106,7 @@ de:
     sign_out: 'Abmelden'
     friends: 'Freunde'
     find_friends: 'Freunde finden'
+    ask_friend: 'Freundschaftsanfrage'
     user: 'Nutzer'
     name: 'Name'
     logged_in_as: 'Angemeldet als'
@@ -171,8 +172,15 @@ de:
     about: 'Über'
     service_provider: 'Dienstanbieter'
     extras: 'Extras'
+    goal_area: 'Wurfecke'
+    attempt_order: 'Wurffolge'
     link_to_game: 'Link zum Spiel'
     text_link_game: 'Unter der nachfolgenden Linkadresse kannst Du dieses Spiel verlinken:'
+    text_link_ticker_1: 'Du kannst den Ticker zu diesem Spiel auf Deiner Webseite einbauen. Kopiere einfach den untenstehenden Link in den Code Deiner Webseite ein.'
+    text_link_ticker_2: 'Die Größe des Tickers kannst Du an das Layout Deiner Webseite anpassen. Ändere hierzu in dem nachfolgenden Code einfach den Wert für die Breite (width) bzw. Höhe (height) des Tickerfensters.'
+    text_link_ticker_3: 'Weitere Informationen zu dem Ticker findest Du in der Hilfe unter Statistik > (Live-)Ticker'
+    text_login: 'Du musst Dich anmelden, um detailliertere Informationen zu Spielen zu erhalten oder um eigene Spiele hochladen zu können.'
+    text_ask_friend: 'Um detaillierte Informationen zu Spielern zu erfahren, musst Du mit dem Nutzer, der das Spiel eingestellt hat, befreundet sein. Möchtest Du dem Nutzer eine Freundschaftsanfrage senden?'
   devise:
     confirmations:
       confirmed: "Your account was successfully confirmed. You are now signed in."

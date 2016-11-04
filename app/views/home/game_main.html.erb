@@ -45,17 +45,17 @@
       <li class="submenu"><a href="#"><%= I18n.t('basic.game')%></a>
         <ul>
           <li><%= link_to I18n.t('basic.ticker'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GameTicker'), :class => "sidebar" %></li>
-          <li class="submenu"><%= link_to I18n.t('basic.scorer'), home_main_path(:game_id=>@game.id), :remote => true %>
+          <li class="submenu"><%= link_to I18n.t('basic.scorer'), home_game_statistic_main_path(:game_id=>@game.id, :mode => 'GameScorerAll'), :remote => true %>
             <ul>
-              <li><%= link_to I18n.t('basic.all'), home_main_path(:game_id=>@game.id), :remote => true %></li>
-              <li><%= link_to @game.get_club_name_by_team_id(@game.team_home_id), home_main_path(:game_id=>@game.id), :remote => true %></li>
-              <li><%= link_to @game.get_club_name_by_team_id(@game.team_away_id), home_main_path(:game_id=>@game.id), :remote => true %></li>
+              <li><%= link_to I18n.t('basic.all'), home_game_statistic_main_path(:game_id=>@game.id, :mode => 'GameScorerAll'), :remote => true %></li>
+              <li><%= link_to @game.get_club_name_by_team_id(@game.team_home_id), home_game_statistic_main_path(:game_id=>@game.id, :mode => 'GameScorerHome'), :remote => true %></li>
+              <li><%= link_to @game.get_club_name_by_team_id(@game.team_away_id), home_game_statistic_main_path(:game_id=>@game.id, :mode => 'GameScorerAway'), :remote => true %></li>
             </ul>
           </li>
-          <li class="submenu"><%= link_to I18n.t('basic.team_roster'), home_main_path(:game_id=>@game.id), :remote => true %>
+          <li class="submenu"><a href="#"><%= I18n.t('basic.team_roster') %></a>
             <ul>
-              <li><%= link_to @game.get_club_name_by_team_id(@game.team_home_id), home_main_path(:game_id=>@game.id), :remote => true %></li>
-              <li><%= link_to @game.get_club_name_by_team_id(@game.team_away_id), home_main_path(:game_id=>@game.id), :remote => true %></li>
+              <li><%= link_to @game.get_club_name_by_team_id(@game.team_home_id), home_game_statistic_main_path(:game_id=>@game.id, :mode => 'GameRosterHome'), :remote => true %></li>
+              <li><%= link_to @game.get_club_name_by_team_id(@game.team_away_id), home_game_statistic_main_path(:game_id=>@game.id, :mode => 'GameRosterAway'), :remote => true %></li>
             </ul>
           </li>
           <li><%= link_to I18n.t('basic.goals'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GameGoals'), :remote => true %></li>
@@ -69,7 +69,13 @@
 
           <% @player_home.each do |player_id| %>
 
-            <li><%= link_to @game.get_player_name_by_id(player_id), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 1), :remote => true %></li>
+            <li class="submenu"><%= link_to @game.get_player_name_by_id(player_id), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 1, :player_mode => 'Overview'), :remote => true %>
+              <ul>
+                <li><%= link_to I18n.t('basic.overview'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 1, :player_mode => 'Overview'), :remote => true %></li>
+                <li><%= link_to I18n.t('basic.goal_area'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 1, :player_mode => 'GoalArea'), :remote => true %></li>
+                <li><%= link_to I18n.t('basic.attempt_order'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 1, :player_mode => 'AttemptOrder'), :remote => true %></li>           
+              </ul>
+            </li>
 
           <% end %>
 
@@ -80,7 +86,13 @@
 
           <% @player_away.each do |player_id| %>
 
-            <li><%= link_to @game.get_player_name_by_id(player_id), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 0), :remote => true %></li>
+            <li class="submenu"><%= link_to @game.get_player_name_by_id(player_id), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 0, :player_mode => 'Overview'), :remote => true %>
+              <ul>
+                <li><%= link_to I18n.t('basic.overview'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 0, :player_mode => 'Overview'), :remote => true %></li>
+                <li><%= link_to I18n.t('basic.goal_area'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 0, :player_mode => 'GoalArea'), :remote => true %></li>
+                <li><%= link_to I18n.t('basic.attempt_order'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 0, :player_mode => 'AttemptOrder'), :remote => true %></li>           
+              </ul>
+            </li>
 
           <% end %>
 
@@ -88,7 +100,7 @@
       </li>
       <li class="submenu"><a href="#"><%= I18n.t('basic.extras')%></a>
         <ul>
-          <li><%= link_to I18n.t('basic.live_ticker'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GameLiveTicker'), :class => "sidebar" %></li>
+          <li><%= link_to I18n.t('basic.live_ticker'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GameLinkToTicker'), :class => "sidebar" %></li>
           <li><%= link_to I18n.t('basic.link_to_game'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GameLinkToGame'), :remote => true %></li>
         </ul>
       </li>
@@ -129,6 +141,48 @@
   <% if @mode == 'GamePenalty' %>
 
     <%= render :file => "home/game_statistic_penalty" %>
+
+  <% end %>
+
+  <% if @mode == 'GameLinkToTicker' %>
+
+    <%= render :file => "home/game_link_to_ticker" %>
+
+  <% end %>
+
+  <% if @mode == 'GameLinkToGame' %>
+
+    <%= render :file => "home/game_link_to_game" %>
+
+  <% end %>
+
+  <% if @mode == 'GameScorerAll' %>
+
+    <%= render :file => "home/game_scorer" %>
+
+  <% end %>
+
+  <% if @mode == 'GameScorerHome' %>
+
+    <%= render :file => "home/game_scorer" %>
+
+  <% end %>
+
+  <% if @mode == 'GameScorerAway' %>
+
+    <%= render :file => "home/game_scorer" %>
+
+  <% end %>
+
+  <% if @mode == 'GameRosterHome' %>
+
+    <%= render :file => "home/game_roster" %>
+
+  <% end %>
+
+  <% if @mode == 'GameRosterAway' %>
+
+    <%= render :file => "home/game_roster" %>
 
   <% end %>
 

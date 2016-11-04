@@ -3,6 +3,8 @@
 	<%= I18n.t('basic.sign_in') %> 
 </div>  
 
+<p id="info_text"><%= I18n.t('basic.text_login') %></p>
+
 <div class="modal-body">
 	
 	<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f| %>

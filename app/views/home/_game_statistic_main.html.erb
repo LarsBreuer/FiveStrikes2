@@ -31,8 +31,44 @@
 
 <% end %>
 
+<% if @mode == 'GameLinkToTicker' %>
+
+  <%= render :file => "home/game_link_to_ticker" %>
+
+<% end %>
+
 <% if @mode == 'GameLinkToGame' %>
 
   <%= render :file => "home/game_link_to_game" %>
+
+<% end %>
+
+<% if @mode == 'GameScorerAll' %>
+
+	<%= render :file => "home/game_scorer" %>
+
+<% end %>
+
+<% if @mode == 'GameScorerHome' %>
+
+	<%= render :file => "home/game_scorer" %>
+
+<% end %>
+
+<% if @mode == 'GameScorerAway' %>
+
+	<%= render :file => "home/game_scorer" %>
+
+<% end %>
+
+<% if @mode == 'GameRosterHome' %>
+
+	<%= render :file => "home/game_roster" %>
+
+<% end %>
+
+<% if @mode == 'GameRosterAway' %>
+
+	<%= render :file => "home/game_roster" %>
 
 <% end %>

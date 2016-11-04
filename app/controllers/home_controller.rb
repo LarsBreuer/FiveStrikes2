@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :side, :main, :statistic_home, :game_main, :game_statistic_main, :imprint, :help, :help_info]
+  before_filter :authenticate_user!, :except => [:index, :side, :main, :game, :imprint, :help, :help_info]
   before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home, :game_main, :game_statistic_main, :imprint, :help, :help_info]
 
   def index
@@ -118,10 +118,11 @@ class HomeController < ApplicationController
   end
 
   def game_player_main
-
+    
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
+    @player_mode = params[:player_mode]
 
   end
 

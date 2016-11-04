@@ -1,23 +1,14 @@
-<h1>Freundsschaftsanfrage</h1>
+<div id="login_errors"></div>
+<div class="facebox-header">  
+  <%= I18n.t('basic.ask_friend') %> 
+</div>
 
-<table>
-  <tr>
-    <th>User ID</th>
-    <th>Email</th>
-    <th>Username</th>
-  </tr>
+<p id="info_text"><%= I18n.t('basic.text_ask_friend') %></p>
 
-  <tr>
-    <td><%= user.id %></td>
-    <td><%= user.email %></td>
-    <td><%= user.name %></td>
-    <td>
-          (<%= link_to "request friendship",
+<p id="info_text" style="text-align: center;"><%= link_to I18n.t('basic.request_friendship'),
                     :controller => :friendships,
                     :action => :req,
-                    :id => user_id %>)
-    </td>
-  </tr>
-</table>
+                    :id => user_id %></p>
+
 
 <br />
