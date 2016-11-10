@@ -1,3 +1,37 @@
 <p id="info_text">1. Rufe auf fivesweb.de den Punkt "Registrieren" auf. (Du kannst Dich auch über die App anmelden, aber an dieser Stelle soll nur der Login über die Webseite dargestellt werden.)</p>
 <p id="info_text"><%= image_tag("register.png", :class => "pic") %></p>
 <p id="info_text">2. Gib in der Eingabemaske Deinen Nutzernamen (muss nicht zwangsläufig identisch mit Deinem Namen sein), Deine eMail-Adresse, auf die Du Zugriff hast und ein Passwort ein. Bestätige die Nutzungbedingungen und die Datenschutzbestimmungen. Klicke auf Registrieren um zu bestätigen.</p>
+<p id="info_text"><%= image_tag("register_box.png", :class => "pic") %></p>
+<p id="info_text">3. Lege nun eine Mannschaft an. Suche hierzu zunächst den Verein, für den Du die Mannschaft anlegen möchtest. Achte darauf, dass in dem Drop-Down-Menü die Suche nach einem Verein ausgewählt ist. Klicke dann auf das Lupensymbol oder drücke Return auf der Tastatur.</p>
+<p id="info_text"><%= image_tag("club_search.png", :class => "pic") %></p>
+<p id="info_text">4. Wähle in der Listenansicht den Verein, für den Du eine Mannschaft anlegen willst.</p>
+<p id="info_text"><%= image_tag("club_search_result.png", :class => "pic") %></p>
+<p id="info_text">5. In der Übersicht erscheint nun der Verein mit einer Liste aller Mannschaften, die zu dem Verein bereits angelegt wurden. Falls Deine Mannschaft nicht dabei ist, klicke auf "Neue Mannschaft" (ansonsten auf die Mannschaft, für die Du neue Spieler anlegen möchtest udn weiter mit Schritt 7.).</p>
+<p id="info_text"><%= image_tag("team_overview.png", :class => "pic") %></p>
+<p id="info_text">6. Es öffnet sich eine Eingabebox. Dort wählst Du das Geschlecht, die Alterstufe und die Spielstärke (1. Mannschaft, 2. Mannschaft oder 3. Mannschaft usw.) der Mannschaft aus. Bestätige Deine Auswahl mit "Mannschaft speichern".</p>
+<p id="info_text"><%= image_tag("new_team.png", :class => "pic") %></p>
+<p id="info_text">7. Wähle die Mannschaft aus, für die Du neue Spieler anlegen möchtest.</p>
+<p id="info_text"><%= image_tag("choose_team.png", :class => "pic") %></p>
+<p id="info_text">8. Die Mannschaft erscheint nun in der Listenansicht. Wähle nun in der Listenansicht diese Mannschaft aus.</p>
+<p id="info_text"><%= image_tag("choose_team_in_list.png", :class => "pic") %></p>
+<p id="info_text">9. In dem Übersichtsfenster siehst Du nun die Übersicht der Spieler der ausgewählten Mannschaft (falls bereits Spieler eingerichtet wurden). Um neue Spieler für die Mannschaft anzulegen, kannst Du entweder "Neuer Spieler" oder "Spieler aus CSV-Datei importieren" auswählen. In den ersten Schritten wählen wir "Spieler aus CSV-Datei importieren" aus. Eine Erläuterung, wie Du einzelne Spieler anlegst, findest Du in der Hilfe unter "Mannschaft anlegen" > "Neuer Spieler".</p>
+<p id="info_text"><%= image_tag("new_player_csv.png", :class => "pic") %></p>
+<p id="info_text">10. Wir empfehlen Dir, die Muster CSV-Datei auf den Rechner zu laden und Deine Spielerdaten in die Datei einzutragen. Du kannst aber auch Deine eigene Excel-Spielerliste umformatieren und hochladen. Achte nur darauf, dass die CSV im Format Unicode (UTF-8) und mit Kommazeichen als Separator abgespeichert wird. Außerdem muss die CSV-Datei die Spaltenüberschriften "player_number", "player_forename", "player_surename" und "player_position_first" haben.</p>
+<p id="info_text"><%= image_tag("download_csv.png", :class => "pic") %></p>
+<p id="info_text">11. Trage die Daten Deiner Mannschaft (für jeden Spieler Rückennummer, Vorname, Nachname und Position des Spielers) in die CSV-Tabelle ein und speichere die Datei auf Deiner Festplatte. Für die Position des Spielers in der Spalte "player_position_first" musst Du Kürzel benutzen und zwar: "TW" für den Torwart, "LA" für den Linksaußen, "RL" für Rückraum Links, "RM" für Rückraum Mitte, "RR" für Rückraum Rechts, "RA" für Rechtsaußen und "KM" für den Kreisläufer.</p>
+<p id="info_text"><%= image_tag("player_csv.png", :class => "pic") %></p>
+<p id="info_text">12. Wenn Du die Datei abgespeichert hast, klickst Du auf Durchsuchen und wählst die soeben abgespeicherte Datei aus. In dem Feld daneben müsste nun der von Dir ausgewählte Dateiname stehen. Zum Bestätigen des Importvorgangs klicke "CSV-Datei importieren". Wenn alles gut gegangen ist, sollte die Mannschaft nun eine Liste der von Dir importierten Spieler enthalten.</p>
+<p id="info_text"><%= image_tag("import_player.png", :class => "pic") %></p>
+<p id="info_text">13. Wenn alles gut gegangen ist, sollte die Mannschaft nun eine Liste der von Dir importierten Spieler enthalten.</p>
+<p id="info_text"><%= image_tag("team_player_list.png", :class => "pic") %></p>
+<p id="info_text">14. Wiederhole die Schritte 3-12 nun für die gegnerische Mannschaft. (Keine Sorge, Du musst dies nicht jedes Mal machen. Sobald eine Mannschaft einmal angelegt ist, steht sie ab da immer zur Verfügung.)</br>Soweit zunächst zu dem Anlegen von Mannschaft. Nun geht es weite mit der App.</p>
+<p id="info_text">13. Öffne die FIVES-App auf Deinem Smartphone. In der Übersicht gehe auf Login und gib in dem nächsten Fenster Deine eMail-Adresse und Dein Passwort an, mit denen Du Dich bei FIVES angemeldet hattest. Bestätige Deine Eingabe mit Klick auch "Login".</p>
+<p id="info_text"><%= image_tag("smart_overview_login.png", :class => "pic") %></p>
+<p id="info_text"><%= image_tag("smart_login.png", :class => "pic") %></p>
+<p id="info_text">14. Zurück in der Übersicht gehe auf "Mannschaft" und dann dort auf das "+"-Zeichen rechts oben auf dem Bildschirm.</p>
+<p id="info_text"><%= image_tag("smart_overview_team.png", :class => "pic") %></p>
+<p id="info_text"><%= image_tag("smart_team_plus.png", :class => "pic") %></p>
+<p id="info_text">15. In dem nächsten Fenster wählst Du aus der Liste die Option "Internet (empfohlen) aus.</p>
+<p id="info_text"><%= image_tag("smart_add_team.png", :class => "pic") %></p>
+<p id="info_text">16. Nun musst Du den Vereinsnamen eingeben, den Du gerade auf der Homepage eingerichtet hast und mit einem Klick auf "Suche" die Suche nach dem Verein auf dem Webserver auslösen. Bitte achte darauf, dass Du eine bestehende Internetverbindung hast.</p>
+<p id="info_text"><%= image_tag("smart_search_team.png", :class => "pic") %></p>

@@ -122,7 +122,7 @@ de:
     text_club_teams: 'Mannschaften, die zu diesem Verein angelegt wurden:'
     text_team_players: 'Spieler dieser Mannschaft:'
     text_team_games: 'Spiele, die zu dieser Mannschaft angelegt wurden:'
-    text_csv_import: 'Importiere Deine Spielerdaten aus einer CSV-Datei. Lade hierzu die Muster-CSV-Datei herunter und trage Deine Spielerdaten in die Tabelle ein. Wichtig ist, dass die erste Zeile bestehen bleibt. Wähle dann die neu erstellte CSV-Datei unten aus und importiere sie, indem Du auf den Button mit der Aufschrift "CSV-Datei importieren" klickst.'
+    text_csv_import: 'Importiere Deine Spielerdaten aus einer CSV-Datei. Lade hierzu die Muster-CSV-Datei herunter und trage Deine Spielerdaten in die Tabelle ein. Wichtig ist, dass die erste Zeile bestehen bleibt. Für die Position des Spielers in der Spalte "player_position_first" musst Du Kürzel benutzen und zwar: "TW" für den Torwart, "LA" für den Linksaußen, "RL" für Rückraum Links, "RM" für Rückraum Mitte, "RR" für Rückraum Rechts, "RA" für Rechtsaußen und "KM" für den Kreisläufer. Wähle dann die neu erstellte CSV-Datei unten aus und importiere sie, indem Du auf den Button mit der Aufschrift "CSV-Datei importieren" klickst.'
     text_download_csv: 'Lade die Muster-CSV-Datei'
     save_player: 'Spieler speichern'
     edit_player: 'Spieler bearbeiten'
