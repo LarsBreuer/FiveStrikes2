@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:show]
-  before_filter :check_if_admin, :only => [:index, :edit]
+  # before_filter :check_if_admin, :only => [:index, :edit]
 
   def check_if_admin
     begin

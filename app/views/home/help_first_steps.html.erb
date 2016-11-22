@@ -35,5 +35,37 @@
 <p id="info_text"><%= image_tag("smart_add_team.png", :class => "pic") %></p>
 <p id="info_text">16. Nun musst Du den Vereinsnamen eingeben, den Du gerade auf der Homepage eingerichtet hast und mit einem Klick auf "Suche" die Suche nach dem Verein auf dem Webserver auslösen. Bitte achte darauf, dass Du eine bestehende Internetverbindung hast.</p>
 <p id="info_text"><%= image_tag("smart_search_team.png", :class => "pic") %></p>
-<p id="info_text">17. Es erscheint eine Liste mit allen Mannschaften, die auf Deine Suche passen. Wähle die Mannschaft aus, die Du importieren möchtest.</p>
+<p id="info_text">17. Es erscheint eine Liste mit allen Mannschaften, die auf Deine Suche passen. Wähle die Mannschaft aus, die Du importieren möchtest und bestätige die Abfrage, ob Du auch die Spieler herunterladen möchtest, mit "Ja".</p>
 <p id="info_text"><%= image_tag("smart_choose_team.png", :class => "pic") %></p>
+<p id="info_text"><%= image_tag("smart_player_yes.png", :class => "pic") %></p>
+<p id="info_text">18. Die Mannschfat ist nun mit Spielern angelegt. In der Mannschaftsliste erscheint die Mannschaft mit einem grünen Wolkensymbol. Wiederhole die Schritte 14-17, um auch die gegnerische Mannschaft anzulegen.</p>
+<p id="info_text"><%= image_tag("smart_team.png", :class => "pic") %></p>
+<p id="info_text">19. Gehe zurück zur Übersicht indem Du links oben auf das Logo klickst (so kommst Du auch generell immer zurück zu dem vorhergehenden Bildschirm) und wähle in der Übersicht "Spiel" aus...</p>
+<p id="info_text"><%= image_tag("smart_team_back.png", :class => "pic") %></p>
+<p id="info_text"><%= image_tag("smart_overview_game.png", :class => "pic") %></p>
+<p id="info_text">20. ... und richte dort durch einen Klick auf das "+"-Symbol ein neues Spiel ein.</p>
+<p id="info_text"><%= image_tag("smart_game_plus.png", :class => "pic") %></p>
+<p id="info_text">21. Du hast nun zunächst die Möglichkeiten, die Grundeinstellungen für das Spiel festzulegen. So kannst Du zunächst das Datum des Spiels eingeben. Standardmäßig ist das Datum des aktuellen Tages eingestellt. Wenn Du den Datum-Button anklickst, kannst Du ein individuelles Datum einstellen.</p>
+<p id="info_text"><%= image_tag("smart_game_choose_date.png", :class => "pic") %></p>
+<p id="info_text">22. Standardmäßig ist die Halbzeitlänge auf 30 Minuten eingestellt. Hier kannst Du die Länge einer Halbzeit individuell anpassen.</p>
+<p id="info_text"><%= image_tag("smart_game_choose_length.png", :class => "pic") %></p>
+<p id="info_text">23. Durch Klicken auf die Button "Heim" bzw. "Auswärts kannst Du die Heim- und Auswärtsmannschaft auswählen. Wenn Du eine der beiden Button klickst, erscheint eine Liste der Mannschaften, die Du bereits angelegt hast. Wähle hier eine Mannschaft aus. Du kannst die Mannschaft so lange ändern, bis Du das Spiel gestartet hast.</p>
+<p id="info_text"><%= image_tag("smart_game_choose_team.png", :class => "pic") %></p>
+<p id="info_text">24. Über den Punkt "Eingabetiefe" gelangst Du zu einer Auswahl, in der Du bestimemen kannst, wie detailliert Du eine Spielsituation erfasst. Wenn Du alle Häkchen deaktivierst, gibst Du nur die Spielaktionen ohne weitere Angaben ein.</br>"Spieler": Erfasse auch die Namen der Spieler zu einer Spielaktion.</br>"Wurfecke/-position": Gib bei Toren oder Fehlwürfen auch die Wurfecke und die Abwurfposition ein.</br>"Wurftechnik": Gib auch an, welche Wurftechnik der Spieler verwendet hat.</br>"Vorlage zum Torwurf": Es wird auch der Spieler erfasst, der die Vorlage zu dem Torwurf gegeben hat.</br>"Abwehr bei Torwurf": Im Falle eines Torwurfs wird auch der Abwehrspieler mit erfasst.</br>"Benotung der Aktion": Benote die Aktion des Spielers.</br>"Detail Technischer Fehler": Mache detaillierte Angeben im Falle eines technischen Fehlers.</br>"Tickermeldung": Die Tickermeldung wird automatisch generiert. Du kannst Dir diese nach einer Spielaktion aber auch anzeigen lassen und individuell anpassen.</p>
+<p id="info_text"><%= image_tag("smart_game_choose_input_depth.png", :class => "pic") %></p>
+<p id="info_text"><%= image_tag("smart_game_input_depth.png", :class => "pic") %></p>
+<p id="info_text">25. Wenn Du alle Einstellungen gemacht hast, kommst Du über "Ticker aufrufen" zum Ticker.</p>
+<p id="info_text"><%= image_tag("smart_game_start_ticker.png", :class => "pic") %></p>
+<p id="info_text">26. Das Spiel soll an dieser Stelle nur allgemein behandelt werden. Solltest Du detailliertere Informationen zum Ticker haben wollen, informiere Dich in der Hilfe unter "Spiel einrichten". Nachfolgend findest Du einen Überblick über die Elemente der Spielseite.</p>
+<p id="info_text"><b>Die Zeitanzeige:</b> Die Uhr zeigt die aktuell gespielet Zeit ein. Ein kurzer Klick auf die hr startet bzw. stoppt die Zeit. Durch einen langen Klick auf die Uhr öffnet sich ein Fenster über das man die aktuelle Zeit einstellen kann.</p>
+<p id="info_text"><%= image_tag("smart_ticker_time.png", :class => "pic") %></p>
+<p id="info_text"><b>Die Ergebnisanzeige:</b> Durch Klick auf die Ergebnisanzeige kannst Du auswählen, welche Mannschaft im Ballbesitz ist. Normalerweise ist dies aber nicht notwendig, da der Ballbesitz automatisch aktualisiert wird. Die Mannschaft, die im Ballbesitz ist, wird durch einen dunkelblauen Balken am unteren Rand der Toranzeige markiert.</p>
+<p id="info_text"><%= image_tag("smart_ticker_result.png", :class => "pic") %></p>
+<p id="info_text"><b>Die Spielaktionen:</b> In dem Hauptfenster der Tickeranzeige sind die einzelnen Spielaktionen durch Symbole dargestellt. Je nach Auswahl in der Eingabetiefe können hier in den nachfolgenden Fenstern weitere Eingaben zu machen sein. Eine ausführliche Darstellung der Spielaktionen findest Du in der Hilfe unter "Spiel einrichten" > "Neue Spielaktion".</p>
+<p id="info_text"><%= image_tag("smart_ticker_activities.png", :class => "pic") %></p>
+<p id="info_text"><b>Editieren einer Spielaktionen:</b> Über den Reiter "Ticker" kommst Du zu dem Ticker des Spiels. Hier sind alle Spielaktionen, die Du erfasst hast, aufgelistet. Wenn Du einen Tickereintrag anklickst, öffnet sich ein neuer Dialog, in dem Du den Tickereintrag editieren kannst. Dies soll an dieser Stelle nicht näher behandelt werden. Für weitere Informationen wähle in der Hilfe den Punkt "Spiel einrichten" > "Spielaktion editieren" aus.</p>
+<p id="info_text"><%= image_tag("smart_ticker_menu.png", :class => "pic") %></p>
+<p id="info_text"><%= image_tag("smart_ticker_edit.png", :class => "pic") %></p>
+<p id="info_text">27. Wenn Du ein Spiel erflgreich eingerichtet hast, kannst Du in der Übersicht über den Punkt "Statistik" umfangreiche Statistiken zu dem Spiel abrufen. Auch dieser Punkt soll an dieser Stelle nicht ausführlicher behandelt werden. Erfahre mehr zu den Statistiken in der Hilfe unter dem Punkt "Statistik".</p>
+<p id="info_text"><%= image_tag("smart_overview_statistic.png", :class => "pic") %></p>
+<p id="info_text">Soweit zu den Ersten Schritten. Viel Spass bei Deinen Spielen!</p>

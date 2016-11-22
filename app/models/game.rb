@@ -1959,7 +1959,9 @@ class Game < ActiveRecord::Base
 
     if date
       date = DateTime.parse(date)
-      result = date.strftime('%d.%m.%Y, %H:%M:%S')
+      result = date.strftime('%d.%m.%Y')
+# ToDo => Falls die Uhrzeit in der App eingegeben werden kann, auch hier anzeigen
+      #result = date.strftime('%d.%m.%Y, %H:%M:%S')
     end
 
     return result
@@ -1967,5 +1969,3 @@ class Game < ActiveRecord::Base
   end
 
 end
-
-
