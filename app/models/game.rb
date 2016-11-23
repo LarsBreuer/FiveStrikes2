@@ -820,7 +820,7 @@ class Game < ActiveRecord::Base
         end
 
         # Breite des Balken entsprechend der Führung ermitteln
-        if max_width == 0
+        if max_width == 0 OR max_width == nil
           game_stat_array.push(0)
           game_stat_away.push(0)
         else
@@ -907,12 +907,7 @@ puts intMaxLeadAway
       team_lead_array.push(intMaxLeadAway)
       team_lead_array.push(self.get_club_name_short_by_team_id(self.team_away_id))
     end
-puts "team_lead_array"
-puts team_lead_array 
-puts "team_lead_array(0)"
-puts team_lead_array(0)
-puts "team_lead_array(1)"
-puts team_lead_array(1) 
+
     return team_lead_array
 
   end
