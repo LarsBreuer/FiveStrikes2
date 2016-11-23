@@ -895,7 +895,9 @@ puts "Tor geworfen aufgerufen"
     intMaxLeadAway = intMaxLeadAway
 
 puts "intMaxLeadHome" 
-puts "intMaxLeadAway"  
+puts intMaxLeadHome
+puts "intMaxLeadAway"
+puts intMaxLeadAway  
 
     if intMaxLeadHome > intMaxLeadAway
       team_lead_array.push(intMaxLeadHome)
