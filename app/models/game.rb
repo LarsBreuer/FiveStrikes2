@@ -752,6 +752,13 @@ class Game < ActiveRecord::Base
     max_lead_array = self.get_max_team_lead
     max_width = max_lead_array[0]
 
+    puts "Spiel-ID"
+    puts self.id
+    puts "max_width"
+    puts max_width
+    puts "max_lead_array"
+    puts max_lead_array
+
     i = 1
 
     if source == "Statistic"
