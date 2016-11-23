@@ -885,11 +885,10 @@ class Game < ActiveRecord::Base
     # Betrag der maximalen Führung der Auswärtsmannschaft, da sonst negativ 
     intMaxLeadAway= intMaxLeadAway.abs 
 
-    if intMaxLeadHome => intMaxLeadAway
+    if intMaxLeadHome > intMaxLeadAway
       team_lead_array.push(intMaxLeadHome)
       team_lead_array.push(self.get_club_name_short_by_team_id(self.team_home_id))
-    end
-    if intMaxLeadAway > intMaxLeadHome
+    else
       team_lead_array.push(intMaxLeadAway)
       team_lead_array.push(self.get_club_name_short_by_team_id(self.team_away_id))
     end
