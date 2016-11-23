@@ -752,13 +752,6 @@ class Game < ActiveRecord::Base
     max_lead_array = self.get_max_team_lead
     max_width = max_lead_array[0]
 
-    puts "Spiel-ID"
-    puts self.id
-    puts "max_width"
-    puts max_width
-    puts "max_lead_array"
-    puts max_lead_array
-
     i = 1
 
     if source == "Statistic"
@@ -820,7 +813,7 @@ class Game < ActiveRecord::Base
         end
 
         # Breite des Balken entsprechend der Führung ermitteln
-        if max_width == 0 OR max_width == nil
+        if max_width == 0
           game_stat_array.push(0)
           game_stat_away.push(0)
         else
@@ -857,12 +850,12 @@ class Game < ActiveRecord::Base
     # Maximale Führung ermitteln
     # Alle Ticker eines Spiels aufrufen
     self.ticker_activities.each do |ticker_activity|
-puts "Ticker Activity aufgerufen"
+
       intTickerTime = ticker_activity.time
 
       # Wurde ein Tor geschossen?
       if ticker_activity.activity_id == 10100 || ticker_activity.activity_id == 10101 || ticker_activity.activity_id == 10102
-puts "Tor geworfen aufgerufen"    
+  
         # Hat das Heimteam das Tor geschossen?
         if ticker_activity.home_or_away == 1
             
@@ -890,16 +883,9 @@ puts "Tor geworfen aufgerufen"
     end
 
     # Betrag der maximalen Führung der Auswärtsmannschaft, da sonst negativ 
-    intMaxLeadAway= intMaxLeadAway.abs
-    intMaxLeadHome = intMaxLeadHome
-    intMaxLeadAway = intMaxLeadAway
+    intMaxLeadAway= intMaxLeadAway.abs 
 
-puts "intMaxLeadHome" 
-puts intMaxLeadHome
-puts "intMaxLeadAway"
-puts intMaxLeadAway  
-
-    if intMaxLeadHome > intMaxLeadAway
+    if intMaxLeadHome => intMaxLeadAway
       team_lead_array.push(intMaxLeadHome)
       team_lead_array.push(self.get_club_name_short_by_team_id(self.team_home_id))
     end
@@ -907,7 +893,7 @@ puts intMaxLeadAway
       team_lead_array.push(intMaxLeadAway)
       team_lead_array.push(self.get_club_name_short_by_team_id(self.team_away_id))
     end
-
+  
     return team_lead_array
 
   end
