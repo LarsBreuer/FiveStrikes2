@@ -857,12 +857,12 @@ class Game < ActiveRecord::Base
     # Maximale Führung ermitteln
     # Alle Ticker eines Spiels aufrufen
     self.ticker_activities.each do |ticker_activity|
-
+puts "Ticker Activity aufgerufen"
       intTickerTime = ticker_activity.time
 
       # Wurde ein Tor geschossen?
       if ticker_activity.activity_id == 10100 || ticker_activity.activity_id == 10101 || ticker_activity.activity_id == 10102
-              
+puts "Tor geworfen aufgerufen"    
         # Hat das Heimteam das Tor geschossen?
         if ticker_activity.home_or_away == 1
             
@@ -893,6 +893,9 @@ class Game < ActiveRecord::Base
     intMaxLeadAway= intMaxLeadAway.abs
     intMaxLeadHome = intMaxLeadHome
     intMaxLeadAway = intMaxLeadAway
+
+puts "intMaxLeadHome" 
+puts "intMaxLeadAway"  
 
     if intMaxLeadHome > intMaxLeadAway
       team_lead_array.push(intMaxLeadHome)
