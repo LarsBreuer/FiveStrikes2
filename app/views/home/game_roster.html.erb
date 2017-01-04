@@ -1,1 +1,54 @@
-<p id="info_text"> <%= I18n.t('basic.coming_soon') %> </p>
+<% if @mode == 'GameRosterHome' %>
+
+    <% player_game = @player_home %>
+    <% team_name = @game.get_club_name_by_team_id(@game.team_home_id) %>
+    <% home_or_away = 1 %>
+
+<% else %>
+
+    <% player_game = @player_away %>
+    <% team_name = @game.get_club_name_by_team_id(@game.team_away_id) %>
+    <% home_or_away = 0 %>
+
+<% end %>
+
+<p id="info_text" style= 'font-size: 20px; text-align: center; font-weight: bold;'>
+    <%= I18n.t('basic.team_roster') %> <%= team_name %>
+</p>
+
+<div id= "<%= cycle('first_row', 'second_row') -%>" >
+
+	<div style="float: left; width: 4%; font-weight: bold;"><%= I18n.t('basic.number_short') %></div>
+    <div style="float: left; width: 20%; font-weight: bold;"><%= I18n.t('basic.name') %></div>
+    <div style="float: left; width: 18%; text-align: center; font-weight: bold;"><%= I18n.t('basic.goals_effective') %></div>
+    <div style="float: left; width: 18%; text-align: center; font-weight: bold;"><%=I18n.t('basic.7m_goals_effective') %></div>
+    <div style="float: left; width: 18%; text-align: center; font-weight: bold;"><%= I18n.t('basic.fb_goals_effective') %></div>
+    <div style="float: left; width: 5%; text-align: center; font-weight: bold;"><%= I18n.t('basic.tech_fault_short') %></div>
+    <div style="float: left; width: 5%; text-align: center; font-weight: bold;"><%= I18n.t('basic.yellow_card_short') %></div>
+    <div style="float: left; width: 5%; text-align: center; font-weight: bold;"><%= I18n.t('basic.two_minutes_short') %></div>
+    <div style="float: left; width: 5%; text-align: center; font-weight: bold;"><%= I18n.t('basic.red_card_short') %></div>
+
+</div>
+
+<% player_game.each do |player| %>
+	<%= link_to home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => home_or_away, :player_mode => 'Overview'), :remote => true do %>
+		<div id= "<%= cycle('first_row', 'second_row') -%>" >
+
+       		<div style="float: left; width: 4%;"><%= player.player_number %></div>
+<%# ToDo => Breite der Zelle, falls Name länger ist %>
+       		<div style="float: left; width: 20%;"><%= player.player_forename %> <%= player.player_surename %></div>
+       		<div style="float: left; width: 18%; text-align: center;"><%= @game.player_effective_goals_total(player.id) %></div>
+          <div style="float: left; width: 18%; text-align: center;"><%= @game.player_effective_goals_7m(player.id) %></div>
+          <div style="float: left; width: 18%; text-align: center;"><%= @game.player_effective_goals_fb(player.id) %></div>
+      		<div style="float: left; width: 5%; text-align: center;"><%= @game.count_player_tech_faults(player.id) %></div>
+       		<div style="float: left; width: 5%; text-align: center;"><%= @game.count_player_activities(player.id, 10400) %></div>
+          <div style="float: left; width: 5%; text-align: center;"><%= @game.count_player_two_minutes(player.id) %></div>
+          <div style="float: left; width: 5%; text-align: center;"><%= @game.count_player_activities(player.id, 10403) %></div>
+
+   		</div>
+  	<% end %>
+<% end %>
+
+<p id="info_text" style= 'font-size: 11px; text-align: left; font-weight: normal;'>
+    <%= I18n.t('basic.text_roster_explain') %>
+</p>

@@ -105,6 +105,12 @@ class HomeController < ApplicationController
       @game_history = @game.get_game_history(300, "Statistic")
       @game_penalty = @game.get_game_penalty()
       @ticker_events = @game.ticker_events
+      @player_home = @game.get_player_home()
+      @player_away = @game.get_player_away()
+      @scorer_all = @game.get_top_scorer_hash("all")
+      @scorer_home = @game.get_top_scorer_hash("home")
+      @scorer_away = @game.get_top_scorer_hash("away")
+
     end
 
     if params[:mode].present?

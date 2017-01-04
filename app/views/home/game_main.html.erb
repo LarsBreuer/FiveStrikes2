@@ -67,13 +67,13 @@
       <li class="submenu"><a href="#"><%= I18n.t('basic.player')%> <%= @game.get_club_name_short_by_team_id(@game.team_home_id)%></a>
         <ul>
 
-          <% @player_home.each do |player_id| %>
+          <% @player_home.each do |player| %>
 
-            <li class="submenu"><%= link_to @game.get_player_name_by_id(player_id), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 1, :player_mode => 'Overview'), :remote => true %>
+            <li class="submenu"><%= link_to @game.get_player_name_by_id(player.id), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 1, :player_mode => 'Overview'), :remote => true %>
               <ul>
-                <li><%= link_to I18n.t('basic.overview'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 1, :player_mode => 'Overview'), :remote => true %></li>
-                <li><%= link_to I18n.t('basic.goal_area'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 1, :player_mode => 'GoalArea'), :remote => true %></li>
-                <li><%= link_to I18n.t('basic.attempt_order'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 1, :player_mode => 'AttemptOrder'), :remote => true %></li>           
+                <li><%= link_to I18n.t('basic.overview'), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 1, :player_mode => 'Overview'), :remote => true %></li>
+                <li><%= link_to I18n.t('basic.goal_area'), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 1, :player_mode => 'GoalArea'), :remote => true %></li>
+                <li><%= link_to I18n.t('basic.attempt_order'), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 1, :player_mode => 'AttemptOrder'), :remote => true %></li>           
               </ul>
             </li>
 
@@ -84,13 +84,13 @@
       <li class="submenu"><a href="#"><%= I18n.t('basic.player')%> <%= @game.get_club_name_short_by_team_id(@game.team_away_id)%></a>
         <ul>
 
-          <% @player_away.each do |player_id| %>
+          <% @player_away.each do |player| %>
 
-            <li class="submenu"><%= link_to @game.get_player_name_by_id(player_id), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 0, :player_mode => 'Overview'), :remote => true %>
+            <li class="submenu"><%= link_to @game.get_player_name_by_id(player.id), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 0, :player_mode => 'Overview'), :remote => true %>
               <ul>
-                <li><%= link_to I18n.t('basic.overview'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 0, :player_mode => 'Overview'), :remote => true %></li>
-                <li><%= link_to I18n.t('basic.goal_area'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 0, :player_mode => 'GoalArea'), :remote => true %></li>
-                <li><%= link_to I18n.t('basic.attempt_order'), home_game_player_main_path(:game_id => @game.id, :player_id => player_id, :home_or_away => 0, :player_mode => 'AttemptOrder'), :remote => true %></li>           
+                <li><%= link_to I18n.t('basic.overview'), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 0, :player_mode => 'Overview'), :remote => true %></li>
+                <li><%= link_to I18n.t('basic.goal_area'), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 0, :player_mode => 'GoalArea'), :remote => true %></li>
+                <li><%= link_to I18n.t('basic.attempt_order'), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 0, :player_mode => 'AttemptOrder'), :remote => true %></li>           
               </ul>
             </li>
 

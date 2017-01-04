@@ -52,8 +52,8 @@ class Game < ActiveRecord::Base
     
     self.players.each do |player|
       if player.team_id == self.team_home_id
-        unless player_array.include?(player.id)
-          player_array.push(player.id)
+        unless player_array.include?(player)
+          player_array.push(player)
         end
       end
     end
@@ -68,8 +68,8 @@ class Game < ActiveRecord::Base
     
     self.players.each do |player|
       if player.team_id == self.team_away_id
-        unless player_array.include?(player.id)
-          player_array.push(player.id)
+        unless player_array.include?(player)
+          player_array.push(player)
         end
       end
     end
@@ -1684,32 +1684,125 @@ class Game < ActiveRecord::Base
     self.ticker_activities.where("activity_id = ? AND player_id = ?", activityID, playerID).count
   end
 
+  def count_player_tech_faults(playerID)
+    self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ? OR activity_id = ? OR activity_id = ? OR activity_id = ? OR activity_id = ?) AND player_id = ?", 10300, 10301, 10302, 10303, 10304, 10305, 10306, playerID).count
+  end
+
+  def count_player_two_minutes(playerID)
+    two_minutes = self.ticker_activities.where("activity_id = ?  AND player_id = ?", 10401, playerID).count
+    two_plus_two = self.ticker_activities.where("activity_id = ?  AND player_id = ?", 10402, playerID).count
+    return two_minutes + (two_plus_two * 2)
+  end
+
+  def player_effective_goals_total(playerID)
+    # Prüfung, ob Spieler Torwart oder Feldspieler ist
+    if count_gk_saves(playerID) > count_player_goals(playerID)
+      effective = self.gk_effective_saves(playerID)
+      if effective > 0
+        attempts = self.count_gk_saves(playerID) + self.count_gk_goal_againsts(playerID)
+        str_effective = self.count_gk_saves(playerID).to_s + " / " + attempts.to_s + " / " + effective.to_s + "%"
+      else
+        str_effective = "0"
+      end
+    else
+      effective = self.player_effective_goals(playerID)
+      if effective > 0
+        attempts = self.count_player_goals(playerID) + self.count_player_miss(playerID)
+        str_effective = self.count_player_goals(playerID).to_s + " / " + attempts.to_s + " / " + effective.to_s + "%"
+      else
+        str_effective = "0"
+      end
+    end
+    return str_effective
+  end
+
+  def player_effective_goals_7m(playerID)
+    # Prüfung, ob Spieler Torwart oder Feldspieler ist
+    if count_player_activities(playerID, 10201) > count_player_activities(playerID, 10101)
+      effective = self.player_effective(10201, playerID)
+      if effective > 0
+        attempts = self.count_player_activities(playerID, 10201) + self.count_player_activities(playerID, 10251)
+        str_effective = self.count_player_activities(playerID, 10201).to_s + " / " + attempts.to_s + " / " + effective.to_s + "%"
+      else
+        str_effective = "0"
+      end
+    else
+      effective = self.player_effective(10101, playerID)
+      if effective > 0
+        attempts = self.count_player_activities(playerID, 10101) + self.count_player_activities(playerID, 10151)
+        str_effective = self.count_player_activities(playerID, 10101).to_s + " / " + attempts.to_s + " / " + effective.to_s + "%"
+      else
+        str_effective = "0"
+      end
+    end
+    return str_effective
+  end
+
+  def player_effective_goals_fb(playerID)
+    # Prüfung, ob Spieler Torwart oder Feldspieler ist
+    if count_player_activities(playerID, 10202) > count_player_activities(playerID, 10102)
+      effective = self.player_effective(10202, playerID)
+      if effective > 0
+        attempts = self.count_player_activities(playerID, 10202) + self.count_player_activities(playerID, 10252)
+        str_effective = self.count_player_activities(playerID, 10202).to_s + " / " + attempts.to_s + " / " + effective.to_s + "%"
+      else
+        str_effective = "0"
+      end
+    else
+      effective = self.player_effective(10102, playerID)
+      if effective > 0
+        attempts = self.count_player_activities(playerID, 10102) + self.count_player_activities(playerID, 10152)
+        str_effective = self.count_player_activities(playerID, 10102).to_s + " / " + attempts.to_s + " / " + effective.to_s + "%"
+      else
+        str_effective = "0"
+      end
+    end
+    return str_effective
+  end
+
   #
   #
-  # Betsen Torschützen / Torwart ermitteln
+  # Besten Torschützen / Torwart ermitteln
   #
   #
 
-  def get_top_scorer_hash(gameID)
+  def get_top_scorer_hash(home_or_away)
     player_hash = Hash.new
 
     self.players.each do |player|
 
-      player_hash[player.id] = self.count_player_goals(player.id)
+      if home_or_away == "all"
+        player_hash[player] = self.count_player_goals(player.id)
+      end
+
+      if home_or_away == "home"
+        if player.team_id == self.team_home_id
+          player_hash[player] = self.count_player_goals(player.id)
+        end
+      end
+
+      if home_or_away == "away"
+        if player.team_id == self.team_away_id
+          player_hash[player] = self.count_player_goals(player.id)
+        end
+      end
+
+
 
     end
+
+    player_hash = Hash[player_hash.sort_by{|k, v| v}.reverse]
 
     return player_hash
 
   end
-
+  
   def get_top_scorer(gameID)
 
     top_scorer_array = Array.new
 
-    top_scorer_array.push(self.get_top_scorer_hash(gameID).max_by{|k,v| v}[1])
-    playerID = self.get_top_scorer_hash(gameID).max_by{|k,v| v}[0]
-    player = self.players.where("player_id = ?", playerID).first
+    player = self.get_top_scorer_hash("all").max_by{|k,v| v}[0]
+    top_scorer_array.push(self.get_top_scorer_hash("all").max_by{|k,v| v}[1])
     top_scorer_array.push(player.player_surename)
 
     return top_scorer_array
