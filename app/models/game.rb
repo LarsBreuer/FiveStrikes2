@@ -88,20 +88,30 @@ class Game < ActiveRecord::Base
 
     game_stat_main_array = Array.new
     params_array = Array.new
+    goals = self.count_team_goals(self.team_home_id) + self.count_team_goals(self.team_away_id)
 
     # Tore
     game_stat_main_array.push(count_team_goals(self.team_home_id))
     game_stat_main_array.push(count_team_goals(self.team_away_id))
 
-    # Bester Torschütze
-    params_array = self.get_top_scorer(self.id)
-    game_stat_main_array.push(params_array[0])
-    game_stat_main_array.push(params_array[1])
+    # Nur wenn im Spiel ein Tor gefallen ist den besten Torschützen und den besten Torwart anzeigen
+    if goals > 0
+      # Bester Torschütze
+      params_array = self.get_top_scorer(self.id)
+      game_stat_main_array.push(params_array[0])
+      game_stat_main_array.push(params_array[1])
 
-    # Bester Torwart
-    params_array = self.get_top_goalie(self.id)
-    game_stat_main_array.push(params_array[0])
-    game_stat_main_array.push(params_array[1])
+      # Bester Torwart
+      params_array = self.get_top_goalie(self.id)
+      game_stat_main_array.push(params_array[0])
+      game_stat_main_array.push(params_array[1])
+
+    else
+      game_stat_main_array.push("")
+      game_stat_main_array.push("")
+      game_stat_main_array.push("")
+      game_stat_main_array.push("")
+    end
 
     # Spielverlauf eingeben
     params_array = self.get_game_history(54, "Overview")
@@ -132,10 +142,16 @@ class Game < ActiveRecord::Base
     game_stat_main_array.push(params_array[2])
     game_stat_main_array.push(params_array[3])
 
-    # Spieler Effektivität
-    params_array = self.get_top_effective(self.id)
-    game_stat_main_array.push(params_array[0])
-    game_stat_main_array.push(params_array[1])
+    # Nur wenn im Spiel ein Tor gefallen ist den besten Torschützen und den besten Torwart anzeigen
+    if goals > 0
+      # Spieler Effektivität
+      params_array = self.get_top_effective(self.id)
+      game_stat_main_array.push(params_array[0])
+      game_stat_main_array.push(params_array[1])
+    else
+      game_stat_main_array.push("")
+      game_stat_main_array.push("")
+    end
 
     return game_stat_main_array
 
@@ -1801,12 +1817,14 @@ class Game < ActiveRecord::Base
 
     top_scorer_array = Array.new
 
-    player = self.get_top_scorer_hash("all").max_by{|k,v| v}[0]
-    top_scorer_array.push(self.get_top_scorer_hash("all").max_by{|k,v| v}[1])
-    top_scorer_array.push(player.player_surename)
+    goals = self.count_team_goals(self.team_home_id) + self.count_team_goals(self.team_away_id)
 
-    return top_scorer_array
-
+    if goals > 0
+      player = self.get_top_scorer_hash("all").max_by{|k,v| v}[0]
+      top_scorer_array.push(self.get_top_scorer_hash("all").max_by{|k,v| v}[1])
+      top_scorer_array.push(player.player_surename)
+      return top_scorer_array
+    end
   end
 
   def get_top_goalie_hash(gameID)
@@ -1862,15 +1880,16 @@ class Game < ActiveRecord::Base
   def get_top_effective(gameID)
 
     top_effective_array = Array.new
+    goals = self.count_team_goals(self.team_home_id) + self.count_team_goals(self.team_away_id)
 
-    effective = self.get_top_effective_hash(gameID).max_by{|k,v| v}[1]
-    top_effective_array.push(effective)
-    playerID = self.get_top_effective_hash(gameID).max_by{|k,v| v}[0]
-    player = self.players.where("player_id = ?", playerID).first
-    top_effective_array.push(player.player_surename)
-
-    return top_effective_array
-
+    if goals > 0
+      effective = self.get_top_effective_hash(gameID).max_by{|k,v| v}[1]
+      top_effective_array.push(effective)
+      playerID = self.get_top_effective_hash(gameID).max_by{|k,v| v}[0]
+      player = self.players.where("player_id = ?", playerID).first
+      top_effective_array.push(player.player_surename)
+      return top_effective_array
+    end
   end
 
   #
