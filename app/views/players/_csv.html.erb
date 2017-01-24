@@ -6,7 +6,7 @@
   <%= I18n.t('basic.text_csv_import') %> 
 </div> 
 
-<p id="info_link"> <%= link_to I18n.t('basic.text_download_csv'), asset_path("player.csv"), :target => "_blank"  %> </p>
+<p id="info_link"> <%= link_to I18n.t('basic.text_download_csv'), '/player.csv', :target => "_blank"  %> </p>
 
 <%= form_tag import_players_path(:team_id => params[:team_id]), multipart: true do %>
   <%= file_field_tag :file, class: 'file_field_tag' %>
