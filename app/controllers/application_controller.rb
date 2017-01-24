@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
   end
 
   def setup_last_games_in_cart
-    @last_games = Game.limit(5).order('created_at ASC').all
+    @last_games = Game.limit(10).order('created_at ASC').all
     if @last_games.any?
       cart = current_cart
       unless current_cart.line_items.any?
