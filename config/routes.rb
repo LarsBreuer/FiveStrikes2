@@ -56,6 +56,7 @@ FiveStrikes2::Application.routes.draw do
   post '/multiple_ticker_events', to: 'ticker_events#create', as: :multiple_ticker_events_locations
   match '/impressum', to: 'home#imprint', as: :imprint
   match '/hilfe', to: 'home#help', as: :help
+  match '/player_csv', to: "home#player_csv", as: :player_csv
 
   resources :users
   resources :ticker_activities do

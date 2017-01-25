@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :side, :main, :game, :imprint, :help, :help_info]
-  before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home, :game_main, :game_statistic_main, :imprint, :help, :help_info]
+  before_filter :authenticate_user!, :except => [:index, :side, :main, :game, :imprint, :help, :help_info, :player_csv]
+  before_filter :check_if_friend, :except => [:index, :side, :main, :statistic_home, :game_main, :game_statistic_main, :imprint, :help, :help_info, :player_csv]
 
   def index
     setup_last_games_in_cart
@@ -124,7 +124,7 @@ class HomeController < ApplicationController
   end
 
   def game_player_main
-    
+
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
@@ -173,6 +173,10 @@ class HomeController < ApplicationController
     if params[:mode].present?
       @mode = params[:mode]
     end
+  end
+
+  def player_csv
+    send_file "#{Rails.root}/public/player.csv", type: "text/csv", x_sendfile: true
   end
 
   protected
