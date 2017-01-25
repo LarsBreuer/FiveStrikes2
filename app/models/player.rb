@@ -32,7 +32,7 @@ class Player < ActiveRecord::Base
 	def self.import(file_in, team_id)
 		if (team = Team.find(team_id))
 			# Daten aus der CSV herauslesen
-			CSV.foreach(file_in.path, headers: true, encoding:'iso-8859-1:utf-8') do |row|
+			CSV.foreach(file_in.path, headers: true, col_sep: ',', encoding:'iso-8859-1:utf-8') do |row|
 				player_hash = row.to_hash
 				player_hash.keys.each do |k|
 					player_hash[k] = player_hash[k].encode("iso-8859-1").force_encoding("utf-8") if player_hash[k]
