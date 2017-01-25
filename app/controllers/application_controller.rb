@@ -55,18 +55,16 @@ class ApplicationController < ActionController::Base
   end
 
   def setup_last_games_in_cart
-    @last_games = Game.limit(10).order('created_at ASC').all
+    @last_games = Game.limit(10).order('created_at DESC').all
     if @last_games.any?
       cart = current_cart
       unless current_cart.line_items.any?
         @last_games.each {|game| cart.line_items.create(game: game)}
       end
       @line_items = cart.line_items.limit(100).all
-      if @line_items.first.game and @last_games.first
-        @game = @last_games.first
-        @game_overview = @game.get_game_main_stat()
-        @ticker_activities = @game.ticker_activities
-      end
+      @game = @last_games.first
+      @game_overview = @game.get_game_main_stat
+      @ticker_activities = @game.ticker_activities
     end
   end
 
