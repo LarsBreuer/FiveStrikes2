@@ -31,21 +31,33 @@ class Player < ActiveRecord::Base
 	# Import CSV-File
 	def self.import(file_in, team_id)
 		if (team = Team.find(team_id))
-			# Daten aus der CSV herauslesen
-			CSV.foreach(file_in.path, headers: true, col_sep: ';', encoding:'iso-8859-1:utf-8') do |row|
-				player_hash = row.to_hash
-				player_hash.keys.each do |k|
-					player_hash[k] = player_hash[k].encode("iso-8859-1").force_encoding("utf-8") if player_hash[k]
+			if (col_sep = detect_column_separator(file_in.path))
+				puts "Column separator detected: #{col_sep}"
+				# Daten aus der CSV herauslesen
+				CSV.foreach(file_in.path, headers: true, col_sep: col_sep, encoding:'iso-8859-1:utf-8') do |row|
+					player_hash = row.to_hash
+					player_hash.keys.each do |k|
+						player_hash[k] = player_hash[k].encode("iso-8859-1").force_encoding("utf-8") if player_hash[k]
+					end
+					if player_hash['player_position_first'] and not player_hash['player_position_first'].empty?
+						player_hash['player_position_first'] = CSV_POSITION_MAPPING[player_hash['player_position_first'].to_sym]
+					end
+					puts "CSV row: #{player_hash.inspect}"
+					players = team.players.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"])
+					team.players.create(player_hash) if players.count == 0
 				end
-				if player_hash['player_position_first'] and not player_hash['player_position_first'].empty?
-					player_hash['player_position_first'] = CSV_POSITION_MAPPING[player_hash['player_position_first'].to_sym]
-				end
-				puts "CSV row: #{player_hash.inspect}"
-				players = team.players.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"])
-				team.players.create(player_hash) if players.count == 0
 			end
 		end
   end
+
+	def self.detect_column_separator(path)
+	  first_line = File.open(path).first
+	  return nil unless first_line
+	  detected = {}
+	  [",", ";"].each { |delim| detected[delim] = first_line.count(delim) }
+	  detected = detected.sort { |a, b| b[1] <=> a[1] }
+	  detected.size > 0 ? detected[0][0] : nil
+	end
 
   def get_player_position_by_id(position_id)
   	if position_id == '1001'
