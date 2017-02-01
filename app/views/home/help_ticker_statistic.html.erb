@@ -1,1 +1,13 @@
-<p id="info_text"> <%= I18n.t('basic.coming_soon') %> </p>
+<p id="info_headline" style = "margin: 0;">(Live-) Ticker einbauen</p>
+<p id="info_text">1. Voraussetzung für einen (Live-) Ticker ist zunächst, dass Du Dein Spiel mit dem Server synchronisiert hast. Wie Du das machst, erfährst Du unter dem Hilfepunkt <%= link_to I18n.t('basic.first_steps'), home_help_info_path(:mode => 'HelpFirstSteps'), :remote => true %>.</p>
+<p id="info_text">2. Klicke in den Spieleinstellungen auf den Informationsbutton neben dem Synchronisieren-Button.</p>
+<p id="info_text"><%= image_tag("smart_synch_info.png", :class => "pic") %></p>
+<p id="info_text">3. In dem nachfolgenden Informationsfenster findest Du einen HTML-Code. Baue diesen auf Deiner Homepage an einer beliebigen Stelle ein. Mit width bzw. height kannst Du die Breite bzw. Höhe des Tickerfensters festlegen. Du kannst den Code auch von de Webseite unter </p>
+<p id="info_text"><%= image_tag("smart_ticker_info.png", :class => "pic") %></p>
+<p id="info_text"><%= image_tag("ticker_homepage.png", :class => "pic") %></p>
+<p id="info_text">Du kannst den Code auch von der Webseite unter Extras > (Live-)Ticker kopieren.</p>
+<p id="info_text"><%= image_tag("live_ticker_homepage.png", :class => "pic") %></p>
+</br>
+<p id="info_text">Wenn Du nun während eines Spiels zurück zu den Spieleinstellungen gehst und auf „Synchronisieren“ klickst werden automatisch die aktuellen Tickermeldungen auf den FIVES-Server übertragen und auf Deiner Homepage angezeigt.</p>
+<p id="info_text"><%= image_tag("smart_game_edit_synch.png", :class => "pic") %></p>
+<p id="info_text">Wie Du Tickermeldungen erstellen bzw. bearbeiten kannst, erfährst Du in der Hilfe unter <%= link_to I18n.t('basic.ticker_message'), home_help_info_path(:mode => 'HelpTickerMessage' ), :remote => true %>.</p>

@@ -33,6 +33,7 @@ de:
     comments: 'Kommentare'
     goals: 'Tore'
     ticker: 'Ticker'
+    ticker_message: 'Tickermeldung'
     game_history: 'Spielverlauf'
     penalties: 'Strafen'
     powerplay: 'Überzahl'
