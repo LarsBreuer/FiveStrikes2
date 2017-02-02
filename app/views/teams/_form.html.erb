@@ -19,7 +19,11 @@
   <%= f.label :player_position_first, I18n.t('basic.level'), class: 'label_type' %>
   <%= select_tag(:class_id, options_for_select([[I18n.t('basic.choose'), 0], ['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]], 0), {:class => 'select-style'}) %>
 
-  <%= f.hidden_field :team_club_name, :value => @team_club_name %>
+<div class="field">
+    <%= f.label :team_club_name %><br />
+    <%= f.text_field :team_club_name %>
+  </div>
+  
 
   <div class="actions">
     <%= f.submit I18n.t('basic.save_team'), class: 'btn_submit' %>

@@ -6,6 +6,7 @@
     <th>Team ID</th>
     <th>Team Type ID</th>
     <th>Club</th>
+    <th>Team Club Name</th>
     <th>Team</th>
     <th></th>
     <th></th>
@@ -18,6 +19,7 @@
     <td><%= team.id %></td>
     <td><%= team.team_type_id %></td>
     <td><%= team.club.club_name %></td>
+    <td><%= team.team_club_name %></td>
     <td><%= team.team_type(team.team_type_id) %></td>
     <td><%= link_to 'Show', team %></td>
     <td><%= link_to 'Edit', edit_team_path(team) %></td>
