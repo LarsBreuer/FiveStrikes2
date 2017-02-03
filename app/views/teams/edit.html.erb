@@ -1,6 +1,44 @@
 <h1>Editing team</h1>
 
-<%= render 'form' %>
+
+<%= form_for(@team) do |f| %>
+  <% if @team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% @team.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="field">
+    <%= f.label :club_id %><br />
+    <%= f.text_field :club_id %>
+  </div>
+  <div class="field">
+    <%= f.label :team_type_id %><br />
+    <%= f.text_field :team_type_id %>
+  </div>
+  <div class="field">
+    <%= f.label :team_club_name %><br />
+    <%= f.text_field :team_club_name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
 
 <%= link_to 'Show', @team %> |
 <%= link_to 'Back', teams_path %>
