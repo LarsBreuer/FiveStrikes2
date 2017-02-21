@@ -1,6 +1,6 @@
 <div id="info_headline" >
 
-  <%= @team.club.club_name %> <%= @team.team_type(@team.team_type_id) %>
+  <%= truncate(@team.club.club_name, length: 35) %> <%= @team.team_type(@team.team_type_id) %>
 
 </div>
 

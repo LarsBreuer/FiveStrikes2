@@ -32,6 +32,7 @@ FiveStrikes2::Application.routes.draw do
   match '/home/side', :to => 'home#side'
   match '/home/statistic', :to => 'home#statistic'
   match '/home/statistic_home', :to => 'home#statistic_home'
+  match '/home/player_statistic_detail', :to => 'home#player_statistic_detail'
   match '/line_items/create_line_items', :to => 'line_items#create_line_items'
   match '/line_items/create_team_line_items', :to => 'line_items#create_team_line_items'
   match '/line_items/create_player_line_items', :to => 'line_items#create_player_line_items'

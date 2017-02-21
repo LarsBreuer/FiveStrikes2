@@ -17,7 +17,7 @@
       <tr class = "game_headline_row">
 
         <td class = "game_headline_left">
-          <%= @game.get_club_name_by_team_id(@game.team_home_id) %>
+          <%= truncate(@game.get_club_name_by_team_id(@game.team_home_id), length: 25) %>
         </td>
         <td class = "game_headline_middle_left">
           <%= @game.count_team_goals(@game.team_home_id) %>
@@ -26,7 +26,7 @@
           -
         </td>
         <td class = "game_headline_middle_right">
-          <%= @game.count_team_goals(@game.team_away_id) %>
+          <%= truncate(@game.count_team_goals(@game.team_away_id), length: 25) %>
         </td>
         <td class = "game_headline_right">
           <%= @game.get_club_name_by_team_id(@game.team_away_id) %>
@@ -64,7 +64,7 @@
           <li><%= link_to I18n.t('basic.penalties'), home_game_statistic_main_path(:game_id => @game.id, :mode => 'GamePenalty'), :remote => true %></li>
         </ul>
       </li>
-      <li class="submenu"><a href="#"><%= I18n.t('basic.player')%> <%= @game.get_club_name_short_by_team_id(@game.team_home_id)%></a>
+      <li class="submenu"><a href="#"><%= I18n.t('basic.player')%> <%= @game.(@game.team_home_id)%></a>
         <ul>
 
           <% @player_home.each do |player| %>

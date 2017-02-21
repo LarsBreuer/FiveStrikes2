@@ -129,6 +129,16 @@ class HomeController < ApplicationController
     @player = Player.find(params[:player_id])
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
     @player_mode = params[:player_mode]
+    @home_or_away = params[:home_or_away]
+
+  end
+
+  def player_statistic_detail
+
+    @game = Game.find(params[:game_id])
+    @player = Player.find(params[:player_id])
+    @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
+    @player_mode = params[:player_mode]
 
   end
 

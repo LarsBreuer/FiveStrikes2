@@ -1,6 +1,6 @@
 <div id="info_headline" >
 
-  <div style = "font-size: 24px;" > <%= @player.player_forename %> <%= @player.player_surename %> (<%= @player_team.club.club_name %> <%= @player_team.team_type(@player_team.team_type_id) %>) </div>
+  <div style = "font-size: 24px;" > <%= @player.player_forename %> <%= @player.player_surename %> (<%= truncate(@player_team.club.club_name, length: 25) %> <%= @player_team.team_type(@player_team.team_type_id) %>) </div>
 
 </div>
 

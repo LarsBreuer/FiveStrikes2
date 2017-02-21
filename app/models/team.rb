@@ -32,18 +32,11 @@ class Team < ActiveRecord::Base
 			age_id = team_type_id.to_s[3].to_i
 			level_id = team_type_id.to_s[4].to_i
 
-
-			if gender_id == 1 && age_id == 1
-				gender = "Herren"
+			if gender_id == 1
+				gender = "m"
 			end
-			if gender_id == 2 && age_id == 1
-				gender = "Damen"
-			end
-			if gender_id == 1 && age_id > 1
-				gender = "männlich"
-			end
-			if gender_id == 2 && age_id > 1
-				gender = "weiblich"
+			if gender_id == 2
+				gender = "w"
 			end
 			if age_id == 2
 				age = "A"
@@ -64,10 +57,10 @@ class Team < ActiveRecord::Base
 				level = level_id.to_s
 			end
 			if age_id == 1
-				team_type = level + ". " + gender
+				team_type = gender + level
 			end
 			if age_id > 1
-				team_type = age + level + " " + gender
+				team_type = gender + age + level + " "
 			end
 		end
 
