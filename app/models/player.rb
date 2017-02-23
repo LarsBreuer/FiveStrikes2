@@ -37,7 +37,9 @@ class Player < ActiveRecord::Base
 				CSV.foreach(file_in.path, headers: true, col_sep: col_sep, encoding:'iso-8859-1:utf-8') do |row|
 					player_hash = row.to_hash
 					player_hash.keys.each do |k|
-						player_hash[k] = player_hash[k].encode("iso-8859-1").force_encoding("utf-8") if player_hash[k]
+						nk = k.gsub(/[^0-9A-Za-z_]/, '')
+						player_hash[nk] = player_hash[k].encode("iso-8859-1").force_encoding("utf-8") if player_hash[k]
+						player_hash.delete(k) if nk != k
 					end
 					if player_hash['player_position_first'] and not player_hash['player_position_first'].empty?
 						player_hash['player_position_first'] = CSV_POSITION_MAPPING[player_hash['player_position_first'].to_sym]
@@ -46,8 +48,10 @@ class Player < ActiveRecord::Base
 					players = team.players.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"])
 					team.players.create(player_hash) if players.count == 0
 				end
+				return true
 			end
 		end
+		false
   end
 
 	def self.detect_column_separator(path)
