@@ -44,9 +44,13 @@ class Player < ActiveRecord::Base
 					if player_hash['player_position_first'] and not player_hash['player_position_first'].empty?
 						player_hash['player_position_first'] = CSV_POSITION_MAPPING[player_hash['player_position_first'].to_sym]
 					end
-					puts "CSV row: #{player_hash.inspect}"
-					players = team.players.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"])
-					team.players.create(player_hash) if players.count == 0
+					if player_hash and not player_hash.empty?
+						puts "CSV row: #{player_hash.inspect}"
+						if player_hash["player_forename"].present? and player_hash["player_surename"].present?
+							players = team.players.where(player_forename: player_hash["player_forename"], player_surename: player_hash["player_surename"])
+							team.players.create(player_hash) if players.count == 0
+						end
+					end
 				end
 				return true
 			end
