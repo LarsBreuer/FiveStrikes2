@@ -42,12 +42,12 @@
 				<div class="cell_game_white_6"> </div>
 			</div>
 			<div class="row_game">
-				<div class="cell_game_white_319"><%= truncate(item.game.get_club_name_by_team_id(item.game.team_home_id), length: 25) %> <%= item.game.get_team_type_by_team_id(item.game.team_home_id) %></div>
+				<div class="cell_game_white_319"><%= truncate(item.game.get_club_name_by_team_id(item.game.team_home_id), length: 22) %> <%= item.game.get_team_type_by_team_id(item.game.team_home_id) %></div>
 				<div class="cell_game_white_36"><%= item.game.count_team_goals(item.game.team_home_id) %></div>
 				<div class="cell_game_white_6"> </div>
 			</div>
 			<div class="row_game">
-				<div class="cell_game_white_319"><%= truncate(item.game.get_club_name_by_team_id(item.game.team_away_id), length: 25) %> <%= item.game.get_team_type_by_team_id(item.game.team_home_id) %></div>
+				<div class="cell_game_white_319"><%= truncate(item.game.get_club_name_by_team_id(item.game.team_away_id), length: 22) %> <%= item.game.get_team_type_by_team_id(item.game.team_home_id) %></div>
 				<div class="cell_game_white_36"><%= item.game.count_team_goals(item.game.team_away_id) %></div>
 				<div class="cell_game_white_6"> </div>
 			</div>
@@ -67,7 +67,7 @@
 		</div>
 
 		<div id="line_item_main">
-			<p id="item_text_main"><%= truncate(item.team.club.club_name, length: 25) %></p>
+			<p id="item_text_main"><%= truncate(item.team.club.club_name, length: 22) %></p>
 			<p id="item_text_sub"><%= item.team.team_type(item.team.team_type_id) %></p>
 		</div>
 
@@ -87,7 +87,7 @@
 		</div>
 
 		<div id="line_item_main">
-			<p id="item_text_main"><%= truncate(item.club.club_name, length: 25) %> (<%= item.club.club_name_short %>)</p>
+			<p id="item_text_main"><%= truncate(item.club.club_name, length: 22) %> (<%= item.club.club_name_short %>)</p>
 			<% if item.club.district %>
 				<p id="item_text_sub"><%= I18n.t('basic.district') %> <%= item.club.district.name %></p>
 			<% end %>

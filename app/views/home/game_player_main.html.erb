@@ -8,9 +8,9 @@
 
 </table>
 
-<%= button_to "Überblick", home_player_statistic_detail_path(:game_id => @game.id, :player_id => @player.id, :home_or_away => @home_or_away, :player_mode => 'Overview'), class: 'btn_submit', :remote => true %>
-<%= button_to "Wurfbild", home_player_statistic_detail_path(:game_id => @game.id, :player_id => @player.id, :home_or_away => @home_or_away, :player_mode => 'GoalArea'), class: 'btn_submit', :remote => true %>
-<%= button_to "Wurffolge", home_player_statistic_detail_path(:game_id => @game.id, :player_id => @player.id, :home_or_away => @home_or_away, :player_mode => 'AttemptOrder'), class: 'btn_submit', :remote => true %>
+<div style="float: left; width: 33%; margin-bottom: 20px;"><%= button_to "Überblick", home_player_statistic_detail_path(:game_id => @game.id, :player_id => @player.id, :home_or_away => @home_or_away, :player_mode => 'Overview'), class: 'btn_submit', :remote => true %></div> 
+<div style="float: left; width: 33%; margin-bottom: 20px;"><%= button_to "Wurfbild", home_player_statistic_detail_path(:game_id => @game.id, :player_id => @player.id, :home_or_away => @home_or_away, :player_mode => 'GoalArea'), class: 'btn_submit', :remote => true %></div> 
+<div style="float: left; width: 33%; margin-bottom: 20px;"><%= button_to "Wurffolge", home_player_statistic_detail_path(:game_id => @game.id, :player_id => @player.id, :home_or_away => @home_or_away, :player_mode => 'AttemptOrder'), class: 'btn_submit', :remote => true %></div> 
 
 <div id="player_statistic_detail" >
 

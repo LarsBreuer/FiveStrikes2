@@ -36,9 +36,22 @@
 <% end %>
 
 <% if @player_mode == 'GoalArea' %>
+<%
+=begin 
+%>
+  <canvas id="field_canvas"></canvas>
 
+  <script>
+    var canvas = document.getElementById("field_canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#FF0000";
+    <% height_box = 25 %>
+    ctx.fillRect(0,0,150,<%= height_box %>);
+  </script>
+<%
+=end
+%>
   <p id="info_text" style="text-align: center;"> <%= I18n.t('basic.coming_soon') %> </p>
-
 <% end %>
 
 <% if @player_mode == 'AttemptOrder' %>

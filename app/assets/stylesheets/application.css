@@ -937,6 +937,14 @@ td.player_stat_chart {
 	font-family: Arial;
 }
 
+/* Spielfeld Wurfecke */
+
+#field_canvas {
+	width: 350px;
+   	height: 228px;
+   	background: url('field.jpg')  no-repeat;
+}
+
 /* Links */
 
 a.navbar:link {
