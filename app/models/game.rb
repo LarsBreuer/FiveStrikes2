@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  
+
   # ToDo => Eventuell doch Verweis auf Team Home und Team Away einrichten, statt nur auf die ID zu verweisen
   has_many :ticker_activities, :dependent => :destroy, :order => 'time ASC'
   has_many :ticker_events, :dependent => :delete_all, :order => 'time DESC'
@@ -34,7 +34,7 @@ class Game < ActiveRecord::Base
 
   def get_club_name_by_team_id(team_id)
 	 Team.find(:first, :conditions => [ "id = ?", team_id ]).club.club_name
-  end 
+  end
 
   def get_club_name_short_by_team_id(team_id)
    Team.find(:first, :conditions => [ "id = ?", team_id ]).club.club_name_short
@@ -101,9 +101,9 @@ class Game < ActiveRecord::Base
   end
 
   def get_player_home()
-    
+
     player_array = Array.new
-    
+
     self.players.each do |player|
       if player.team_id == self.team_home_id
         unless player_array.include?(player)
@@ -117,9 +117,9 @@ class Game < ActiveRecord::Base
   end
 
   def get_player_away()
-    
+
     player_array = Array.new
-    
+
     self.players.each do |player|
       if player.team_id == self.team_away_id
         unless player_array.include?(player)
@@ -174,7 +174,7 @@ class Game < ActiveRecord::Base
       game_stat_main_array.push(params_array[i])
       i += 1
     end
-    
+
     # Längste Führung
     params_array = self.get_team_lead(self.id)
     game_stat_main_array.push(params_array[0])
@@ -215,7 +215,7 @@ class Game < ActiveRecord::Base
 
     game_ticker_array = Array.new
 
-    
+
 
     return game_ticker_array
 
@@ -476,7 +476,7 @@ class Game < ActiveRecord::Base
       game_stat_array.push(row_width * game_stat_array[array_length - 1] / max_width)
       game_stat_array.push(row_width - (row_width * game_stat_array[array_length - 1] / max_width))
     end
-    
+
 
     return game_stat_array
 
@@ -662,49 +662,49 @@ class Game < ActiveRecord::Base
 
       # Wurde ein Tor geschossen?
       if ticker_activity.activity_id == 10100 || ticker_activity.activity_id == 10101 || ticker_activity.activity_id == 10102
-              
+
         # Hat das Heimteam das Tor geschossen?
         if ticker_activity.home_or_away == 1
-            
+
           intGoalDifference = intGoalDifference + 1
-            
+
           # Maximale Führung überprüfen
           if intGoalDifference > intMaxLeadHome
             intMaxLeadHome = intGoalDifference
           end
-            
+
           # Kommt es durch das Tor zum Unentschieden?
           if intGoalDifference == 0
             intTimeLeadAway = intTimeLeadAway + intTickerTime - intTimeLeadChange
             intTimeLeadChange = intTickerTime
           end
-            
+
           # Geht die Heimmannschaft durch das Tor in Führung?
           if intGoalDifference == 1
             intTimeDraw = intTimeDraw + intTickerTime - intTimeLeadChange
             intTimeLeadChange = intTickerTime
           end
-        
+
         end
-            
+
         # Hat das Auswärtsteam das Tor geschossen?
         if ticker_activity.home_or_away == 0
-            
+
           intGoalDifference = intGoalDifference - 1
-            
+
           # Maximale Führung überprüfen
           if intGoalDifference < intMaxLeadAway
             intMaxLeadAway = intGoalDifference
           end
-            
+
           # Kommt es durch das Tor zum Unentschieden?
           if intGoalDifference == 0
             intTimeLeadHome = intTimeLeadHome + intTickerTime - intTimeLeadChange
             intTimeLeadChange = intTickerTime
           end
-            
+
           # Geht die Auswärtsmannschaft durch das Tor in Führung?
-          if intGoalDifference == -1              
+          if intGoalDifference == -1
             intTimeDraw = intTimeDraw + intTickerTime - intTimeLeadChange
             intTimeLeadChange = intTickerTime
           end
@@ -729,7 +729,7 @@ class Game < ActiveRecord::Base
       intTimeDraw = intTimeDraw + (duration * 2 * 60) - intTimeLeadChange
     end
 
-    # Betrag der maximalen Führung der Auswärtsmannschaft, da sonst negativ 
+    # Betrag der maximalen Führung der Auswärtsmannschaft, da sonst negativ
     intMaxLeadAway= intMaxLeadAway.abs
 
   # 0 => Titel Führung
@@ -867,7 +867,7 @@ class Game < ActiveRecord::Base
       time_step = duration * 2 / intervall
 
       while i <= intervall do
-        
+
         # Tore Heim und Auswärts ermitteln
         goals_home = count_team_goals_time(self.team_home_id, time_step * i)
         goals_away = count_team_goals_time(self.team_away_id, time_step * i)
@@ -925,24 +925,24 @@ class Game < ActiveRecord::Base
 
       # Wurde ein Tor geschossen?
       if ticker_activity.activity_id == 10100 || ticker_activity.activity_id == 10101 || ticker_activity.activity_id == 10102
-  
+
         # Hat das Heimteam das Tor geschossen?
         if ticker_activity.home_or_away == 1
-            
+
           intGoalDifference = intGoalDifference + 1
-            
+
           # Maximale Führung überprüfen
           if intGoalDifference > intMaxLeadHome
             intMaxLeadHome = intGoalDifference
           end
-        
+
         end
-            
+
         # Hat das Auswärtsteam das Tor geschossen?
         if ticker_activity.home_or_away == 0
-            
+
           intGoalDifference = intGoalDifference - 1
-            
+
           # Maximale Führung überprüfen
           if intGoalDifference < intMaxLeadAway
             intMaxLeadAway = intGoalDifference
@@ -952,8 +952,8 @@ class Game < ActiveRecord::Base
       end
     end
 
-    # Betrag der maximalen Führung der Auswärtsmannschaft, da sonst negativ 
-    intMaxLeadAway= intMaxLeadAway.abs 
+    # Betrag der maximalen Führung der Auswärtsmannschaft, da sonst negativ
+    intMaxLeadAway= intMaxLeadAway.abs
 
     if intMaxLeadHome > intMaxLeadAway
       team_lead_array.push(intMaxLeadHome)
@@ -962,7 +962,7 @@ class Game < ActiveRecord::Base
       team_lead_array.push(intMaxLeadAway)
       team_lead_array.push(self.get_club_name_short_by_team_id(self.team_away_id))
     end
-  
+
     return team_lead_array
 
   end
@@ -975,7 +975,7 @@ class Game < ActiveRecord::Base
     if self.duration_halftime != nil
       duration = self.duration_halftime
     end
-    intPowerplay = 0 
+    intPowerplay = 0
     intGoalsPowerplayHome = 0
     intGoalsPowerplayAway = 0
     intGoalsShorthandedHome = 0
@@ -1094,23 +1094,23 @@ class Game < ActiveRecord::Base
 
       # Wurde ein Tor geschossen?
       if ticker_activity.activity_id == 10100 || ticker_activity.activity_id == 10101 || ticker_activity.activity_id == 10102
-              
+
         # Hat das Heimteam das Tor geworfen?
         if ticker_activity.home_or_away == 1
-            
+
           #Überzahl- und Unterzahltore ermitteln
-          if intPowerplay > 0 
+          if intPowerplay > 0
             intGoalsPowerplayHome = intGoalsPowerplayHome + 1
           end
           if intPowerplay < 0
             intGoalsShorthandedHome = intGoalsShorthandedHome + 1
           end
-        
+
         end
-            
+
         # Hat das Auswärtsteam das Tor geworfen?
         if ticker_activity.home_or_away == 0
-            
+
           # Überzahl- und Unterzahltore ermitteln
           if intPowerplay < 0
             intGoalsPowerplayAway = intGoalsPowerplayAway + 1
@@ -1123,10 +1123,10 @@ class Game < ActiveRecord::Base
       end
 
       # Überzahl / Unterzahl eintragen
-        
+
       # Falls eine Zeitstrafe gegeben wurde
       if ticker_activity.activity_id == 10401 || ticker_activity.activity_id == 10402 || ticker_activity.activity_id == 10403
-              
+
         if ticker_activity.home_or_away == 1    # Zeitstrafe für die Heimmannschaft
           intPowerplay = intPowerplay - 1
           if intPowerplay == -1                 # Ist Auswärtsmannschaft in Überzahl gekommen?
@@ -1136,7 +1136,7 @@ class Game < ActiveRecord::Base
             end
           end
         end
-        
+
         if ticker_activity.home_or_away == 0    # Zeitstrafe für die Auswärtsmannschaft
           intPowerplay = intPowerplay + 1
           if intPowerplay == 1                  # Ist Auswärtsmannschaft in Überzahl gekommen?
@@ -1147,10 +1147,10 @@ class Game < ActiveRecord::Base
           end
         end
       end
-        
+
       # Falls Spieler von Zeitstrafe zurück kommt
       if ticker_activity.activity_id == 10503
-        if ticker_activity.home_or_away == 1 
+        if ticker_activity.home_or_away == 1
           intPowerplay = intPowerplay + 1
           if intPowerplay == 1                 # Ist Heimmannschaft durch Rückkehr in Überzahl gekommen?
             intTimePowerplayChange = intTickerTime
@@ -1159,7 +1159,7 @@ class Game < ActiveRecord::Base
             intTimePowerplayAway = intTimePowerplayAway + intTickerTime - intTimePowerplayChange
           end
         end
-          
+
         if ticker_activity.home_or_away == 0
           intPowerplay = intPowerplay - 1
           if intPowerplay == 1                  # Ist Auswärtsmannschaft durch Rückkehr in Überzahl gekommen?
@@ -1268,7 +1268,7 @@ class Game < ActiveRecord::Base
     player_stat_array = Array.new
     stat_hash = Hash.new
     stat_overall_hash = Hash.new
-    
+
     row_width = 400
     duration = 30
     if self.duration_halftime != nil
@@ -1308,9 +1308,9 @@ class Game < ActiveRecord::Base
           end
           player_status = 1
         end
-        
+
         # Wurde Spieler ausgewechselt?
-        if ticker_activity.activity_id == 10502 || ticker_activity.activity_id == 10401 || 
+        if ticker_activity.activity_id == 10502 || ticker_activity.activity_id == 10401 ||
            ticker_activity.activity_id == 10402 || ticker_activity.activity_id == 10403
           if player_status == 1
             time = time + ticker_activity.time - time_in
@@ -1320,8 +1320,8 @@ class Game < ActiveRecord::Base
       else
 
         # Falls es zwar keine Aktion des Spielers, aber eine Einwechselung
-        # ist und der zu prüfende Spieler gerade eingewechselt ist, prüfe, ob 
-        # es sich um eine Mannschaftsaufstellung mit sieben Spielern handelt 
+        # ist und der zu prüfende Spieler gerade eingewechselt ist, prüfe, ob
+        # es sich um eine Mannschaftsaufstellung mit sieben Spielern handelt
         # und ob das Ticker Ereignis noch nicht abgefragt wurde
         # Falls ja: Wechsel den Spieler aus.
 
@@ -1330,7 +1330,7 @@ class Game < ActiveRecord::Base
           ticker_activities_sub_in = self.ticker_activities.where("ticker_event_id_local = ? AND activity_id = ?", ticker_event_id, 10501)
 
           if ticker_activities_sub_in.count == 7
-            
+
             # Überprüfe, ob der Spieler Teil der Mannschaftsaufstellung ist
             player_in = false
             # Alle Tickermeldungen des Events abfragen und mit der Spieler ID vergleichen
@@ -1342,19 +1342,19 @@ class Game < ActiveRecord::Base
                 end
               end
             end
-            
+
             # Ticker Event ID speichern, damit diese nicht noch einmal abgefragt wird
             last_ticker_event_id = ticker_event_id
-            
-            # Falls nicht, also falls sieben Spieler eingewechselt wurden und der 
-            # zu prüfende Spieler nicht dabei war, wurde der zu prüfende 
+
+            # Falls nicht, also falls sieben Spieler eingewechselt wurden und der
+            # zu prüfende Spieler nicht dabei war, wurde der zu prüfende
             # Spieler ausgewechselt.
             if player_in == false
-              
+
               time = time + ticker_activity.time - time_in
               player_status = 0
-              
-            end          
+
+            end
           end
         end
       end
@@ -1375,7 +1375,7 @@ class Game < ActiveRecord::Base
     time = time /1000
     time_in = time_in / 1000
 
-    # Falls der Spieler auch am Ende des Spiels noch eingewechselt war, 
+    # Falls der Spieler auch am Ende des Spiels noch eingewechselt war,
     # addiere die restliche Spielzeit zur Gesamtspielzeit.
     if player_status == 1
       time = time + (duration * 2 * 60) - time_in
@@ -1652,6 +1652,10 @@ class Game < ActiveRecord::Base
     self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ?) AND team_id = ?", 10100, 10101, 10102, teamID).count
   end
 
+  def total_goals
+    self.ticker_activities.select {|ta| [10100, 10101, 10102].include?(ta.activity_id) and ta.team_id}.size
+  end
+
   # Fehlwürfe eines Teams
   def count_team_miss(teamID)
     self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ?) AND team_id = ?", 10150, 10151, 10152, teamID).count
@@ -1702,7 +1706,7 @@ class Game < ActiveRecord::Base
   def count_player_goals(playerID)
     self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ?) AND player_id = ?", 10100, 10101, 10102, playerID).count
   end
-  
+
   # Fehlwürfe eines Spielers
   def count_player_miss(playerID)
     self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ?) AND player_id = ?", 10150, 10151, 10152, playerID).count
@@ -1866,7 +1870,7 @@ class Game < ActiveRecord::Base
     return player_hash
 
   end
-  
+
   def get_top_scorer(gameID)
 
     top_scorer_array = Array.new
@@ -1969,9 +1973,9 @@ class Game < ActiveRecord::Base
     else
       duration_halftime = 30
     end
-    
+
     self.ticker_activities.each do |ticker_activity|
-         
+
       if ticker_activity.activity_id == 10100 || ticker_activity.activity_id == 10101 || ticker_activity.activity_id == 10102
 
         if ticker_activity.home_or_away == 1
@@ -2052,10 +2056,10 @@ class Game < ActiveRecord::Base
     red_away = 0
     fair_home = 0
     fair_away = 0
-    
+
     self.ticker_activities.each do |ticker_activity|
-         
-      if ticker_activity.activity_id == 10400 
+
+      if ticker_activity.activity_id == 10400
         if ticker_activity.home_or_away == 1
           yellow_home = yellow_home + 1
         end
@@ -2064,7 +2068,7 @@ class Game < ActiveRecord::Base
         end
       end
 
-      if ticker_activity.activity_id == 10401 
+      if ticker_activity.activity_id == 10401
         if ticker_activity.home_or_away == 1
           two_home = two_home + 1
         end
@@ -2082,7 +2086,7 @@ class Game < ActiveRecord::Base
         end
       end
 
-      if ticker_activity.activity_id == 10403 
+      if ticker_activity.activity_id == 10403
         if ticker_activity.home_or_away == 1
           red_home = red_home + 1
         end

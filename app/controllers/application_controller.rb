@@ -55,7 +55,8 @@ class ApplicationController < ActionController::Base
   end
 
   def setup_last_games_in_cart
-    @last_games = Game.limit(10).order('created_at DESC').all.to_a.reverse
+    @last_games = Game.includes(:ticker_activities).limit(20).order('created_at DESC').all.to_a.reverse
+    @last_games = @last_games.select {|game| game.total_goals >= 10}[0..9]
     if @last_games.any?
       cart = current_cart
       unless current_cart.line_items.any?
