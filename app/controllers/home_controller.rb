@@ -128,6 +128,7 @@ class HomeController < ApplicationController
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
+    @player_field_matrix = @game.get_player_field_matrix(params[:player_id], nil)
     @player_mode = params[:player_mode]
     @home_or_away = params[:home_or_away]
 
@@ -138,6 +139,8 @@ class HomeController < ApplicationController
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
+# ToDo => player_field_matrix nur dann berechnen, wenn es nicht schon berechnet wurde.
+    @player_field_matrix = @game.get_player_field_matrix(params[:player_id], nil)
     @player_mode = params[:player_mode]
 
   end

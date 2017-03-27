@@ -17,7 +17,6 @@
         <td class = "player_stat_chart">
           <IMG src="/assets/blue.png" width="<%= @player_stat[i+2] -%>"  height=14 border=0><IMG src="/assets/grey.png" width="<%= @player_stat[i+3] -%>" height=14 border=0>
         </td>
-
       </tr>
 
       <% i += 4 %>
@@ -36,22 +35,118 @@
 <% end %>
 
 <% if @player_mode == 'GoalArea' %>
-<%
-=begin 
-%>
+
   <canvas id="field_canvas"></canvas>
 
   <script>
-    var canvas = document.getElementById("field_canvas");
+
+<%# Canvas einrichten in Abhängigkeit von der Bildschirmgröße %>
+
+    var PIXEL_RATIO = (function () {
+      var ctx_pixel = document.getElementById("field_canvas").getContext("2d"),
+          dpr = window.devicePixelRatio || 1,
+          bsr = ctx_pixel.webkitBackingStorePixelRatio ||
+                ctx_pixel.mozBackingStorePixelRatio ||
+                ctx_pixel.msBackingStorePixelRatio ||
+                ctx_pixel.oBackingStorePixelRatio ||
+                ctx_pixel.backingStorePixelRatio || 1;
+
+      return dpr / bsr;
+    })();
+
+    createHiDPICanvas = function(w, h, ratio) {
+      if (!ratio) { ratio = PIXEL_RATIO; }
+      var can = document.getElementById("field_canvas");
+      can.width = w * ratio;
+      can.height = h * ratio;
+      can.style.width = w + "px";
+      can.style.height = h + "px";
+      can.getContext("2d").setTransform(ratio, 0, 0, ratio, 0, 0);
+      return can;
+    }
+
+<%# Mausklick abfangen %>
+
+    function doMouseDown(event) {
+      canvas_x = event.pageX;
+      canvas_y = event.pageY;
+
+      canvas_x -= canvas.offsetLeft;
+      canvas_y -= canvas.offsetTop;
+
+      alert("X=" + canvas_x + " >=" + canvas_y);
+    }
+
+<%# Spielfeld erstellen %>
+
+    var canvas = createHiDPICanvas(350, 228);
     var ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#FF0000";
-    <% height_box = 25 %>
-    ctx.fillRect(0,0,150,<%= height_box %>);
+    canvas.addEventListener("mousedown", doMouseDown, false);
+
+    var width = canvas.width;
+    var height = canvas.height;
+
+<%# Farbige Spielfelder generieren %>
+
+    <% btn_width = 350 %>
+    <% btn_height = 228 %>
+    <% outfield = 10 * btn_height / 130 %>
+    <% rect_width = btn_width / 15 %>
+    <% rect_height = (btn_height - outfield) / 10 %>
+
+    <% i = 0 %>
+    <% x_counter = 1 %>
+    <% y_counter = 1 %>
+
+    <% while( i < 150 )  %>
+      <% for x_counter in 1..15 %>
+        <% for y_counter in 1..10 %>
+          <% if @player_field_matrix[i] > 0 %>
+            <% coord_left = (x_counter - 1) * rect_width %>
+            <% coord_right = x_counter * rect_width %>
+            <% coord_top = outfield + ((y_counter - 1) * rect_height) %>
+            <% coord_bottom = outfield + (y_counter * rect_height) %>
+            <% if @player_field_matrix[i] == 1 %>
+              ctx.fillStyle = "#CE4C4C";
+            <% end %>
+            <% if @player_field_matrix[i] == 2 %>
+              ctx.fillStyle = "#FFE8A2";
+            <% end %>
+            <% if @player_field_matrix[i] == 3 %>
+              ctx.fillStyle = "#98C05F";
+            <% end %>
+            ctx.fillRect(<%= coord_left %>, <%= coord_top %>, <%= rect_width %>, <%= rect_height %>);
+            ctx.lineWidth=0.5;
+            ctx.strokeRect(<%= coord_left %>, <%= coord_top %>, <%= rect_width %>, <%= rect_height %>);
+          <% end %>
+          <% i += 1 %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+<%# Beschriftung der Wurfpositionen %>
+
+    ctx.fillStyle = "#000";
+    ctx.font = 'bold 18px Arial';
+    <% x = 0 %>
+    <% position_x = [20, 34, 54, 100, 100, 164, 144, 180] %>
+    <% position_y = [30, 94, 69, 99, 69, 94, 69, 30] %>
+
+    <% while( i < 171 )  %>
+      <% if @player_field_matrix[i+1] > 0 %>
+        <% position_text = @player_field_matrix[i].to_s  + " / " + @player_field_matrix[i+1].to_s %>
+        <% text_x = position_x[x] * btn_width / 200 %>
+        <% text_y = position_y[x] * btn_height / 120 %>
+        ctx.fillText('<%= position_text %>', <%= text_x %>, <%= text_y %>);
+        <% position_text = @player_field_matrix[i+2].to_s + " %" %>
+        ctx.fillText('<%= position_text %>', <%= text_x %>, <%= text_y + 20 %>);
+      <% end %>
+      <% i += 3 %>
+      <% x += 1 %>
+    <% end %>
+
   </script>
-<%
-=end
-%>
-  <p id="info_text" style="text-align: center;"> <%= I18n.t('basic.coming_soon') %> </p>
+
 <% end %>
 
 <% if @player_mode == 'AttemptOrder' %>

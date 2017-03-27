@@ -8,6 +8,7 @@ class Game < ActiveRecord::Base
   has_many :line_items
 
   require 'date'
+  include Math
 
   # ToDo => Überprüfung, ob Spiel tatsächlich zerstört werden darf, einrichten
   # before_destroy :ensure_not_referenced_by_any_line_item
@@ -1623,6 +1624,366 @@ class Game < ActiveRecord::Base
 # ToDo => Statistik über die Art der Würfe einfügen
 
     return player_stat_array
+
+  end
+
+  def get_player_field_matrix(playerID, position_control)
+
+    # Aufteilung des Spielfeld-Arrays
+    # 0-149 => Farbe des Bereichs auf dem Spielfeld (15x10 Matrix)
+    # 150-170 => Beschriftung des Spielfelds nach Wurfpositionen
+    
+    player_field_matrix = Array.new
+    player_stat_goal_array = self.get_player_stat_goal(playerID, position_control)
+    player = self.players.where("player_id = ?", playerID).first
+
+    if player.player_position_first == '1001'
+      goalkeeper = true
+    else
+      goalkeeper = false
+    end
+
+    # Farbige Felder festlegen
+
+    for x_counter in 1..15
+      for y_counter in 1..10
+
+        plus = 0
+        minus = 0
+        attempts = 0
+        percent = 0
+
+        if goalkeeper == true
+              # 1-150 => Feldtor
+              # 151-300 => 7m-Tor
+              # 301-450 => Tempogegenstoss-Tor
+              # Danach jeweils in 150-Schritten für Fehlwurf, Gehalten und Torwart-Gegentor
+          plus = player_stat_goal_array[900 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1050 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1200 + x_counter + ((y_counter - 1) * 15)]
+          minus = player_stat_goal_array[1350 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1500 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1650 + x_counter + ((y_counter - 1) * 15)]
+          attempts = plus + minus
+          percent = plus * 100 / attempts if attempts > 0
+          
+        else
+              
+          plus = player_stat_goal_array[x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[150 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[300 + x_counter + ((y_counter - 1) * 15)]
+          minus = player_stat_goal_array[450 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[600 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[750 + x_counter + ((y_counter - 1) * 15)]
+          attempts = plus + minus;
+          percent = plus * 100 / attempts if attempts > 0
+              
+        end
+
+        if attempts > 0
+          if goalkeeper == true
+puts "Eintrag Torwart"
+puts percent
+            player_field_matrix.push(1) if percent <= 25
+            player_field_matrix.push(2) if percent > 25 && percent < 40
+            player_field_matrix.push(3) if percent >= 40
+          else
+            player_field_matrix.push(1) if percent <= 33
+            player_field_matrix.push(2) if percent > 33 && percent < 66
+            player_field_matrix.push(3) if percent >= 66
+          end
+        else
+          player_field_matrix.push(0)
+        end
+
+      end
+    end
+
+    # Wurfposition beschriften
+
+    for x_counter in 0..7
+
+      if goalkeeper == true
+        plus = player_stat_goal_array[2089 + x_counter] + player_stat_goal_array[2097 + x_counter] + player_stat_goal_array[2105 + x_counter]
+        minus = player_stat_goal_array[2113 + x_counter] + 
+            player_stat_goal_array[2121 + x_counter] + 
+            player_stat_goal_array[2129 + x_counter]
+        attempts = plus + minus
+        percent = plus * 100 / attempts if (attempts > 0) 
+            
+      else
+        
+        plus = player_stat_goal_array[2041 + x_counter] + player_stat_goal_array[2049 + x_counter] + player_stat_goal_array[2057 + x_counter]
+        minus = player_stat_goal_array[2065 + x_counter] + player_stat_goal_array[2073 + x_counter] + player_stat_goal_array[2081 + x_counter]
+        attempts = plus + minus
+        percent = plus * 100 / attempts if (attempts > 0) 
+            
+      end
+
+      if attempts > 0
+        player_field_matrix.push(plus)
+        player_field_matrix.push(attempts)
+        player_field_matrix.push(percent)
+      else
+        player_field_matrix.push(0)
+        player_field_matrix.push(0)
+        player_field_matrix.push(0)
+      end
+
+    end
+
+    #destdr
+    
+    return player_field_matrix
+  end
+
+  def get_player_stat_goal(playerID, position_control)
+
+    # Aufteilung des Spieler-Statistik Arrays
+    # 1-1800 => Position des Wurfs auf dem Spielfel (15x10 Matrix)
+      # 1-150 => Feldtor
+      # 151-300 => 7m-Tor
+      # 301-450 => Tempogegenstoss-Tor
+      # Danach jeweils in 150-Schritten für Fehlwurf, Gehalten und Torwart-Gegentor
+    # 1801-2040 => Wurfecke, ansonsten die Schritte wie oben
+    # 2041-2136 => Position des Wurfs gemessen an der Spielerposition (Linksaußen, Halblinks Nachbereich, Halblinks Fern etc.)
+    
+    player_stat_goal_array = Array.new(2137, 0)
+    bool_distance = false
+
+    position_counter = 0
+
+    self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ? OR 
+                                   activity_id = ? OR activity_id = ? OR activity_id = ? OR 
+                                   activity_id = ? OR activity_id = ? OR activity_id = ? OR 
+                                   activity_id = ? OR activity_id = ? OR activity_id = ?) 
+                                   AND player_id = ?", 
+                                   10100, 10101, 10102, 10150, 10151, 10152, 10200, 10201, 10202, 10250, 10251, 10252, playerID).each do |ticker_activity|
+
+      # Abfrage, ob nur eine bestimmter Wurf abgefragt werden soll oder alle Würfe abgefragt werden sollen
+      if position_control == nil || position_control == position_counter
+
+        ticker_activity_id = ticker_activity.activity_id
+
+        # Statistiken Wurfposition berechnen
+        # Koordinaten abfragen
+          
+        x_coord_original = ticker_activity.field_position_x
+        y_coord_original = ticker_activity.field_position_y
+
+        if x_coord_original != nil && y_coord_original != nil
+            
+          # Wurf auf dem Spielfeld zuordnen
+          # Abfrage, ob eine bestimmte Spielposition, oder ob alle Positionen abgefragt werden sollen 
+          if bool_distance == false     # Wenn kein fester Punkt angegeben wurde...
+
+            # ... alle Positionen in die Auswertung einbeziehen
+            x_coord_matrix = (x_coord_original * 3 / 40) + 1
+            y_coord_matrix = (y_coord_original / 12) + 1
+
+            if x_coord_matrix > 15 
+              x_coord_matrix = 15
+            end
+            if y_coord_matrix > 10 
+              y_coord_matrix = 10
+            end
+
+            # Wurftyp ermitteln
+            # Beispiel: field_position_id = 0 wenn es sich um Torwurf handelt 
+            field_position_id = 0 if ticker_activity_id == 10100
+            field_position_id = 1 if ticker_activity_id == 10101
+            field_position_id = 2 if ticker_activity_id == 10102
+            field_position_id = 3 if ticker_activity_id == 10150
+            field_position_id = 4 if ticker_activity_id == 10151
+            field_position_id = 5 if ticker_activity_id == 10152
+            field_position_id = 6 if ticker_activity_id == 10200
+            field_position_id = 7 if ticker_activity_id == 10201
+            field_position_id = 8 if ticker_activity_id == 10202
+            field_position_id = 9 if ticker_activity_id == 10250
+            field_position_id = 10 if ticker_activity_id == 10251
+            field_position_id = 11 if ticker_activity_id == 10252
+
+            for x_counter in -2..2
+              for y_counter in -2..2
+
+                x_matrix = x_coord_matrix + x_counter
+                y_matrix = y_coord_matrix + y_counter
+                
+                if x_matrix >= 1 && x_matrix <= 15 && y_matrix >= 1 && y_matrix <=10
+
+                  # Konkrete Matrix bestimmt sich nach dem Wurftyp, der x-Koordinate und der y-Koordinate
+                  matrix_id = (field_position_id * 150) + (x_matrix) + ((y_matrix - 1) * 15)
+
+                  if player_stat_goal_array[matrix_id] != nil
+                    player_stat_goal_array[matrix_id] = player_stat_goal_array[matrix_id] + 1
+                  else
+                    player_stat_goal_array[matrix_id] = 1
+                  end
+                  
+                end
+                  
+              end
+            end
+
+            # ... Wurf einer Spielerposition zuordnen
+            position = self.get_position(x_coord_original, y_coord_original)
+
+            matrix_id = 2041 + field_position_id * 8 + position
+
+            if player_stat_goal_array[matrix_id] != nil
+              player_stat_goal_array[matrix_id] = player_stat_goal_array[matrix_id] + 1
+            else
+              player_stat_goal_array[matrix_id] = 1
+            end
+
+          else      # Wenn eine konkrete Position angegeben wurde
+            # ToDo: Auswahl einer konkreten Position noch machen
+            # destdr
+          end
+        end
+
+        # Statistiken Wurfecke berechnen
+        goal_area = ticker_activity.goal_area
+
+        if goal_area != nil
+
+          x_area = nil
+          y_area = nil
+          if goal_area == "uull"
+            x_area = 0
+            y_area = 0
+          end
+          if goal_area == "uul"
+            x_area = 1
+            y_area = 0
+          end
+          if goal_area == "uum"
+            x_area = 2
+            y_area = 0
+          end
+          if goal_area == "uur"
+            x_area = 3
+            y_area = 0
+          end
+          if goal_area == "uurr"
+            x_area = 4
+            y_area = 0
+          end
+          if goal_area == "ull"
+            x_area = 0
+            y_area = 1
+          end
+          if goal_area == "ul"
+            x_area = 1
+            y_area = 1
+          end
+          if goal_area == "um"
+            x_area = 2
+            y_area = 1
+          end
+          if goal_area == "ur"
+            x_area = 3
+            y_area = 1
+          end
+          if goal_area == "urr"
+            x_area = 4
+            y_area = 1
+          end
+          if goal_area == "mll"
+            x_area = 0
+            y_area = 2
+          end
+          if goal_area == "ml"
+            x_area = 1
+            y_area = 2
+          end
+          if goal_area == "mm"
+            x_area = 2
+            y_area = 2
+          end
+          if goal_area == "mr"
+            x_area = 3
+            y_area = 2
+          end
+          if goal_area == "mrr"
+            x_area = 4
+            y_area = 2
+          end
+          if goal_area == "lll"
+            x_area = 0
+            y_area = 3
+          end
+          if goal_area == "ll"
+            x_area = 1
+            y_area = 3
+          end
+          if goal_area == "lm"
+            x_area = 2
+            y_area = 3
+          end
+          if goal_area == "lr"
+            x_area = 3
+            y_area = 3
+          end
+          if goal_area == "lrr"
+            x_area = 4
+            y_area = 3
+          end
+
+          if x_area != nil && y_area != nil
+            if (bool_distance == true && click_distance <= max_distance) || bool_distance == false
+
+              matrix_id = (field_position_id * 20) + (x_area) + (y_area * 4) + 1801
+
+              if player_stat_goal_array[matrix_id] != nil
+                player_stat_goal_array[matrix_id] = player_stat_goal_array[matrix_id] + 1
+              else
+                player_stat_goal_array[matrix_id] = 1
+              end
+
+            end
+          end
+        end
+      end
+
+      position_counter = position_counter + 1
+
+    end
+
+    return player_stat_goal_array
+
+  end
+
+  def get_position(x_coord_original, y_coord_original)
+
+    best_position = 0
+    best_distance = 250
+    position_x = Array.new
+    position_y = Array.new
+
+    position_x.push(20)
+    position_x.push(34)
+    position_x.push(54)
+    position_x.push(100)
+    position_x.push(100)
+    position_x.push(164)
+    position_x.push(144)
+    position_x.push(180)
+
+    position_y.push(30)
+    position_y.push(94)
+    position_y.push(69)
+    position_y.push(99)
+    position_y.push(69)
+    position_y.push(94)
+    position_y.push(69)
+    position_y.push(30)
+
+    for position in 0..7
+
+      distance = Math.sqrt(((x_coord_original - position_x[position]) * (x_coord_original - position_x[position])) +
+                           ((y_coord_original - position_y[position]) * (y_coord_original - position_y[position])))
+
+      if distance < best_distance
+        best_distance = distance
+        best_position = position
+      end
+
+    end
+
+    return best_position
 
   end
 
