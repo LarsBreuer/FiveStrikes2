@@ -74,7 +74,10 @@
       canvas_x -= canvas.offsetLeft;
       canvas_y -= canvas.offsetTop;
 
-      alert("X=" + canvas_x + " >=" + canvas_y);
+      // alert("X=" + canvas_x + " >=" + canvas_y);
+      var url = "/home/player_statistic_detail?game_id=<%= @game.id %>&player_id=<%= @player.id %>&home_or_away=<%= @home_or_away %>&x_click=" + canvas_x + "&y_click=" + canvas_y;
+      console.log("URL: " + url);
+      $.ajax(url);
     }
 
 <%# Spielfeld erstellen %>
