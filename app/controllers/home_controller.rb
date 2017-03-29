@@ -127,6 +127,7 @@ class HomeController < ApplicationController
 
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
+    @home_or_away = params[:home_or_away]
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
     if params[:position_control].present?
       @position_control = params[:position_control]
@@ -153,6 +154,7 @@ class HomeController < ApplicationController
 
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
+    @home_or_away = params[:home_or_away]
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
     if params[:position_control].present?
       @position_control = params[:position_control]
