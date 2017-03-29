@@ -1627,14 +1627,14 @@ class Game < ActiveRecord::Base
 
   end
 
-  def get_player_field_matrix(playerID, position_control)
+  def get_player_field_matrix(playerID, position_control, x_click, y_click)
 
     # Aufteilung des Spielfeld-Arrays
     # 0-149 => Farbe des Bereichs auf dem Spielfeld (15x10 Matrix)
     # 150-170 => Beschriftung des Spielfelds nach Wurfpositionen
     
     player_field_matrix = Array.new
-    player_stat_goal_array = self.get_player_stat_goal(playerID, position_control)
+    player_stat_goal_array = self.get_player_stat_goal(playerID, position_control, x_click, y_click)
     player = self.players.where("player_id = ?", playerID).first
 
     if player.player_position_first == '1001'
@@ -1729,7 +1729,7 @@ puts percent
     return player_field_matrix
   end
 
-  def get_player_stat_goal(playerID, position_control)
+  def get_player_stat_goal(playerID, position_control, x_click, y_click)
 
     # Aufteilung des Spieler-Statistik Arrays
     # 1-1800 => Position des Wurfs auf dem Spielfel (15x10 Matrix)

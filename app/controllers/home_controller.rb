@@ -128,7 +128,22 @@ class HomeController < ApplicationController
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
-    @player_field_matrix = @game.get_player_field_matrix(params[:player_id], nil)
+    if params[:position_control].present?
+      @position_control = params[:position_control]
+    else
+      @position_control = nil
+    end
+    if params[:x_click].present?
+      @x_click = params[:x_click]
+    else
+      @x_click = nil
+    end
+    if params[:y_click].present?
+      @y_click = params[:y_click]
+    else
+      @y_click = nil
+    end
+    @player_field_matrix = @game.get_player_field_matrix(params[:player_id], @position_control, @x_click, @y_click)
     @player_mode = params[:player_mode]
     @home_or_away = params[:home_or_away]
 
@@ -139,8 +154,23 @@ class HomeController < ApplicationController
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
+    if params[:position_control].present?
+      @position_control = params[:position_control]
+    else
+      @position_control = nil
+    end
+    if params[:x_click].present?
+      @x_click = params[:x_click]
+    else
+      @x_click = nil
+    end
+    if params[:y_click].present?
+      @y_click = params[:y_click]
+    else
+      @y_click = nil
+    end
 # ToDo => player_field_matrix nur dann berechnen, wenn es nicht schon berechnet wurde.
-    @player_field_matrix = @game.get_player_field_matrix(params[:player_id], nil)
+    @player_field_matrix = @game.get_player_field_matrix(params[:player_id], @position_control, @x_click, @y_click)
     @player_mode = params[:player_mode]
 
   end
