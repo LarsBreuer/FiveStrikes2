@@ -73,7 +73,7 @@
               <ul>
                 <li><%= link_to I18n.t('basic.overview'), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 1, :player_mode => 'Overview'), :remote => true %></li>
                 <li><%= link_to I18n.t('basic.goal_area'), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 1, :player_mode => 'GoalArea'), :remote => true %></li>
-                <li><%= link_to I18n.t('basic.attempt_order'), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 1, :player_mode => 'AttemptOrder'), :remote => true %></li>           
+                <li><%= link_to I18n.t('basic.attempt_order'), home_game_player_main_path(:game_id => @game.id, :player_id => player.id, :home_or_away => 1, :player_mode => 'AttemptOrder', :position_control => 0), :remote => true %></li>           
               </ul>
             </li>
 

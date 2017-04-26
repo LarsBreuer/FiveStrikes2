@@ -92,6 +92,31 @@ class Player < ActiveRecord::Base
   	return position
   end
 
+  def get_player_position_short_by_id(position_id)
+  	if position_id == '1001'
+  		position = I18n.t('basic.goalkeeper_short')
+  	end
+  	if position_id == '1002'
+  		position = I18n.t('basic.left_wing_short')
+  	end
+  	if position_id == '1003'
+  		position = I18n.t('basic.left_back_short')
+  	end
+  	if position_id == '1004'
+  		position = I18n.t('basic.center_back_short')
+  	end
+  	if position_id == '1005'
+  		position = I18n.t('basic.right_back_short')
+  	end
+  	if position_id == '1006'
+  		position = I18n.t('basic.right_wing_short')
+  	end
+  	if position_id == '1007'
+  		position = I18n.t('basic.pivot_short')
+  	end
+  	return position
+  end
+
   def get_player_games
 
     game_array = Array.new

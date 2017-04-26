@@ -1627,14 +1627,10 @@ class Game < ActiveRecord::Base
 
   end
 
-  def get_player_field_matrix(playerID, position_control, x_click, y_click)
-
-    # Aufteilung des Spielfeld-Arrays
-    # 0-149 => Farbe des Bereichs auf dem Spielfeld (15x10 Matrix)
-    # 150-170 => Beschriftung des Spielfelds nach Wurfpositionen
+  def get_player_field_matrix(playerID, position_control, x_click, y_click, goal_area)
     
     player_field_matrix = Array.new
-    player_stat_goal_array = self.get_player_stat_goal(playerID, position_control, x_click, y_click)
+    player_stat_goal_array = self.get_player_stat_goal(playerID, position_control, x_click, y_click, goal_area)
     player = self.players.where("player_id = ?", playerID).first
 
     if player.player_position_first == '1001'
@@ -1643,93 +1639,176 @@ class Game < ActiveRecord::Base
       goalkeeper = false
     end
 
-    # Farbige Felder festlegen
+    if x_click == nil && y_click == nil && position_control == nil   # Farbige Felder festlegen, falls keine konkrete Position ausgewählt
 
-    for x_counter in 1..15
-      for y_counter in 1..10
+      # Aufteilung des Spielfeld-Arrays
+      # 0-149 => Farbe des Bereichs auf dem Spielfeld (15x10 Matrix)
+      # 150-170 => Beschriftung des Spielfelds nach Wurfpositionen
+      # 171- => Färbung und Beschriftung der Wurfecke
 
-        plus = 0
-        minus = 0
-        attempts = 0
-        percent = 0
+      for x_counter in 1..15
+        for y_counter in 1..10
+
+          plus = 0
+          minus = 0
+          attempts = 0
+          percent = 0
+
+          if goalkeeper == true
+                # 1-150 => Feldtor
+                # 151-300 => 7m-Tor
+                # 301-450 => Tempogegenstoss-Tor
+                # Danach jeweils in 150-Schritten für Fehlwurf, Gehalten und Torwart-Gegentor
+            plus = player_stat_goal_array[900 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1050 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1200 + x_counter + ((y_counter - 1) * 15)]
+            minus = player_stat_goal_array[1350 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1500 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1650 + x_counter + ((y_counter - 1) * 15)]
+            attempts = plus + minus
+            percent = plus * 100 / attempts if attempts > 0
+          
+          else
+              
+            plus = player_stat_goal_array[x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[150 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[300 + x_counter + ((y_counter - 1) * 15)]
+            minus = player_stat_goal_array[450 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[600 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[750 + x_counter + ((y_counter - 1) * 15)]
+            attempts = plus + minus;
+            percent = plus * 100 / attempts if attempts > 0
+              
+          end
+
+          if attempts > 0
+            if goalkeeper == true
+              player_field_matrix.push(1) if percent <= 25
+              player_field_matrix.push(2) if percent > 25 && percent < 40
+              player_field_matrix.push(3) if percent >= 40
+            else
+              player_field_matrix.push(1) if percent <= 33
+              player_field_matrix.push(2) if percent > 33 && percent < 66
+              player_field_matrix.push(3) if percent >= 66
+            end
+          else
+            player_field_matrix.push(0)
+          end
+
+        end
+      end
+
+      # Wurfposition beschriften
+
+      for x_counter in 0..7
 
         if goalkeeper == true
-              # 1-150 => Feldtor
-              # 151-300 => 7m-Tor
-              # 301-450 => Tempogegenstoss-Tor
-              # Danach jeweils in 150-Schritten für Fehlwurf, Gehalten und Torwart-Gegentor
-          plus = player_stat_goal_array[900 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1050 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1200 + x_counter + ((y_counter - 1) * 15)]
-          minus = player_stat_goal_array[1350 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1500 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[1650 + x_counter + ((y_counter - 1) * 15)]
+          plus = player_stat_goal_array[2089 + x_counter] + player_stat_goal_array[2097 + x_counter] + player_stat_goal_array[2105 + x_counter]
+          minus = player_stat_goal_array[2113 + x_counter] + 
+              player_stat_goal_array[2121 + x_counter] + 
+              player_stat_goal_array[2129 + x_counter]
           attempts = plus + minus
-          percent = plus * 100 / attempts if attempts > 0
-          
+          percent = plus * 100 / attempts if (attempts > 0) 
+            
         else
-              
-          plus = player_stat_goal_array[x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[150 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[300 + x_counter + ((y_counter - 1) * 15)]
-          minus = player_stat_goal_array[450 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[600 + x_counter + ((y_counter - 1) * 15)] + player_stat_goal_array[750 + x_counter + ((y_counter - 1) * 15)]
-          attempts = plus + minus;
-          percent = plus * 100 / attempts if attempts > 0
-              
+        
+          plus = player_stat_goal_array[2041 + x_counter] + player_stat_goal_array[2049 + x_counter] + player_stat_goal_array[2057 + x_counter]
+          minus = player_stat_goal_array[2065 + x_counter] + player_stat_goal_array[2073 + x_counter] + player_stat_goal_array[2081 + x_counter]
+          attempts = plus + minus
+          percent = plus * 100 / attempts if (attempts > 0) 
+            
         end
 
         if attempts > 0
-          if goalkeeper == true
-puts "Eintrag Torwart"
-puts percent
-            player_field_matrix.push(1) if percent <= 25
-            player_field_matrix.push(2) if percent > 25 && percent < 40
-            player_field_matrix.push(3) if percent >= 40
-          else
-            player_field_matrix.push(1) if percent <= 33
-            player_field_matrix.push(2) if percent > 33 && percent < 66
-            player_field_matrix.push(3) if percent >= 66
-          end
+          player_field_matrix.push(plus)
+          player_field_matrix.push(attempts)
+          player_field_matrix.push(percent)
         else
+          player_field_matrix.push(0)
+          player_field_matrix.push(0)
+          player_field_matrix.push(0)
+        end
+      end
+
+      # Wurfecke eingeben
+      for x_counter in 0..19
+
+        if goalkeeper == true
+          plus = player_stat_goal_array[1921 + x_counter] + player_stat_goal_array[1941 + x_counter] + player_stat_goal_array[1961 + x_counter]
+          minus = player_stat_goal_array[1981 + x_counter] + 
+              player_stat_goal_array[2001 + x_counter] + 
+              player_stat_goal_array[2021 + x_counter]
+          attempts = plus + minus
+          percent = plus * 100 / attempts if (attempts > 0) 
+            
+        else
+        
+          plus = player_stat_goal_array[1801 + x_counter] + player_stat_goal_array[1821 + x_counter] + player_stat_goal_array[1841 + x_counter]
+          minus = player_stat_goal_array[1861 + x_counter] + player_stat_goal_array[1881 + x_counter] + player_stat_goal_array[1901 + x_counter]
+          attempts = plus + minus
+          percent = plus * 100 / attempts if (attempts > 0) 
+            
+        end
+
+        if attempts > 0
+          player_field_matrix.push(plus)
+          player_field_matrix.push(attempts)
+          player_field_matrix.push(percent)
+        else
+          player_field_matrix.push(0)
+          player_field_matrix.push(0)
           player_field_matrix.push(0)
         end
 
       end
-    end
 
-    # Wurfposition beschriften
+    else      # Falls eine bestimmte Position ausgewählt wurde
 
-    for x_counter in 0..7
+      for x_counter in 0..11
 
-      if goalkeeper == true
-        plus = player_stat_goal_array[2089 + x_counter] + player_stat_goal_array[2097 + x_counter] + player_stat_goal_array[2105 + x_counter]
-        minus = player_stat_goal_array[2113 + x_counter] + 
-            player_stat_goal_array[2121 + x_counter] + 
-            player_stat_goal_array[2129 + x_counter]
-        attempts = plus + minus
-        percent = plus * 100 / attempts if (attempts > 0) 
-            
-      else
-        
-        plus = player_stat_goal_array[2041 + x_counter] + player_stat_goal_array[2049 + x_counter] + player_stat_goal_array[2057 + x_counter]
-        minus = player_stat_goal_array[2065 + x_counter] + player_stat_goal_array[2073 + x_counter] + player_stat_goal_array[2081 + x_counter]
-        attempts = plus + minus
-        percent = plus * 100 / attempts if (attempts > 0) 
-            
+        player_field_matrix.push(player_stat_goal_array[2137 + x_counter])
+
       end
 
-      if attempts > 0
-        player_field_matrix.push(plus)
-        player_field_matrix.push(attempts)
-        player_field_matrix.push(percent)
-      else
-        player_field_matrix.push(0)
-        player_field_matrix.push(0)
-        player_field_matrix.push(0)
+      # Wurfecke eingeben
+      for x_counter in 0..19
+
+        if goalkeeper == true
+          plus = player_stat_goal_array[1921 + x_counter] + player_stat_goal_array[1941 + x_counter] + player_stat_goal_array[1961 + x_counter]
+          minus = player_stat_goal_array[1981 + x_counter] + 
+              player_stat_goal_array[2001 + x_counter] + 
+              player_stat_goal_array[2021 + x_counter]
+          attempts = plus + minus
+          percent = plus * 100 / attempts if (attempts > 0) 
+        else
+          plus = player_stat_goal_array[1801 + x_counter] + player_stat_goal_array[1821 + x_counter] + player_stat_goal_array[1841 + x_counter]
+          minus = player_stat_goal_array[1861 + x_counter] + player_stat_goal_array[1881 + x_counter] + player_stat_goal_array[1901 + x_counter]
+          attempts = plus + minus
+          percent = plus * 100 / attempts if (attempts > 0) 
+        end
+
+        if attempts > 0
+          player_field_matrix.push(plus)
+          player_field_matrix.push(attempts)
+          player_field_matrix.push(percent)
+        else
+          player_field_matrix.push(0)
+          player_field_matrix.push(0)
+          player_field_matrix.push(0)
+        end
       end
+
+      player_field_matrix.push(player_stat_goal_array[2149])
+      player_field_matrix.push(player_stat_goal_array[2150])
+      player_field_matrix.push(player_stat_goal_array[2151])
 
     end
 
-    #destdr
-    
     return player_field_matrix
   end
 
-  def get_player_stat_goal(playerID, position_control, x_click, y_click)
+  def player_ticker_length(playerID)
+    return ticker = self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ? OR 
+                                   activity_id = ? OR activity_id = ? OR activity_id = ? OR 
+                                   activity_id = ? OR activity_id = ? OR activity_id = ? OR 
+                                   activity_id = ? OR activity_id = ? OR activity_id = ?) 
+                                   AND player_id = ?", 
+                                   10100, 10101, 10102, 10150, 10151, 10152, 10200, 10201, 10202, 10250, 10251, 10252, playerID).size
+  end
+
+  def get_player_stat_goal(playerID, position_control, x_click, y_click, goal_area)
 
     # Aufteilung des Spieler-Statistik Arrays
     # 1-1800 => Position des Wurfs auf dem Spielfel (15x10 Matrix)
@@ -1739,29 +1818,77 @@ puts percent
       # Danach jeweils in 150-Schritten für Fehlwurf, Gehalten und Torwart-Gegentor
     # 1801-2040 => Wurfecke, ansonsten die Schritte wie oben
     # 2041-2136 => Position des Wurfs gemessen an der Spielerposition (Linksaußen, Halblinks Nachbereich, Halblinks Fern etc.)
+    # 2137-2148 => Würfe von einer bestimmten Position aus
+    # 2149-2150 => x- und y-Koordinate bei Wurffolge
+    # 2151 => Beschriftung bei Wurffolge
     
-    player_stat_goal_array = Array.new(2137, 0)
+    player_stat_goal_array = Array.new(2152, 0)
     bool_distance = false
-
+    click_distance = 0
+    max_distance = 50
+    if x_click != nil && y_click != nil
+      bool_distance = true
+      x_click = x_click.to_i * 200 / 350
+      y_click = (y_click.to_i - (10 * 228 / 130)) * 120 / 228
+    end
+    if position_control != nil
+      position_control = position_control.to_i
+    end
+    
     position_counter = 0
 
-    self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ? OR 
+    if goal_area == nil
+      ticker = self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ? OR 
                                    activity_id = ? OR activity_id = ? OR activity_id = ? OR 
                                    activity_id = ? OR activity_id = ? OR activity_id = ? OR 
                                    activity_id = ? OR activity_id = ? OR activity_id = ?) 
                                    AND player_id = ?", 
-                                   10100, 10101, 10102, 10150, 10151, 10152, 10200, 10201, 10202, 10250, 10251, 10252, playerID).each do |ticker_activity|
+                                   10100, 10101, 10102, 10150, 10151, 10152, 10200, 10201, 10202, 10250, 10251, 10252, playerID)
+    else
+      ticker = self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ? OR 
+                                   activity_id = ? OR activity_id = ? OR activity_id = ? OR 
+                                   activity_id = ? OR activity_id = ? OR activity_id = ? OR 
+                                   activity_id = ? OR activity_id = ? OR activity_id = ?) 
+                                   AND player_id = ? AND goal_area = ?", 
+                                   10100, 10101, 10102, 10150, 10151, 10152, 10200, 10201, 10202, 10250, 10251, 10252, playerID, goal_area)
+    end
+
+    ticker.each do |ticker_activity|
 
       # Abfrage, ob nur eine bestimmter Wurf abgefragt werden soll oder alle Würfe abgefragt werden sollen
       if position_control == nil || position_control == position_counter
 
         ticker_activity_id = ticker_activity.activity_id
 
+        # Wurftyp ermitteln
+        # Beispiel: field_position_id = 0 wenn es sich um Torwurf handelt 
+        field_position_id = 0 if ticker_activity_id == 10100
+        field_position_id = 1 if ticker_activity_id == 10101
+        field_position_id = 2 if ticker_activity_id == 10102
+        field_position_id = 3 if ticker_activity_id == 10150
+        field_position_id = 4 if ticker_activity_id == 10151
+        field_position_id = 5 if ticker_activity_id == 10152
+        field_position_id = 6 if ticker_activity_id == 10200
+        field_position_id = 7 if ticker_activity_id == 10201
+        field_position_id = 8 if ticker_activity_id == 10202
+        field_position_id = 9 if ticker_activity_id == 10250
+        field_position_id = 10 if ticker_activity_id == 10251
+        field_position_id = 11 if ticker_activity_id == 10252
+
         # Statistiken Wurfposition berechnen
         # Koordinaten abfragen
           
         x_coord_original = ticker_activity.field_position_x
         y_coord_original = ticker_activity.field_position_y
+
+        if position_control != nil
+          bool_distance = true
+          x_click = x_coord_original 
+          y_click = y_coord_original
+          player_stat_goal_array[2149] = x_click * 350 / 200
+          player_stat_goal_array[2150] = y_click * 228 / 120 + (10 * 228 / 130)
+          player_stat_goal_array[2151] = TickerActivity.convert_seconds_to_time(ticker_activity.time / 1000).to_s + " " + I18n.t('basic.minutes_short') + " " + TickerActivity.convert_activity_id_to_activity(ticker_activity.activity_id)
+        end
 
         if x_coord_original != nil && y_coord_original != nil
             
@@ -1779,21 +1906,6 @@ puts percent
             if y_coord_matrix > 10 
               y_coord_matrix = 10
             end
-
-            # Wurftyp ermitteln
-            # Beispiel: field_position_id = 0 wenn es sich um Torwurf handelt 
-            field_position_id = 0 if ticker_activity_id == 10100
-            field_position_id = 1 if ticker_activity_id == 10101
-            field_position_id = 2 if ticker_activity_id == 10102
-            field_position_id = 3 if ticker_activity_id == 10150
-            field_position_id = 4 if ticker_activity_id == 10151
-            field_position_id = 5 if ticker_activity_id == 10152
-            field_position_id = 6 if ticker_activity_id == 10200
-            field_position_id = 7 if ticker_activity_id == 10201
-            field_position_id = 8 if ticker_activity_id == 10202
-            field_position_id = 9 if ticker_activity_id == 10250
-            field_position_id = 10 if ticker_activity_id == 10251
-            field_position_id = 11 if ticker_activity_id == 10252
 
             for x_counter in -2..2
               for y_counter in -2..2
@@ -1829,8 +1941,14 @@ puts percent
             end
 
           else      # Wenn eine konkrete Position angegeben wurde
-            # ToDo: Auswahl einer konkreten Position noch machen
-            # destdr
+            
+            click_distance = Math.sqrt((x_coord_original - x_click) ** 2 + (y_coord_original - y_click) ** 2)
+
+            if click_distance <= max_distance
+              matrix_id = 2137 + field_position_id
+              player_stat_goal_array[matrix_id] = player_stat_goal_array[matrix_id] + 1
+            end
+
           end
         end
 
@@ -1838,7 +1956,6 @@ puts percent
         goal_area = ticker_activity.goal_area
 
         if goal_area != nil
-
           x_area = nil
           y_area = nil
           if goal_area == "uull"
@@ -1923,17 +2040,16 @@ puts percent
           end
 
           if x_area != nil && y_area != nil
+
             if (bool_distance == true && click_distance <= max_distance) || bool_distance == false
-
-              matrix_id = (field_position_id * 20) + (x_area) + (y_area * 4) + 1801
-
+              matrix_id = (field_position_id * 20) + (x_area) + (y_area * 5) + 1801
               if player_stat_goal_array[matrix_id] != nil
                 player_stat_goal_array[matrix_id] = player_stat_goal_array[matrix_id] + 1
               else
                 player_stat_goal_array[matrix_id] = 1
               end
-
             end
+
           end
         end
       end
@@ -1973,8 +2089,8 @@ puts percent
 
     for position in 0..7
 
-      distance = Math.sqrt(((x_coord_original - position_x[position]) * (x_coord_original - position_x[position])) +
-                           ((y_coord_original - position_y[position]) * (y_coord_original - position_y[position])))
+      distance = Math.sqrt(((x_coord_original - position_x[position]) ** 2 ) +
+                           ((y_coord_original - position_y[position]) ** 2))
 
       if distance < best_distance
         best_distance = distance

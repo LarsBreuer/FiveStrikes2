@@ -169,7 +169,7 @@ html, body
 
 #side {
 	width: 307px;
-	min-height: 100%;
+	min-height: 1000px;
 	padding-top: 114px;
 	background: white;
 }
@@ -227,7 +227,7 @@ html, body
 #main {
 	width: 728px;
 	padding-top: 114px;
-	min-height: 600px;
+	min-height: 1000px;
 	font-family: Arial;
     font-size: 13pt;
   	background: transparent;
@@ -361,8 +361,8 @@ html, body
 
 #game_statistic_main {
 	width: 704px;
-	min-height: 600px;
-	padding: 50px 12px 12px 12px;
+	min-height: 1000px;
+	padding: 36px 12px 12px 12px;
 	color: #355264;
   	background: white;
 }
@@ -389,7 +389,7 @@ html, body
 
 #team_main {
 	width: 704px;
-	min-height: 600px;
+	min-height: 1000px;
 	padding: 12px;
 	color: #355264;
   	background: white;
@@ -397,7 +397,7 @@ html, body
 
 #info_main {
 	width: 688px;
-	min-height: 600px;
+	min-height: 1000px;
 	padding: 20px;
 	color: #355264;
   	background: white;
@@ -405,7 +405,7 @@ html, body
 
 #help_info {
 	width: 648px;
-	min-height: 600px;
+	min-height: 1000px;
 	padding: 40px;
 	color: #355264;
   	background: white;
@@ -909,11 +909,39 @@ img.pic {
 	color: white;
 }
 
+td.player_stat_overview_name {
+	width: 100%;
+	text-align: center;
+	vertical-align: middle;
+	padding: 0px;
+	font-family: Arial;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+td.player_stat_overview_headline {
+	width: 20%;
+	text-align: center;
+	padding: 0px;
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+td.player_stat_overview_data {
+	width: 20%;
+	text-align: center;
+	padding: 0px;
+	font-family: Arial;
+	font-size: 18px;
+}
+
 td.player_stat_name {
 	width: 150px;
 	text-align: left;
 	padding: 0px;
 	font-family: Arial;
+	font-size: 14px;
 }
 
 td.player_stat_name_margin {
@@ -921,6 +949,7 @@ td.player_stat_name_margin {
 	padding: 0px;
 	padding-left: 20px;
 	font-family: Arial;
+	font-size: 14px;
 }
 
 td.player_stat_value {
@@ -928,6 +957,7 @@ td.player_stat_value {
 	text-align: left;
 	padding: 0px;
 	font-family: Arial;
+	font-size: 14px;
 }
 
 td.player_stat_chart {
@@ -935,14 +965,78 @@ td.player_stat_chart {
 	text-align: left;
 	padding: 0px;
 	font-family: Arial;
+	font-size: 14px;
 }
 
 /* Spielfeld Wurfecke */
+
+#player_statistic_overview {
+	width: 600px;
+	height: 36px;
+	padding: 0px;
+	margin: 0 auto;
+	border-bottom: 1px solid #355264;
+}
+
+#player_statistic_active {
+	width: 150px;
+	height: 5px;
+	padding: 0px;
+	margin-left: 23px;
+	border-bottom: 4px solid #355264;
+}
+
+#player_statistic_inactive {
+	width: 150px;
+	height: 9px;
+	padding: 0px;
+	margin-left: 23px;
+}
+
+#player_statistic_detail {
+	width: 600px;
+	padding: 0px;
+	margin: 0 auto;
+}
+
+#player_field {
+	width: 350px;
+	padding: 20px 125px 20px 125px;
+}
+
+#player_attempts_menu {
+	width: 600px;
+}
+
+#player_attempts_menu_button {
+	width: 125px;
+	height: 28px;
+	float: left;
+}
+
+#player_attempts_menu_text {
+	width: 338px;
+	height: 6px;
+	float: left;
+	padding: 6px;
+	border: 0px;
+	font-family: Arial !important;
+ 	font-size: 11pt !important;
+	color: black !important;
+	text-align:center;
+}
 
 #field_canvas {
 	width: 350px;
    	height: 228px;
    	background: url('field.jpg')  no-repeat;
+}
+
+#goal_canvas {
+	width: 350px;
+   	height: 188px;
+   	background: url('goal.jpg')  no-repeat;
+   	background-size: 350px 188px;
 }
 
 /* Links */
@@ -1396,6 +1490,35 @@ select:active, select:hover {
 	color: white !important;
 	border-radius: 0 !important;
 	margin-top: 8px;
+}
+
+.btn_player {
+	width: 150px;
+	background: none !important;
+	font-family: Arial !important;
+ 	font-size: 11pt !important;
+	color: #355264 !important;
+	text-shadow: none !important;
+	border-radius: 0 !important;
+	margin-top: 8px;
+	margin-left: 24px;
+	border: 0 !important;
+	box-shadow: none !important;
+}
+
+.btn_player_menu {
+	width: 28px;
+	height: 28px;
+	background: none !important;
+	background-color: #355264 !important;
+	font-family: Arial !important;
+ 	font-size: 11pt !important;
+	color: white !important;
+	border-radius: 0 !important;
+	border: 0px !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	padding: 0 !important;
 }
 
 .file_field_tag {

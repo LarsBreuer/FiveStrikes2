@@ -131,6 +131,11 @@ class HomeController < ApplicationController
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
     if params[:position_control].present?
       @position_control = params[:position_control]
+      @player_ticker_length = @game.player_ticker_length(params[:player_id])
+      position_control = @position_control.to_i
+      player_ticker_length = @player_ticker_length.to_i - 1
+      @position_control = 0 if position_control > player_ticker_length
+      @position_control = player_ticker_length if position_control < 0
     else
       @position_control = nil
     end
@@ -144,7 +149,12 @@ class HomeController < ApplicationController
     else
       @y_click = nil
     end
-    @player_field_matrix = @game.get_player_field_matrix(params[:player_id], @position_control, @x_click, @y_click)
+    if params[:goal_area].present?
+      @goal_area = params[:goal_area]
+    else
+      @goal_area = nil
+    end
+    @player_field_matrix = @game.get_player_field_matrix(params[:player_id], @position_control, @x_click, @y_click, @goal_area)
     @player_mode = params[:player_mode]
     @home_or_away = params[:home_or_away]
 
@@ -158,6 +168,11 @@ class HomeController < ApplicationController
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
     if params[:position_control].present?
       @position_control = params[:position_control]
+      @player_ticker_length = @game.player_ticker_length(params[:player_id])
+      position_control = @position_control.to_i
+      player_ticker_length = @player_ticker_length.to_i - 1
+      @position_control = 0 if position_control > player_ticker_length
+      @position_control = player_ticker_length if position_control < 0
     else
       @position_control = nil
     end
@@ -171,8 +186,13 @@ class HomeController < ApplicationController
     else
       @y_click = nil
     end
+    if params[:goal_area].present?
+      @goal_area = params[:goal_area]
+    else
+      @goal_area = nil
+    end
 # ToDo => player_field_matrix nur dann berechnen, wenn es nicht schon berechnet wurde.
-    @player_field_matrix = @game.get_player_field_matrix(params[:player_id], @position_control, @x_click, @y_click)
+    @player_field_matrix = @game.get_player_field_matrix(params[:player_id], @position_control, @x_click, @y_click, @goal_area)
     @player_mode = params[:player_mode]
 
   end
@@ -229,7 +249,7 @@ class HomeController < ApplicationController
   def check_if_friend
     @game = Game.find(params[:game_id])
     @user = User.find(@game.user_id)
-    redirect_to fb_ask_friend_path(:id => @game.user_id), :remote => true, notice: 'Du bist kein Freund' unless current_user.friend.include?(@user) || current_user == @user || current_user.name == 'JaqenHghar'
+    redirect_to fb_ask_friend_path(:id => @game.user_id), :remote => true, notice: 'Du bist kein Freund' unless current_user.friend.include?(@user) || current_user == @user || current_user.name == 'JaqenHghar' || @user.name == 'JaqenHghar'
   end
 
   def authenticate_user!
