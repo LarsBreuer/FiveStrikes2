@@ -443,6 +443,41 @@
     </div>
   </div>
 
+  <% i = 0 %>
+  <% array_length = @player_ticker.count %>
+
+  <div>
+    
+    <% while( i < array_length )  %>
+
+      <div id= "<%= cycle('first_row', 'second_row') -%>" >
+
+        <div style="float: left; width: 50%;"><%= @player_ticker[i] %></div>
+        <div style="float: left; width: 50%;"><%= @player_ticker[i + 1] %></div>
+
+      </div>
+
+      <% i += 2 %>
+
+    <% end %>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
   <script>
 
 <%# Canvas einrichten in Abhängigkeit von der Bildschirmgröße %>

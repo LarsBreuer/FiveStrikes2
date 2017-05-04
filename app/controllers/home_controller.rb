@@ -123,6 +123,35 @@ class HomeController < ApplicationController
     end
   end
 
+  def game_player_roster
+
+    if params[:game_id].present?
+      # ToDo => Werden bei einem einzelnen Abruf immer alle Statistiken errechnet?
+      @game = Game.find(params[:game_id])
+      @game_stat = @game.get_game_stat()
+      @game_possession = @game.get_game_possession()
+      @game_lead = @game.get_game_lead()
+      @game_history = @game.get_game_history(300, "Statistic")
+      @game_penalty = @game.get_game_penalty()
+      @ticker_events = @game.ticker_events
+      @player_home = @game.get_player_home()
+      @player_away = @game.get_player_away()
+      @scorer_all = @game.get_top_scorer_hash("all")
+      @scorer_home = @game.get_top_scorer_hash("home")
+      @scorer_away = @game.get_top_scorer_hash("away")
+
+    end
+
+    if params[:mode].present?
+      @mode = params[:mode]
+    end
+
+    respond_to do |format|
+      #format.html
+      format.js
+    end
+  end
+
   def game_player_main
 
     @game = Game.find(params[:game_id])
@@ -157,6 +186,7 @@ class HomeController < ApplicationController
     @player_field_matrix = @game.get_player_field_matrix(params[:player_id], @position_control, @x_click, @y_click, @goal_area)
     @player_mode = params[:player_mode]
     @home_or_away = params[:home_or_away]
+    @player_ticker = @game.player_ticker(params[:player_id])
 
   end
 
@@ -194,6 +224,7 @@ class HomeController < ApplicationController
 # ToDo => player_field_matrix nur dann berechnen, wenn es nicht schon berechnet wurde.
     @player_field_matrix = @game.get_player_field_matrix(params[:player_id], @position_control, @x_click, @y_click, @goal_area)
     @player_mode = params[:player_mode]
+    @player_ticker = @game.player_ticker(params[:player_id])
 
   end
 
@@ -249,7 +280,7 @@ class HomeController < ApplicationController
   def check_if_friend
     @game = Game.find(params[:game_id])
     @user = User.find(@game.user_id)
-    redirect_to fb_ask_friend_path(:id => @game.user_id), :remote => true, notice: 'Du bist kein Freund' unless current_user.friend.include?(@user) || current_user == @user || current_user.name == 'JaqenHghar' || @user.name == 'JaqenHghar'
+    redirect_to fb_ask_friend_path(:id => @game.user_id), :remote => true, notice: 'Du bist kein Freund' unless current_user.friend.include?(@user) || current_user == @user || current_user.name == 'JaqenHghar' || @user.name == 'FIVES'
   end
 
   def authenticate_user!

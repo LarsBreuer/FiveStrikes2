@@ -1799,6 +1799,23 @@ class Game < ActiveRecord::Base
     return player_field_matrix
   end
 
+  def player_ticker(playerID)
+puts "player_ticker aufgerufen"
+    player_ticker_array = Array.new
+    
+    ticker = self.ticker_activities.where("player_id = ?", playerID)
+
+    ticker.each do |ticker_activity|
+
+      player_ticker_array.push(TickerActivity.convert_seconds_to_time(ticker_activity.time / 1000))
+      player_ticker_array.push(TickerActivity.convert_activity_id_to_activity(ticker_activity.activity_id))
+
+    end
+
+    return player_ticker_array
+
+  end
+
   def player_ticker_length(playerID)
     return ticker = self.ticker_activities.where("(activity_id = ? OR activity_id = ? OR activity_id = ? OR 
                                    activity_id = ? OR activity_id = ? OR activity_id = ? OR 

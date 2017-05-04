@@ -19,9 +19,11 @@
 
 <% end %>
 
-<p id="info_text" style= 'font-size: 20px; text-align: center; font-weight: bold;'>
+<div id="info_headline" >
+
   <%= I18n.t('basic.scorer') %> <%= team_name %>
-</p>
+
+</div>
 
 <div id= "<%= cycle('first_row', 'second_row') -%>" >
 

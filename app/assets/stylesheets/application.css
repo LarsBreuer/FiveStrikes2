@@ -418,6 +418,15 @@ html, body
  	color: #355264;
 }
 
+#warning {
+	width: 684px;
+	height: 36px;
+	background-color: red;
+	color: white;
+	padding: 10px;
+	margin-bottom: 18px;
+}
+
 img.pic {
 	display: block;
     margin-left: auto;
@@ -1006,6 +1015,8 @@ td.player_stat_chart {
 
 #player_attempts_menu {
 	width: 600px;
+	height: 28px;
+	padding-bottom: 20px;
 }
 
 #player_attempts_menu_button {

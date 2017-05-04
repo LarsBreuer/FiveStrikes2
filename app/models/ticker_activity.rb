@@ -23,8 +23,7 @@ class TickerActivity < ActiveRecord::Base
 
   	def self.convert_activity_id_to_activity(activity_id)
   		activity = ""
-puts "convert_activity_id_to_activity aufgerufen"
-puts activity_id
+
   		activity = I18n.t('basic.possession') if activity_id == 10099
 
   		activity = I18n.t('basic.shot_on_goal') if activity_id == 10100
@@ -43,7 +42,7 @@ puts activity_id
   		activity = I18n.t('basic.seven_goal_against') if activity_id == 10251
   		activity = I18n.t('basic.fb_goal_against') if activity_id == 10252
 
-		activity = I18n.t('basic.assist_goal') if activity_id == 10160
+		  activity = I18n.t('basic.assist_goal') if activity_id == 10160
   		activity = I18n.t('basic.assist_missed') if activity_id == 10161
 
   		activity = I18n.t('basic.defense_error') if activity_id == 10170
