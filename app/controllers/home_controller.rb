@@ -155,6 +155,7 @@ class HomeController < ApplicationController
   def game_player_main
 
     @game = Game.find(params[:game_id])
+    @user = User.find(@game.user_id)
     @player = Player.find(params[:player_id])
     @home_or_away = params[:home_or_away]
     @player_stat = @game.get_player_stat(params[:player_id], params[:home_or_away])
@@ -280,7 +281,7 @@ class HomeController < ApplicationController
   def check_if_friend
     @game = Game.find(params[:game_id])
     @user = User.find(@game.user_id)
-    redirect_to fb_ask_friend_path(:id => @game.user_id), :remote => true, notice: 'Du bist kein Freund' unless current_user.friend.include?(@user) || current_user == @user || current_user.name == 'JaqenHghar' || @user.name == 'FIVES'
+    redirect_to fb_ask_friend_path(:id => @game.user_id), :remote => true, notice: 'Du bist kein Freund' unless current_user.friend.include?(@user) || current_user == @user || current_user.name == 'JaqenHghar' || @user.name == 'larsb'
   end
 
   def authenticate_user!

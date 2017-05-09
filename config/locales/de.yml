@@ -246,7 +246,7 @@ de:
     text_ask_friend: 'Um detaillierte Informationen zu Spielern zu erfahren, musst Du mit dem Nutzer, der das Spiel eingestellt hat, befreundet sein. Möchtest Du dem Nutzer eine Freundschaftsanfrage senden?'
     text_roster_explain: 'Abkürzungen: T Effekt.: Bei Feldspieler: Tore Effektivität (Tore / Versuche / Quote), bei Torhüter: Paraden (Gehalten / Würfe / Quote); 7m Effekt.: 7m Effektivität; TG Effekt.: Tempogegenstoss Effektivität; TF: Technische Fehler; GK: Gelbe Karte; ZM: Zwei Minuten; RK: Rote Karte'
     text_goal_area_explain: 'Klicke auf das Spielfeld oder eine Torecke für detailiiertere Statistiken.'
-    text_user_fives: 'Dies ist ein Spiel des Nutzers FIVES. Spiele des Nutzers FIVES sind zu Anschauungszwecken für alle freigeschaltet. Generell ist diese Statistik nur für Freunde einzusehen.'
+    text_user_fives: 'Dies ist ein Spiel des Nutzers FIVES. Spiele des Nutzers FIVES sind zu Anschauungszwecken für alle freigeschaltet. Ansonsten ist diese Statistik nur für Freunde einzusehen.'
   devise:
     confirmations:
       confirmed: "Your account was successfully confirmed. You are now signed in."
